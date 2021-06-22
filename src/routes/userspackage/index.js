@@ -13,7 +13,7 @@
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
  
- import { TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl, Checkbox} from '@material-ui/core';
+ import { TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl, Checkbox, FormControlLabel, FormGroup, FormLabel,FormHelperText} from '@material-ui/core';
  
  export default class UsersPackage extends Component {
     state = {
@@ -148,9 +148,49 @@
                                 <MenuItem value="50">50</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl>
-                            <InputLabel htmlFor="first-checkbox" Start>1</InputLabel>
-                            <Checkbox value="checkedA" color="primary" inputProps={{ 'aria-label': 'Checkbox A' }} id="first-checkbox" />
+                        <FormControl component="fieldset">
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={<Checkbox name="velkom" />}
+                                    label="Velkommen Side"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="meny" />}
+                                    label="Meny"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="pakker" />}
+                                    label="Pakker"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="spesial" />}
+                                    label="Spesialiteter"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="qrcode" />}
+                                    label="QRCode"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="whatsbest" />}
+                                    label="Whatsapp Bestilling"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="onlinebest" />}
+                                    label="Online Bestilling"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="reserve" />}
+                                    label="Reservajon"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="contacter" />}
+                                    label="Contacter"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="digitalbetal" />}
+                                    label="Digital Betaling"
+                                />
+                            </FormGroup>
                         </FormControl>
                         
                     </DialogContent>
