@@ -1,0 +1,46 @@
+/*============ Advance Ui Elements ===========*/
+// Tabs Scss
+.custom-tabs {
+  border: none;
+  .nav-item {
+    .nav-link {
+      border: none;
+      border-radius: 50px;
+      &:hover, &:focus, &.active {
+        border: none;
+        color: $gray-900;
+        background: rgba(0,0,0,0.2);
+      }
+    }
+  }
+}
+// Sweet Alerts
+.sweet-alert  {
+  .btn {
+    padding: 0.3rem 2rem;
+    font-size: 1rem;
+  }
+}
+// date-picker icon
+.date-picker-icon{
+   height:auto !important;
+}
+// auto select
+.auto-select-wrap{
+   .react-single-wrap{
+      padding:2px 0;
+      > div{
+         border:0 !important;
+         box-shadow:none !important;
+         >div:first-child{
+            padding: 0;
+         }
+         >div:nth-child(2) span{
+            display: none;
+         }
+         &:focus,&:hover{
+            box-shadow: none !important;
+         }
+      }
+   }
+}
