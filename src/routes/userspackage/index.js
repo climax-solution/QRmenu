@@ -14,8 +14,6 @@
  import IntlMessages from 'Util/IntlMessages';
  
  import { TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl, Checkbox, FormControlLabel, FormGroup,FormHelperText,Input} from '@material-ui/core';
- 
- import 'Assets/css/userpackage.css';
 
  export default class UsersPackage extends Component {
     state = {
