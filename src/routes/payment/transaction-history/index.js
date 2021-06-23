@@ -8,7 +8,8 @@
  
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
- 
+
+ import  {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core';
  export default class TransactionHistory extends Component {
      render() {
          return (
@@ -18,6 +19,16 @@
                      <meta name="description" content="Reactify Blank Page" />
                  </Helmet>
                  <PageTitleBar title={<IntlMessages id="sidebar.transactionhistory" />} match={this.props.match} />
+                <Table>
+                    <TableHead>
+
+                    </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            
+                        </TableRow>
+                    </TableBody>
+                </Table>
              </div>
          );
      }
