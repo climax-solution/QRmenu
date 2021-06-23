@@ -12,8 +12,9 @@
  
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
- 
+
  import { TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl} from '@material-ui/core';
+
  export default class UsersPackage extends Component {
     state = {
 		monthlyPlan: true,
@@ -119,8 +120,8 @@
                         <DialogContentText>
                             Edit your package
                         </DialogContentText>
-                        <TextField margin="dense" id="name" label="Package name" type="text" width="100px" />
-                        <TextField margin="dense" id="slug" label="Slug" type="text" width="200px" />
+                        <TextField margin="dense" id="name" label="Package name" type="text" className="width-50"/>
+                        <TextField margin="dense" id="slug" label="Slug" type="text" width="200px" className="width-50"/>
                         <TextField margin="dense" id="email" label="Email Address" type="email" fullWidth />
                         <FormControl fullWidth>
                             <InputLabel htmlFor="orderLimit">Order Limit</InputLabel>
