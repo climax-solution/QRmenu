@@ -7,16 +7,11 @@ import IntlMessages from 'Util/IntlMessages';
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 // import * as Switch from 'react-toggle-switch';
 import Switch from '@material-ui/core/Switch';
-import { FormGroup, FormControlLabel, FormControl, TextField, Button} from '@material-ui/core';
+import { FormGroup, FormControlLabel, FormControl, TextField, Button,FormLabel} from '@material-ui/core';
 // rct collapsible card
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
+import ToggleSwitch from "./switch";
 
-import {
-	visitorsData,
-	salesData,
-	ordersData,
-    trafficStatus
- } from './data';
  export default class PaymentSetting extends Component {
     state = {
 		monthlyPlan: true,
@@ -41,6 +36,11 @@ import {
     handleClose = () => {
         this.setState({ open: false });
     };
+    onNewsletterChange = () => {
+        this.setState({
+            open: true
+        })
+      };
      render() {
          return (
              <div className="blank-wrapper">
@@ -60,21 +60,30 @@ import {
 					>
                         <FormControl style={{display: 'block',padding: '20px'}}>
                             <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <FormControlLabel
-                                    value="top"
-                                    control={<Switch color="primary" size="normal"/>}
-                                    label="Paypal Payment"
-                                    labelPlacement="top"
-                                />
-                                <FormControlLabel
-                                    value="top"
-                                    control={<Switch color="primary" size="normal"/>}
-                                    label="Status   "
-                                    labelPlacement="top"
-                                    // className="pull-right"
-                                />
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <FormLabel>Paypal Payment</FormLabel>
+                                        <ToggleSwitch
+                                            id="paypal-payment"
+                                            checked={this.state.open}
+                                            onChange={()=>this.onNewsletterChange}
+                                            dataYes="&#xe64c; Active"
+                                            dataNo="&#xe73c; Off"
+                                        />
+                                    </div>
+                                    <div className="col-md-6">
+                                        <FormLabel>Status</FormLabel>
+                                        <ToggleSwitch
+                                            id="paypal-status"
+                                            checked={this.state.open}
+                                            onChange={()=>this.onNewsletterChange}
+                                            dataYes="&#xe64c; Active"
+                                            dataNo="&#xe73c; Off"
+                                        />
+                                </div>
+                                </div>
                                 <TextField margin="dense" id="paypalemail" label="Paypal Email" type="email" fullWidth />
-                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}}>
+                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-10 mb-10">
                                     <i class="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
@@ -88,42 +97,46 @@ import {
 						closeable
 						fullBlock
 					>
-                        <FormControl style={{display: 'block',padding:'20px'}}>
+                        <FormControl style={{display: 'block',padding:'0 20px'}}>
                             <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <FormControlLabel
-                                    value="top"
-                                    control={<Switch color="primary" size="normal"/>}
-                                    label="Payment Gateway"
-                                    labelPlacement="top"
-                                />
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-12">
+                                        <FormLabel>Payment Gateway</FormLabel>
+                                        <ToggleSwitch
+                                            id="stripe-payment"
+                                            checked={this.state.open}
+                                            onChange={()=>this.onNewsletterChange}
+                                            dataYes="&#xe64c; Active"
+                                            dataNo="&#xe73c; Off"
+                                        />
+                                    </div>
+                                    <div className="col-md-6 mt-10">
                                         <TextField
                                             margin="dense"
                                             id="paypalemail"
-                                            label="Paypal Email"
-                                            type="email"
+                                            label="Stripe Public Key"
+                                            type="text"
                                             fullWidth
                                         />
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 mt-10">
                                         <TextField
                                             margin="dense"
                                             id="paypalemail"
-                                            label="Paypal Email"
-                                            type="email"
+                                            label="Stripe Secret Key"
+                                            type="text"
                                         />
                                     </div>
                                 </div>
-                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}}>
+                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-20">
                                     <i class="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
                         </FormControl>
                     </RctCollapsibleCard>
                 </div>
-                <di class="row">
-                <RctCollapsibleCard
+                <div class="row">
+                    <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
 						heading={<IntlMessages id="Razorpay Payment Gateway" />}
@@ -131,31 +144,26 @@ import {
 						closeable
 						fullBlock
 					>
-                        <FormControl style={{display: 'block',padding:'20px'}}>
+                        <FormControl style={{display: 'block',padding:'0 20px'}}>
                             <FormGroup className="mt-30" aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <FormControlLabel
-                                    value="top"
-                                    control={<Switch color="primary" size="normal"/>}
-                                    label="Razorpay Payment"
-                                    labelPlacement="top"
-                                    className="mt-30"
-                                />
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-12">
+                                        <FormLabel>Razorpay Payment</FormLabel>
+                                        <ToggleSwitch
+                                            id="razor-payment"
+                                            checked={this.state.open}
+                                            onChange={()=>this.onNewsletterChange}
+                                            dataYes="&#xe64c; Active"
+                                            dataNo="&#xe73c; Off"
+                                        />
+                                    </div>
+                                    <div className="col-md-12 mt-50">
                                         <TextField
                                             margin="dense"
                                             id="razorpaykey"
                                             label="Razorpay Key"
-                                            type="email"
+                                            type="text"
                                             fullWidth
-                                        />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <TextField
-                                            margin="dense"
-                                            id="paypalemail"
-                                            label="Paypal Email"
-                                            type="email"
                                         />
                                     </div>
                                 </div>
@@ -175,13 +183,17 @@ import {
 					>
                         <FormControl style={{display: 'block',padding:'20px'}}>
                             <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <FormControlLabel
-                                    value="top"
-                                    control={<Switch color="primary" size="normal"/>}
-                                    label="Payment Gateway"
-                                    labelPlacement="top"
-                                />
                                 <div className="row">
+                                    <div className="col-md-12">
+                                        <FormLabel>Payment Gateway</FormLabel>
+                                        <ToggleSwitch
+                                            id="bambora-payment"
+                                            checked={this.state.open}
+                                            onChange={()=>this.onNewsletterChange}
+                                            dataYes="&#xe64c; Active"
+                                            dataNo="&#xe73c; Off"
+                                        />
+                                    </div>
                                     <div className="col-md-6">
                                         <TextField
                                             margin="dense"
@@ -214,7 +226,7 @@ import {
                             </FormGroup>
                         </FormControl>
                     </RctCollapsibleCard>
-                </di>
+                </div>
              </div>
          );
      }
