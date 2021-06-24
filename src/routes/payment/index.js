@@ -15,8 +15,7 @@
     <div className="dashboard-wrapper">
        <Switch>
           <Redirect exact from={`${match.url}/`} to={`${match.url}/transaction-history`} />
-          <Route path={`${match.url}/transaction-history`} component={AsyncTransactionHistoryComponent
-} />
+          <Route path={`${match.url}/transaction-history`} component={AsyncTransactionHistoryComponent} />
           <Route path={`${match.url}/offline-payment`} component={AsyncOfflinePaymentComponent} />
           <Route path={`${match.url}/payment-setting`} component={AsyncPaymentSettingComponent} />
        </Switch>

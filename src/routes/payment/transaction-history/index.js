@@ -91,4 +91,3 @@ export default class TransactionHistory extends Component {
         );
     }
 }
-  
