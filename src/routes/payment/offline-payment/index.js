@@ -9,30 +9,59 @@ import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
 import { Scrollbars } from 'react-custom-scrollbars';
-
+import {Badge,Button} from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
 
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 
 export default class OfflinePayment extends Component {
     render() {
-        const columns = ["Sl", "Username", "Email", "Package", "Price","Txn Id", "Request Date","Status","Action"];
+        const columns = [
+            {
+                name: "Sl"
+            },
+            {
+                name: "Username"
+            },
+            {
+                name: "Email"
+            },
+            {
+                name: "Package"
+            },
+            {
+                name: "Price",
+                
+            },
+            {
+                name: "TxnId"
+            },
+            {
+                name: "Request Date"
+            },
+            {
+                name: "Status",
+                options:{
+                    customBodyRender: (value, tableMeta, updateValue) => (
+                        (value == 'Pending'
+                        ?<Badge color="secondary" badgeContent={"Pending"} className="badge-pill"></Badge>
+                        : value)
+                    )
+                }
+            },
+            {
+                name: "Action",
+                options:{
+                    customBodyRender: (value, tableMeta, updateValue) => (
+                        <Button variant="contained" color="primary">
+                            Approve<i class="ti-arrow-circle-right"></i>
+                        </Button>
+                    )
+                }
+            }
+        ];
         const data = [
-            ["1", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["2", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["3", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["4", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["5", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["6", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["7", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["8", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["9", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["10", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["11", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["12", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["13", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["14", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
-            ["15", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"],
+            ["1","admin", "mason@gmail.com", "Prøve package - kr 0 / trial","$22222", "d1341223g3r","202020789","Pending","2020"],
         ];
         const options = {
             filterType: 'dropdown',
