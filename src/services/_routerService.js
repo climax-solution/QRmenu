@@ -12,54 +12,80 @@ import Subscription from 'Routes/subscription';
 import ManageFeature from 'Routes/managefeature';
 import PaymentHistory from 'Routes/paymenthistory';
 import Profile from 'Routes/profile';
+import Menu from 'Routes/menu';
+import Login from 'Routes/login';
 export default [
+   //Login
+   {
+      path: 'login',
+      component: Login,
+      divide: []
+   },
+   //
    {
       path: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      divide: ['/app','/vendor']
    },
    {
       path: 'subscription',
-      component: Subscription
+      component: Subscription,
+      divide: ['/vendor']
    },
    {
       path: 'crm',
-      component: Crm
+      component: Crm,
+      divide: ['/app','/vendor']
    },
    {
       path: 'users-management',
-      component: UsersManagement
+      component: UsersManagement,
+      divide: ['/app']
    },
    {
       path: "userspackage",
-      component: UsersPackage
+      component: UsersPackage,
+      divide: ['/app']
    },
    {
       path: "payment",
-      component: Payment
+      component: Payment,
+      divide: ['/app']
    },
    {
       path: "adminsetting",
-      component: AdminSetting
+      component: AdminSetting,
+      divide: ['/app']
    },
    {
       path: "backupdb",
-      component: BackUpDB
+      component: BackUpDB,
+      divide: ['/app']
    },
    //vendor
    {
       path: 'liveorder',
-      component: LiveOrder
+      component: LiveOrder,
+      divide: ['/app','/vendor']
    },
    {
       path: 'managefeature',
-      component: ManageFeature
+      component: ManageFeature,
+      divide: ['/app','/vendor']
    },
    {
       path: 'paymenthistory',
-      component: PaymentHistory
+      component: PaymentHistory,
+      divide: ['/app','/vendor']
    },
    {
       path: 'profile',
-      component: Profile
+      component: Profile,
+      divide: ['/app','/vendor']
+   },
+   {
+      path: 'menu',
+      component: Menu,
+      divide: ['/app','/vendor']
    }
 ]

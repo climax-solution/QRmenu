@@ -21,7 +21,7 @@ import RctDefaultLayout from './DefaultLayout';
 // boxed layout
 import RctBoxedLayout from './RctBoxedLayout';
 // CRM layout
-import CRMLayout from './CRMLayout';
+import LoginLayout from './LoginLayout';
 /**
  * Initial Path To Check Whether User Is Logged In Or Not
  */
@@ -35,20 +35,28 @@ class App extends Component {
    render() {
       const { location, match, user } = this.props;
       if (location.pathname === '/') {
+         return <Redirect to={'/login'} />;
+      }
+      else if (location.pathname === '/app') {
          return <Redirect to={'/app/dashboard'} />;
+      }
+      else if (location.pathname === '/vendor') {
+         return <Redirect to={'/vendor/dashboard'} />;
       }
       return (
          <RctThemeProvider>
             <NotificationContainer />
-            <InitialPath
+            <Route
                path={`${match.url}app`}
                authUser={user}
                component={RctDefaultLayout}
             />
-            <Route path="/horizontal" component={HorizontalLayout} />
-            <Route path="/agency" component={AgencyLayout} />
-            <Route path="/boxed" component={RctBoxedLayout} />
-            <Route path="/dashboard" component={CRMLayout} />
+            <Route
+               path={`${match.url}vendor`}
+               authUser={user}
+               component={RctDefaultLayout}
+            />
+            <Route path="/login" component={LoginLayout}/>
          </RctThemeProvider>
       );
    }

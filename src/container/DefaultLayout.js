@@ -13,11 +13,17 @@ import routerService from "../services/_routerService";
 
 class DefaultLayout extends Component {
 	render() {
-		const { match } = this.props;
+		const { match, location } = this.props;
+		if (location.pathname === '/app') {
+			return (<Redirect to={'/app/dashboard'} />);
+		}
+		console.log(match);
 		return (
 			<RctAppLayout>
 				{routerService && routerService.map((route,key)=>
-					<Route key={key} path={`${match.url}/${route.path}`} component={route.component} />
+					(route.divide.indexOf(match.url) > -1) && 
+						<Route key={key} path={`${match.url}/${route.path}`} component={route.component} />
+					
 				)}
 			</RctAppLayout>
 		);
