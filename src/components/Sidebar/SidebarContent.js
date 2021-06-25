@@ -26,6 +26,8 @@ class SidebarContent extends Component {
 
     render() {
         const { sidebarMenus } = this.props.sidebar;
+        const { match } = this.props;
+        console.log(match);
         return (
             <div className="rct-sidebar-nav">
                 <nav className="navigation">
@@ -43,130 +45,141 @@ class SidebarContent extends Component {
                             />
                         ))}
                     </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category2.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                                onToggleMenu={() => this.toggleMenu(menu, 'category2')}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category3.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category4.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                                onToggleMenu={() => this.toggleMenu(menu, "category4")}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category5.map((menu, key) => (
-                            <NavMenuItem 
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category6.map((menu, key) => (
-                            <NavMenuItem 
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category7.map((menu, key) => (
-                            <NavMenuItem 
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category8.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                                onToggleMenu={() => this.toggleMenu(menu, "category8")}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category9.map((menu, key) => (
-                            <NavMenuItem 
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category10.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                                onToggleMenu={() => this.toggleMenu(menu, "category10")}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category11.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category12.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
-                    <List
-                        className="rct-mainMenu p-0 m-0 list-unstyled"
-                    >
-                        {sidebarMenus.category13.map((menu, key) => (
-                            <NavMenuItem
-                                menu={menu}
-                                key={key}
-                            />
-                        ))}
-                    </List>
+                    {
+                        match.url == "/app" &&
+                        <div>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category2.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                        onToggleMenu={() => this.toggleMenu(menu, 'category2')}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category3.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category4.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                        onToggleMenu={() => this.toggleMenu(menu, "category4")}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category5.map((menu, key) => (
+                                    <NavMenuItem 
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category6.map((menu, key) => (
+                                    <NavMenuItem 
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                        </div>
+                    }
+                    {
+                        match.url == '/vendor' &&
+                        <div>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                                
+                            >
+                                {sidebarMenus.category7.map((menu, key) => (
+                                    <NavMenuItem 
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category8.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                        onToggleMenu={() => this.toggleMenu(menu, "category8")}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category9.map((menu, key) => (
+                                    <NavMenuItem 
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category10.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                        onToggleMenu={() => this.toggleMenu(menu, "category10")}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category11.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category12.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category13.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                        </div>
+                    }
                 </nav>
             </div>
         );
