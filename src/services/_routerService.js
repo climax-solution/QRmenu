@@ -10,6 +10,7 @@ import LiveOrder from 'Routes/liveorder';
 //vendor
 import Subscription from 'Routes/subscription';
 import ManageFeature from 'Routes/managefeature';
+import PaymentHistory from 'Routes/paymenthistory';
 export default [
    {
       path: 'dashboard',
@@ -51,5 +52,9 @@ export default [
    {
       path: 'managefeature',
       component: ManageFeature
+   },
+   {
+      path: 'paymenthistory',
+      component: PaymentHistory
    }
 ]
