@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRouter } from 'react';
 import { Form, FormGroup, Input } from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,10 +11,35 @@ import QueueAnim from 'rc-queue-anim';
 import AppConfig from 'Constants/AppConfig';
 
 export default class LockScreen extends Component {
+   state = {
+      username: '',
+      password: '',
+      link:'/'
+   }
+   changeUsername(e) {
+      this.setState({
+         username: e.target.value
+      })
+   }
+   changePassword(e) {
+      this.setState({
+         password: e.target.value
+      })
+   }
+   signin() {
+      if (this.state.username == 'admin' && this.state.password == 'DevQR2021') {
+         this.props.history.push('/app');
+      }
+      else if (this.state.username == 'vendor' && this.state.password == 'Dev2021') {
+         this.props.history.push('/vendor');
+      }
+      else {
+      }
+   }
    render() {
       return (
          <QueueAnim type="bottom" duration={2000}>
-            <div className="rct-session-wrapper" key="1">
+            <div className="rct-session-wrapper" key="1" style={{overflow:'hidden'}}>
                <AppBar position="static" className="session-header">
                   <Toolbar>
                      <div className="container">
@@ -33,31 +58,20 @@ export default class LockScreen extends Component {
                      <div className="col-sm-8 col-lg-4 mx-auto">
                         <div className="session-body text-center">
                            <div className="session-head mb-30">
-                              <h2>Admin</h2>
+                              <h2>SIGN IN</h2>
+                              <h4>Signup to discover your shop</h4>
                            </div>
                            <Form>
                               <FormGroup className="has-wrapper">
-                                 <Input type="password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Password" />
-                                 <span className="has-icon"><i className="ti-lock"></i></span>
+                                 <Input type="text" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Username" value={this.state.username} onChange={(event) => this.changeUsername(event)}/>
+                                 <span className="has-icon"><i className="ti-user"></i></span>
                               </FormGroup>
-                              <FormGroup>
-                                 <Button component={Link} to="/app" variant="contained" className="w-100 btn-info text-white btn-block btn-large">Login</Button>
-                              </FormGroup>
-                           </Form>
-                        </div>
-                     </div>
-                     <div className="col-sm-8 col-lg-4 mx-auto">
-                        <div className="session-body text-center">
-                           <div className="session-head mb-30">
-                              <h2>Vendor</h2>
-                           </div>
-                           <Form>
                               <FormGroup className="has-wrapper">
-                                 <Input type="password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Password" />
+                                 <Input type="password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Password"  value={this.state.password} onChange={(event) => this.changePassword(event)}/>
                                  <span className="has-icon"><i className="ti-lock"></i></span>
                               </FormGroup>
                               <FormGroup>
-                                 <Button component={Link} to="/vendor" variant="contained" className="w-100 btn-info text-white btn-block btn-large">Login</Button>
+                                 <Button variant="contained" className="w-100 btn-info text-white btn-block btn-large" onClick={()=>this.signin()}>Sign in</Button>
                               </FormGroup>
                            </Form>
                         </div>

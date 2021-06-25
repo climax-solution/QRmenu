@@ -75,7 +75,7 @@ export default {
       {
          "menu_title": "sidebar.subscription",
          "menu_icon":"zmdi zmdi-wrench",
-         "path": "/app/subscription",
+         "path": "/vendor/subscription",
          "child_routes": null
       }
    ],
@@ -86,15 +86,15 @@ export default {
          "type_multi": null,
          "child_routes": [
             {
-               "path": "/app/menu/category",
+               "path": "/vendor/menu/category",
                "menu_title": "sidebar.category"
             },
             {
-               "path": "/app/menu/package",
+               "path": "/vendor/menu/package",
                "menu_title": "sidebar.package"
             },
             {
-               "path": "/app/menu/qrbuilder",
+               "path": "/vendor/menu/qrbuilder",
                "menu_title": "sidebar.qrbuilder"
             }
          ]
@@ -104,7 +104,7 @@ export default {
       {
          "menu_title": "sidebar.liveorder",
          "menu_icon":"zmdi zmdi-file-text",
-         "path": "/app/liveorder",
+         "path": "/vendor/liveorder",
          "child_routes": null
       }
    ],
@@ -115,11 +115,11 @@ export default {
          "type_multi": null,
          "child_routes": [
             {
-               "path": "/app/profile/profile",
+               "path": "/vendor/profile/profile",
                "menu_title": "sidebar.profile"
             },
             {
-               "path": "/app/profile/avaible",
+               "path": "/vendor/profile/avaible",
                "menu_title": "sidebar.avaible"
             }
          ]
@@ -129,20 +129,20 @@ export default {
       {
          "menu_title": "sidebar.managefeature",
          "menu_icon": "zmdi zmdi-layers",
-         "path": "/app/managefeature",
+         "path": "/vendor/managefeature",
          "child_routes": null
       }
    ],
    category12: [{
       "menu_title": "sidebar.paymenthistory",
       "menu_icon": "zmdi zmdi-card",
-      "path": "/app/paymenthistory",
+      "path": "/vendor/paymenthistory",
       "child_routes": null
    }],
    category13: [{
       "menu_title": "sidebar.deactive",
       "menu_icon": "zmdi zmdi-block",
-      "path": "/app/deactiveaccount",
+      "path": "/vendor/deactiveaccount",
       "child_routes": null
    }]
 }

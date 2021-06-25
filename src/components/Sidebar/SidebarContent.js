@@ -27,7 +27,13 @@ class SidebarContent extends Component {
     render() {
         const { sidebarMenus } = this.props.sidebar;
         const { match } = this.props;
-        console.log(match);
+        if (match.url == '/vendor') {
+            sidebarMenus.category1.map((menu,key)=>{
+                const item = menu.path.split('/');
+                menu.path = '/vendor/' + item[2];
+            })
+        }
+        console.log(sidebarMenus.category1);
         return (
             <div className="rct-sidebar-nav">
                 <nav className="navigation">
