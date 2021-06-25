@@ -50,6 +50,30 @@ const AsyncTransactionHistoryComponent = Loadable({
    loading: () => <RctPageLoader />,
 });
 
+//Subscription
+const AsyncSubscriptionComponent = Loadable({
+   loader: () => import("Routes/subscription"),
+   loading: () => <RctPageLoader />
+})
+
+//Category
+const AsyncCategoryComponent = Loadable({
+   loader: () => import("Routes/menu/category"),
+   loading: () => <RctPageLoader />
+})
+
+//Package
+const AsyncPackageComponent = Loadable({
+   loader: () => import("Routes/menu/package"),
+   loading: () => <RctPageLoader />
+})
+
+//Package
+const AsyncQrBuilderComponent = Loadable({
+   loader: () => import("Routes/menu/qrbuilder"),
+   loading: () => <RctPageLoader />
+})
+
 export {
    AsyncDashboardComponent,
    AsyncComponentAddNewRestaurantComponent,
@@ -57,5 +81,9 @@ export {
    AsyncComponentUsersPackageComponent,
    AsyncOfflinePaymentComponent,
    AsyncPaymentSettingComponent,
-   AsyncTransactionHistoryComponent
+   AsyncTransactionHistoryComponent,
+   AsyncSubscriptionComponent,
+   AsyncCategoryComponent,
+   AsyncPackageComponent,
+   AsyncQrBuilderComponent,
 };

@@ -70,5 +70,79 @@ export default {
          "path": "/app/backupdb",
          "child_routes": null
       }
-   ]
+   ],
+   category7:[
+      {
+         "menu_title": "sidebar.subscription",
+         "menu_icon":"zmdi zmdi-wrench",
+         "path": "/app/subscription",
+         "child_routes": null
+      }
+   ],
+   category8:[
+      {
+         "menu_title": "sidebar.menu",
+         "menu_icon": 'zmdi zmdi-home',
+         "type_multi": null,
+         "child_routes": [
+            {
+               "path": "/app/menu/category",
+               "menu_title": "sidebar.category"
+            },
+            {
+               "path": "/app/menu/package",
+               "menu_title": "sidebar.package"
+            },
+            {
+               "path": "/app/menu/qrbuilder",
+               "menu_title": "sidebar.qrbuilder"
+            }
+         ]
+      }
+   ],
+   category9:[
+      {
+         "menu_title": "sidebar.liveorder",
+         "menu_icon":"zmdi zmdi-file-text",
+         "path": "/app/liveorder",
+         "child_routes": null
+      }
+   ],
+   category10: [
+      {
+         "menu_title": "sidebar.profile",
+         "menu_icon":"zmdi zmdi-account",
+         "type_multi": null,
+         "child_routes": [
+            {
+               "path": "/app/profile/profile",
+               "menu_title": "sidebar.profile"
+            },
+            {
+               "path": "/app/menu/avaible",
+               "menu_title": "sidebar.avaible"
+            }
+         ]
+      }
+   ],
+   category11:[
+      {
+         "menu_title": "sidebar.managefeature",
+         "menu_icon": "zmdi zmdi-layers",
+         "path": "/app/managefeature",
+         "child_routes": null
+      }
+   ],
+   category12: [{
+      "menu_title": "sidebar.paymenthistory",
+      "menu_icon": "zmdi zmdi-card",
+      "path": "/app/paymenthistory",
+      "child_routes": null
+   }],
+   category13: [{
+      "menu_title": "sidebar.deactive",
+      "menu_icon": "zmdi zmdi-block",
+      "path": "/app/deactiveaccount",
+      "child_routes": null
+   }]
 }

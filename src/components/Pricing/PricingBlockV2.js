@@ -6,7 +6,7 @@ import IntlMessages from 'Util/IntlMessages';
 import ReactTooltip from 'react-tooltip';
 import { Button } from 'reactstrap';
 
-const PricingBlockV2 = ({ type, responses, color, features }) => (
+const PricingBlockV2 = ({ type, responses, color, features,status }) => (
    <div className="pricing-box">
       <div className="pricing-head">
          <h2 className={`text-${color} pricing-title mb-0`}>
@@ -29,7 +29,10 @@ const PricingBlockV2 = ({ type, responses, color, features }) => (
             ))}
          </ul>
          <Button color={color} className='btn-block btn-lg'>
-            <IntlMessages id="widgets.startToBasic" />
+            {
+               status ? <IntlMessages id="widgets.runpackage"/>
+               : <IntlMessages id="widgets.selectpackage" />
+            }
          </Button>
       </div>
    </div>

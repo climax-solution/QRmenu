@@ -95,6 +95,78 @@ class SidebarContent extends Component {
                             />
                         ))}
                     </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category7.map((menu, key) => (
+                            <NavMenuItem 
+                                menu={menu}
+                                key={key}
+                            />
+                        ))}
+                    </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category8.map((menu, key) => (
+                            <NavMenuItem
+                                menu={menu}
+                                key={key}
+                                onToggleMenu={() => this.toggleMenu(menu, "category8")}
+                            />
+                        ))}
+                    </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category9.map((menu, key) => (
+                            <NavMenuItem 
+                                menu={menu}
+                                key={key}
+                            />
+                        ))}
+                    </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category10.map((menu, key) => (
+                            <NavMenuItem
+                                menu={menu}
+                                key={key}
+                                onToggleMenu={() => this.toggleMenu(menu, "category10")}
+                            />
+                        ))}
+                    </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category11.map((menu, key) => (
+                            <NavMenuItem
+                                menu={menu}
+                                key={key}
+                            />
+                        ))}
+                    </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category12.map((menu, key) => (
+                            <NavMenuItem
+                                menu={menu}
+                                key={key}
+                            />
+                        ))}
+                    </List>
+                    <List
+                        className="rct-mainMenu p-0 m-0 list-unstyled"
+                    >
+                        {sidebarMenus.category13.map((menu, key) => (
+                            <NavMenuItem
+                                menu={menu}
+                                key={key}
+                            />
+                        ))}
+                    </List>
                 </nav>
             </div>
         );
