@@ -74,6 +74,18 @@ const AsyncQrBuilderComponent = Loadable({
    loading: () => <RctPageLoader />
 })
 
+//Profile
+const AsyncProfileComponent = Loadable({
+   loader: () => import("Routes/profile/profile"),
+   loading: () => <RctPageLoader />
+})
+
+//Avaible Days
+const AsyncAvaibleComponent = Loadable({
+   loader: () => import("Routes/profile/avaibledays"),
+   loading: () => <RctPageLoader />
+})
+
 export {
    AsyncDashboardComponent,
    AsyncComponentAddNewRestaurantComponent,
@@ -86,4 +98,6 @@ export {
    AsyncCategoryComponent,
    AsyncPackageComponent,
    AsyncQrBuilderComponent,
+   AsyncProfileComponent,
+   AsyncAvaibleComponent,
 };

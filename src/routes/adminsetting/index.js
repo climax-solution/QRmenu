@@ -139,7 +139,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'14px'}}>Registration System <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                        <Switch onClick={this.settingChang} on={this.state.setGe}/>
+                                            <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                             <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
                                         </FormGroup>
                                     </FormControl>

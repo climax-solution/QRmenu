@@ -119,7 +119,7 @@ export default {
                "menu_title": "sidebar.profile"
             },
             {
-               "path": "/app/menu/avaible",
+               "path": "/app/profile/avaible",
                "menu_title": "sidebar.avaible"
             }
          ]

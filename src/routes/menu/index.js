@@ -11,7 +11,7 @@
     AsyncQrBuilderComponent
  } from 'Components/AsyncComponent/AsyncComponent';
  
- const Payment = ({ match }) => (
+ const Menu = ({ match }) => (
     <div className="dashboard-wrapper">
        <Switch>
           <Redirect exact from={`${match.url}/`} to={`${match.url}/category`} />
@@ -22,5 +22,5 @@
     </div>
  );
  
- export default Payment;
+ export default Menu;
  
