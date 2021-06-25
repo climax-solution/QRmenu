@@ -13,7 +13,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 import IntlMessages from 'Util/IntlMessages';
 import { Badge,Media } from '@material-ui/core';
 
-export default class TransactionHistory extends Component {
+export default class QrBuilder extends Component {
     render() {
         const columns = [
             {
@@ -78,7 +78,7 @@ export default class TransactionHistory extends Component {
                 <title>Transaction History</title>
                 <meta name="description" content="Reactify Blank Page" />
             </Helmet>
-            <PageTitleBar title={<IntlMessages id="sidebar.transactionhistory" />} match={this.props.match} />
+            <PageTitleBar title={<IntlMessages id="sidebar.QrBuilder" />} match={this.props.match} />
                 <RctCollapsibleCard heading="Transaction History" fullBlock>
                     <MUIDataTable
                         title={"Transaction History"}

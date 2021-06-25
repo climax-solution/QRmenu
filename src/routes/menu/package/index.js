@@ -12,7 +12,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,FormLabel} 
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import ToggleSwitch from "./switch";
 
- export default class PaymentSetting extends Component {
+ export default class Package extends Component {
     state = {
 		monthlyPlan: true,
 		premiumPlan: 300,
@@ -48,12 +48,12 @@ import ToggleSwitch from "./switch";
                      <title>Payment Setting</title>
                      <meta name="description" content="Reactify Blank Page" />
                  </Helmet>
-                 <PageTitleBar title={<IntlMessages id="sidebar.paymentsetting" />} match={this.props.match} />
+                 <PageTitleBar title={<IntlMessages id="sidebar.package" />} match={this.props.match} />
                 <div class="row">
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
-						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Paypal Payment Gateway" />}
+						colClasses="col-sm-12 col-md-12 col-lg-10 d-sm-full"
+						heading={<IntlMessages id="sidebar.package" />}
 						collapsible
 						closeable
 						fullBlock
@@ -89,145 +89,8 @@ import ToggleSwitch from "./switch";
                             </FormGroup>
                         </FormControl>
                     </RctCollapsibleCard>
-                    <RctCollapsibleCard
-						customClasses="trafic-bar-chart"
-						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Stripe Payment Gateway" />}
-						collapsible
-						closeable
-						fullBlock
-					>
-                        <FormControl style={{display: 'block',padding:'0 20px'}}>
-                            <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <FormLabel>Payment Gateway</FormLabel>
-                                        <ToggleSwitch
-                                            id="stripe-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
-                                            dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
-                                        />
-                                    </div>
-                                    <div className="col-md-6 mt-10">
-                                        <TextField
-                                            margin="dense"
-                                            id="paypalemail"
-                                            label="Stripe Public Key"
-                                            type="text"
-                                            fullWidth
-                                        />
-                                    </div>
-                                    <div className="col-md-6 mt-10">
-                                        <TextField
-                                            margin="dense"
-                                            id="paypalemail"
-                                            label="Stripe Secret Key"
-                                            type="text"
-                                        />
-                                    </div>
-                                </div>
-                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-20">
-                                    <i class="ti-save"></i>&nbsp;Save Change
-                                </Button>
-                            </FormGroup>
-                        </FormControl>
-                    </RctCollapsibleCard>
                 </div>
-                <div class="row">
-                    <RctCollapsibleCard
-						customClasses="trafic-bar-chart"
-						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Razorpay Payment Gateway" />}
-						collapsible
-						closeable
-						fullBlock
-					>
-                        <FormControl style={{display: 'block',padding:'0 20px'}}>
-                            <FormGroup className="mt-30" aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <FormLabel>Razorpay Payment</FormLabel>
-                                        <ToggleSwitch
-                                            id="razor-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
-                                            dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
-                                        />
-                                    </div>
-                                    <div className="col-md-12 mt-50">
-                                        <TextField
-                                            margin="dense"
-                                            id="razorpaykey"
-                                            label="Razorpay Key"
-                                            type="text"
-                                            fullWidth
-                                        />
-                                    </div>
-                                </div>
-                                <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10" style={{float:'right'}}>
-                                    <i class="ti-save"></i>&nbsp;Save Change
-                                </Button>
-                            </FormGroup>
-                        </FormControl>
-                    </RctCollapsibleCard>
-                    <RctCollapsibleCard
-						customClasses="trafic-bar-chart"
-						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Bambora Payment Gateway" />}
-						collapsible
-						closeable
-						fullBlock
-					>
-                        <FormControl style={{display: 'block',padding:'20px'}}>
-                            <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <FormLabel>Payment Gateway</FormLabel>
-                                        <ToggleSwitch
-                                            id="bambora-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
-                                            dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
-                                        />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <TextField
-                                            margin="dense"
-                                            id="paypalemail"
-                                            label="Bambora Access Key"
-                                            type="text"
-                                            fullWidth
-                                        />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <TextField
-                                            margin="dense"
-                                            id="paypalemail"
-                                            label="Bambora Merchant Number"
-                                            type="text"
-                                            fullWidth
-                                        />
-                                    </div>
-                                </div>
-                                <TextField
-                                    margin="dense"
-                                    id="paypalemail"
-                                    label="Bambora Secret Key"
-                                    type="text"
-                                    fullWidth
-                                />
-                                <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10 mb-10" style={{float:'right'}}>
-                                    <i class="ti-save"></i>&nbsp;Save Change
-                                </Button>
-                            </FormGroup>
-                        </FormControl>
-                    </RctCollapsibleCard>
-                </div>
-             </div>
+            </div>
          );
      }
  }
