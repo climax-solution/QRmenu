@@ -11,6 +11,7 @@ import LiveOrder from 'Routes/liveorder';
 import Subscription from 'Routes/subscription';
 import ManageFeature from 'Routes/managefeature';
 import PaymentHistory from 'Routes/paymenthistory';
+import Profile from 'Routes/profile';
 export default [
    {
       path: 'dashboard',
@@ -56,5 +57,9 @@ export default [
    {
       path: 'paymenthistory',
       component: PaymentHistory
+   },
+   {
+      path: 'profile',
+      component: Profile
    }
 ]

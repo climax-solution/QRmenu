@@ -5,19 +5,65 @@
  import { Helmet } from "react-helmet";
  // page title bar
  import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
+import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
  
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
- 
+ import MUIDataTable from "mui-datatables";
  export default class BackUpDB extends Component {
      render() {
+        const columns = [
+            {
+                name: "Sl"
+            },
+            {
+                name: 'Order Number'
+            },
+            {
+                name: "Txn Id"
+            },
+            {
+                name: "Amount"
+            },
+            {
+                name: "Payment Status"
+            },
+            {
+                name: "Payment By",
+                // options:{
+                //     customBodyRender: (value, tableMeta, updateValue) => (
+                //         (value == 'Pending'
+                //         ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
+                //         : value)
+                //     )
+                // }
+            },
+            {
+                name: "Payment Date"
+            }
+        ];
+        const data = [
+            [ "1", "111", "Alexandr", "(555) 3333", "Norway","23123adfadfadf","2020"]
+        ];
          return (
              <div className="blank-wrapper">
                  <Helmet>
-                     <title>Back Up Database</title>
+                     <title>Payment History</title>
                      <meta name="description" content="Reactify Blank Page" />
                  </Helmet>
-                 <PageTitleBar title={<IntlMessages id="sidebar.backupdb" />} match={this.props.match} />
+                 <PageTitleBar title={<IntlMessages id="sidebar.paymenthistory" />} match={this.props.match} />
+                 <RctCollapsibleCard
+                    heading="Payment History"
+                    collapsible
+                    fullBlock
+                >
+                    <MUIDataTable
+                        title={"Payment History"}
+                        data={data}
+                        columns={columns}
+                        // options={options}
+                    />
+                 </RctCollapsibleCard>
              </div>
          );
      }
