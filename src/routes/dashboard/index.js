@@ -32,7 +32,7 @@
          return (
              <div className="dashboard-wrapper">
                 <Helmet>
-                    <title>Pakage</title>
+                    <title>Package</title>
                     <meta name="description" content="Reactify Blank Page" />
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={match} />
