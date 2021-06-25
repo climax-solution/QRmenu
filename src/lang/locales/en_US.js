@@ -769,9 +769,23 @@ module.exports = {
    "sidebar.paymentsetting": "Payment Setting",
    "sidebar.adminsetting": "Setting",
    "sidebar.backupdb": "Back Up DB",
+   //vendor
+   "sidebar.subscription": "Subscription",
+   "sidebar.category": "Category",
+   "sidebar.package": "Package",
+   "sidebar.qrbuilder": "QR Builder",
+   "sidebar.liveorder": "Live Order",
+   "sidebar.profile": "Profile",
+   "sidebar.avaible": "Avaible Days",
+   "sidebar.managefeature": "Manage Features",
+   "sidebar.paymenthistory": "Payment History",
+   "sidebar.deactive": "Deactive Account",
    //custom widget
    "widgets.profile": "Profile",
    "widgets.logOut": "Log Out",
    "widgets.freemember": "Prøve Package",
-   "widgets.paymentmember": "Payment Package"
+   "widgets.paymentmember": "Payment Package",
+   //vendor widget
+   "widgets.runpackage": "Running Package",
+   "widgets.selectpackage": "Select Package",
 }

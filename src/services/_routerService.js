@@ -1,4 +1,4 @@
-
+//admin
 import Dashboard from 'Routes/dashboard';
 import Crm from 'Routes/crm';
 import UsersManagement from 'Routes/users-management';
@@ -7,11 +7,17 @@ import Payment from 'Routes/payment';
 import AdminSetting from 'Routes/adminsetting';
 import BackUpDB from 'Routes/backupdb';
 
+//vendor
+import Subscription from 'Routes/subscription';
 
 export default [
    {
       path: 'dashboard',
       component: Dashboard
+   },
+   {
+      path: 'subscription',
+      component: Subscription
    },
    {
       path: 'crm',
