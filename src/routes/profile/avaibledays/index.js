@@ -70,7 +70,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -85,7 +84,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -109,7 +107,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -124,7 +121,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -148,7 +144,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -163,7 +158,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -187,7 +181,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -202,7 +195,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -226,7 +218,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -241,7 +232,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -265,7 +255,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -280,7 +269,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -304,7 +292,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth
@@ -319,7 +306,6 @@ export default class Avaibledays extends Component {
                                         </TableCell>
                                         <TableCell>
                                             <TimePicker
-                                                label="12 hours"
                                                 value={this.state.selectedDate}
                                                 onChange={()=>this.handleDateChange()}
                                                 fullWidth

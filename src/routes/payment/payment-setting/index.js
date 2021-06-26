@@ -68,7 +68,7 @@ import ToggleSwitch from "./switch";
                                             checked={this.state.open}
                                             onChange={()=>this.onNewsletterChange}
                                             dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
+                                            dataNo="&#xe6ae; Off"
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -77,8 +77,8 @@ import ToggleSwitch from "./switch";
                                             id="paypal-status"
                                             checked={this.state.open}
                                             onChange={()=>this.onNewsletterChange}
-                                            dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
+                                            dataYes="&#xe64c; Live"
+                                            dataNo="&#xe6ae; Sandbox"
                                         />
                                 </div>
                                 </div>
@@ -107,7 +107,7 @@ import ToggleSwitch from "./switch";
                                             checked={this.state.open}
                                             onChange={()=>this.onNewsletterChange}
                                             dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
+                                            dataNo="&#xe6ae; Off"
                                         />
                                     </div>
                                     <div className="col-md-6 mt-10">
@@ -154,7 +154,7 @@ import ToggleSwitch from "./switch";
                                             checked={this.state.open}
                                             onChange={()=>this.onNewsletterChange}
                                             dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
+                                            dataNo="&#xe6ae; Off"
                                         />
                                     </div>
                                     <div className="col-md-12 mt-50">
@@ -191,7 +191,7 @@ import ToggleSwitch from "./switch";
                                             checked={this.state.open}
                                             onChange={()=>this.onNewsletterChange}
                                             dataYes="&#xe64c; Active"
-                                            dataNo="&#xe73c; Off"
+                                            dataNo="&#xe6ae; Off"
                                         />
                                     </div>
                                     <div className="col-md-6">

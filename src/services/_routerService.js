@@ -13,24 +13,25 @@ import ManageFeature from 'Routes/managefeature';
 import PaymentHistory from 'Routes/paymenthistory';
 import Profile from 'Routes/profile';
 import Menu from 'Routes/menu';
-import Login from 'Routes/login';
+import Login from 'Routes/signin';
+import SignUp from 'Routes/signup';
+import OrderConfig from 'Routes/orderconfig';
+
 export default [
    //Login
    {
       path: 'login',
-      component: Login,
-      divide: []
+      component: Login
+   },
+   {
+      path: 'signup',
+      component: SignUp
    },
    //
    {
       path: 'dashboard',
       component: Dashboard,
       divide: ['/app','/vendor']
-   },
-   {
-      path: 'subscription',
-      component: Subscription,
-      divide: ['/vendor']
    },
    {
       path: 'crm',
@@ -66,26 +67,36 @@ export default [
    {
       path: 'liveorder',
       component: LiveOrder,
-      divide: ['/app','/vendor']
+      divide: ['/vendor']
    },
    {
       path: 'managefeature',
       component: ManageFeature,
-      divide: ['/app','/vendor']
+      divide: ['/vendor']
    },
    {
       path: 'paymenthistory',
       component: PaymentHistory,
-      divide: ['/app','/vendor']
+      divide: ['/vendor']
    },
    {
       path: 'profile',
       component: Profile,
-      divide: ['/app','/vendor']
+      divide: ['/vendor']
    },
    {
       path: 'menu',
       component: Menu,
-      divide: ['/app','/vendor']
+      divide: ['/vendor']
+   },
+   {
+      path: 'orderconfiguration',
+      component: OrderConfig,
+      divide: ['/vendor']
+   },
+   {
+      path: 'subscription',
+      component: Subscription,
+      divide: ['/vendor']
    }
 ]
