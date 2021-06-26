@@ -54,7 +54,7 @@ export default class OfflinePayment extends Component {
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <Button variant="contained" color="primary">
-                            Approve<i class="ti-arrow-circle-right"></i>
+                            Approve<i className="ti-arrow-circle-right"></i>
                         </Button>
                     )
                 }

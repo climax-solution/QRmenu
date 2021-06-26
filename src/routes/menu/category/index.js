@@ -91,10 +91,10 @@ export default class Category extends Component {
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
                             <Button variant="contained" className="btn-primary text-white">
-                            &nbsp;<i class="ti-pencil-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Edit
+                            &nbsp;<i className="ti-pencil-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Edit
                             </Button>
                             <Button variant="contained" className="btn-danger text-white mt-5">
-                                <i class="ti-trash"></i>&nbsp;&nbsp;Delete
+                                <i className="ti-trash"></i>&nbsp;&nbsp;Delete
                             </Button>
                         </div>
                         
@@ -269,7 +269,7 @@ export default class Category extends Component {
                                 
                                 </div>
                                 <Button variant="contained"  color="primary" style={{float:'right'}} className="mt-10 mb-10 ml-auto">
-                                    <i class="ti-save"></i>&nbsp;Save Change
+                                    <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </RctCollapsibleCard>
                         

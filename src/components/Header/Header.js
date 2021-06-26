@@ -27,7 +27,6 @@
  import DashboardOverlay from '../DashboardOverlay/DashboardOverlay';
  import LanguageProvider from './LanguageProvider';
  import SearchForm from './SearchForm';
- import QuickLinks from './QuickLinks';
  import MobileSearchForm from './MobileSearchForm';
  import Cart from './Cart';
  
@@ -76,6 +75,7 @@
 	}
  
 	render() {
+		console.log(this.props);
 	   const { isMobileSearchFormVisible } = this.state;
 	   $('body').click(function () {
 		  $('.dashboard-overlay').removeClass('show');
@@ -115,7 +115,6 @@
 							   </Tooltip>
 							</li>
 						 }
-						 {!horizontalMenu && <QuickLinks />}
 					  </ul>
 				   }
 				</div>

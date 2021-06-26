@@ -119,7 +119,7 @@ import MUIDataTable from "mui-datatables";
                 <Button className="btn btn-info text-white" variant="contained" onClick={this.handleClickOpen}>
                     <i className="ti-plus"></i> Add New
                 </Button>
-                <div class="row mt-10">
+                <div className="row mt-10">
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-10 d-sm-full"

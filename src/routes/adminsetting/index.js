@@ -42,7 +42,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                      <meta name="description" content="Reactify Blank Page" />
                  </Helmet>
                  <PageTitleBar title={<IntlMessages id="sidebar.adminsetting" />} match={this.props.match} />
-                 <div class="row">
+                 <div className="row">
                      <div className="col-lg-6 col-md-12 col-sm-12">
                         <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
@@ -117,7 +117,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                         <TextField id="description" fullWidth label="Description" multiline rows="4" className="mt-10" />
                                         <TextField id="google-analytics" fullWidth label="Google Analytics" multiline rows="4" className="mt-10" />
                                         <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-60 mb-30" style={{float:'right'}}>
-                                            <i class="ti-save"></i>&nbsp;Save Change
+                                            <i className="ti-save"></i>&nbsp;Save Change
                                         </Button>
                                     </FormGroup>
                                 </FormControl>
@@ -205,13 +205,13 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                 </FormGroup>
                             </FormControl>
-                            <FormControl class="mt-20" style={{padding: '0 20px'}} fullWidth>
+                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
                                 <FormLabel style={{fontSize:'14px'}}>Recaptcha Site Key</FormLabel>
                                 <FormGroup aria-label="position" row>
                                     <TextField type="text" fullWidth/>
                                 </FormGroup>
                             </FormControl>
-                            <FormControl class="mt-20" style={{padding: '0 20px'}} fullWidth>
+                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
                                 <FormLabel style={{fontSize:'14px'}}>Secret Key</FormLabel>
                                 <FormGroup aria-label="position" row>
                                     <TextField type="text" fullWidth/>
@@ -220,7 +220,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                             <FormControl style={{padding:'0px 20px'}} fullWidth>
                                 <FormGroup aria-label="position" style={{display: 'block'}} row>
                                     <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10 mb-30" style={{float:'right'}}>
-                                        <i class="ti-save"></i>&nbsp;Save Change
+                                        <i className="ti-save"></i>&nbsp;Save Change
                                     </Button>
                                 </FormGroup>
                             </FormControl>

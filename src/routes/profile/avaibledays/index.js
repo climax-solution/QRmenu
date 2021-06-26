@@ -41,7 +41,7 @@ export default class Avaibledays extends Component {
                      <meta name="description" content="Reactify Blank Page" />
                  </Helmet>
                  <PageTitleBar title={<IntlMessages id="sidebar.avaible" />} match={this.props.match} />
-                <div class="row">
+                <div className="row">
                     <div className="col-sm-12 col-md-12 col-lg-7">
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"

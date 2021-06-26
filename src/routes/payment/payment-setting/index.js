@@ -49,7 +49,7 @@ import ToggleSwitch from "./switch";
                      <meta name="description" content="Reactify Blank Page" />
                  </Helmet>
                  <PageTitleBar title={<IntlMessages id="sidebar.paymentsetting" />} match={this.props.match} />
-                <div class="row">
+                <div className="row">
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
@@ -84,7 +84,7 @@ import ToggleSwitch from "./switch";
                                 </div>
                                 <TextField margin="dense" id="paypalemail" label="Paypal Email" type="email" fullWidth />
                                 <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-10 mb-10">
-                                    <i class="ti-save"></i>&nbsp;Save Change
+                                    <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
                         </FormControl>
@@ -129,13 +129,13 @@ import ToggleSwitch from "./switch";
                                     </div>
                                 </div>
                                 <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-20">
-                                    <i class="ti-save"></i>&nbsp;Save Change
+                                    <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
                         </FormControl>
                     </RctCollapsibleCard>
                 </div>
-                <div class="row">
+                <div className="row">
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
@@ -168,7 +168,7 @@ import ToggleSwitch from "./switch";
                                     </div>
                                 </div>
                                 <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10" style={{float:'right'}}>
-                                    <i class="ti-save"></i>&nbsp;Save Change
+                                    <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
                         </FormControl>
@@ -221,7 +221,7 @@ import ToggleSwitch from "./switch";
                                     fullWidth
                                 />
                                 <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10 mb-10" style={{float:'right'}}>
-                                    <i class="ti-save"></i>&nbsp;Save Change
+                                    <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
                         </FormControl>

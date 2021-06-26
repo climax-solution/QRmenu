@@ -68,7 +68,7 @@
                         />
                     </RctCollapsibleCard>
                     <div className="col-sm-12 col-md-12 col-lg-7 d-sm-full">
-                        <div class="row">
+                        <div className="row">
                             <RctCollapsibleCard
                                 colClasses="col-sm-12 col-md-12 col-lg-12 w-xs-full"
                                 heading={<IntlMessages id="widgets.RecentOrders" />}
