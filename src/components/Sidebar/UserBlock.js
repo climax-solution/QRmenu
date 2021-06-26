@@ -61,6 +61,7 @@ class UserBlock extends Component {
 	}
 
 	render() {
+		const {match} = this.props;
 		return (
 			<div className="top-sidebar">
 				<div className="sidebar-user-block">
@@ -83,7 +84,9 @@ class UserBlock extends Component {
 								/>
 							</div>
 							<div className="user-info">
-								<span className="user-name ml-4">Admin</span>
+								<span className="user-name ml-4">{
+									match.url == '/app' ? 'Admin' : 'Assistant'
+								}</span>
 								<i className="zmdi zmdi-chevron-down dropdown-icon mx-4"></i>
 							</div>
 						</DropdownToggle>
@@ -103,10 +106,10 @@ class UserBlock extends Component {
 									</Link>
 								</li>
 								<li className="border-top">
-									<a href="javascript:void(0)">
+									<Link  to="/">
 										<i className="zmdi zmdi-power text-danger mr-3"></i>
 										<IntlMessages id="widgets.logOut" />
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</DropdownMenu>

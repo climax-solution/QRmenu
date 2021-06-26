@@ -25,7 +25,7 @@
        </div>
        <ul className="price-detail list-unstyled">
           {features.map((feature, key) => (
-             <li key={key} className="text-left">{feature}</li>
+             <li key={key} className="text-left"><i className="ti-check" style={{fontWeight: 'bold', color: 'green'}}></i>{feature}</li>
           ))}
        </ul>
        <Button color={color} className='btn-block btn-lg' onClick={handleClickOpen}>

@@ -121,7 +121,8 @@ export default {
             {
                "path": "/vendor/profile/avaible",
                "menu_title": "sidebar.avaible"
-            }
+            },
+
          ]
       }
    ],
@@ -143,6 +144,12 @@ export default {
       "menu_title": "sidebar.deactive",
       "menu_icon": "zmdi zmdi-block",
       "path": "/vendor/deactiveaccount",
+      "child_routes": null
+   }],
+   category14: [{
+      "menu_title": "sidebar.orderconfig",
+      "menu_icon": "zmdi zmdi-settings",
+      "path": "/vendor/orderconfiguration",
       "child_routes": null
    }]
 }

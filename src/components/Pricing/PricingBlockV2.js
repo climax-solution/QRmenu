@@ -30,7 +30,7 @@ const PricingBlockV2 = ({ type, responses, color, features,status }) => (
          </ul>
          <Button color={color} className='btn-block btn-lg'>
             {
-               status ? <IntlMessages id="widgets.runpackage"/>
+               status ? <IntlMessages id="widgets.runpackage" disabled/>
                : <IntlMessages id="widgets.selectpackage" />
             }
          </Button>

@@ -18,7 +18,6 @@ import SidebarContent from './SidebarContent';
 import AgencySidebar from '../AgencyMenu/AgencySidebar';
 
 class Sidebar extends Component {
-
 	componentWillMount() {
 		this.updateDimensions();
 	}
@@ -55,6 +54,7 @@ class Sidebar extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		const { enableSidebarBackgroundImage, selectedSidebarImage, isDarkSidenav, agencySidebar } = this.props;
 		return (
 			<Fragment>
@@ -78,7 +78,7 @@ class Sidebar extends Component {
 								autoHideDuration={100}
 								style={{ height: 'calc(100vh - 60px)' }}
 							>
-								<UserBlock />
+								<UserBlock match={this.props.match}/>
 								{!agencySidebar ?
 									<SidebarContent />
 									:

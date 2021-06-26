@@ -33,7 +33,7 @@ class SidebarContent extends Component {
                 menu.path = '/vendor/' + item[2];
             })
         }
-        console.log(sidebarMenus.category1);
+        
         return (
             <div className="rct-sidebar-nav">
                 <nav className="navigation">
@@ -158,6 +158,16 @@ class SidebarContent extends Component {
                                 className="rct-mainMenu p-0 m-0 list-unstyled"
                             >
                                 {sidebarMenus.category11.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
+                                {sidebarMenus.category14.map((menu,key) => (
                                     <NavMenuItem
                                         menu={menu}
                                         key={key}
