@@ -137,7 +137,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6 ">
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
-                                        <FormLabel style={{fontSize:'14px'}}>Registration System <i className=" icon-info"></i> </FormLabel>
+                                        <FormLabel style={{fontSize:'10px'}}>Registration System <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
                                             <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                             <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
@@ -146,7 +146,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 </div>
                                 <div className="col-lg-4 col-md-6 col-sm-4 col-xs-6 ">
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
-                                        <FormLabel style={{fontSize:'14px'}}>Auto Approval <i className=" icon-info"></i> </FormLabel>
+                                        <FormLabel style={{fontSize:'10px'}}>Auto Approval <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
                                         <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                             <i className='material-icons'style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
@@ -155,7 +155,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 </div>
                                 <div className="col-lg-4 col-md-6 col-sm-4 col-xs-6 ">
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
-                                        <FormLabel style={{fontSize:'14px'}}>Email Verification <i className=" icon-info"></i> </FormLabel>
+                                        <FormLabel style={{fontSize:'10px'}}>Email Verification <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
                                         <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                         <i className='material-icons'style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
@@ -164,7 +164,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6 mt-30 mb-30">
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
-                                        <FormLabel style={{fontSize:'14px'}}>Free Verify  <i className=" icon-info"></i> </FormLabel>
+                                        <FormLabel style={{fontSize:'10px'}}>Free Verify  <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
                                         <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                         <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe ? 'green' : 'red' }}> {this.state.setGe ? 'On' : 'off' }</span>
@@ -173,7 +173,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6  mt-30 mb-30">
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
-                                        <FormLabel style={{fontSize:'14px'}}>User Invoice <i className=" icon-info"></i> </FormLabel>
+                                        <FormLabel style={{fontSize:'10px'}}>User Invoice <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
                                         <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                         <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe ? 'green' : 'red' }}> {this.state.setGe ? 'On' : 'off' }</span>
@@ -182,7 +182,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6 mt-30 mb-30">
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
-                                        <FormLabel style={{fontSize:'14px'}}>Rating <i className=" icon-info"></i> </FormLabel>
+                                        <FormLabel style={{fontSize:'10px'}}>Rating <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
                                         <Switch onClick={this.settingChang} on={this.state.setGe}/>
                                         <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe ? 'green' : 'red' }}> {this.state.setGe ? 'On' : 'off' }</span>
