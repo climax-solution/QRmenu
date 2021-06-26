@@ -86,6 +86,7 @@
       "react-dropzone-component": "^3.2.0",
       "react-helmet": "^5.2.0",
       "react-hot-loader": "^4.8.0",
+      "react-images-upload": "^1.2.8",
       "react-instantsearch": "^5.4.0",
       "react-intl": "^2.8.0",
       "react-joyride": "^1.11.4",
