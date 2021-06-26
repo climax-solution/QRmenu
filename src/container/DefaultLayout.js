@@ -17,11 +17,14 @@ class DefaultLayout extends Component {
 		if (location.pathname === '/app') {
 			return (<Redirect to={'/app/dashboard'} />);
 		}
-		console.log(match);
+		if (location.pathname === '/vendor') {
+			return (<Redirect to={'/vendor/dashboard'} />);
+		}
+		console.log(routerService);
 		return (
 			<RctAppLayout>
 				{routerService && routerService.map((route,key)=>
-					(route.divide.indexOf(match.url) > -1) && 
+					(route.divide && route.divide.indexOf(match.url) > -1) && 
 						<Route key={key} path={`${match.url}/${route.path}`} component={route.component} />
 					
 				)}

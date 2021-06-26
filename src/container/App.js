@@ -21,7 +21,7 @@ import RctDefaultLayout from './DefaultLayout';
 // boxed layout
 import RctBoxedLayout from './RctBoxedLayout';
 // CRM layout
-import LoginLayout from './LoginLayout';
+import SignLayout from './SignLayout';
 /**
  * Initial Path To Check Whether User Is Logged In Or Not
  */
@@ -35,7 +35,7 @@ class App extends Component {
    render() {
       const { location, match, user } = this.props;
       if (location.pathname === '/') {
-         return <Redirect to={'/login'} />;
+         return <Redirect to='/signin/signin' />;
       }
       else if (location.pathname === '/app') {
          return <Redirect to={'/app/dashboard'} />;
@@ -56,7 +56,10 @@ class App extends Component {
                authUser={user}
                component={RctDefaultLayout}
             />
-            <Route path="/login" component={LoginLayout}/>
+            <Route
+               path={`${match.url}signin`}
+               component={SignLayout}
+            />
          </RctThemeProvider>
       );
    }
