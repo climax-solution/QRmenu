@@ -62,15 +62,33 @@ const AsyncCategoryComponent = Loadable({
    loading: () => <RctPageLoader />
 })
 
+//Item
+const AsyncItemComponent = Loadable({
+   loader: () => import("Routes/menu/item"),
+   loading: () => <RctPageLoader />
+})
+
 //Package
 const AsyncPackageComponent = Loadable({
    loader: () => import("Routes/menu/package"),
    loading: () => <RctPageLoader />
 })
 
-//Package
+//Specialities
+const AsyncSpecialitesComponent = Loadable({
+   loader: () => import("Routes/menu/specialites"),
+   loading: () => <RctPageLoader />
+})
+
+//QR Builder
 const AsyncQrBuilderComponent = Loadable({
    loader: () => import("Routes/menu/qrbuilder"),
+   loading: () => <RctPageLoader />
+})
+
+//Allergens
+const AsyncAllergensComponent = Loadable({
+   loader: () => import("Routes/menu/allergens"),
    loading: () => <RctPageLoader />
 })
 
@@ -96,8 +114,11 @@ export {
    AsyncTransactionHistoryComponent,
    AsyncSubscriptionComponent,
    AsyncCategoryComponent,
+   AsyncItemComponent,
    AsyncPackageComponent,
+   AsyncSpecialitesComponent,
    AsyncQrBuilderComponent,
+   AsyncAllergensComponent,
    AsyncProfileComponent,
    AsyncAvaibleComponent,
 };
