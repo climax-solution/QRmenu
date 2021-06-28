@@ -132,7 +132,7 @@ export default class QrBuilder extends Component {
                 <div className="row mt-10">
                     <RctCollapsibleCard
                         customClasses="trafic-bar-chart"
-                        colClasses="col-sm-12 col-md-12 col-lg-10 d-sm-full"
+                        colClasses="col-sm-12 col-md-12 col-lg-12 d-sm-full"
                         heading={<IntlMessages id="sidebar.qrbuilder" />}
                         collapsible
                         closeable

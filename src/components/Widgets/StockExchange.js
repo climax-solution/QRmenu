@@ -56,10 +56,6 @@ class StockExchange extends Component {
 							<span><i className="ti-arrow-down text-danger"></i> {ratesData.rates ? ratesData.rates.EUR.toFixed(2) : 0}</span>
 						</ListItem>
 						<ListItem>
-							<span><img src={require('Assets/flag-icons/icons8-south_korea.png')} className="img-fluid mr-10" alt="krw" /> KRW (Korea)</span>
-							<span><i className="ti-arrow-down text-danger"></i> {ratesData.rates ? ratesData.rates.NZD.toFixed(2) : 0}</span>
-						</ListItem>
-						<ListItem>
 							<span><img src={require('Assets/flag-icons/icons8-india.png')} className="img-fluid mr-10" alt="inr" /> INR (Indian Rupees)</span>
 							<span><i className="ti-arrow-up text-success"></i> {ratesData.rates ? ratesData.rates.INR.toFixed(2) : 0}</span>
 						</ListItem>

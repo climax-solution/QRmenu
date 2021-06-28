@@ -16,7 +16,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
     state = {
         selectedValue: 'english',
         currency:'',
-        setGe:true
+        setGe:[true,true,true,true,true,true,true]
     }
     handleChange = (event) => {
         this.setState({
@@ -28,8 +28,9 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
             currency: event.target.value
         })
     }
-    settingChang = () =>{
-        let custom = this.state.setGe ? false : true;
+    settingChang = (index) =>{
+        let custom = this.state.setGe;
+        custom[index] = custom[index] ? false : true;
         this.setState({
             setGe: custom
         })
@@ -139,8 +140,8 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'10px'}}>Registration System <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                            <Switch onClick={this.settingChang} on={this.state.setGe}/>
-                                            <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
+                                            <Switch onClick={()=>this.settingChang(0)} on={this.state.setGe[0]}/>
+                                            <i className='material-icons' style={{color: this.state.setGe[0] ? 'green' : 'red' }}>{this.state.setGe[0] ? 'check' : 'do_not_disturb_alt'}</i>
                                         </FormGroup>
                                     </FormControl>
                                 </div>
@@ -148,8 +149,8 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'10px'}}>Auto Approval <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                        <Switch onClick={this.settingChang} on={this.state.setGe}/>
-                                            <i className='material-icons'style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
+                                        <Switch onClick={()=>this.settingChang(1)} on={this.state.setGe[1]}/>
+                                            <i className='material-icons'style={{color: this.state.setGe[1] ? 'green' : 'red' }}>{this.state.setGe[1] ? 'check' : 'do_not_disturb_alt'}</i>
                                         </FormGroup>
                                     </FormControl>
                                 </div>
@@ -157,8 +158,8 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'10px'}}>Email Verification <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                        <Switch onClick={this.settingChang} on={this.state.setGe}/>
-                                        <i className='material-icons'style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i>
+                                        <Switch onClick={()=>this.settingChang(2)} on={this.state.setGe[2]}/>
+                                        <i className='material-icons'style={{color: this.state.setGe[2] ? 'green' : 'red' }}>{this.state.setGe[2] ? 'check' : 'do_not_disturb_alt'}</i>
                                         </FormGroup>
                                     </FormControl>
                                 </div>
@@ -166,8 +167,8 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'10px'}}>Free Verify  <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                        <Switch onClick={this.settingChang} on={this.state.setGe}/>
-                                        <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe ? 'green' : 'red' }}> {this.state.setGe ? 'On' : 'off' }</span>
+                                        <Switch onClick={()=>this.settingChang(3)} on={this.state.setGe[3]}/>
+                                        <i className='material-icons' style={{color: this.state.setGe[3] ? 'green' : 'red' }}>{this.state.setGe[3] ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe[3] ? 'green' : 'red' }}> {this.state.setGe[3] ? 'On' : 'off' }</span>
                                         </FormGroup>
                                     </FormControl>
                                 </div>
@@ -175,8 +176,8 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'10px'}}>User Invoice <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                        <Switch onClick={this.settingChang} on={this.state.setGe}/>
-                                        <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe ? 'green' : 'red' }}> {this.state.setGe ? 'On' : 'off' }</span>
+                                        <Switch onClick={()=>this.settingChang(4)} on={this.state.setGe[4]}/>
+                                        <i className='material-icons' style={{color: this.state.setGe[4] ? 'green' : 'red' }}>{this.state.setGe[4] ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe[4] ? 'green' : 'red' }}> {this.state.setGe[4] ? 'On' : 'off' }</span>
                                         </FormGroup>
                                     </FormControl>
                                 </div>
@@ -184,8 +185,8 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                     <FormControl style={{padding: '0 20px'}} fullWidth>
                                         <FormLabel style={{fontSize:'10px'}}>Rating <i className=" icon-info"></i> </FormLabel>
                                         <FormGroup aria-label="position" row>
-                                        <Switch onClick={this.settingChang} on={this.state.setGe}/>
-                                        <i className='material-icons' style={{color: this.state.setGe ? 'green' : 'red' }}>{this.state.setGe ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe ? 'green' : 'red' }}> {this.state.setGe ? 'On' : 'off' }</span>
+                                        <Switch onClick={()=>this.settingChang(5)} on={this.state.setGe[5]}/>
+                                        <i className='material-icons' style={{color: this.state.setGe[5] ? 'green' : 'red' }}>{this.state.setGe[5] ? 'check' : 'do_not_disturb_alt'}</i><span style={{color: this.state.setGe[5] ? 'green' : 'red' }}> {this.state.setGe[5] ? 'On' : 'off' }</span>
                                         </FormGroup>
                                     </FormControl>
                                 </div>
@@ -202,7 +203,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                             <FormControl style={{padding: '0 20px'}} fullWidth>
                                 <FormLabel style={{fontSize:'14px'}}>Recaptcha</FormLabel>
                                 <FormGroup aria-label="position" row>
-                                <Switch onClick={this.settingChang} on={this.state.setGe}/>
+                                <Switch onClick={()=>this.settingChang(6)} on={this.state.setGe[6]}/>
                                 </FormGroup>
                             </FormControl>
                             <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>

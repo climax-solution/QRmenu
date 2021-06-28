@@ -25,7 +25,8 @@ import {
     MenuItem,
     FormControl,
     Button,
-    Badge
+    Badge,
+    Chip,
 } from '@material-ui/core';
 
 import {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core';

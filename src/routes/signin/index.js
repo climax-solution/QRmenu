@@ -27,15 +27,13 @@ export default class SignIn extends Component {
       })
    }
    signin() {
-      this.props.history.push('/app');
-
       if (this.state.username == 'admin' && this.state.password == 'DevQR2021') {
-         console.log(this.props.history);
-         // NotificationManager.success('User Login Successfully!');
+         NotificationManager.success('User Login Successfully!');
+         this.props.history.push('/app');
       }
       else if (this.state.username == 'vendor' && this.state.password == 'Dev2021') {
+         NotificationManager.success('User Login Successfully!');
          this.props.history.push('/vendor');
-         // NotificationManager.success('User Login Successfully!');
       }
       else {
       }

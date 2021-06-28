@@ -43,7 +43,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
             }
         ];
         const data = [
-            [ "1", "111", "Alexandr", "(555) 3333", "Norway","23123adfadfadf","2020"]
+            [ "1", "111", "sd23xu2rw2", "100USD", "Norway","Paypal","2020"]
         ];
          return (
              <div className="blank-wrapper">

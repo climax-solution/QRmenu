@@ -26,7 +26,8 @@ $dataYes: attr(data-yes);
     border-radius: 0px;
     margin: 0;
     position: relative;
-    width: 100px;
+    width: 90px;
+    text-align: left;
     &:focus {
       outline: none;
       > span {
@@ -50,7 +51,7 @@ $dataYes: attr(data-yes);
       height: 34px;
       padding: 0;
       line-height: 34px;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: bold;
       box-sizing: border-box;
     }
@@ -89,7 +90,7 @@ $dataYes: attr(data-yes);
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 90%;
+    right: 89%;
     border: 1px solid $label-colour;
     transition: all 0.3s ease-in 0s;
   }

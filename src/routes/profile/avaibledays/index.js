@@ -71,7 +71,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -85,7 +85,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -108,7 +108,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -122,7 +122,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -145,7 +145,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -159,7 +159,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -182,7 +182,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -196,7 +196,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -219,7 +219,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -233,7 +233,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -256,7 +256,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -270,7 +270,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -293,7 +293,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (
@@ -307,7 +307,7 @@ export default class Avaibledays extends Component {
                                         <TableCell>
                                             <TimePicker
                                                 value={this.state.selectedDate}
-                                                onChange={()=>this.handleDateChange()}
+                                                onChange={this.handleDateChange}
                                                 fullWidth
                                                 InputProps={{
                                                     endAdornment: (

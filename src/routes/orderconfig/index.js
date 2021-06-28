@@ -68,7 +68,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -78,7 +78,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -88,7 +88,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -98,7 +98,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -108,7 +108,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; Active"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-md-6">
@@ -147,7 +147,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; Active"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                     </div>
                                     </div>
@@ -176,7 +176,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; Active"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-md-6">
@@ -232,7 +232,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -242,7 +242,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -252,7 +252,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
@@ -262,7 +262,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; On"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                     </div>
@@ -292,7 +292,7 @@ import ToggleSwitch from "./switch";
                                                 checked={this.state.open}
                                                 onChange={()=>this.onNewsletterChange}
                                                 dataYes="&#xe64c; Active"
-                                                dataNo="&#xe73c; Off"
+                                                dataNo="&#xe6ae; Off"
                                             />
                                         </div>
                                         <div className="col-md-6 mt-10">

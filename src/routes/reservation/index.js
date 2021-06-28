@@ -12,23 +12,20 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 import MUIDataTable from "mui-datatables";
 import { Badge } from '@material-ui/core';
 
-export default class LiveOrder extends Component {
+export default class BackUpDB extends Component {
      render() {
         const columns = [
             {
                 name: "Sl"
             },
             {
-                name: 'Order Number'
+                name: 'Order ID'
             },
             {
                 name: "Name"
             },
             {
                 name: "Phone"
-            },
-            {
-                name: "Address"
             },
             {
                 name: "OrderType",
@@ -42,6 +39,9 @@ export default class LiveOrder extends Component {
             },
             {
                 name: "Overview"
+            },
+            {
+                name: "Comments"
             },
             {
                 name: "Status",
@@ -66,22 +66,21 @@ export default class LiveOrder extends Component {
             }
         ];
         const data = [
-            [ "1", "111", "Alexandr", "(555) 3333", "Norway","any","offline","pending"]
+            // [ "1", "111", "Alexandr", "(555) 3333", "Norway","any","offline","pending"]
         ];
          return (
              <div className="blank-wrapper">
                  <Helmet>
-                     <title>Live Order</title>
-                     <meta name="description" content="Reactify Blank Page" />
+                     <title>Reservation</title>
+                     <meta name="description" content="reservation" />
                  </Helmet>
-                 <PageTitleBar title={<IntlMessages id="sidebar.liveorder" />} match={this.props.match} />
+                 <PageTitleBar title={<IntlMessages id="sidebar.reservation" />} match={this.props.match} />
                  <RctCollapsibleCard
-                    heading="Live Order"
+                    heading="Reversation"
                     collapsible
                     fullBlock
                 >
                     <MUIDataTable
-                        title={"Live Order"}
                         data={data}
                         columns={columns}
                         // options={options}
