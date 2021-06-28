@@ -75,14 +75,13 @@
 	}
  
 	render() {
-		console.log(this.props);
 	   const { isMobileSearchFormVisible } = this.state;
 	   $('body').click(function () {
 		  $('.dashboard-overlay').removeClass('show');
 		  $('.dashboard-overlay').addClass('d-none');
 		  $('body').css('overflow', '');
 	   });
-	   const { horizontalMenu, agencyMenu, location } = this.props;
+	   const { horizontalMenu, agencyMenu, location,match } = this.props;
 	   return (
 		  <AppBar position="static" className="rct-header">
 			 <Toolbar className="d-flex justify-content-between w-100 pl-0">
@@ -127,7 +126,7 @@
 					  </Tooltip>
 				   </li>
 				   <LanguageProvider />
-				   <Notifications />
+				   <Notifications match={match}/>
 				   <li className="list-inline-item">
 					  <Tooltip title="Full Screen" placement="bottom">
 						 <IconButton aria-label="settings" onClick={() => this.toggleScreenFull()}>
