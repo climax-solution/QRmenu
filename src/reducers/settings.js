@@ -83,71 +83,11 @@ const INIT_STATE = {
 			icon: 'en',
 		},
 		{
-			languageId: 'chinese',
-			locale: 'zh',
-			name: 'Chinese',
-			icon: 'zh',
+			languageId: 'norway',
+			locale: 'nw',
+			name: 'Norway',
+			icon: 'nw',
 		},
-		{
-			languageId: 'russian',
-			locale: 'ru',
-			name: 'Russian',
-			icon: 'ru',
-		},
-		{
-			languageId: 'hebrew',
-			locale: 'he',
-			name: 'Hebrew',
-			icon: 'he',
-		},
-		{
-			languageId: 'french',
-			locale: 'fr',
-			name: 'French',
-			icon: 'fr',
-		},
-		{
-			languageId: 'saudi-arabia',
-			locale: 'ar',
-			name: 'Arabic',
-			icon: 'ar',
-		},
-		{
-			languageId: 'german',
-			locale: 'de',
-			name: 'German',
-			icon: 'de',
-		},
-		{
-			languageId: 'spanish',
-			locale: 'es',
-			name: 'Spanish',
-			icon: 'es',
-		},
-		{
-			languageId: 'japanese',
-			locale: 'ja',
-			name: 'Japanese',
-			icon: 'ja',
-		},
-		{
-			languageId: 'korean',
-			locale: 'ko',
-			name: 'Korean',
-			icon: 'ko',
-		},
-		{
-			languageId: 'italian',
-			locale: 'it',
-			name: 'Italian',
-			icon: 'it',
-		},
-		{
-			languageId: 'hungarian',
-			locale: 'hu',
-			name: 'Hungarian',
-			icon: 'hu',
-		}
 	],
 	agencyLayoutBgColors: [
 		{
