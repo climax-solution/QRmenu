@@ -1,0 +1,34 @@
+[
+    {
+        "id":1,
+        "title":"Food"
+    },
+    {
+        "id":2,
+        "title":"Foodie"
+    },
+    {
+        "id":3,
+        "title":"Chicken"
+    },
+    {
+        "id":4,
+        "title":"Meat"
+    },
+    {
+        "id":5,
+        "title":"Health"
+    },
+    {
+        "id":6,
+        "title":"Vegan"
+    },
+    {
+        "id":7,
+        "title":"Fit"
+    },
+    {
+        "id":8,
+        "title":"Fruit"
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "img": "assets/img/locations/1.jpg",
+        "title": "Slices London",
+        "brancetype": "Main Branch",
+        "location": [
+            "Cecilia Chapman",
+            "711-2880 Nulla St.",
+            "Mankato Mississippi 96522"
+        ],
+        "contactno": "(257) 563-7401",
+        "emailid": "info@slices.com",
+        "mapdata": [
+            40.711652,
+            -73.963877
+        ]
+    },
+    {
+        "id": 2,
+        "img": "assets/img/locations/2.jpg",
+        "title": "Slices Washington",
+        "brancetype": "Secondary Branch",
+        "location": [
+            "Iris Watson",
+            "P.O. Box 283 8562 Fusce Rd.",
+            "Frederick Nebraska 20620"
+        ],
+        "contactno": "(372) 587-2335",
+        "emailid": "info@slices-dc.com",
+        "mapdata": [
+            40.711652,
+            -73.963877
+        ]
+    },
+    {
+        "id": 3,
+        "img": "assets/img/locations/3.jpg",
+        "title": "Slices Italy",
+        "brancetype": "Secondary Branch",
+        "location": [
+            "Celeste Slater",
+            "606-3727 Ullamcorper. Street",
+            "Roseville NH 11523"
+        ],
+        "contactno": "(786) 713-8616",
+        "emailid": "info@slices-italy.com",
+        "mapdata": [
+            40.711652,
+            -73.963877
+        ]
+    }
+]
