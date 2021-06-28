@@ -16,7 +16,8 @@ import Menu from 'Routes/menu';
 import Login from 'Routes/signin';
 import SignUp from 'Routes/signup';
 import OrderConfig from 'Routes/orderconfig';
-
+import Reservation from 'Routes/reservation';
+import KDS from 'Routes/kds';
 export default [
    //Login
    {
@@ -67,6 +68,16 @@ export default [
    {
       path: 'liveorder',
       component: LiveOrder,
+      divide: ['/vendor']
+   },
+   {
+      path: 'reservation',
+      component: Reservation,
+      divide: ['/vendor']
+   },
+   {
+      path: 'kds',
+      component: KDS,
       divide: ['/vendor']
    },
    {
