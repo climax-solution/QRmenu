@@ -54,7 +54,6 @@ class Sidebar extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		const { enableSidebarBackgroundImage, selectedSidebarImage, isDarkSidenav, agencySidebar } = this.props;
 		return (
 			<Fragment>

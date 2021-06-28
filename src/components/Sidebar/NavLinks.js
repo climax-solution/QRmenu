@@ -6,7 +6,6 @@ export default {
          "menu_icon": "zmdi zmdi-view-dashboard",
          "path": "/app/dashboard",
          "type_multi": null,
-         "child_routes": null
       }
    ],
    category2: [
@@ -90,12 +89,24 @@ export default {
                "menu_title": "sidebar.category"
             },
             {
+               "path": "/vendor/menu/item",
+               "menu_title": "sidebar.item"
+            },
+            {
                "path": "/vendor/menu/package",
                "menu_title": "sidebar.package"
             },
             {
+               "path": "/vendor/menu/specialities",
+               "menu_title": "sidebar.specialities"
+            },
+            {
                "path": "/vendor/menu/qrbuilder",
                "menu_title": "sidebar.qrbuilder"
+            },
+            {
+               "path": "/vendor/menu/allergens",
+               "menu_title": "sidebar.allergens"
             }
          ]
       }
@@ -105,7 +116,8 @@ export default {
          "menu_title": "sidebar.liveorder",
          "menu_icon":"zmdi zmdi-file-text",
          "path": "/vendor/liveorder",
-         "child_routes": null
+         "child_routes": null,
+         "new_item": true
       }
    ],
    category10: [
@@ -150,6 +162,18 @@ export default {
       "menu_title": "sidebar.orderconfig",
       "menu_icon": "zmdi zmdi-settings",
       "path": "/vendor/orderconfiguration",
+      "child_routes": null
+   }],
+   category15: [{
+      "menu_title": "sidebar.reservation",
+      "menu_icon": "zmdi zmdi-truck",
+      "path": "/vendor/reservation",
+      "child_routes": null
+   }],
+   category16: [{
+      "menu_title": "sidebar.kds",
+      "menu_icon": "zmdi zmdi-shopping-basket",
+      "path": "/vendor/kds",
       "child_routes": null
    }]
 }

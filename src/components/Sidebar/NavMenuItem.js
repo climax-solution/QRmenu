@@ -122,6 +122,11 @@ class NavMenuItem extends Component {
                </ListItemIcon>
                <span className="menu">
                   <IntlMessages id={menu.menu_title} />
+                  {menu.new_item && menu.new_item === true ?
+                     <Chip label="new" className="new-item" color="secondary" />
+                     :
+                     ''
+                  }
                </span>
             </NavLink>
          </ListItem>
