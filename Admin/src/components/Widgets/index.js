@@ -369,10 +369,10 @@ const TrendingNews = Loadable({
    loading: MyLoadingComponent
 })
 
-const TopHeadlines = Loadable({
-   loader: () => import("./TopHeadlines"),
-   loading: MyLoadingComponent
-})
+// const TopHeadlines = Loadable({
+//    loader: () => import("./TopHeadlines"),
+//    loading: MyLoadingComponent
+// })
 
 const Visitors = Loadable({
    loader: () => import("./Visitors"),
@@ -549,7 +549,6 @@ export {
    SessionSlider,
    AgencyWelcomeBlock,
    TrendingNews,
-   TopHeadlines,
    Visitors,
    Subscribers,
    NewslaterCampaign,

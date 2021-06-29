@@ -788,6 +788,7 @@ module.exports = {
    "sidebar.paymenthistory": "Payment History",
    "sidebar.deactive": "Deactive Account",
    "sidebar.orderconfig": "Order Configuration",
+   "sidebar.overviewprofile": "Overview Profile",
    //custom widget
    "widgets.profile": "Profile",
    "widgets.logOut": "Log Out",

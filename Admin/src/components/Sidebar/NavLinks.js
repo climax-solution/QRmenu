@@ -175,5 +175,12 @@ export default {
       "menu_icon": "zmdi zmdi-shopping-basket",
       "path": "/vendor/kds",
       "child_routes": null
+   }],
+   category17: [{
+      "menu_title": "sidebar.overviewprofile",
+      "menu_icon": "zmdi zmdi-eye",
+      "exact": true,
+      "path": "overviewprofile",
+      "child_routes": null
    }]
 }

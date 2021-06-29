@@ -45,7 +45,7 @@ class StockExchange extends Component {
 		}
 		return (
 			<div className="stock-exchange">
-				{ratesData !== null &&
+				{/* {ratesData !== null &&
 					<List className="list-unstyled p-0">
 						<ListItem>
 							<span><img src={require('Assets/flag-icons/icons8-canada.png')} className="img-fluid mr-10" alt="cad" /> CAD (Canadian Dollar)</span>
@@ -64,7 +64,7 @@ class StockExchange extends Component {
 							<span><i className="ti-arrow-down text-danger"></i> {ratesData.rates ? ratesData.rates.SGD.toFixed(2) : 0}</span>
 						</ListItem>
 					</List>
-				}
+				} */}
 				<RctCardFooter customClasses="border-0 fs-12 text-base">
 					<i className="mr-5 zmdi zmdi-refresh"></i>
 					<IntlMessages id="widgets.updated10Minago" />

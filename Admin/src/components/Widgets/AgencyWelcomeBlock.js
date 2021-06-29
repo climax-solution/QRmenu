@@ -108,7 +108,7 @@ export default class AgencyWelcomeBlock extends Component {
 					</div>
 					<div className="col-lg-6 d-lg-block d-none">
 						<div className="d-flex align-items-center justify-content-center">
-							<img alt="agency block" src={require('Assets/img/agency-welcome.png')} className="img-fluid" />
+							{/* <img alt="agency block" src={require('Assets/img/agency-welcome.png')} className="img-fluid" /> */}
 						</div>
 					</div>
 				</div>

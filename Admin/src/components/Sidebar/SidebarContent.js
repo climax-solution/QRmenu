@@ -207,6 +207,16 @@ class SidebarContent extends Component {
                             <List
                                 className="rct-mainMenu p-0 m-0 list-unstyled"
                             >
+                                {sidebarMenus.category17.map((menu, key) => (
+                                    <NavMenuItem
+                                        menu={menu}
+                                        key={key}
+                                    />
+                                ))}
+                            </List>
+                            <List
+                                className="rct-mainMenu p-0 m-0 list-unstyled"
+                            >
                                 {sidebarMenus.category13.map((menu, key) => (
                                     <NavMenuItem
                                         menu={menu}

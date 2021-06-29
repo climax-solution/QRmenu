@@ -116,7 +116,19 @@ class NavMenuItem extends Component {
       }
       return (
          <ListItem button component="li">
-            <NavLink activeClassName="item-active" to={menu.path}>
+               {menu.path != 'overviewprofile' ? (<NavLink activeClassName="item-active" to={menu.path}>
+                  <ListItemIcon className="menu-icon">
+                     <i className={menu.menu_icon}></i>
+                  </ListItemIcon>
+                  <span className="menu">
+                     <IntlMessages id={menu.menu_title} />
+                     {menu.new_item && menu.new_item === true ?
+                        <Chip label="new" className="new-item" color="secondary" />
+                        :
+                        ''
+                     }
+                  </span>
+               </NavLink>) : (<a href="http://localhost:3000" _target="blank">
                <ListItemIcon className="menu-icon">
                   <i className={menu.menu_icon}></i>
                </ListItemIcon>
@@ -128,7 +140,8 @@ class NavMenuItem extends Component {
                      ''
                   }
                </span>
-            </NavLink>
+            </a>)}
+            
          </ListItem>
       );
    }

@@ -8,7 +8,7 @@ const Activity = () => (
 		<div className="p-20">
 			<p className="lightermb-0">Today</p>
 		</div>
-		<div className="media-listing">
+		{/* <div className="media-listing">
 			<ul className="list-unstyled">
 				<li className="media border-bottom">
 					<img
@@ -138,7 +138,7 @@ const Activity = () => (
 					</div>
 				</li>
 			</ul>
-		</div>
+		</div> */}
 	</Fragment>
 );
 

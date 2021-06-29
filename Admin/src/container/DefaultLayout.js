@@ -20,14 +20,19 @@ class DefaultLayout extends Component {
 		if (location.pathname === '/vendor') {
 			return (<Redirect to={'/vendor/dashboard'} />);
 		}
-		console.log(routerService);
 		return (
 			<RctAppLayout>
-				{routerService && routerService.map((route,key)=>
-					(route.divide && route.divide.indexOf(match.url) > -1) && 
+				{/* {routerService && routerService.map((route,key)=>
+					(route.divide && route.divide.indexOf(match.url) > -1) && (route.path != 'http://localhost:3000') && 
 						<Route key={key} path={`${match.url}/${route.path}`} component={route.component} />
-					
-				)}
+					)
+					(route.divide && route.divide.indexOf(match.url) > -1) && (route.path == 'http://localhost:3000') && 
+						<Route key={key} path='http://localhost:3000' component={route.component} />
+					)
+				} */}
+				{routerService && routerService.map((route,key)=> 
+					(route.divide && route.divide.indexOf(match.url) > -1) && route.path == 'overviewprofile' ? <Route key={key} path='http://localhost:3000' component={route.component} /> : <Route key={key} path={`${match.url}/${route.path}`} component={route.component} /> )
+				}
 			</RctAppLayout>
 		);
 	}

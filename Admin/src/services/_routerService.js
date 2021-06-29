@@ -106,6 +106,11 @@ export default [
       divide: ['/vendor']
    },
    {
+      path: 'overviewprofile',
+      component: Subscription,
+      divide: ['/vendor']
+   },
+   {
       path: 'subscription',
       component: Subscription,
       divide: ['/vendor']

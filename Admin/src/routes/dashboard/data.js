@@ -31,31 +31,6 @@ export const ordersData = {
    totalRevenue: 8520
 }
 
-// top selling products
-export const topSellingProducts = {
-   totalSales: '12,550',
-   earning: '$35,000',
-   products: [
-      {
-         id: 1,
-         productName: 'HD Classic Gold Headphone',
-         price: '300',
-         productImage: require('Assets/img/device-1.jpg')
-      },
-      {
-         id: 2,
-         productName: 'HD Classic Gold Headphone',
-         price: '300',
-         productImage: require('Assets/img/device-2.jpg')
-      },
-      {
-         id: 3,
-         productName: 'HD Classic Gold Headphone',
-         price: '300',
-         productImage: require('Assets/img/device-3.jpg')
-      }
-   ]
-}
 
 // traffic Status
 export const trafficStatus = {
