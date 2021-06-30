@@ -5,14 +5,14 @@ import Breadcrumbs from '../layouts/Breadcrumb';
 import Footer from '../layouts/Footer';
 import Content from '../sections/checkout/Content';
 
-const pagelocation = 'Checkout' 
+const pagelocation = 'Reservation' 
 
 class Checkout extends Component {
     render() {
         return (
             <Fragment>
                 <MetaTags>
-                    <title>Slices - React Template | {pagelocation}</title>
+                    <title>{pagelocation}</title>
                     <meta
                         name="description"
                         content="#"
@@ -21,7 +21,7 @@ class Checkout extends Component {
                 <Header/>
                 <Breadcrumbs breadcrumb={{ pagename: pagelocation }} />
                 <Content/>
-                <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/logo-light.png" }} />
+                <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/qrcode.png" }} />
             </Fragment>
         );
     }

@@ -5,7 +5,7 @@ import Breadcrumbs from '../layouts/Breadcrumb';
 import Footer from '../layouts/Footer';
 import Content from '../sections/menu-item-v1/Content';
 
-const pagelocation = 'Menu Item v1'
+const pagelocation = 'Ordering'
 
 class Menuitemone extends Component {
     render() {

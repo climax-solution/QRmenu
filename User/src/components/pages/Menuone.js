@@ -5,7 +5,7 @@ import Breadcrumbs from '../layouts/Breadcrumb';
 import Footer from '../layouts/Footer';
 import Content from '../sections/menu-v1/Content';
 
-const pagelocation = 'Menu v1'
+const pagelocation = 'Menu'
 
 class Menuone extends Component {
     render() {
@@ -21,7 +21,7 @@ class Menuone extends Component {
                 <Header/>
                 <Breadcrumbs breadcrumb={{ pagename: pagelocation }} />
                 <Content/>
-                <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/logo-light.png" }} />
+                <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/qrcode.png" }} />
             </Fragment>
         );
     }

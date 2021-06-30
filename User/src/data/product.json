@@ -151,7 +151,7 @@
     },
     {
         "id": 2,
-        "img": "assets/img/prods-sm/13.png",
+        "img": "assets/img/prods-sm/10.png",
         "name": "Rum With Soda",
         "shortdesc": "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc",
         "price": 3.99,
@@ -302,7 +302,7 @@
     },
     {
         "id": 3,
-        "img": "assets/img/prods-sm/12.png",
+        "img": "assets/img/prods-sm/5.png",
         "name": "Chocolate Cookies",
         "shortdesc": "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc",
         "price": 4.99,
@@ -603,7 +603,7 @@
     },
     {
         "id": 5,
-        "img": "assets/img/prods-sm/11.png",
+        "img": "assets/img/prods-sm/8.png",
         "name": "Sea Food Pasta",
         "shortdesc": "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc",
         "price": 14.99,
@@ -1054,7 +1054,7 @@
     },
     {
         "id": 8,
-        "img": "assets/img/prods-sm/15.png",
+        "img": "assets/img/prods-sm/7.png",
         "name": "Ceaser Salad",
         "shortdesc": "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc",
         "price": 10.99,
@@ -1205,7 +1205,7 @@
     },
     {
         "id": 9,
-        "img": "assets/img/prods-sm/14.png",
+        "img": "assets/img/prods-sm/3.png",
         "name": "Chicken Wrap",
         "shortdesc": "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc",
         "price": 5.99,

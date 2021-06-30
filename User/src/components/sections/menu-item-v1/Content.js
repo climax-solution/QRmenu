@@ -114,7 +114,8 @@ class Content extends Component {
                                                 <span className="qty-add" onClick={this.IncrementItem}><i className="fa fa-plus" /></span>
                                             </div>
                                         </div>
-                                        <button type="submit" name="button" className="btn-custom secondary"> Order <i className="fas fa-shopping-cart" /> </button>
+                                        {/* <button type="button" name="button" className="btn-custom secondary" component={Link} to="/cart"> Order <i className="fas fa-shopping-cart" /> </button> */}
+                                        <Link type="button" name="button" className="btn-custom secondary" to={"/cart"}> Order <i className="fas fa-shopping-cart" /> </Link>
                                     </form>
                                     {/* /Add To Cart Form */}
                                     {/* Product Meta */}

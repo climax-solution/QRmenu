@@ -19,7 +19,7 @@ class Home extends Component {
                 </MetaTags> 
                 <Header/>
                 <Content/>
-                <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/logo-light.png" }} />
+                <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/qrcode.png" }} />
             </Fragment>
         );
     }

@@ -17,7 +17,7 @@ const Blogsingle = React.lazy(() => import("./components/pages/Blogsingle"));
 const About = React.lazy(() => import("./components/pages/About"));
 const Login = React.lazy(() => import("./components/pages/Login"));
 const Register = React.lazy(() => import("./components/pages/Register"));
-const Checkout = React.lazy(() => import("./components/pages/Checkout"));
+const Reservation = React.lazy(() => import("./components/pages/Checkout"));
 const Cart = React.lazy(() => import("./components/pages/Cart"));
 const Legal = React.lazy(() => import("./components/pages/Legal"));
 const Error = React.lazy(() => import("./components/pages/Error"));
@@ -27,6 +27,10 @@ const Menuitemone = React.lazy(() => import("./components/pages/Menuitemone"));
 const Menuitemtwo = React.lazy(() => import("./components/pages/Menuitemtwo"));
 const Locations = React.lazy(() => import("./components/pages/Locations"));
 const Contact = React.lazy(() => import("./components/pages/Contact"));
+const TrackOrder = React.lazy(() => import("./components/pages/TrackOrder"));
+const Packages = React.lazy(() => import("./components/pages/Packages"));
+const Specialities = React.lazy(() => import("./components/pages/Specialities"));
+
 
 const ScrollToTop = withRouter(({ children, location: { pathname } }) => {
   useLayoutEffect(() => {
@@ -55,16 +59,21 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/checkout" component={Checkout} />
+          <Route path="/reservation" component={Reservation} />
           <Route path="/cart" component={Cart} />
           <Route path="/legal" component={Legal} />
           <Route path="/error" component={Error} />
           <Route path="/menu-v1" component={Menuone} />
+          <Route path="/menu" component={Menuone} />
           <Route path="/menu-v2" component={Menutwo} />
           <Route path="/menu-item-v1/:id" exact component={props => (<Menuitemone {...props} key={window.location.pathname} />)} />
+          <Route path="/ordering/:id" exact component={props => (<Menuitemone {...props} key={window.location.pathname} />)} />
           <Route path="/menu-item-v2/:id" exact component={props => (<Menuitemtwo {...props} key={window.location.pathname} />)} />
           <Route path="/locations" component={Locations} />
           <Route path="/contact" component={Contact} />
+          <Route path="/track-order" component={TrackOrder} />
+          <Route path="/package" component={Packages} />
+          <Route path="/specialities" component={Specialities} />
         </ScrollToTop>
       </Suspense>
     </Router>

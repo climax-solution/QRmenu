@@ -14,20 +14,7 @@ class Content extends Component {
         return (
             <div className="contact-wrapper">
                 <div className="ct-contact-map-wrapper">
-                    <MapContainer
-                        className="markercluster-map ct-contact-map"
-                        center={latlng}
-                        zoom={16}
-                        scrollWheelZoom={false}
-                    >
-                        <TileLayer
-                            url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
-                            attribution='&copy; Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ'
-                            maxZoom={16}
-                        />
-                        <Marker position={latlng} icon={customMarker}></Marker>
-                    </MapContainer>
-                    <a rel={'external'} className="btn-custom shadow-none" href={"https://maps.google.com/?q=" + latlng}>View in Google Maps</a>
+                    <img src="assets/img/contactus.jpg" style={{width:'100%',height:'100%'}}/>
                 </div>
                 <div>
                     <div className="section section-padding">
@@ -84,7 +71,7 @@ class Content extends Component {
                                         <textarea name="message" className="form-control" placeholder="Type your message" rows={8} />
                                     </div>
                                 </div>
-                                <button type="submit" className="btn-custom primary" name="button">Send Message</button>
+                                <button type="button" className="btn-custom primary" name="button">Send Message</button>
                             </form>
                         </div>
                     </div>

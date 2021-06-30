@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import MetaTags from "react-meta-tags";
-import Header from '../layouts/Headerthree';
+import Header from '../layouts/Headerinner';
+import Breadcrumbs from '../layouts/Breadcrumb';
 import Footer from '../layouts/Footer';
-import Content from '../sections/contact/Content';
+import Content from '../sections/specialities/Content';
 
-const pagelocation = 'Contact Us'
+const pagelocation = 'Specialities'
 
-class Contact extends Component {
+class Specialities extends Component {
     render() {
         return (
             <Fragment>
@@ -18,6 +19,7 @@ class Contact extends Component {
                     />
                 </MetaTags> 
                 <Header/>
+                <Breadcrumbs breadcrumb={{ pagename: pagelocation }} />
                 <Content/>
                 <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/qrcode.png" }} />
             </Fragment>
@@ -25,4 +27,4 @@ class Contact extends Component {
     }
 }
 
-export default Contact;
+export default Specialities;

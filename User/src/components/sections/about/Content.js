@@ -10,7 +10,6 @@ class Content extends Component {
             <Fragment>
                 <Aboutus />
                 <Infographics/>
-                <Teammembers/>
                 <Newsletter/>
             </Fragment>
         );

@@ -84,12 +84,12 @@ class Content extends Component {
                     <div className="favorite">
                         <i className="far fa-heart" />
                     </div>
-                    <Link className="product-thumb" to={"/menu-item-v1/" + item.id}>
+                    <Link className="product-thumb" to={"/ordering/" + item.id}>
                         <img src={process.env.PUBLIC_URL + "/" + item.img} alt={item.name} />
                     </Link>
                     <div className="product-body">
                         <div className="product-desc">
-                            <h4> <Link to={"/menu-item-v1/" + item.id}>{item.name}</Link></h4>
+                            <h4> <Link to={"/ordering/" + item.id}>{item.name}</Link></h4>
                             <div className="ct-rating-wrapper">
                                 <div className="ct-rating">
                                     {Rating(item.rating)}
@@ -100,7 +100,7 @@ class Content extends Component {
                         </div>
                         <div className="product-controls">
                             <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</p>
-                            <Link to={"/menu-item-v1/" + item.id} className="order-item btn-custom btn-sm shadow-none">Order <i className="fas fa-shopping-cart" /> </Link>
+                            <Link to={"/ordering/" + item.id} className="order-item btn-custom btn-sm shadow-none">Order <i className="fas fa-shopping-cart" /> </Link>
                         </div>
                     </div>
                 </div>

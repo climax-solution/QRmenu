@@ -43,20 +43,6 @@ class Header extends HeaderComponent {
                 <div className="aside-overlay aside-trigger" onClick={this.toggleNav} />
                 {/* Header Start */}
                 <header className="main-header header-1 header-absolute">
-                    <div className="top-header">
-                        <div className="container">
-                            <div className="top-header-inner">
-                                <div className="top-header-contacts">
-                                    <ul className="top-header-nav">
-                                        <li> <Link className="p-0" to="/tel:+123456789"><i className="fas fa-phone mr-2" /> +123 456 789</Link> </li>
-                                    </ul>
-                                </div>
-                                <ul className="top-header-nav header-cta">
-                                    <li> <Link to="/menu-v1">Order Online</Link> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                     <div className="container">
                         <nav className="navbar">
                             {/* Logo */}
