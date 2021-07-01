@@ -12,6 +12,7 @@
  import LinearProgress from '@material-ui/core/LinearProgress';
  import QueueAnim from 'rc-queue-anim';
  import { Fab } from '@material-ui/core';
+import { NotificationManager } from 'react-notifications';
  
  // components
  import { SessionSlider } from 'Components/Widgets';
@@ -28,28 +29,75 @@
     signinUserWithTwitter
  } from 'Actions';
  
+ import axios from 'axios';
+import validator from 'validator';
+
  class SignupFirebase extends Component {
  
     state = {
-       restaurant: '',
-       owner:'',
+       website: '',
+       name:'',
        email: '',
        password: '',
-       confirmpass: ''
+       confirmpass: '',
+       legacy: false,
     }
  
     /**
      * On User Signup
      */
     onUserSignUp() {
-       const { email, password } = this.state;
-       if (email !== '' && password !== '') {
-          this.props.signupUserInFirebase({ email, password }, this.props.history);
+       let state = this.state;
+       let flag = 0;
+       for (let item in state)
+       {
+         if ( state[item] == '')
+         {
+            flag = 1;
+         }
        }
+       if (flag)
+       {
+         NotificationManager.error('Input is invalid!');
+         return ;
+      }
+      let url_option = {
+         protocols: ['http','https','ftp'],
+         require_tld: true,
+         require_protocol: false,
+         require_host: true,
+         require_port: false,
+         require_valid_protocol: true,
+         allow_underscores: false,
+         host_whitelist: false,
+         host_blacklist: false,
+         allow_trailing_dot: false,
+         allow_protocol_relative_urls: false,
+         disallow_auth: false,
+         validate_length: true
+      };
+
+      if ( !validator.isURL(state['website'],url_option) ) {
+         NotificationManager.error('Url is invalid!');
+         return ;
+      }
+      else if ( !validator.isEmail(state['email']) ) {
+         NotificationManager.error('Email is invalid!');
+         return ;
+      }
+      if (state['confirmpass'] != state['password'])
+      {
+         NotificationManager.error('Password is invalid!');
+      } else {
+         delete state.confirmpass;
+         axios.post('http://localhost:8000/api/signup',state).then((res)=>{
+            console.log(res);
+         })
+      }
     }
  
     render() {
-       const { restaurant,owner, email, password,confirmpass } = this.state;
+       const { website,name, email, password,confirmpass } = this.state;
        const { loading } = this.props;
        return (
           <QueueAnim type="bottom" duration={2000}>
@@ -84,11 +132,11 @@
                                </div>
                                <Form>
                                   <FormGroup className="has-wrapper">
-                                     <Input type="text" value={restaurant} name="restaurant-name" id="user-name" className="has-input input-lg" placeholder="Restaurant Name" onChange={(e) => this.setState({ restaurant: e.target.value })} />
+                                     <Input type="text" value={website} name="restaurant-name" id="user-name" className="has-input input-lg" placeholder="Restaurant Name" onChange={(e) => this.setState({ website: e.target.value })} />
                                      <span className="has-icon"><i className="zmdi zmdi-local-dining"></i></span>
                                   </FormGroup>
                                   <FormGroup className="has-wrapper">
-                                     <Input type="text" value={owner} name="owner-name" id="user-name" className="has-input input-lg" placeholder="Owner Name" onChange={(e) => this.setState({ owner: e.target.value })} />
+                                     <Input type="text" value={name} name="owner-name" id="user-name" className="has-input input-lg" placeholder="Owner Name" onChange={(e) => this.setState({ name: e.target.value })} />
                                      <span className="has-icon"><i className="zmdi zmdi-account"></i></span>
                                   </FormGroup>
                                   <FormGroup className="has-wrapper">
@@ -105,8 +153,9 @@
                                   </FormGroup>
                                   <FormGroup className="has-wrapper">
                                         <FormControlLabel
-                                            control={<Checkbox name="term-legacy" color="primary" />}
+                                            control={<Checkbox name="term-legacy" color="primary" checked={this.state.legacy}/>}
                                             label="I have read theTerms & Conditions accept them "
+                                            onClick={() => this.setState({ legacy: !this.state.legacy }) }
                                         />
                                   </FormGroup>
                                   <FormGroup className="mb-15">

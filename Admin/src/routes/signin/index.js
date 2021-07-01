@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom';
 import QueueAnim from 'rc-queue-anim';
 import { NotificationManager } from 'react-notifications';
 
+import {validate, res} from 'react-email-validator';
 // app config
 import AppConfig from 'Constants/AppConfig';
+import axios from 'axios';
 
 export default class SignIn extends Component {
    state = {
