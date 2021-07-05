@@ -15,21 +15,16 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('currency');
-            $table->string('timezone');
-            $table->string('site_name');
-            $table->string('copyright');
-            $table->string('description');
-            $table->string('google_analytics');
-            $table->boolean('registration');
-            $table->boolean('auto_approval');
-            $table->boolean('email_verification');
-            $table->boolean('free_verify');
-            $table->boolean('invoice');
-            $table->boolean('rating');
-            $table->boolean('recaptcha');
-            $table->string('site_key');
-            $table->string('secret_key');
+            $table->string('currency')->nullable();
+            $table->string('timezone')->nullable();
+            $table->string('site_name')->nullable();
+            $table->string('copyright')->nullable();
+            $table->string('description')->nullable();
+            $table->string('google_analytics')->nullable();
+            $table->string('recaptcha')->nullable();
+            $table->string('normal_setting')->nullable();
+            $table->string('site_key')->nullable();
+            $table->string('secret_key')->nullable();
             $table->timestamps();
         });
     }

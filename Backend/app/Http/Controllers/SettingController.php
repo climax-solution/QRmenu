@@ -7,19 +7,22 @@ use App\Models\Setting;
 class SettingController extends Controller
 {
     public function getStatus(Request $request) {
-        return response()->json(Package::first());
+        $result = Setting::first();
+        $result['normal_setting'] = unserialize($result['normal_setting']);
+        return response()->json($result);
     }
 
     public function postModifyCreate(Request $request) {
         $data = $request->all();
-        $check = Package::all();
+        $check = Setting::all();
+        if (isset($data['normal_setting'])) $data['normal_setting'] = serialize($data['normal_setting']);
         if (!count($check)) {
-            Package::create($data);
-            return response()->json(Package::first());
+            Setting::insert($data);
+            return response()->json(Setting::first());
         }
         else {
-            Package::where('id',$data['id'])->update($data);
-            return response()->json(Package::first());            
+            Setting::where('id',$check[0]['id'])->update($data);
+            return response()->json(Setting::first());            
         }
     }
 }
