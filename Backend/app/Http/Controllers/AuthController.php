@@ -32,7 +32,6 @@ class AuthController extends BaseController
             if($validator->fails()){
                 return $this->sendError('Validation Error.', $validator->errors());       
             }
-            dd($request->all());
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
@@ -58,6 +57,7 @@ class AuthController extends BaseController
             //     return $this->sendError('Email no verificated.');
 
             $user->tokenResult = $user->createToken($user->email);
+
             return $this->sendResponse(new AuthResource($user), 'User login successfully.');
         } 
         else{ 

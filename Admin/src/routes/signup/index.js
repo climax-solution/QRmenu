@@ -93,8 +93,9 @@ import validator from 'validator';
          Axios.post('http://localhost:8000/api/signup',state).then((res)=>{
             NotificationManager.success('Successfully Signed Up!');
          }).catch((error) => {
-            console.log(error);
+            NotificationManager.error('Faliure!');
          })
+         state.confirmpass = state.password;
       }
     }
  
