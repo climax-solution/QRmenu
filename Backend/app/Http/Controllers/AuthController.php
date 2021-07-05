@@ -25,20 +25,17 @@ class AuthController extends BaseController
                 // 'name' => 'required',
                 'email' => 'required|email|unique:users',
                 'password' => 'required',
-                'website' => 'require',
-                'name' => 'require'
-                // 'c_password' => 'required|same:password',
+                'website' => 'required',
+                'username' => 'required|unique:users'
             ]);
        
             if($validator->fails()){
                 return $this->sendError('Validation Error.', $validator->errors());       
             }
-       
+            dd($request->all());
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
-            $input['name'] = $input['email'];
-            // $user = User::query()->create($input)->sendEmailVerificationNotification();
-            $user = User::query()->create($input);
+            $user = User::create($input);
             $success['email'] =  $input['email'];
         } catch (Exception $exception) {
             return $this->sendError($exception->getMessage());
@@ -114,8 +111,16 @@ class AuthController extends BaseController
      */
     public function getLogout(Request $request)
     {
-        $request->user()->token()->revoke();
+        auth()->logout();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'logout'
+        ], 200);
+    }
 
-        return $this->sendResponse([], 'Successfully logged out.');
+    public function postCheckToken(Request $request) {
+        $user = auth('api')->user();
+
+        return $this->sendResponse(new AuthResource($user), 'User fetch successfully.');
     }
 }

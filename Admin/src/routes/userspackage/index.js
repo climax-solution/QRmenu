@@ -5,25 +5,52 @@
  import Switch from 'react-toggle-switch';
  import { Helmet } from "react-helmet";
  import { Button } from 'reactstrap';
- // components
+ import { connect } from 'react-redux';
+ import Axios from 'axios';
  import PricingBlockV3 from 'Components/Pricing/PricingBlockV3';
- // page title bar
  import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
- 
- // intl messages
  import IntlMessages from 'Util/IntlMessages';
  
  import { TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl, Checkbox, FormControlLabel, FormGroup,FormHelperText,Input} from '@material-ui/core';
+import { NotificationManager } from 'react-notifications';
 
- export default class UsersPackage extends Component {
+class UsersPackage extends Component {
     state = {
         monthlyPlan: true,
         premiumPlan: 300,
         enterprisePlan: 590,
         open: false,
-        modalTitle: 'Add Package'
+        modalTitle: 'Add Package',
+        packages: [],
+        dialog: {
+            package_name: '',
+            slug: '',
+            package_type: '',
+            order_limit: '',
+            price:'',
+            item_limit: '',
+            package_ability:[false,false,false,false,false,false,false,false,false,false]
+        },
+        items: {
+            velkom: "Velkommen Side",meny: "Meny",pakker: "Pakker",spesial: "Spesialiteter", qrcode: "QR Code",whatsapp: 'Whatsapp Bestilling',onlinebest: 'Online Bestilling',reserve: 'Reservasion',contacter: 'Contacter', digitalbetal: 'Digtal Betaling'
+        },
+        isUpdate: false,
+        activeId: -1,
+	};
+
+    componentDidMount() {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+         }
+        Axios.get('http://localhost:8000/api/pkglist',{},{headers: headers}).then(res=>{
+            this.setState({
+                packages: res.data.data
+            })
+        })
     }
- 
+
     // on plan change
     onPlanChange(isMonthly) {
         this.setState({ monthlyPlan: !isMonthly });
@@ -33,15 +60,73 @@
             this.setState({ businessPlan: 350, enterprisePlan: 700 });
         }
     }
-    handleClickOpen = (arg = false) => {
-        let text = arg == true ? 'Add Package' : 'Edit Package';
+    handleClickOpen = (arg) => {
+        let text = arg ? 'Add Package' : 'Edit Package';
         this.setState({ open: true, modalTitle: text });
     };
-  
+    
+    editPackage = (id) => {
+        Axios.post('http://localhost:8000/api/pkgitem',{id: id}).then(res=>{
+            const { data } = res;
+            const { dialog } = this.state;
+            for (let key in data) {
+                if (key != 'id') {
+                    dialog[key] = data[key];
+                }
+            }
+            this.setState({ dialog: dialog, open: true, isUpdate: true,activeId: data['id'] });
+        });
+    }
+
     handleClose = () => {
         this.setState({ open: false });
     };
+
+    CheckItem = (index) => (event, checked) => {
+        let { dialog } = this.state;
+        dialog.package_ability[index] = checked;
+        this.setState({
+            dialog: dialog,
+        })
+    };
+
+    addPkg = () => {
+        const { dialog, isUpdate, activeId } = this.state;
+        let affix = isUpdate ? 'editpkg' : 'addpkg';
+        if ( isUpdate ) dialog['id'] = activeId;
+        Axios.post('http://localhost:8000/api/'+affix, dialog).then(res=>{
+            const { data } = res;
+            if (!data.status) {
+                NotificationManager.error('Package info is incorrectly!');
+            }
+            else {
+                NotificationManager.success(`Successfully ${isUpdate ? 'Chagned' : 'added New'} Package!`);
+                this.setState({
+                    open: false,
+                    packages: data.data
+                })
+            }
+        })
+    }
+    deletePackage = (arg) => {
+        Axios.delete(`http://localhost:8000/api/deletepkg/${arg}`).then(res=>{
+            const { data } = res;
+            if (!data.status) {
+                NotificationManager.error('Failure!');
+            }
+            else {
+                NotificationManager.success(`Successfully Removed Package!`);
+                this.setState({
+                    open: false,
+                    packages: data.data
+                })
+            }
+        })
+    }
      render() {
+        console.log(this.state);
+        const { dialog, items, packages } = this.state;
+        const CheckItems = this.CheckItem;
          return (
              <div className="pricing-wrapper">
                  <Helmet>
@@ -72,48 +157,34 @@
                 </div>
                 <div className="price-list m-10">
                     <div className="row row-eq-height">
-                        <PricingBlockV3
-                            planType="free"
-                            type="widgets.freemember"
-                            color="primary"
-                            description="Secure file sharing and collaboration. Ideal for small teams."
-                            price="widgets.free"
-                            users={1}
-                            handleClickOpen = {()=>this.handleClickOpen(false)}
-                            features={[
-                                'Velkommen side',
-                                'Meny (50 items)',
-                                'Pakker',
-                                'Spesialiteter',
-                                'QR kode',
-                                'Whatsapp bestilling',
-                                'Online bestilling (50)',
-                                'Reservasjon',
-                                'Kontakter',
-                                'Digital betaling'
-                            ]}
-                        />
-                        <PricingBlockV3
-                            planType="premium"
-                            type="widgets.paymentmember"
-                            color="primary"
-                            description="Secure file sharing and collaboration. Ideal for small teams."
-                            price={this.state.premiumPlan}
-                            users={1}
-                            handleClickOpen = {()=>this.handleClickOpen(false)}
-                            features={[
-                                'Velkommen side',
-                                'Meny (Unlimited items)',
-                                'Pakker',
-                                'Spesialiteter',
-                                'QR kode',
-                                'Whatsapp bestilling',
-                                'Online bestilling (Unlimited)',
-                                'Reservasjon',
-                                'Kontakter',
-                                'Digital betaling'
-                            ]}
-                        />
+                        {
+                            packages.map(item=>{
+                                return <PricingBlockV3
+                                    planType="premium"
+                                    type="widgets.paymentmember"
+                                    color="primary"
+                                    description="Secure file sharing and collaboration. Ideal for small teams."
+                                    price={item.price}
+                                    users={1}
+                                    editPackage = {()=>this.editPackage(item.id)}
+                                    features={[
+                                        'Velkommen side',
+                                        `Meny (${item.order_limit < 0 ? 'Unlimited' : item.order_limit} items)`,
+                                        'Pakker',
+                                        'Spesialiteter',
+                                        'QR kode',
+                                        'Whatsapp bestilling',
+                                        `Online bestilling (${item.order_limit < 0 ? 'Unlimited' : item.order_limit + 'items'})`,
+                                        'Reservasjon',
+                                        'Kontakter',
+                                        'Digital betaling'
+                                    ]}
+                                    id={item.id}
+                                    deletePackage = {() => this.deletePackage(item.id) }
+                                    ability={item.package_ability}
+                                />
+                            })
+                        }
                     </div>
                 </div>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="md">
@@ -124,20 +195,20 @@
                         </DialogContentText>
                         <div className="row">                        
                             <div className="col-md-6" >
-                                <TextField margin="dense" id="name" label="Package name" type="text" fullWidth/>
-                                <TextField margin="dense" id="slug" label="Slug" type="text" fullWidth/>
+                                <TextField margin="dense" id="name" label="Package name" type="text" value={ dialog.package_name } onChange={(e)=> this.setState({ dialog: {...dialog, package_name: e.target.value }})}fullWidth/>
+                                <TextField margin="dense" id="slug" label="Slug" type="text" fullWidth value={ dialog.slug } onChange={(e)=> this.setState({ dialog: {...dialog, slug: e.target.value }})}/>
                                 <FormControl margin="dense" fullWidth>
                                     <InputLabel htmlFor="packagetype">Package Type</InputLabel>
-                                    <Select id="packagetype">
+                                    <Select id="packagetype" value={ dialog.package_type } onChange={(e)=> this.setState({ dialog: {...dialog, package_type: e.target.value }})} >
                                         <MenuItem value="">Select</MenuItem>
                                         <MenuItem value="free">free</MenuItem>
-                                        <MenuItem value="month">monthly</MenuItem>
-                                        <MenuItem value="year">yearly</MenuItem>
+                                        <MenuItem value="monthly">monthly</MenuItem>
+                                        <MenuItem value="yearly">yearly</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <FormControl margin="dense"  fullWidth>
+                                <FormControl margin="dense" fullWidth>
                                     <InputLabel htmlFor="orderLimit">Order Limit</InputLabel>
-                                    <Select id="orderLimit">
+                                    <Select id="orderLimit" value={dialog.order_limit}  onChange={(e)=> this.setState({ dialog: {...dialog, order_limit: e.target.value }})}>
                                         <MenuItem value="">Select Amount</MenuItem>
                                         <MenuItem value="-1">Unlimit</MenuItem>
                                         <MenuItem value="10">10</MenuItem>
@@ -147,13 +218,13 @@
                                         <MenuItem value="50">50</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <TextField margin="dense" id="price" label="Price" type="text" fullWidth/>
+                                <TextField margin="dense" id="price" label="Price" type="text" fullWidth value={dialog.price} onChange={(e)=>this.setState({ dialog: {...dialog, price: e.target.value }})}/>
                                 <FormControl margin="dense"  fullWidth>
                                     <InputLabel htmlFor="itemLimit">Item Limit</InputLabel>
-                                    <Select id="itemLimit">
-                                    <MenuItem value="">Select Amount</MenuItem>
-                                    <MenuItem value="-1">Unlimit</MenuItem>
-                                    <MenuItem value="10">10</MenuItem>
+                                    <Select id="itemLimit" value={dialog.item_limit} onChange={(e)=> this.setState({ dialog: {...dialog, item_limit: e.target.value }})}>
+                                        <MenuItem value="">Select Amount</MenuItem>
+                                        <MenuItem value="-1">Unlimit</MenuItem>
+                                        <MenuItem value="10">10</MenuItem>
                                         <MenuItem value="15">15</MenuItem>
                                         <MenuItem value="20">20</MenuItem>
                                         <MenuItem value="30">30</MenuItem>
@@ -165,46 +236,15 @@
                             <div className="col-md-6">
                                 <FormControl component="fieldset" className="pull-right">
                                     <FormGroup>
-                                        <FormControlLabel
-                                            control={<Checkbox name="velkom" />}
-                                            label="Velkommen Side"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="meny" />}
-                                            label="Meny"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="pakker" />}
-                                            label="Pakker"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="spesial" />}
-                                            label="Spesialiteter"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="qrcode" />}
-                                            label="QRCode"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="whatsbest" />}
-                                            label="Whatsapp Bestilling"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="onlinebest" />}
-                                            label="Online Bestilling"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="reserve" />}
-                                            label="Reservajon"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="contacter" />}
-                                            label="Contacter"
-                                        />
-                                        <FormControlLabel
-                                            control={<Checkbox name="digitalbetal" />}
-                                            label="Digital Betaling"
-                                        />
+                                        {
+                                            Object.keys(items).map(function(key,index) {
+                                                return <FormControlLabel control={
+                                                    <Checkbox color="primary" onChange={CheckItems(index)} checked={dialog.package_ability[index]} name={key} />
+                                                } label={items[key]}
+                                                />
+                                            })
+                                        }
+                                        
                                     </FormGroup>
                                 </FormControl>
                             </div>
@@ -214,7 +254,7 @@
                         <Button variant="contained" onClick={this.handleClose} color="primary" className="text-white">
                             Cancel
                         </Button>
-                        <Button variant="contained" onClick={this.handleClose} className="btn-info text-white">
+                        <Button variant="contained" onClick={this.addPkg} className="btn-info text-white">
                             Submit
                         </Button>
                     </DialogActions>
@@ -224,3 +264,12 @@
      }
  }
  
+const mapDispatchToProps = dispatch => {
+    return ({
+        AddNew: () => {}
+    })
+ };
+export default connect(
+     null,
+     mapDispatchToProps
+)(UsersPackage);

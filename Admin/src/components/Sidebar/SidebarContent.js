@@ -52,7 +52,7 @@ class SidebarContent extends Component {
                         ))}
                     </List>
                     {
-                        match.url == "/app" &&
+                        match.url == "/admin" &&
                         <div>
                             <List
                                 className="rct-mainMenu p-0 m-0 list-unstyled"

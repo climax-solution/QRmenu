@@ -22,6 +22,7 @@ import RctDefaultLayout from './DefaultLayout';
 import RctBoxedLayout from './RctBoxedLayout';
 // CRM layout
 import SignLayout from './SignLayout';
+import Axios from 'axios';
 /**
  * Initial Path To Check Whether User Is Logged In Or Not
  */
@@ -33,21 +34,27 @@ const InitialPath = ({ component: Component, ...rest }) =>
 
 class App extends Component {
    render() {
-      const { location, match, user } = this.props;
-      if (location.pathname === '/') {
+      const { location, match, user,permission } = this.props;
+      console.log(user);
+      if (location.pathname === '/' || !user && location.pathname.indexOf('sign') < 0 ) {
          return <Redirect to='/signin/signin' />;
       }
-      else if (location.pathname === '/app') {
-         return <Redirect to={'/app/dashboard'} />;
+      else if (user == true && location.pathname.indexOf(permission) < 0) {
+         return <Redirect to={`/${permission}`} />;
       }
-      else if (location.pathname === '/vendor') {
+      else if (location.pathname === '/admin') {
+         return <Redirect to={'/admin/dashboard'} />;
+      }
+      else if (location.pathname === '/vendor' ) {
+         console.log('VENDOR')
+
          return <Redirect to={'/vendor/dashboard'} />;
       }
       return (
          <RctThemeProvider>
             <NotificationContainer />
             <Route
-               path={`${match.url}app`}
+               path={`${match.url}admin`}
                authUser={user}
                component={RctDefaultLayout}
             />
@@ -67,8 +74,10 @@ class App extends Component {
 
 // map state to props
 const mapStateToProps = ({ authUser }) => {
-   const { user } = authUser;
-   return { user };
+   const { user, permission } = authUser;
+   return { user, permission };
 };
+export default connect(
+   mapStateToProps,
 
-export default connect(mapStateToProps)(App);
+)(App);

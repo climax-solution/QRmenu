@@ -22,10 +22,12 @@ class Auth extends JsonResource
             'email_verified_at' => Carbon::parse($this->email_verified_at)->toDateTimeString(),
             'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
             'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
+            'permission' => $this->permission,
             $this->mergeWhen($this->tokenResult, function () {
                 return [
                     'access_token' => $this->tokenResult->accessToken,
                     'token_type' => 'Bearer',
+                    'permission' => $this->permission,
                     'expires_at' => Carbon::parse(
                         $this->tokenResult->token->expires_at
                     )->toDateTimeString()

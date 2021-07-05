@@ -77,7 +77,7 @@ class MainApp extends Component {
     renderPage() {
         const { pathname } = this.props.location;
         const { children } = this.props;
-        if (pathname === '/app/chat' || pathname.startsWith('/app/mail') || pathname === '/app/todo') {
+        if (pathname === '/admin/chat' || pathname.startsWith('/admin/mail') || pathname === '/admin/todo') {
             return (
                 <div className="rct-page-content p-0">
                     {children}

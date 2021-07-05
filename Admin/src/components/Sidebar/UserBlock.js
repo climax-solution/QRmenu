@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Badge } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
-
+import Axios from 'axios';
 // components
 import SupportPage from '../Support/Support';
 
@@ -60,6 +60,19 @@ class UserBlock extends Component {
 		NotificationManager.success('Message has been sent successfully!');
 	}
 
+	onLogout () {
+		const headers = {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${localStorage.getItem('token')}`
+		 }
+		 Axios.get('http://localhost:8000/api/logout', {}, {headers: headers}).then(res=>{
+			 console.log(res);
+				localStorage.clear();
+			this.props.history.push('/');
+
+		 });
+	}
 	render() {
 		const {match} = this.props;
 		return (
@@ -85,7 +98,7 @@ class UserBlock extends Component {
 							</div>
 							<div className="user-info">
 								<span className="user-name ml-4">{
-									match.url == '/app' ? 'Admin' : 'Assistant'
+									match.url == '/admin' ? 'Admin' : 'Assistant'
 								}</span>
 								<i className="zmdi zmdi-chevron-down dropdown-icon mx-4"></i>
 							</div>
@@ -98,7 +111,7 @@ class UserBlock extends Component {
 								</li>
 								<li>
 									<Link to={{
-										pathname: '/app/adminsetting',
+										pathname: '/admin/adminsetting',
 										state: { activeTab: 0 }
 									}}>
 										<i className="zmdi zmdi-account text-primary mr-3"></i>
@@ -106,10 +119,10 @@ class UserBlock extends Component {
 									</Link>
 								</li>
 								<li className="border-top">
-									<Link  to="/">
+									<a onClick={() => this.onLogout()}>
 										<i className="zmdi zmdi-power text-danger mr-3"></i>
 										<IntlMessages id="widgets.logOut" />
-									</Link>
+									</a>
 								</li>
 							</ul>
 						</DropdownMenu>

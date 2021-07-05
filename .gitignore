@@ -8,7 +8,7 @@
 
 # production
 /dist
-
+/Backend-backup
 # misc
 /Admin/.DS_Store
 /Admin/.env.local

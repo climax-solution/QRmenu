@@ -12,6 +12,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 // import Switch from '@material-ui/core/Switch';
 import Switch from 'react-toggle-switch';
 import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Select,InputLabel,MenuItem,FormLabel} from '@material-ui/core';
+import timezones from 'timezone-list';
  export default class AdminSetting extends Component {
     state = {
         selectedValue: 'english',
@@ -36,6 +37,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
         })
     }  
      render() {
+         console.log(timezones.getTimezones());
          return (
              <div className="blank-wrapper">
                  <Helmet>
@@ -56,7 +58,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,Radio,Selec
                                 <FormControl style={{display: 'block',padding:'10px 20px'}} fullWidth>
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
                                         <InputLabel htmlFor="currency" className="ml-10">Currency</InputLabel>
-                                        <Select value={this.state.currency} onChange={this.currencyChange}inputProps={{ name: 'currency', id: 'currency', }}fullWidth>
+                                        <Select value={this.state.currency} onChange={this.currencyChange} inputProps={{ name: 'currency', id: 'currency', }}fullWidth>
                                             <MenuItem value={''}>Select Amount</MenuItem>
                                             <MenuItem value={-1}>Unlimit</MenuItem>
                                             <MenuItem value={10}>10</MenuItem>

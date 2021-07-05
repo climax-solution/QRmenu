@@ -32,37 +32,37 @@ export default [
    {
       path: 'dashboard',
       component: Dashboard,
-      divide: ['/app','/vendor']
+      divide: ['/admin','/vendor']
    },
    {
       path: 'crm',
       component: Crm,
-      divide: ['/app','/vendor']
+      divide: ['/admin','/vendor']
    },
    {
       path: 'users-management',
       component: UsersManagement,
-      divide: ['/app']
+      divide: ['/admin']
    },
    {
       path: "userspackage",
       component: UsersPackage,
-      divide: ['/app']
+      divide: ['/admin']
    },
    {
       path: "payment",
       component: Payment,
-      divide: ['/app']
+      divide: ['/admin']
    },
    {
       path: "adminsetting",
       component: AdminSetting,
-      divide: ['/app']
+      divide: ['/admin']
    },
    {
       path: "backupdb",
       component: BackUpDB,
-      divide: ['/app']
+      divide: ['/admin']
    },
    //vendor
    {

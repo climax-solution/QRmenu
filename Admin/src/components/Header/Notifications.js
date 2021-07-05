@@ -37,7 +37,7 @@ class Notifications extends Component {
     //   })
 	  let note_admin;
 	  let note_vendor;
-	  if (this.props.match.url == '/app') {
+	  if (this.props.match.url == '/admin') {
 		note_admin = [
 			{
 				userAvatar:'user-1',

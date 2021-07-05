@@ -4,7 +4,7 @@ export default {
       {
          "menu_title": "sidebar.dashboard",
          "menu_icon": "zmdi zmdi-view-dashboard",
-         "path": "/app/dashboard",
+         "path": "/admin/dashboard",
          "type_multi": null,
       }
    ],
@@ -15,11 +15,11 @@ export default {
          "type_multi": null,
          "child_routes": [
             {
-               "path": "/app/users-management/addnew",
+               "path": "/admin/users-management/addnew",
                "menu_title": "sidebar.newuser"
             },
             {
-               "path": "/app/users-management/restaurantlist",
+               "path": "/admin/users-management/restaurantlist",
                "menu_title": "sidebar.restaurantlist"
             }
          ]
@@ -29,7 +29,7 @@ export default {
       {
          "menu_title": "sidebar.userpackage",
          "menu_icon": "zmdi zmdi-format-list-bulleted",
-         "path": "/app/userspackage",
+         "path": "/admin/userspackage",
          "child_routes": null
       }
    ],
@@ -40,15 +40,15 @@ export default {
          "type_multi": null,
          "child_routes": [
             {
-               "path": "/app/payment/transaction-history",
+               "path": "/admin/payment/transaction-history",
                "menu_title": "sidebar.transactionhistory"
             },
             {
-               "path": "/app/payment/offline-payment",
+               "path": "/admin/payment/offline-payment",
                "menu_title": "sidebar.offlinepayment"
             },
             {
-               "path": "/app/payment/payment-setting",
+               "path": "/admin/payment/payment-setting",
                "menu_title": "sidebar.paymentsetting"
             }
          ]
@@ -58,7 +58,7 @@ export default {
       {
          "menu_title": "sidebar.adminsetting",
          "menu_icon": "zmdi zmdi-settings",
-         "path": "/app/adminsetting",
+         "path": "/admin/adminsetting",
          "child_routes": null
       }
    ],
@@ -66,7 +66,7 @@ export default {
       {
          "menu_title": "sidebar.backupdb",
          "menu_icon": "zmdi zmdi-download",
-         "path": "/app/backupdb",
+         "path": "/admin/backupdb",
          "child_routes": null
       }
    ],

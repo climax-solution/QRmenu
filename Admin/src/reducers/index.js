@@ -9,6 +9,7 @@ import sidebarReducer from './SidebarReducer';
 import todoAppReducer from './TodoAppReducer';
 import authUserReducer from './AuthUserReducer';
 import feedbacksReducer from './FeedbacksReducer';
+import pkgmanagement from './PkgManagement';
 
 const reducers = combineReducers({
   settings,
@@ -18,6 +19,6 @@ const reducers = combineReducers({
   todoApp: todoAppReducer,
   authUser: authUserReducer,
   feedback: feedbacksReducer,
+  pkgmange: pkgmanagement,
 });
-
 export default reducers;

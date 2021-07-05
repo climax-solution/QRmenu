@@ -10,17 +10,19 @@ import { NotificationManager } from 'react-notifications';
 import {validate, res} from 'react-email-validator';
 // app config
 import AppConfig from 'Constants/AppConfig';
-import axios from 'axios';
+import Axios from 'axios';
+import validator from 'validator';
+import { connect } from 'react-redux';
 
-export default class SignIn extends Component {
+class SignIn extends Component {
    state = {
-      username: '',
+      email: '',
       password: '',
       link:'/'
    }
-   changeUsername(e) {
+   changeEmail(e) {
       this.setState({
-         username: e.target.value
+         email: e.target.value
       })
    }
    changePassword(e) {
@@ -29,15 +31,24 @@ export default class SignIn extends Component {
       })
    }
    signin() {
-      if (this.state.username == 'admin' && this.state.password == 'DevQR2021') {
-         NotificationManager.success('User Login Successfully!');
-         this.props.history.push('/app');
-      }
-      else if (this.state.username == 'vendor' && this.state.password == 'Dev2021') {
-         NotificationManager.success('User Login Successfully!');
-         this.props.history.push('/vendor');
+      const { email, password } = this.state;
+      if ( validator.isEmail( email ) && password != '') {
+         let data = {
+            email: email,
+            password: password
+         }
+
+         Axios.post('http://localhost:8000/api/login',data).then( res => {
+            window.localStorage.setItem('token', res.data.data.access_token);
+            NotificationManager.success("You logined successfully!");
+            this.props.logined(res.data.data.permission);
+            this.props.history.push(`/${res.data.data.permission}`);
+         }).catch(res=>{
+            if (res) NotificationManager.error('Your info is invalid!');
+         })
       }
       else {
+         NotificationManager.error('Input is invalid!');
       }
    }
    render() {
@@ -71,11 +82,11 @@ export default class SignIn extends Component {
                            </div>
                            <Form>
                               <FormGroup className="has-wrapper">
-                                 <Input type="text" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Username" value={this.state.username} onChange={(event) => this.changeUsername(event)}/>
+                                 <Input type="text" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Email" value={this.state.email} onChange={(event) => this.changeEmail(event)} style={{paddingRight: '45px'}}/>
                                  <span className="has-icon"><i className="ti-user"></i></span>
                               </FormGroup>
                               <FormGroup className="has-wrapper">
-                                 <Input type="password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Password"  value={this.state.password} onChange={(event) => this.changePassword(event)}/>
+                                 <Input type="password" name="user-pwd" id="pwd" className="has-input input-lg" placeholder="Enter Your Password"  value={this.state.password} onChange={(event) => this.changePassword(event)}  style={{paddingRight: '45px'}}/>
                                  <span className="has-icon"><i className="ti-lock"></i></span>
                               </FormGroup>
                               <FormGroup>
@@ -91,3 +102,19 @@ export default class SignIn extends Component {
       );
    }
 }
+
+const mapStateProps = state => {
+   return {
+   }
+}
+
+const mapDispatchProps = dispatch => {
+   return {
+      logined: (per) => dispatch({type: 'LOGIN_USER_SUCCESS',permission: per})
+   }
+}
+
+export default connect(
+   mapStateProps,
+   mapDispatchProps
+)(SignIn);

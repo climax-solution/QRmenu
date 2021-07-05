@@ -7,7 +7,7 @@ export default {
          "new_item": true,
          "child_routes": [
             {
-               "path": "/app/dashboard/ecommerce",
+               "path": "/admin/dashboard/ecommerce",
                "menu_title": "sidebar.ecommerce",
                "new_item": false,
                exact: true

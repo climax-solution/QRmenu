@@ -29,14 +29,14 @@ import { NotificationManager } from 'react-notifications';
     signinUserWithTwitter
  } from 'Actions';
  
- import axios from 'axios';
+ import Axios from 'axios';
 import validator from 'validator';
 
  class SignupFirebase extends Component {
  
     state = {
        website: '',
-       name:'',
+       username:'',
        email: '',
        password: '',
        confirmpass: '',
@@ -90,14 +90,16 @@ import validator from 'validator';
          NotificationManager.error('Password is invalid!');
       } else {
          delete state.confirmpass;
-         axios.post('http://localhost:8000/api/signup',state).then((res)=>{
-            console.log(res);
+         Axios.post('http://localhost:8000/api/signup',state).then((res)=>{
+            NotificationManager.success('Successfully Signed Up!');
+         }).catch((error) => {
+            console.log(error);
          })
       }
     }
  
     render() {
-       const { website,name, email, password,confirmpass } = this.state;
+       const { website,username, email, password,confirmpass } = this.state;
        const { loading } = this.props;
        return (
           <QueueAnim type="bottom" duration={2000}>
@@ -132,11 +134,11 @@ import validator from 'validator';
                                </div>
                                <Form>
                                   <FormGroup className="has-wrapper">
-                                     <Input type="text" value={website} name="restaurant-name" id="user-name" className="has-input input-lg" placeholder="Restaurant Name" onChange={(e) => this.setState({ website: e.target.value })} />
+                                     <Input type="text" value={website} name="restaurant-name" id="website" className="has-input input-lg" placeholder="Restaurant Name" onChange={(e) => this.setState({ website: e.target.value })} />
                                      <span className="has-icon"><i className="zmdi zmdi-local-dining"></i></span>
                                   </FormGroup>
                                   <FormGroup className="has-wrapper">
-                                     <Input type="text" value={name} name="owner-name" id="user-name" className="has-input input-lg" placeholder="Owner Name" onChange={(e) => this.setState({ name: e.target.value })} />
+                                     <Input type="text" value={username} name="owner-name" id="username" className="has-input input-lg" placeholder="Owner Name" onChange={(e) => this.setState({ username: e.target.value })} />
                                      <span className="has-icon"><i className="zmdi zmdi-account"></i></span>
                                   </FormGroup>
                                   <FormGroup className="has-wrapper">

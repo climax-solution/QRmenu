@@ -14,9 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\AuthController;
-    // Authentication
+use App\Http\Controllers\PkgController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\SettingController;
+
+// Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::post('signup', [AuthController::class, 'postSignup']);
 Route::post('forgot-password', [AuthController::class, 'postForgotPassword']);
 Route::get('user', [AuthController::class, 'getUser']);
 Route::get('logout', [AuthController::class, 'getLogout']);
+Route::post('check-token', [AuthController::class, 'postCheckToken']);
+
+//Package Management
+Route::get('pkglist', [PkgController::class, 'getPkgList']);
+Route::post('addpkg', [PkgController::class, 'postAddPkg']);
+Route::post('pkgitem', [PkgController::class, 'postGetItem']);
+Route::post('editpkg', [PkgController::class, 'postUpdateItem']);
+Route::delete('deletepkg/{id}', [PkgController::class, 'postDeleteItem']);
+
+//Manage Restaurant
+Route::get('restaurantlist', [RestaurantController::class, 'getRestList']);
+Route::post('adduser',[RestaurantController::class, 'postAddUser']);
+
+//Site Setting
+Route::get('settingstatus', [SettingController::class, 'getStatus']);
+Route::post('modifycreate', [SettingController::class, 'postModifyCreate']);
+
