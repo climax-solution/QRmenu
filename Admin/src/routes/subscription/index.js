@@ -3,20 +3,37 @@
  */
  import React, { Component } from 'react';
  import { Helmet } from "react-helmet";
+ import { connect } from 'react-redux';
  // page title bar
  import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
  import PricingBlockV2 from 'Components/Pricing/PricingBlockV2';
  
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
- 
- export default class Subscription extends Component {
+ import Axios from 'axios';
+class Subscription extends Component {
      state = {
         premiumPlan: 300,
+        packages: [],
+     }
+     componentWillMount() {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+         }
+        Axios.get('http://localhost:8000/api/pkglist',{},{headers: headers}).then(res=>{
+            this.setState({
+                packages: res.data.data
+            })
+        })
      }
     handleClickOpen = (arg = false) => {
     };
      render() {
+         const { packages } = this.state;
+         const { user, activedpkg } = this.props;
+         console.log(user);
          return (
              <div className="blank-wrapper">
                  <Helmet>
@@ -26,50 +43,35 @@
                  <PageTitleBar title={<IntlMessages id="sidebar.subscription" />} match={this.props.match} />
                  <div className="price-list m-10">
                     <div className="row row-eq-height">
-                        <PricingBlockV2
-                            planType="free"
-                            type="widgets.freemember"
-                            color="success"
-                            description="Secure file sharing and collaboration. Ideal for small teams."
-                            price="widgets.free"
-                            users={1}
-                            handleClickOpen = {()=>this.handleClickOpen(false)}
-                            features={[
-                                'Velkommen side',
-                                'Meny (50 items)',
-                                'Pakker',
-                                'Spesialiteter',
-                                'QR kode',
-                                'Whatsapp bestilling',
-                                'Online bestilling (50)',
-                                'Reservasjon',
-                                'Kontakter',
-                                'Digital betaling'
-                            ]}
-                            status={true}
-                        />
-                        <PricingBlockV2
-                            planType="premium"
-                            type="widgets.paymentmember"
-                            color="primary"
-                            description="Secure file sharing and collaboration. Ideal for small teams."
-                            price={this.state.premiumPlan}
-                            users={1}
-                            handleClickOpen = {()=>this.handleClickOpen(false)}
-                            features={[
-                                'Velkommen side',
-                                'Meny (Unlimited items)',
-                                'Pakker',
-                                'Spesialiteter',
-                                'QR kode',
-                                'Whatsapp bestilling',
-                                'Online bestilling (Unlimited)',
-                                'Reservasjon',
-                                'Kontakter',
-                                'Digital betaling'
-                            ]}
-                            status={false}
-                        />
+                    `   {
+                            packages.map(item=>{
+                                return <PricingBlockV2
+                                    planType="premium"
+                                    type={`${item.package_name}`}
+                                    color={item.id == activedpkg  ? 'success' : 'primary'}
+                                    description="Secure file sharing and collaboration. Ideal for small teams."
+                                    price={item.price}
+                                    users={1}
+                                    editPackage = {()=>this.editPackage(item.id)}
+                                    features={[
+                                        'Velkommen side',
+                                        `Meny (${item.order_limit < 0 ? 'Unlimited' : item.order_limit} items)`,
+                                        'Pakker',
+                                        'Spesialiteter',
+                                        'QR kode',
+                                        'Whatsapp bestilling',
+                                        `Online bestilling (${item.order_limit < 0 ? 'Unlimited' : item.order_limit + 'items'})`,
+                                        'Reservasjon',
+                                        'Kontakter',
+                                        'Digital betaling'
+                                    ]}
+                                    id={item.id}
+                                    deletePackage = {() => this.deletePackage(item.id) }
+                                    ability={item.package_ability}
+                                    status={item.id == activedpkg  ? true : false}
+                                />
+                            })
+                        }
                     </div>
                 </div>
                 
@@ -77,4 +79,11 @@
          );
      }
  }
+ const mapStateToProps = ({ authUser }) => {
+    const { user, activedpkg } = authUser;
+    return { user, activedpkg };
+ };
+ export default connect(
+    mapStateToProps,
  
+ )(Subscription);

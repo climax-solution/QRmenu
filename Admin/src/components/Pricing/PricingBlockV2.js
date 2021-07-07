@@ -5,37 +5,49 @@ import React from 'react';
 import IntlMessages from 'Util/IntlMessages';
 import ReactTooltip from 'react-tooltip';
 import { Button } from 'reactstrap';
-
-const PricingBlockV2 = ({ type, responses, color, features,status }) => (
-   <div className="pricing-box">
-      <div className="pricing-head">
-         <h2 className={`text-${color} pricing-title mb-0`}>
-            <IntlMessages id={type} />
-         </h2>
-      </div>
-      <div className="plan-info">
-         <span>{responses}</span>
-      </div>
-      <div className="pricing-body">
-         <ul className="list-unstyled plan-info-listing">
-            {features.map((feature, key) => (
-               <li className="d-flex justify-align-start" key={key}>
-                  <i className="ti-check-box"></i>
-                  <a data-tip>{feature}</a>
-                  <ReactTooltip place="right" effect="solid" className="rct-tooltip">
-                     <span>{feature}</span>
-                  </ReactTooltip>
-               </li>
-            ))}
-         </ul>
+import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
+ 
+ // intl messages
+ const Items = [
+   'Velkommen side',
+   'Meny',
+   'Pakker',
+   'Spesialiteter',
+   'QR kode',
+   'Whatsapp bestilling',
+   'Online bestilling',
+   'Reservasjon',
+   'Kontakter',
+   'Digital betaling'
+];
+const green = {fontWeight: 'bold', color: 'green'};
+const red = {fontWeight: 'bold', color: 'red'};
+ const PricingBlockV2 = ({ planType, type, price, users, features, color, ability,id,status }) => (
+    <RctCollapsibleCard customClasses="text-center" colClasses="col-md-4" id={id}>
+       <div className="pricing-icon mb-40">
+          <img src={require('Assets/img/pricing-icon.png')} alt="pricing icon" className="img-fluid" width="" height="" />
+       </div>
+       <h2 className={`text-${color} pricing-title`}><IntlMessages id={type} /></h2>
+       <div className="mb-25">
+          {planType === 'free' ?
+             <h2 className="amount-title"><IntlMessages id={price} /></h2>
+             : <h6 className="amount-title">Kr{price}/Mo</h6>
+          }
+          <span className="text-muted small">For {users} user</span>
+       </div>
+       <ul className="price-detail list-unstyled">
+          {features.map((feature, key) => (
+             <li key={key} className="text-left"><i className={`${!ability[key] ? 'ti-close' : 'ti-check'}`} style={ability[key] ? green : red}></i> {feature}</li>
+          ))}
+       </ul>
          <Button color={color} className='btn-block btn-lg'>
             {
                status ? <IntlMessages id="widgets.runpackage" disabled/>
                : <IntlMessages id="widgets.selectpackage" />
             }
          </Button>
-      </div>
-   </div>
-);
-
-export default PricingBlockV2;
+    </RctCollapsibleCard>
+ );
+ 
+ export default PricingBlockV2;
+ 

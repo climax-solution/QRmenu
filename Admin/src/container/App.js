@@ -10,27 +10,27 @@ import { NotificationContainer } from 'react-notifications';
 import RctThemeProvider from './RctThemeProvider';
 
 //Horizontal Layout
-import HorizontalLayout from './HorizontalLayout';
+// import HorizontalLayout from './HorizontalLayout';
 
 //Agency Layout
-import AgencyLayout from './AgencyLayout';
+// import AgencyLayout from './AgencyLayout';
 
 //Main App
 import RctDefaultLayout from './DefaultLayout';
 
 // boxed layout
-import RctBoxedLayout from './RctBoxedLayout';
+// import RctBoxedLayout from './RctBoxedLayout';
 // CRM layout
 import SignLayout from './SignLayout';
-import Axios from 'axios';
+// import Axios from 'axios';
 /**
  * Initial Path To Check Whether User Is Logged In Or Not
  */
-const InitialPath = ({ component: Component, ...rest }) =>
-   <Route
-      {...rest}
-      render={props => <Component {...props} />}
-   />;
+// const InitialPath = ({ component: Component, ...rest }) =>
+//    <Route
+//       {...rest}
+//       render={props => <Component {...props} />}
+//    />;
 
 class App extends Component {
    render() {

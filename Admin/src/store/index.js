@@ -19,8 +19,7 @@ export function configureStore(initialState) {
            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
         Axios.post('http://localhost:8000/api/check-token', {}, {headers: headers}).then(res=>{
-            console.log(res);
-            store.dispatch({type: 'LOGIN_USER_SUCCESS',permission: res.data.data.permission});
+            store.dispatch({type: 'LOGIN_USER_SUCCESS',permission: res.data.data.permission,activedpkg: res.data.data.package});
         }).catch((err)=>{
             console.log(err);
             // localStorage.clear();

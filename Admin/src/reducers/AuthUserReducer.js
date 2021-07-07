@@ -27,7 +27,7 @@ export default (state = INIT_STATE, action) => {
             return { ...state, loading: true };
 
         case LOGIN_USER_SUCCESS:
-            return { ...state, loading: false, user: true,permission: action.permission };
+            return { ...state, loading: false, user: true,permission: action.permission, activedpkg: action.activedpkg };
 
         case LOGIN_USER_FAILURE:
             return { ...state, loading: false, user: false };
