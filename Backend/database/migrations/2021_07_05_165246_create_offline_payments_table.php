@@ -15,6 +15,13 @@ class CreateOfflinePaymentsTable extends Migration
     {
         Schema::create('offline_payments', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->nullable();
+            $table->string('email')->nullable();
+            $table->string('package')->nullable();
+            $table->string('price')->nullable();
+            $table->string('txnid')->nullable();
+            $table->string('request_date')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,13 @@ class CreateTransactionHistoriesTable extends Migration
     {
         Schema::create('transaction_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('username')->nullable();
+            $table->string('package')->nullable();
+            $table->string('price')->nullable();
+            $table->string('status')->nullable();
+            $table->string('txnid')->nullable();
+            $table->string('payment')->nullable();
+            $table->string('payment_date')->nullable();
             $table->timestamps();
         });
     }

@@ -11,15 +11,73 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,FormLabel} 
 // rct collapsible card
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import ToggleSwitch from "./switch";
+import Axios from 'axios';
 
  export default class PaymentSetting extends Component {
     state = {
 		monthlyPlan: true,
-		premiumPlan: 300,
-		enterprisePlan: 590,
-        open: false
+        open: false,
+        paypal:{
+            paypal_payment: false,
+            paypal_status: true,
+            paypal_email: ''
+        },
+        stripe:{
+            stripe_gateway: false,
+            stripe_public_key: '',
+            stripe_secret_key: ''
+        },
+        razor: {
+            razor_payment: false,
+            razor_key: ''
+        },
+        bambora: {
+            bambora_gateway: false,
+            bambora_access_key: '',
+            bambora_merchant_key: '',
+            bambora_secret_key: ''
+        }
 	}
 
+    componentWillMount() {
+        Axios.get('http://localhost:8000/api/paymentsettings').then(res => {
+            const { data } = res;
+            const { paypal, stripe, razor, bambora } = this.state;
+            let paypals =[], stripes =[] ,razors =[], bamboras = [];
+            for (let key in data) {
+                if (key == 'paypal_payment' || key == 'paypal_status' ||key == 'stripe_gateway'||key == 'razor_payment' || key == 'bambora_gateway') {
+                    if (data[key] == '1') data[key] = true;
+                    else data[key] = false;
+                }
+
+            }
+            for (let key in paypal) {
+                paypals[key] = data[key];
+                console.log(key, typeof data[key]);
+            }
+            for (let key in stripe) {
+                stripes[key] = data[key];
+                console.log(key, typeof data[key]);
+
+            }
+            for (let key in razor) {
+                console.log(key, typeof data[key]);
+                razors[key] = data[key];
+            }
+            for (let key in bambora) {
+                console.log(key, typeof data[key]);
+                bamboras[key] = data[key];
+            }
+            this.setState({
+                paypal: paypals,
+                stripe: stripes,
+                razor:razors,
+                bambora: bamboras
+            })
+            console.log(paypal,stripe,razor,bambora);
+        })
+    }
+    
 	// on plan change
 	onPlanChange(isMonthly) {
 		this.setState({ monthlyPlan: !isMonthly });
@@ -32,16 +90,41 @@ import ToggleSwitch from "./switch";
     handleClickOpen = () => {
         this.setState({ open: true });
     };
-  
-    handleClose = () => {
-        this.setState({ open: false });
-    };
+    
+    modifycreate = ( arg ) => {
+        const { paypal, stripe, razor, bambora } = this.state;
+
+        let sendData;
+        switch (arg) {
+            case 0:
+                sendData = paypal;
+                break;
+            case 1:
+                sendData = stripe;
+                break;
+            case 2:
+                sendData = razor;
+                break;
+            default:
+                sendData = bambora;
+                break;
+        }
+        console.log(sendData);
+        Axios.post('http://localhost:8000/api/modifycreate_payment',sendData).then(res => {
+            
+        })
+    }
+
     onNewsletterChange = () => {
+        alert(12312312);
         this.setState({
             open: true
         })
       };
      render() {
+         const { paypal, stripe, razor, bambora } = this.state;
+        console.log('STate = >', paypal.paypal_payment);
+
          return (
              <div className="blank-wrapper">
                  <Helmet>
@@ -65,8 +148,11 @@ import ToggleSwitch from "./switch";
                                         <FormLabel>Paypal Payment</FormLabel>
                                         <ToggleSwitch
                                             id="paypal-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
+                                            checked={paypal.paypal_payment}
+                                            onChange={()=>this.setState({
+                                                paypal: {...paypal, paypal_payment: !paypal.paypal_payment}
+                                            })} 
+                                        
                                             dataYes="&#xe64c; Active"
                                             dataNo="&#xe6ae; Off"
                                         />
@@ -75,15 +161,27 @@ import ToggleSwitch from "./switch";
                                         <FormLabel>Status</FormLabel>
                                         <ToggleSwitch
                                             id="paypal-status"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
+                                            checked={paypal.paypal_status}
+                                            onChange={()=>this.setState({
+                                                paypal: {...paypal, paypal_status: !paypal.paypal_status}
+                                            })}
                                             dataYes="&#xe64c; Live"
                                             dataNo="&#xe6ae; Sandbox"
                                         />
                                 </div>
                                 </div>
-                                <TextField margin="dense" id="paypalemail" label="Paypal Email" type="email" fullWidth />
-                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-10 mb-10">
+                                <TextField
+                                    margin="dense"
+                                    id="paypalemail"
+                                    label="Paypal Email"
+                                    type="email"
+                                    fullWidth
+                                    value={paypal.paypal_email}
+                                    onChange={(e)=>this.setState({
+                                        paypal:{...paypal, paypal_email: e.target.value}
+                                    })}
+                                />
+                                <Button variant="contained" onClick={()=>this.modifycreate(0)} color="primary" style={{float:'right'}} className="mt-10 mb-10">
                                     <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
@@ -104,8 +202,8 @@ import ToggleSwitch from "./switch";
                                         <FormLabel>Payment Gateway</FormLabel>
                                         <ToggleSwitch
                                             id="stripe-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
+                                            checked={stripe.stripe_gateway}
+                                            onChange={()=>this.setState({stripe: {...stripe, stripe_gateway: !stripe.stripe_gateway }})}
                                             dataYes="&#xe64c; Active"
                                             dataNo="&#xe6ae; Off"
                                         />
@@ -117,6 +215,12 @@ import ToggleSwitch from "./switch";
                                             label="Stripe Public Key"
                                             type="text"
                                             fullWidth
+                                            value={stripe.stripe_public_key}
+                                            onChange={
+                                                (e)=>this.setState({
+                                                    stripe: {...stripe, stripe_public_key: e.target.value}
+                                                })
+                                            }
                                         />
                                     </div>
                                     <div className="col-md-6 mt-10">
@@ -125,10 +229,16 @@ import ToggleSwitch from "./switch";
                                             id="paypalemail"
                                             label="Stripe Secret Key"
                                             type="text"
+                                            value={stripe.stripe_secret_key}
+                                            onChange={
+                                                (e)=>this.setState({
+                                                    stripe: {...stripe, stripe_secret_key: e.target.value}
+                                                })
+                                            }
                                         />
                                     </div>
                                 </div>
-                                <Button variant="contained" onClick={this.handleClose} color="primary" style={{float:'right'}} className="mt-20">
+                                <Button variant="contained" onClick={()=>this.modifycreate(1)} color="primary" style={{float:'right'}} className="mt-20">
                                     <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
@@ -151,8 +261,10 @@ import ToggleSwitch from "./switch";
                                         <FormLabel>Razorpay Payment</FormLabel>
                                         <ToggleSwitch
                                             id="razor-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
+                                            checked={razor.razor_payment}
+                                            onChange={()=>this.setState({
+                                                razor: { ...razor, razor_payment: !razor.razor_payment }
+                                            })}
                                             dataYes="&#xe64c; Active"
                                             dataNo="&#xe6ae; Off"
                                         />
@@ -164,10 +276,12 @@ import ToggleSwitch from "./switch";
                                             label="Razorpay Key"
                                             type="text"
                                             fullWidth
+                                            value={razor.razor_key}
+                                            onChange={(e)=>this.setState({ razor: {...razor,razor_key: e.target.value }})}
                                         />
                                     </div>
                                 </div>
-                                <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10" style={{float:'right'}}>
+                                <Button variant="contained" onClick={()=>this.modifycreate(2)} color="primary" className="mt-10" style={{float:'right'}}>
                                     <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>
@@ -188,8 +302,10 @@ import ToggleSwitch from "./switch";
                                         <FormLabel>Payment Gateway</FormLabel>
                                         <ToggleSwitch
                                             id="bambora-payment"
-                                            checked={this.state.open}
-                                            onChange={()=>this.onNewsletterChange}
+                                            checked={bambora.bambora_gateway}
+                                            onChange={()=>this.setState({
+                                                bambora: { ...bambora, bambora_gateway: !bambora.bambora_gateway }
+                                            })}
                                             dataYes="&#xe64c; Active"
                                             dataNo="&#xe6ae; Off"
                                         />
@@ -201,6 +317,10 @@ import ToggleSwitch from "./switch";
                                             label="Bambora Access Key"
                                             type="text"
                                             fullWidth
+                                            value={bambora.bambora_access_key}
+                                            onChange={(e)=>this.setState({
+                                                bambora: { ...bambora, bambora_access_key: e.target.value }
+                                            })}
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -210,6 +330,10 @@ import ToggleSwitch from "./switch";
                                             label="Bambora Merchant Number"
                                             type="text"
                                             fullWidth
+                                            value={bambora.bambora_merchant_key}
+                                            onChange={(e)=>this.setState({
+                                                bambora: { ...bambora, bambora_merchant_key: e.target.value }
+                                            })}
                                         />
                                     </div>
                                 </div>
@@ -219,8 +343,12 @@ import ToggleSwitch from "./switch";
                                     label="Bambora Secret Key"
                                     type="text"
                                     fullWidth
+                                    value={bambora.bambora_secret_key}
+                                    onChange={(e)=>this.setState({
+                                        bambora: { ...bambora, bambora_secret_key: e.target.value }
+                                    })}
                                 />
-                                <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10 mb-10" style={{float:'right'}}>
+                                <Button variant="contained" onClick={()=>this.modifycreate(3)} color="primary" className="mt-10 mb-10" style={{float:'right'}}>
                                     <i className="ti-save"></i>&nbsp;Save Change
                                 </Button>
                             </FormGroup>

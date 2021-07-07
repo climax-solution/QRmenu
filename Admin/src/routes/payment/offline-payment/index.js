@@ -13,9 +13,29 @@ import {Badge,Button} from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
 
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
-
+import axios from 'axios';
 export default class OfflinePayment extends Component {
+    state = {
+        data: []
+    }
+    componentWillMount() {
+        axios.get('http://localhost:8000/api/offlinepayment').then(res=>{
+            let { data } = this.state;
+            res.data.map((row,index)=>{
+                let item = [index + 1];
+                const key = ['username','email','package','price','txnid','request_date','status'];
+                key.map(it=>{
+                    item.push(row[it]);
+                })
+                data.push(item);
+            })
+            this.setState({
+                data: data
+            });
+        })
+    }
     render() {
+        console.log(this.state.data);
         const columns = [
             {
                 name: "Sl"
@@ -43,9 +63,7 @@ export default class OfflinePayment extends Component {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'Pending'
-                        ?<Badge color="secondary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                        : value)
+                        <Badge color="secondary" badgeContent={value} className="badge-pill"></Badge>
                     )
                 }
             },
@@ -60,9 +78,7 @@ export default class OfflinePayment extends Component {
                 }
             }
         ];
-        const data = [
-            ["1","admin", "mason@gmail.com", "Prøve package - kr 0 / trial","$22222", "d1341223g3r","202020789","Pending","2020"],
-        ];
+        const data = this.state.data;
         const options = {
             filterType: 'dropdown',
             responsive: 'stacked'

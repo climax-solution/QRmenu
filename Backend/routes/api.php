@@ -17,7 +17,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PkgController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SettingController;
-
+use App\Http\Controllers\PaymentController;
 // Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::post('signup', [AuthController::class, 'postSignup']);
@@ -41,3 +41,8 @@ Route::post('adduser',[RestaurantController::class, 'postAddUser']);
 Route::get('settingstatus', [SettingController::class, 'getStatus']);
 Route::post('modifycreate', [SettingController::class, 'postModifyCreate']);
 
+//Payment Setting
+Route::post('modifycreate_payment', [PaymentController::class, 'postModifyPayment']);
+Route::get('paymentsettings', [PaymentController::class, 'getPaymentSettings']);
+Route::get('offlinepayment', [PaymentController::class, 'offlinepayment']);
+Route::get('transactionhistory', [PaymentController::class, 'transactionhistory']);

@@ -18,14 +18,14 @@ const ToggleSwitch = ({
   dataYes,
   dataNo
 }) => {
-    const {states,setStatus} = useState(checked);
+  const [states,setStates] = useState(checked);
   function handleKeyPress(e) {
     if (e.keyCode !== 32) return;
     e.preventDefault();
     onChange(!checked);
   }
   function onChanges() {
-    setStatus(true);
+    setStates(!states);
   }
   return (
     <div className={"toggle-switch" + (small ? " small-switch" : "")}>
@@ -34,8 +34,8 @@ const ToggleSwitch = ({
         name={name}
         className="toggle-switch-checkbox"
         id={id}
-        checked={states}
-        onChange={(e) => onChanges}
+        checked={checked}
+        onChange={onChange}
         disabled={disabled}
       />
       {id ? (

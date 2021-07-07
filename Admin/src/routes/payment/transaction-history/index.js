@@ -12,8 +12,27 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
 import { Badge,Media } from '@material-ui/core';
-
+import axios from 'axios';
 export default class TransactionHistory extends Component {
+    state = {
+        data: []
+    }
+    componentWillMount() {
+        axios.get('http://localhost:8000/api/transactionhistory').then(res=>{
+            const { data } = this.state;
+            res.data.map((row, index)=>{
+                let item = [index + 1];
+                const key = ['username','package','price','status','txnid','payment','payment_date'];
+                key.map(it=>{
+                    item.push(row[it]);
+                })
+                data.push(item);
+            })
+            this.setState({
+                data: data
+            })
+        })
+    }
     render() {
         const columns = [
             {
@@ -32,9 +51,7 @@ export default class TransactionHistory extends Component {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'Pending'
-                        ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                        : value)
+                        <Badge color="primary" badgeContent={value} className="badge-pill"></Badge>
                     )
                 }
             },
@@ -45,9 +62,7 @@ export default class TransactionHistory extends Component {
                 name: "PaymentBy",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'offline'
-                        ?<Badge color="secondary" badgeContent={"offline"}></Badge>
-                        : value)
+                        <Badge color="secondary" badgeContent={value}></Badge>
                     )
                 }
             },
@@ -55,9 +70,7 @@ export default class TransactionHistory extends Component {
                 name: "PaymentDate"
             }
         ];
-        const data = [
-            [ "1", "mason@gmail.com", "Prøve package - kr 0 / trial", "2020-01-01 10:00:00", "Pending","23123adfadfadf","offline","2020"]
-        ];
+        const data = this.state.data;
         // const options = {
         //     filterType: 'dropdown',
         //     responsive: 'stacked'
