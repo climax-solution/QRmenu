@@ -18,6 +18,7 @@ use App\Http\Controllers\PkgController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderConfigurationController;
 // Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::post('signup', [AuthController::class, 'postSignup']);
@@ -46,3 +47,8 @@ Route::post('modifycreate_payment', [PaymentController::class, 'postModifyPaymen
 Route::get('paymentsettings', [PaymentController::class, 'getPaymentSettings']);
 Route::get('offlinepayment', [PaymentController::class, 'offlinepayment']);
 Route::get('transactionhistory', [PaymentController::class, 'transactionhistory']);
+
+
+/********** Vendor ***********/
+Route::post('modifyorderconfig', [OrderConfigurationController::class, 'modifyorderconfig']);
+Route::post('configsettings', [OrderConfigurationController::class, 'getconfigsetting']);

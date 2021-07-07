@@ -67,8 +67,8 @@ class UserBlock extends Component {
 			'Authorization': `Bearer ${localStorage.getItem('token')}`
 		 }
 		 Axios.get('http://localhost:8000/api/logout', {}, {headers: headers}).then(res=>{
-			 console.log(res);
-				localStorage.clear();
+			console.log(res);
+			localStorage.clear();
 			this.props.history.push('/');
 
 		 });
