@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OrderConfiguration;
+use App\Models\PaymentHistory;
 use Exception;
-class OrderConfigurationController extends Controller
+class VendorChunkOne extends Controller
 {
     public function modifyorderconfig(Request $request) {
         $input = $request->all();
@@ -28,6 +29,12 @@ class OrderConfigurationController extends Controller
     public function getconfigsetting(Request $request) {
         $user = auth('api')->user();
         $result = OrderConfiguration::where('user',$user->email)->first();
+        return response()->json($result);
+    }
+
+    public function vendorpaymenthistory(Request $request) {
+        $user = auth('api')->user();
+        $result = PaymentHistory::where('user',$user->email)->get();
         return response()->json($result);
     }
 }

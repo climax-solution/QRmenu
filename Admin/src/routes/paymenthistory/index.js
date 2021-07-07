@@ -10,7 +10,18 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
  import MUIDataTable from "mui-datatables";
+import Axios from 'axios';
  export default class BackUpDB extends Component {
+     componentWillMount() {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/vendorpaymenthistory',{},{headers: headers}).then(res=>{
+            console.log(res);
+        })
+     }
      render() {
         const columns = [
             {

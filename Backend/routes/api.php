@@ -18,7 +18,7 @@ use App\Http\Controllers\PkgController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\OrderConfigurationController;
+use App\Http\Controllers\VendorChunkOne;
 // Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::post('signup', [AuthController::class, 'postSignup']);
@@ -50,5 +50,6 @@ Route::get('transactionhistory', [PaymentController::class, 'transactionhistory'
 
 
 /********** Vendor ***********/
-Route::post('modifyorderconfig', [OrderConfigurationController::class, 'modifyorderconfig']);
-Route::post('configsettings', [OrderConfigurationController::class, 'getconfigsetting']);
+Route::post('modifyorderconfig', [VendorChunkOne::class, 'modifyorderconfig']);
+Route::post('configsettings', [VendorChunkOne::class, 'getconfigsetting']);
+Route::post('vendorpaymenthistory', [VendorChunkOne::class, 'vendorpaymenthistory']);

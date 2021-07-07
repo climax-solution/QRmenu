@@ -20,6 +20,7 @@ class CreatePaymentHistoriesTable extends Migration
             $table->string('amount')->nullable();
             $table->string('status')->nullable();
             $table->string('payment')->nullable();
+            $table->string('user')->nullable();
             $table->timestamps();
         });
     }
