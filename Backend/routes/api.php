@@ -53,3 +53,6 @@ Route::get('transactionhistory', [PaymentController::class, 'transactionhistory'
 Route::post('modifyorderconfig', [VendorChunkOne::class, 'modifyorderconfig']);
 Route::post('configsettings', [VendorChunkOne::class, 'getconfigsetting']);
 Route::post('vendorpaymenthistory', [VendorChunkOne::class, 'vendorpaymenthistory']);
+Route::get('featurelist', [VendorChunkOne::class, 'featurelist']);
+Route::post('updatefeature', [VendorChunkOne::class, 'updatefeature']);
+

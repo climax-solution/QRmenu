@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\OrderConfiguration;
 use App\Models\PaymentHistory;
+use App\Models\Feature;
 use Exception;
 class VendorChunkOne extends Controller
 {
@@ -36,5 +37,17 @@ class VendorChunkOne extends Controller
         $user = auth('api')->user();
         $result = PaymentHistory::where('user',$user->email)->get();
         return response()->json($result);
+    }
+
+    public function featurelist(Request $request) {
+        return response()->json(Feature::all());
+    }
+
+    public function updatefeature(Request $request) {
+        $input = $request->all();
+        foreach ($input as $item) {
+            Feature::where('id',$item['id'])->update($item);
+        }
+        return response()->json(['success'=>true]);
     }
 }
