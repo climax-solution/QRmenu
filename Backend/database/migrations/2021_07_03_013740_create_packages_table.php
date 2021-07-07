@@ -18,8 +18,8 @@ class CreatePackagesTable extends Migration
             $table->string('package_name')->nullable();
             $table->string('slug')->nullable();
             $table->enum('package_type',['free','monthly','yearly']);
-            $table->enum('order_limit',[-1,10,15,20,30,50]);
-            $table->enum('item_limit',[-1,10,15,20,30,40,50]);
+            $table->enum('order_limit',[-1,10,15,20,30,50])->nullable();;
+            $table->enum('item_limit',[-1,10,15,20,30,40,50])->nullable();;
             $table->string('package_ability')->nullable();
             $table->string('price')->nullable();
             $table->timestamps();

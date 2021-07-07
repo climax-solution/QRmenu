@@ -55,4 +55,6 @@ Route::post('configsettings', [VendorChunkOne::class, 'getconfigsetting']);
 Route::post('vendorpaymenthistory', [VendorChunkOne::class, 'vendorpaymenthistory']);
 Route::get('featurelist', [VendorChunkOne::class, 'featurelist']);
 Route::post('updatefeature', [VendorChunkOne::class, 'updatefeature']);
+Route::post('reservation_list', [VendorChunkOne::class, 'reservation_list']);
+Route::post('updateitem', [VendorChunkOne::class, 'updateitem']);
 

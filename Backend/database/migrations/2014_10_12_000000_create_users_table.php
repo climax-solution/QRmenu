@@ -18,9 +18,17 @@ class CreateUsersTable extends Migration
             $table->string('username')->nullable();
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->string('website')->nullable();
             $table->string('legacy')->nullable();
-            $table->enum('permission',['admin','vendor']);
+            $table->enum('permission',['admin','vendor'])->default('vendor');
+            $table->string('whatsapp')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('website')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('short_about')->nullable();
+            $table->string('more_about')->nullable();
+            $table->string('package')->nullable();
             $table->timestamps();
         });
     }

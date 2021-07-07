@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\OrderConfiguration;
 use App\Models\PaymentHistory;
 use App\Models\Feature;
+use App\Models\Reservation;
 use Exception;
 class VendorChunkOne extends Controller
 {
@@ -48,6 +49,23 @@ class VendorChunkOne extends Controller
         foreach ($input as $item) {
             Feature::where('id',$item['id'])->update($item);
         }
+        return response()->json(['success'=>true]);
+    }
+
+    public function reservation_list(Request $request) {
+        $user = auth('api')->user();
+        if ($user) {
+            $email = $user->email;
+            $sort = $request->input('sort');
+            $where = ['vendor' => $email];
+            if ($sort == 'today') $where['created_at'] = date('y-m-d');
+            return response()->json(Reservation::where($where)->get());
+        }
+    }
+
+    public function updateitem(Request $request) {
+        $data = $request->all();
+        Reservation::where('order_id',$data['order_id'])->update($data);
         return response()->json(['success'=>true]);
     }
 }
