@@ -12,14 +12,29 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
  import MUIDataTable from "mui-datatables";
 import Axios from 'axios';
  export default class BackUpDB extends Component {
-     componentWillMount() {
+    state = {
+        data:[]
+    }
+    componentWillMount() {
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
         Axios.post('http://localhost:8000/api/vendorpaymenthistory',{},{headers: headers}).then(res=>{
-            console.log(res);
+            const result = res.data;
+            let { data } = this.state;
+            result.map((row, index)=>{
+                let item = [index + 1];
+                const key = [ 'order_number', 'txnid', 'amount', 'status', 'payment','createdat'];
+                key.map(it => {
+                    item.push(row[it]);
+                })
+                data.push( item );
+            })
+            this.setState({
+                data: data
+            })
         })
      }
      render() {
@@ -53,9 +68,7 @@ import Axios from 'axios';
                 name: "Payment Date"
             }
         ];
-        const data = [
-            [ "1", "111", "sd23xu2rw2", "100USD", "Norway","Paypal","2020"]
-        ];
+        const { data } = this.state;
          return (
              <div className="blank-wrapper">
                  <Helmet>

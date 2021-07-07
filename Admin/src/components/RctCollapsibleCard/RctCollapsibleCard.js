@@ -40,7 +40,7 @@ class RctCollapsibleCard extends Component {
     }
     render() {
         const { close, reload, collapse } = this.state;
-        const { children, collapsible, closeable, reloadable, heading, fullBlock, colClasses, customClasses, headingCustomClasses, contentCustomClasses, badge, setable, customStyle } = this.props;
+        const { children, collapsible, closeable, reloadable, heading, fullBlock, colClasses, customClasses, headingCustomClasses, contentCustomClasses, badge, setable, customStyle,checked,onChange } = this.props;
         return (
             <div className={classnames(colClasses ? colClasses : '', { 'd-block': !collapse })}>
                 <div className={classnames(`rct-block ${customClasses ? customClasses : ''}`, { 'd-none': close })} style={customStyle}>
@@ -52,7 +52,7 @@ class RctCollapsibleCard extends Component {
                                     {collapsible && <a href="javascript:void(0)" onClick={() => this.onCollapse()}><i className="ti-minus"></i></a>}
                                     {reloadable && <a href="javascript:void(0)" onClick={() => this.onReload()}><i className="ti-reload"></i></a>}
                                     {closeable && <a href="javascript:void(0)" onClick={() => this.onCloseSection()}><i className="ti-close"></i></a>}
-                                    {setable && <Switch onClick={()=>this.onSetting()} on={this.state.status}/>}
+                                    {setable && <Switch onClick={onChange} on={checked}/>}
                                 </div>
                             }
                         </div>

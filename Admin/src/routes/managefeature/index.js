@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
  // page title bar
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
- 
+import {NotificationManager} from 'react-notifications';
  // intl messages
 import IntlMessages from 'Util/IntlMessages';
 
@@ -17,8 +17,49 @@ import {
     FormGroup,
 } from '@material-ui/core';
 import { Button } from 'reactstrap';
-export default class BackUpDB extends Component {
+import Axios from 'axios';
+export default class ManageFeature extends Component {
+    state = {
+        feature_list: []
+    }
+    componentWillMount() {
+        Axios.get('http://localhost:8000/api/featurelist').then(res=>{
+            const { data } = res;
+            let { feature_list } = this.state;
+            data.map(row=>{
+                row.status = row.status ? true : false; 
+                feature_list.push(row);
+            })
+            console.log(feature_list);
+            this.setState({
+                feature_list: feature_list
+            })
+        })
+    }
+    inputValue(index,key, value) {
+        let { feature_list } = this.state;
+        feature_list[index][key] = value;
+        this.setState({
+            feature_list: feature_list
+        })
+    }
+    activate(index) {
+        let { feature_list } = this.state;
+        feature_list[index]['status'] = !feature_list[index]['status'];
+        this.setState({
+            feature_list: feature_list
+        })
+    }
+    updateFeature() {
+        let { feature_list } = this.state;
+        Axios.post('http://localhost:8000/api/updatefeature', feature_list).then(res=>{
+            if (res.data.success) {
+                NotificationManager.success('Successfully updated!');
+            }
+        })
+    }
      render() {
+         const { feature_list } = this.state;
          return (
              <div className="blank-wrapper">
                  <Helmet>
@@ -35,197 +76,34 @@ export default class BackUpDB extends Component {
                     row
                 >
                     <div className="row" style={{padding: '0 10px'}}>
-                        <RctCollapsibleCard
-                            heading="Velkommen Side"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Meny"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Pakker"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Spesialiteter"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="QR Kode"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Whatsapp Bestilling"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Online Bestilling"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Reservasjon"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Kontakter"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <RctCollapsibleCard
-                            heading="Digital Betaling"
-                            setable
-                            colClasses="col-lg-6 col-md-12 col-sm-12"
-                            customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
-                        >
-                            <FormControl style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                            <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
-                                <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
-                                <FormGroup aria-label="position" row>
-                                    <TextField type="text" fullWidth/>
-                                </FormGroup>
-                            </FormControl>
-                        </RctCollapsibleCard>
-                        <Button color="primary" className="btn-primary pull-right ml-auto mb-10 mr-10">Submit</Button>
+                        {
+                            feature_list.map((item, index)=>{
+                                return (
+                                    <RctCollapsibleCard
+                                        heading={`${item.feature_name}`}
+                                        setable
+                                        onChange={()=>this.activate(index)}
+                                        checked={item.status}
+                                        colClasses="col-lg-6 col-md-12 col-sm-12"
+                                        customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
+                                    >
+                                        <FormControl style={{padding: '0 20px'}} fullWidth>
+                                            <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
+                                            <FormGroup aria-label="position" row>
+                                                <TextField type="text" fullWidth value={item.heading} onChange={(e)=>this.inputValue(index,'heading',e.target.value)}/>
+                                            </FormGroup>
+                                        </FormControl>
+                                        <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
+                                            <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
+                                            <FormGroup aria-label="position" row>
+                                                <TextField type="text" value={item.sub_heading} fullWidth onChange={(e)=>this.inputValue(index,'sub_heading',e.target.value)}/>
+                                            </FormGroup>
+                                        </FormControl>
+                                    </RctCollapsibleCard>                                    
+                                )
+                            })
+                        }
+                        <Button color="primary" className="btn-primary pull-right ml-auto mb-10 mr-10" onClick={()=>this.updateFeature()}>Submit</Button>
                     </div>
 
                 </RctCollapsibleCard>
