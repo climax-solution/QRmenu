@@ -19,6 +19,9 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VendorChunkOne;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MenuController;
+
 // Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::post('signup', [AuthController::class, 'postSignup']);
@@ -57,4 +60,13 @@ Route::get('featurelist', [VendorChunkOne::class, 'featurelist']);
 Route::post('updatefeature', [VendorChunkOne::class, 'updatefeature']);
 Route::post('reservation_list', [VendorChunkOne::class, 'reservation_list']);
 Route::post('updateitem', [VendorChunkOne::class, 'updateitem']);
+Route::post('profileinfo', [ProfileController::class, 'getlistprofile']);
+Route::post('updateprofile', [ProfileController::class, 'updateprofile']);
+Route::post('gettimelist', [ProfileController::class, 'gettimelist']);
+Route::post('updatetimelist', [ProfileController::class, 'updatetimelist']);
+
+Route::post('categorylist', [MenuController::class, 'getcategorylist']);
+Route::post('createcategory', [MenuController::class, 'createcategory']);
+Route::post('updatecategory', [MenuController::class, 'updatecategory']);
+Route::post('removecategory', [MenuController::class, 'removecategory']);
 

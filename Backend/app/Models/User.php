@@ -24,6 +24,14 @@ class User extends Authenticatable
         'website',
         'password',
         'package',
+        'whatsapp',
+        'youtube',
+        'website',
+        'facebook',
+        'twitter',
+        'instagram',
+        'short_about',
+        'more_about',
     ];
 
     /**
