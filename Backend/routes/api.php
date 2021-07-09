@@ -69,4 +69,14 @@ Route::post('categorylist', [MenuController::class, 'getcategorylist']);
 Route::post('createcategory', [MenuController::class, 'createcategory']);
 Route::post('updatecategory', [MenuController::class, 'updatecategory']);
 Route::post('removecategory', [MenuController::class, 'removecategory']);
+Route::post('removecategory', [MenuController::class, 'removecategory']);
 
+Route::post('createitem', [MenuController::class, 'createitem']);
+Route::post('itemlist', [MenuController::class, 'itemlist']);
+Route::post('updateitem', [MenuController::class, 'updateitem']);
+Route::post('removeitem', [MenuController::class, 'removeitem']);
+
+Route::post('speciallist', [MenuController::class,'speciallist']);
+Route::post('createspecial', [MenuController::class,'createspecial']);
+Route::post('updatespecial', [MenuController::class,'updatespecial']);
+Route::post('removespecial', [MenuController::class,'removespecial']);
