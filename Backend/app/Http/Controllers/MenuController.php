@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VendorCategory;
 use App\Models\VendorItem;
 use App\Models\VendorSpecial;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -153,5 +154,23 @@ class MenuController extends Controller
         $name = md5($name) .time();
         Storage::disk('custom')->putFileAs('/', $file, $name.'.'.$ext);
         return $name.'.'.$ext;
+    }
+
+    public function orderlist(Request $request) {
+        $user = auth('api')->user();
+        if ($user) {
+            return response()->json(Order::where('vendor',$user->email)->orderBy('created_at','desc')->get());
+        }
+        else return response()->json([]);
+    }
+
+    public function updateorder(Request $request) {
+        $user = auth('api')->user();
+        if ($user) {
+            $data = $request->input();
+            Order::where(['vendor'=>$user->email,'id'=>$data['id']])->update($data);
+            return response()->json(['status'=>true, 'data' => Order::where('vendor',$user->email)->orderBy('created_at','desc')->get()]);
+        }
+        else return response()->json([]);
     }
 }

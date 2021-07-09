@@ -7,6 +7,8 @@ use App\Models\OrderConfiguration;
 use App\Models\PaymentHistory;
 use App\Models\Feature;
 use App\Models\Reservation;
+use App\Models\Order;
+
 use Exception;
 class VendorChunkOne extends Controller
 {

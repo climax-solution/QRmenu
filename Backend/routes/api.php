@@ -80,3 +80,7 @@ Route::post('speciallist', [MenuController::class,'speciallist']);
 Route::post('createspecial', [MenuController::class,'createspecial']);
 Route::post('updatespecial', [MenuController::class,'updatespecial']);
 Route::post('removespecial', [MenuController::class,'removespecial']);
+
+
+Route::post('orderlist', [MenuController::class,'orderlist']);
+Route::post('updateorder', [MenuController::class,'updateorder']);
