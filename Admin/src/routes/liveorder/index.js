@@ -11,9 +11,59 @@ import IntlMessages from 'Util/IntlMessages';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import MUIDataTable from "mui-datatables";
 import { Badge } from '@material-ui/core';
-
+import Axios from  'axios';
+import NotificationManager from 'react-notifications/lib/NotificationManager';
 export default class LiveOrder extends Component {
+    state = {
+        tmp: [],
+        order_list: []
+    }
+    static getDerivedStateFromProps() {
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/orderlist',{},{headers: headers}).then(res=>{
+            const { data } = res;
+            this.resetStates(data);
+        })
+    }
+
+    updateItem( index, status ) {
+        const { tmp } = this.state;
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/updateorder', {id: tmp[index].id, status: status},{headers:headers}).then(res=>{
+            const { data } = res;
+            if ( data.status ) {
+                this.resetStates(data.data);
+                NotificationManager.success('Success!');
+            }
+        })
+    }
+
+    resetStates(data) {
+        let tmp = [], order_list = [];
+        data.map((item, index)=>{
+            tmp.push(item);
+            let row = [index + 1];
+            const key = ['order_number','name','phone','address','order_type','overview','status','status'];
+            key.map(it => {
+                row.push(item[it]);
+            })
+            order_list.push(row);
+        })
+        this.setState({
+            order_list: order_list,
+            tmp: tmp
+        })
+    }
      render() {
+        const { order_list } = this.state;
         const columns = [
             {
                 name: "Sl"
@@ -47,9 +97,7 @@ export default class LiveOrder extends Component {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'pending'
-                        ?<Badge color="primary" badgeContent={"pending"} className="badge-pill"></Badge>
-                        : value)
+                        <span className="badge badge-info">{value == '-1' ? 'Blocked' : value == '0' ? 'Pending': value == '1' ? 'Allowed' : 'Completed'}</span>
                     )
                 }
             },
@@ -58,15 +106,12 @@ export default class LiveOrder extends Component {
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
-                            <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon"> <i className="zmdi zmdi-check"></i>Allow</MatButton>
-                            <MatButton variant="contained" color="danger" className="mr-10 mb-10 text-white btn-danger btn-icon"> <i className="zmdi zmdi-block"></i>block</MatButton>
+                            <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" onClick={() => this.updateItem(tableMeta.rowIndex, value < '1' ? '1' : '2' )}> <i className="zmdi zmdi-check"></i>{value == '1' ? 'Complete' : 'Allow'}</MatButton>
+                            <MatButton variant="contained" color="danger" className="mr-10 mb-10 text-white btn-danger btn-icon"  onClick={() => this.updateItem(tableMeta.rowIndex, '-1')}> <i className="zmdi zmdi-block"></i>Block</MatButton>
                         </div>
                     )
                 }
             }
-        ];
-        const data = [
-            [ "1", "111", "Alexandr", "(555) 3333", "Norway","any","offline","pending"]
         ];
          return (
              <div className="blank-wrapper">
@@ -82,7 +127,7 @@ export default class LiveOrder extends Component {
                 >
                     <MUIDataTable
                         title={"Live Order"}
-                        data={data}
+                        data={order_list}
                         columns={columns}
                         // options={options}
                     />

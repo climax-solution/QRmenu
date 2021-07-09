@@ -8,7 +8,7 @@ import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 // import * as Switch from 'react-toggle-switch';
 import Switch from '@material-ui/core/Switch';
 import {
-    TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl, Checkbox, FormControlLabel, FormGroup,FormHelperText,Input,Button
+    TextField,  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, InputLabel, Select, MenuItem, FormControl, Checkbox, FormControlLabel, FormGroup,FormHelperText,Input,Button, Badge
 } from '@material-ui/core';
 import ReactQuill from 'react-quill';
 import ImageUploader from 'react-images-upload';

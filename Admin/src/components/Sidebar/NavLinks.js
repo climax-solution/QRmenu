@@ -92,18 +92,18 @@ export default {
                "path": "/vendor/menu/item",
                "menu_title": "sidebar.item"
             },
-            {
-               "path": "/vendor/menu/package",
-               "menu_title": "sidebar.package"
-            },
+            // {
+            //    "path": "/vendor/menu/package",
+            //    "menu_title": "sidebar.package"
+            // },
             {
                "path": "/vendor/menu/specialities",
                "menu_title": "sidebar.specialities"
             },
-            {
-               "path": "/vendor/menu/qrbuilder",
-               "menu_title": "sidebar.qrbuilder"
-            },
+            // {
+            //    "path": "/vendor/menu/qrbuilder",
+            //    "menu_title": "sidebar.qrbuilder"
+            // },
             // {
             //    "path": "/vendor/menu/allergens",
             //    "menu_title": "sidebar.allergens"
