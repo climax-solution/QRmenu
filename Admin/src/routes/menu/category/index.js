@@ -28,9 +28,9 @@ import {
     Badge,
     Chip,
 } from '@material-ui/core';
-
+import Axios from 'axios';
 import {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core';
-
+import { NotificationManager } from 'react-notifications';
 export default class Category extends Component {
     constructor(props) {
         super(props)
@@ -40,10 +40,46 @@ export default class Category extends Component {
             enterprisePlan: 590,
             open: false,
             modalTitle: 'Add Package',
-            pictures: []
+            activeIndex: -1,
+            pictures: [],
+            dialog: {
+                category_name: '',
+                type: '',
+                order: '',
+                status: true,
+                details: ''
+            },
+            categorylist:[],
+            tmp:[]
         }
     }
-	// on plan change
+    
+    componentWillMount() {
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/categorylist',{},{headers: headers}).then(res=>{
+            const { data } = res;
+            let { categorylist, dialog, tmp } = this.state;
+            data.map((item, index)=>{
+                tmp.push(item);
+                let row = [index + 1];
+                for (let key in dialog) {
+                    if (key == 'details') continue;
+                    row.push(item[key]);
+                }
+                categorylist.push(row);
+            })
+            console.log('Catergory=>',categorylist);
+            this.setState({
+                categorylist: categorylist,
+                tmp: tmp
+            })
+        })
+    }
+
 	onPlanChange(isMonthly) {
 		this.setState({ monthlyPlan: !isMonthly });
 		if (!isMonthly) {
@@ -59,15 +95,82 @@ export default class Category extends Component {
     handleClose = () => {
         this.setState({ open: false });
     };
-    onNewsletterChange = () => {
-        this.setState({
-            open: true
+    createNew = () => {
+        const { dialog,activeIndex,tmp } = this.state;
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        if (activeIndex != -1) {
+            dialog['id'] = tmp[activeIndex].id;
+        }
+        Axios.post(`http://localhost:8000/api/${activeIndex != -1 ? 'updatecategory': 'createcategory'}`,dialog,{headers: headers}).then(res=>{
+            if (res.data.status) {
+                NotificationManager.success('Success!');
+                const { data } = res.data;
+                this.resetStates(data);
+            }
+            else {
+                NotificationManager.error('failure');
+            }
+            this.setState({ open: false, activeIndex: -1 });
         })
     };
+
+    itemEdit(arg) {
+        const { tmp, dialog } = this.state;
+        console.log(tmp, dialog);
+        for (let key in dialog ) {
+            dialog[key] = tmp[arg][key];
+        }
+        this.setState({
+            dialog: dialog,
+            open: true,
+            activeIndex: arg,
+        })
+    }
+
+    itemRemove(arg) {
+        const { tmp } = this.state;
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/removecategory',{id: tmp[arg].id},{headers: headers}).then(res=>{
+            const { data } = res;
+            this.resetStates(data.data);
+            if (data.success) {
+                NotificationManager.success('Successfully Removed!');
+            }
+        })
+    }
+
+    resetStates(data) {
+        let { dialog } = this.state;
+        let tmp = [], categorylist = [];
+        data.map((item, index)=>{
+            tmp.push(item);
+            let row = [index + 1];
+            for (let key in dialog) {
+                if (key == 'details') continue;
+                row.push(item[key]);
+            }
+            categorylist.push(row);
+        })
+        this.setState({
+            categorylist: categorylist,
+            tmp: tmp
+        })
+    }
     render() {
         const columns = [
             {
                 name: "Sl"
+            },
+            {
+                name: "Name"
             },
             {
                 name: "Type"
@@ -76,13 +179,15 @@ export default class Category extends Component {
                 name: "Order"
             },
             {
-                name: "Username"
-            },
-            {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <Badge color="primary" badgeContent={value} className="badge-pill text-white"></Badge>
+                        (
+                            value ?
+                            <span className={`badge badge-success`}>Live</span>
+                            : <span className={`badge badge-danger`}>Hide</span>
+                        )
+                        
                     )
                 }
             },
@@ -91,10 +196,10 @@ export default class Category extends Component {
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
-                            <Button variant="contained" className="btn-primary text-white">
+                            <Button variant="contained" className="btn-primary text-white" onClick={()=>this.itemEdit(tableMeta.rowIndex)}>
                             &nbsp;<i className="ti-pencil-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Edit
                             </Button>
-                            <Button variant="contained" className="btn-danger text-white mt-5">
+                            <Button variant="contained" className="btn-danger text-white mt-5" onClick={()=>this.itemRemove(tableMeta.rowIndex)}>
                                 <i className="ti-trash"></i>&nbsp;&nbsp;Delete
                             </Button>
                         </div>
@@ -103,9 +208,7 @@ export default class Category extends Component {
                 }
             }
         ];
-        const data = [
-            ["1","admin", "mason@gmail.com", "Prøve package - kr 0 / trial","pending", ]
-        ];
+        const data = this.state.categorylist;
         const options = {
             filterType: 'dropdown',
             responsive: 'stacked'
@@ -124,17 +227,19 @@ export default class Category extends Component {
         };
           
         const formats = [
-        'header',
-        'font',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image', 'align',
-        'code-block'
+            'header',
+            'font',
+            'bold', 'italic', 'underline', 'strike', 'blockquote',
+            'list', 'bullet', 'indent',
+            'link', 'image', 'align',
+            'code-block'
         ];
+
+        const { dialog } = this.state;
         return (
             <div className="blank-wrapper">
                 <Helmet>
-                    <title>Offline Payment</title>
+                    <title>Categories</title>
                     <meta name="description" content="Reactify Blank Page" />
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.category" />} match={this.props.match} />
@@ -145,7 +250,7 @@ export default class Category extends Component {
                     run={true}
                 />
                 <div className="row mt-30">
-                    <div className="col-lg-7 col-md-12 col-sm-12">
+                    <div className="col-lg-12 col-md-12 col-sm-12">
                         <RctCollapsibleCard
                             heading="Categories"
                             colClasses="col-md-12 col-sm-12 d-sm-full"
@@ -162,7 +267,7 @@ export default class Category extends Component {
                             />
                         </RctCollapsibleCard>
                     </div>
-                    <div className="col-lg-5 col-md-12 col-sm-12">
+                    {/* <div className="col-lg-5 col-md-12 col-sm-12">
                         
                             <RctCollapsibleCard
                                 heading="Sizes"
@@ -274,7 +379,7 @@ export default class Category extends Component {
                                 </Button>
                             </RctCollapsibleCard>
                         
-                    </div>
+                    </div> */}
                 </div>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title" fullWidth maxWidth="sm">
                     <DialogTitle id="form-dialog-title">Add New Category</DialogTitle>
@@ -284,20 +389,34 @@ export default class Category extends Component {
                         </DialogContentText>
                         <div className="row">                        
                             <div className="col-md-12">
-                                <TextField margin="dense" id="name" label="Category name" type="text" fullWidth/>
+                                <TextField margin="dense" id="name" label="Category name" type="text" fullWidth value={dialog.category_name} onChange={
+                                    (e)=>this.setState({
+                                        dialog: {...dialog, category_name: e.target.value}
+                                    })
+                                }/>
                                 <FormControl margin="dense" fullWidth>
                                     <InputLabel htmlFor="packagetype">Type</InputLabel>
-                                    <Select id="packagetype" defaultValue="pizza">
+                                    <Select id="packagetype" value={dialog.type} onChange={
+                                    (e)=>this.setState({
+                                        dialog: {...dialog, type: e.target.value}
+                                    })} >
                                         <MenuItem value="">Select</MenuItem>
                                         <MenuItem value="pizza">Pizza</MenuItem>
                                         <MenuItem value="burger">Burger</MenuItem>
                                         <MenuItem value="other">Others</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <TextField margin="dense" id="order" label="Order" type="number" fullWidth/>
+                                <TextField margin="dense" id="order" label="Order" type="number" fullWidth value={dialog.order} onChange={
+                                    (e)=>this.setState({
+                                        dialog: {...dialog, order: e.target.value}
+                                    })}/>
                                 <FormControl>
                                     <InputLabel>Details</InputLabel>
-                                    <ReactQuill modules={modules} formats={formats} placeholder="Enter Your Message.." className="mt-50"/>
+                                    <ReactQuill modules={modules} formats={formats} placeholder="Enter Your Message.." className="mt-50"
+                                    value={dialog.details} onChange={
+                                        (value)=>this.setState({
+                                            dialog: {...dialog, details: value}
+                                        })}/>
                                 </FormControl>
                             </div>
                         </div>
@@ -306,8 +425,8 @@ export default class Category extends Component {
                         <Button variant="contained" onClick={this.handleClose} color="primary" className="text-white">
                             Cancel
                         </Button>
-                        <Button variant="contained" onClick={this.handleClose} className="btn-info text-white">
-                            Create
+                        <Button variant="contained" onClick={this.createNew} className="btn-info text-white">
+                            { this.state.activeIndex == -1 ? 'Create' : 'Update' }
                         </Button>
                     </DialogActions>
                 </Dialog>

@@ -30,6 +30,8 @@ import {
     Input
 } from '@material-ui/core';
 import ImageUploader from 'react-images-upload';
+import Axios from 'axios';
+import NotificationManager from 'react-notifications/lib/NotificationManager';
 
 export default class Specialites extends Component {
     constructor(props) {
@@ -40,7 +42,16 @@ export default class Specialites extends Component {
             enterprisePlan: 590,
             open: false,
             modalTitle: 'Add Package',
-            pictures: []
+            tmp: [],
+            activeIndex: -1,
+            speciallist: [],
+            dialog: {
+                special_name: '',
+                price: '',
+                short_about: '',
+                more_about: '',
+                image:''
+            }
         }
     }
 	// on plan change
@@ -63,14 +74,102 @@ export default class Specialites extends Component {
         this.setState({
             open: true
         })
-      };
+    };
+    componentWillMount() {
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/speciallist',{},{headers: headers}).then(res=>{
+            const { data } = res;
+            this.resetStates(data);
+        })
+    }
+    modifyCreate() {
+        const { dialog, activeIndex,tmp } = this.state;
+        console.log(activeIndex);
+        let sendData = new FormData();
+        for (let key in dialog) {
+            sendData.append(key, dialog[key]);
+        }
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        if (activeIndex > -1) {
+            sendData.append('id',tmp[activeIndex].id);
+            sendData.append('img_url',tmp[activeIndex].img_url);
+        }
+        Axios.post(`http://localhost:8000/api/${activeIndex == -1 ? 'createspecial': 'updatespecial'}`,sendData, {headers: headers}).then(res=>{
+            const { data } = res;
+            if ( data.status ) {                
+                this.resetStates(data.data);
+                NotificationManager.success('Success!');
+            }
+            else NotificationManager.error('Failure!');
+        })
+    }
+    itemEdit(arg) {
+        const { tmp, dialog } = this.state;
+        console.log(tmp, dialog);
+        for (let key in dialog ) {
+            dialog[key] = tmp[arg][key];
+        }
+        dialog['image'] = '';
+        this.setState({
+            dialog: dialog,
+            open: true,
+            activeIndex: arg,
+        })
+    }
+    itemRemove(arg) {
+        console.log(this.state);
+        const { tmp } = this.state;
+        const headers = {
+            'Accept':'application/json',
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+        Axios.post('http://localhost:8000/api/removespecial',{id: tmp[arg].id},{headers: headers}).then(res=>{
+            const { data } = res;
+            this.resetStates(data.data);
+            if (data.success) {
+                NotificationManager.success('Successfully Removed!');
+            }
+        })
+    }
+    resetStates(data) {
+        let tmp = [], speciallist = [];
+        data.map((item, index)=>{
+            tmp.push(item);
+            let row = [index + 1];
+            const keys = ['img_url','special_name','price','status'];
+            keys.map(key=> {
+                row.push(item[key]);
+            })
+            speciallist.push(row);
+        })
+        this.setState({
+            speciallist: speciallist,
+            tmp: tmp
+        })
+    }
+
     render() {
+        const { dialog, speciallist } = this.state;
         const columns = [
             {
                 name: "Sl"
             },
             {
-                name: "Images"
+                name: "Images",
+                options: {
+                    customBodyRender: (value, tableMeta) => (
+                        <img src={`http://localhost:8000/images/${value}`} style={{width: '50px',height: '50px'}} alt=""/>
+                    )
+                }
             },
             {
                 name: "Name"
@@ -79,15 +178,14 @@ export default class Specialites extends Component {
                 name: "Price"
             },
             {
-                name: 'Username'
-            },
-            {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'Pending'
-                        ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                        : value)
+                        (
+                            value ?
+                            <span className="badge badge-success">Live</span>
+                            : <span className="badge badge-danger">Hide</span>
+                        )
                     )
                 }
             },
@@ -95,14 +193,19 @@ export default class Specialites extends Component {
                 name: "Action",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'offline'
-                        ?<Badge color="secondary" badgeContent={"offline"}></Badge>
-                        : value)
+                        <div>
+                            <Button variant="contained" className="btn-primary text-white" onClick={()=>this.itemEdit(tableMeta.rowIndex)}>
+                            &nbsp;<i className="ti-pencil-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Edit
+                            </Button>
+                            <Button variant="contained" className="btn-danger text-white mt-5" onClick={()=>this.itemRemove(tableMeta.rowIndex)}>
+                                <i className="ti-trash"></i>&nbsp;&nbsp;Delete
+                            </Button>
+                        </div>
                     )
                 }
             }
         ];
-        const data = [];
+        const data = speciallist;
         const modules = {
             toolbar: [
               [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -143,7 +246,9 @@ export default class Specialites extends Component {
                         >
                         <div className="row">                        
                             <div className="col-md-10 offset-md-1">
-                                <TextField margin="dense" id="name" label="Name" type="text" fullWidth/>
+                                <TextField margin="dense" id="name" label="Name" type="text" fullWidth value={dialog.special_name} onChange={(e)=>this.setState({
+                                    dialog: {...dialog, special_name: e.target.value}
+                                })}/>
                                 <FormControl className="mt-20">
                                     <Input
                                         id="price"
@@ -151,29 +256,39 @@ export default class Specialites extends Component {
                                         endAdornment={
                                             <InputAdornment position="end">Kr</InputAdornment>
                                         }
+                                        value={dialog.price} onChange={(e)=>this.setState({
+                                            dialog: {...dialog, price: e.target.value}
+                                        })}
                                         style={{width: '50%'}}
                                     />
                                 </FormControl>
                                 <FormControl style={{display: 'block',padding:'10px 0px'}} className="mt-20" fullWidth>
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
-                                        <TextField id="short-des" fullWidth label="About Short Text (Max 120)" multiline rows="4"/>
+                                        <TextField id="short-des" fullWidth label="About Short Text (Max 120)" multiline rows="4"  value={dialog.short_about} onChange={(e)=>this.setState({
+                                    dialog: {...dialog, short_about: e.target.value}
+                                })}/>
                                     </FormGroup>
                                 </FormControl>
-                                <ReactQuill modules={modules} formats={formats} placeholder="Enter Your Message.." className="mt-30"/>
+                                <ReactQuill modules={modules} formats={formats} placeholder="Enter Your Message.." className="mt-30"  value={dialog.more_about} onChange={(value)=>this.setState({
+                                    dialog: {...dialog, more_about: value}
+                                })}/>
                                 <FormControl className="mt-30">
                                     <FormLabel>Image</FormLabel>
                                     <ImageUploader
                                         withIcon={true}
                                         buttonText='Choose images'
-                                        onChange={this.onDrop}
                                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
                                         maxFileSize={5242880}
                                         withPreview={true}
                                         singleImage={true}
+                                        value={dialog.image}
+                                        onChange={(image)=>this.setState({
+                                            dialog: {...dialog, image: image[0]}
+                                        })}
                                     />
                                 </FormControl>
                                 <FormControl style={{display:'block'}}>
-                                    <Button variant="contained" className="btn-info text-white mt-20 mb-10 pull-right">
+                                    <Button variant="contained" className="btn-info text-white mt-20 mb-10 pull-right" onClick={()=>this.modifyCreate()}>
                                         Submit
                                     </Button>
                                 </FormControl>

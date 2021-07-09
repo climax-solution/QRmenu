@@ -19,75 +19,62 @@ import {
     TextField,
     FormGroup
 } from '@material-ui/core';
-import MUIDataTable from "mui-datatables";
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import ReactQuill from 'react-quill';
-
+import Axios from 'axios';
 
 export default class Profile extends Component {
     state = {
-        password: '',
-
-		showPassword: false,
-
+        list: {
+            whatsapp: '',
+            youtube: '',
+            facebook: '',
+            website: '',
+            twitter: '',
+            instagram: '',
+            short_about: '',
+            more_about: ''
+        }
     }
-    handleChange = prop => event => {
-		this.setState({ [prop]: event.target.value });
-	};
-    render() {
-        const columns = [
-            {
-                name: "Sl"
-            },
-            {
-                name: "Username"
-            },
-            {
-                name: "Email"
-            },
-            {
-                name: "Package"
-            },
-            {
-                name: "Price",
-                
-            },
-            {
-                name: "TxnId"
-            },
-            {
-                name: "Request Date"
-            },
-            {
-                name: "Status",
-                options:{
-                    customBodyRender: (value, tableMeta, updateValue) => (
-                        (value == 'Pending'
-                        ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                        : value)
-                    )
-                }
-            },
-            {
-                name: "Action",
-                options:{
-                    customBodyRender: (value, tableMeta, updateValue) => (
-                        <Button variant="contained" color="primary">
-                            Approve<i className="ti-arrow-circle-right"></i>
-                        </Button>
-                    )
-                }
+
+    componentWillMount() {
+        const headers = {
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
-        ];
-        const data = [
-            ["1","admin", "mason@gmail.com", "Prøve package - kr 0 / trial","$22222", "d1341223g3r","202020789","Pending","2020"],
-        ];
-        const options = {
-            filterType: 'dropdown',
-            responsive: 'stacked'
-        };
+        }
+        Axios.post('http://localhost:8000/api/profileinfo',{},headers).then(res=>{
+            const { data } = res;
+            let { list } = this.state;
+           for (let key in list) {
+               list[key] = data[key] == null ? '' : data[key]
+           }
+           this.setState({
+               list: list
+           })
+        })
+    }
+
+    infoSave() {
+        const { list } = this.state;
+        const sendData = list;
+        const headers = {
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+        Axios.post('http://localhost:8000/api/updateprofile',sendData,headers).then(res=>{
+        })
+    }
+    render() {
+        const { list } = this.state;
+
         const modules = {
             toolbar: [
               [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -139,6 +126,10 @@ export default class Profile extends Component {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
+                                        value={list.whatsapp}
+                                        onChange={(e)=>this.setState({
+                                            list:{...list, whatsapp: e.target.value}
+                                        })}
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -153,6 +144,10 @@ export default class Profile extends Component {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
+                                        value={list.youtube}
+                                        onChange={(e)=>this.setState({
+                                            list:{...list, youtube: e.target.value}
+                                        })}
                                     />
                                 </div>
                                 <div className="col-md-6 mt-20">
@@ -167,6 +162,10 @@ export default class Profile extends Component {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
+                                        value={list.facebook}
+                                        onChange={(e)=>this.setState({
+                                            list:{...list, facebook: e.target.value}
+                                        })}
                                     />
                                 </div>
                                 <div className="col-md-6 mt-20">
@@ -181,6 +180,10 @@ export default class Profile extends Component {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
+                                        value={list.website}
+                                        onChange={(e)=>this.setState({
+                                            list:{...list, website: e.target.value}
+                                        })}
                                     />
                                 </div>
                                 <div className="col-md-6 mt-20">
@@ -195,6 +198,10 @@ export default class Profile extends Component {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
+                                        value={list.twitter}
+                                        onChange={(e)=>this.setState({
+                                            list:{...list, twitter: e.target.value}
+                                        })}
                                     />
                                 </div>
                                 <div className="col-md-6 mt-20">
@@ -209,6 +216,10 @@ export default class Profile extends Component {
                                                 </IconButton>
                                             </InputAdornment>
                                         }
+                                        value={list.instagram}
+                                        onChange={(e)=>this.setState({
+                                            list:{...list, instagram: e.target.value}
+                                        })}
                                     />
                                 </div>
                             </div>
@@ -216,16 +227,34 @@ export default class Profile extends Component {
                             <div className="row" style={{padding: '10px 20px'}}>
                                 <FormControl style={{display: 'block',padding:'10px 20px'}} fullWidth>
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
-                                        <TextField id="short-des" fullWidth label="About Short Text (Max 120)" multiline rows="4"/>
+                                        <TextField
+                                            id="short-des"
+                                            fullWidth
+                                            label="About Short Text (Max 120)"
+                                            multiline rows="4"
+                                            value={list.short_about }
+                                            onChange={(e)=>this.setState({
+                                                list:{...list, short_about: e.target.value}
+                                            })}
+                                        />
                                     </FormGroup>
                                 </FormControl>
                                 <FormControl style={{display: 'block',padding:'10px 20px'}} fullWidth>
                                     <InputLabel className="ml-20">About</InputLabel>
-                                    <ReactQuill modules={modules} formats={formats} placeholder="Enter Your Message.." className="mt-50"/>
+                                    <ReactQuill
+                                        modules={modules}
+                                        formats={formats}
+                                        placeholder="Enter Your Message.."
+                                        className="mt-50"
+                                        value={list.more_about}
+                                        onChange={(value)=>this.setState({
+                                            list:{...list, more_about: value}
+                                        })}
+                                    />
                                 </FormControl>
                                 <FormControl style={{display: 'block'}} fullWidth>
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
-                                        <Button variant="contained" onClick={this.handleClose} color="primary" className="mt-10 mb-10" style={{float:'right'}}>
+                                        <Button variant="contained" onClick={()=>this.infoSave( )} color="primary" className="mt-10 mb-10" style={{float:'right'}}>
                                             <i className="ti-save"></i>&nbsp;Save Change
                                         </Button>
                                     </FormGroup>
@@ -243,7 +272,12 @@ export default class Profile extends Component {
                             closeable
                             fullBlock
                         >
-                            <img src={require('Assets/img/qrcode.png')} style={{width: '200px',display:'inherit'}} className="m-auto img-thumbnail"/>
+                            <img
+                                src={require('Assets/img/qrcode.png')}
+                                style={{width: '200px',display:'inherit'}}
+                                className="m-auto img-thumbnail"
+                                alt="qrcode"
+                            />
                             <div className="row mt-20">
                                 <FormControl style={{display: 'block',padding: '0 20px'}} fullWidth>
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
