@@ -4,18 +4,34 @@ import Slider from 'react-slick';
 import { Modal } from 'react-bootstrap';
 import Quickview from '../../layouts/Quickview';
 import products from "../../../data/product.json";
-
+import Axios from 'axios';
 class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modalshow: false,
             lastActiveBox: -1,
+            item_list: []
         };
         this.modalShow = this.modalShow.bind(this);
         this.modalClose = this.modalClose.bind(this);
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
+    }
+    componentDidMount() {
+        const data = {
+            subdomain: window.location.host
+        }
+        Axios.post(process.env.REACT_APP_BACKEND_API + 'user/getitemlist',data).then(res=>{
+            const { data } = res;
+            const { item_list } = this.state;
+            data.map(item => {
+                item_list.push(item);
+            })
+            this.setState({
+                item_list: item_list
+            })
+        });
     }
     next() {
         this.slider.slickNext();
@@ -31,6 +47,7 @@ class Products extends Component {
         this.setState({ modalshow: false });
     }
     render() {
+        const { item_list } = this.state;
         const settings = {
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -59,14 +76,14 @@ class Products extends Component {
                     </div>
                     <Slider className="product-slider" {...settings} ref={c => (this.slider = c)}>
                         {/* Product Start */}
-                        {products.map((item, i) => (
+                        {item_list.map((item, i) => (
                             <div key={i} className="product">
                                 <Link className="product-thumb" to={"/order/" + item.id}>
-                                    <img src={process.env.PUBLIC_URL + "/" + item.img} alt={item.name} />
+                                    <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.title} />
                                 </Link>
                                 <div className="product-body">
                                     <div className="product-desc">
-                                        <h4> <Link to={"/order/" + item.id}>{item.name}</Link> </h4>
+                                        <h4> <Link to={"/order/" + item.id}>{item.title}</Link> </h4>
                                         <p>{item.shortdesc}</p>
                                         <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</p>
                                         <div className="favorite">

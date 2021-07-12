@@ -1,12 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import { Modal } from 'react-bootstrap';
 import Quickview from '../../layouts/Quickview';
-import products from "../../../data/product.json";
+// import products from "../../../data/product.json";
 import productcategory from "../../../data/productcategory.json";
 import { Rating } from "../../../helper/helper";
 import Masonry from 'react-masonry-component';
+// import Axios from 'axios';
+import { connect, useDispatch } from 'react-redux';
+import { getCategories, getItems } from '../../../store/actions/content.actions';
+import { GET_ITEMS } from '../../../store/actions/types';
 
 class Content extends Component {
     constructor(props) {
@@ -14,12 +18,15 @@ class Content extends Component {
         this.state = {
             modalshow: false,
             lastActiveBox: -1,
-            filteredProducts: products,
+            filteredProducts: this.props.items,
+            allItems: this.props.items,
+            categoryList: [],
             activeItem: -1
         };
         this.modalShow = this.modalShow.bind(this);
         this.modalClose = this.modalClose.bind(this);
     }
+    
     // Modal
     modalShow(index) {
         this.setState({ modalshow: true, lastActiveBox: index });
@@ -27,21 +34,35 @@ class Content extends Component {
     modalClose() {
         this.setState({ modalshow: false });
     }
+    componentDidMount() {    
+        this.props.getItems();
+        this.props.getCategories();
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.items !== this.props.items) {
+            this.setState({
+                filteredProducts: this.props.items,
+                allItems: this.props.items
+            });
+        }
+    }
 
     handleClick = id => {
         let filteredProducts = [];
+        const { allItems } = this.state;
         if (id === -1) {
-            filteredProducts = products;
+            filteredProducts = allItems;
         } else {
-            filteredProducts = products.filter(
+            filteredProducts = allItems.filter(
                 (product) => product.category.includes(id)
             );
         }
         this.setState({ filteredProducts, activeItem: id });
     };
     render() {
+        const { categories: categoryList } = this.props;
         const settings = {
-            slidesToShow: 8,
+            slidesToShow: categoryList.length,
             slidesToScroll: 3,
             arrows: false,
             dots: false,
@@ -78,6 +99,7 @@ class Content extends Component {
             resize: true,
             fitWidth: true
         };
+        console.log('LOG',this.props, this.state.filteredProducts)
         const renderAll = this.state.filteredProducts.map((item, i) => (
             <div key={i} className="col-lg-4 col-md-6 masonry-item sides">
                 <div className="product">
@@ -85,21 +107,16 @@ class Content extends Component {
                         <i className="far fa-heart" />
                     </div>
                     <Link className="product-thumb" to={"/ordering/" + item.id}>
-                        <img src={process.env.PUBLIC_URL + "/" + item.img} alt={item.name} />
+                        <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.name} />
                     </Link>
                     <div className="product-body">
                         <div className="product-desc">
-                            <h4> <Link to={"/ordering/" + item.id}>{item.name}</Link></h4>
-                            <div className="ct-rating-wrapper">
-                                <div className="ct-rating">
-                                    {Rating(item.rating)}
-                                </div>
-                            </div>
+                            <h4> <Link to={"/ordering/" + item.id}>{item.title}</Link></h4>
                             <p>{item.shortdesc}</p>
-                            <Link to="#" className="btn-custom light btn-sm shadow-none" onClick={(e) => this.modalShow(item.id)}> Customize <i className="fas fa-plus" /> </Link>
+                            {/* <Link to="#" className="btn-custom light btn-sm shadow-none" onClick={(e) => this.modalShow(item.id)}> Preview <i className="fas fa-eye" /> </Link> */}
                         </div>
                         <div className="product-controls">
-                            <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</p>
+                            <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
                             <Link to={"/ordering/" + item.id} className="order-item btn-custom btn-sm shadow-none">Order <i className="fas fa-shopping-cart" /> </Link>
                         </div>
                     </div>
@@ -120,13 +137,13 @@ class Content extends Component {
                                     <h6>All</h6>
                                 </div>
                             </Link>
-                            {productcategory.map((item, i) => (
+                            {categoryList.map((item, i) => (
                                 <Link key={item.id} to="#" className={this.state.activeItem === parseInt(item.id) ? 'ct-menu-category-item active' : 'ct-menu-category-item'} onClick={this.handleClick.bind(this, item.id)}>
                                     <div className="menu-category-thumb">
-                                        <img src={process.env.PUBLIC_URL + "/" + item.img} alt={item.title} />
+                                        <img src={process.env.PUBLIC_URL + "/assets/img/categories/6.jpg"} alt={item.category_name} />
                                     </div>
                                     <div className="menu-category-desc">
-                                        <h6>{item.title}</h6>
+                                        <h6>{item.category_name}</h6>
                                     </div>
                                 </Link>
                             ))}
@@ -153,4 +170,14 @@ class Content extends Component {
     }
 }
 
-export default Content;
+const mapStateToProps = state => ({
+    items: state.content.items,
+    categories: state.content.categories
+})
+
+const mapStateToDispatch = dispatch => ({
+    getItems: () => dispatch(getItems()),
+    getCategories: () => dispatch(getCategories())
+})
+
+export default connect(mapStateToProps, mapStateToDispatch)(Content);

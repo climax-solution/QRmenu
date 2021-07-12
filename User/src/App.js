@@ -1,5 +1,7 @@
 import React, { Suspense, useLayoutEffect } from 'react'
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import 'react-notifications/lib/notifications.css';
+
 
 // Preloader
 const Preloader = React.lazy(() => import("./components/layouts/Preloader"));
@@ -17,7 +19,7 @@ const Blogsingle = React.lazy(() => import("./components/pages/Blogsingle"));
 const About = React.lazy(() => import("./components/pages/About"));
 const Login = React.lazy(() => import("./components/pages/Login"));
 const Register = React.lazy(() => import("./components/pages/Register"));
-const Reservation = React.lazy(() => import("./components/pages/Checkout"));
+const Reservation = React.lazy(() => import("./components/pages/Reservation"));
 const Cart = React.lazy(() => import("./components/pages/Cart"));
 const Legal = React.lazy(() => import("./components/pages/Legal"));
 const Error = React.lazy(() => import("./components/pages/Error"));
@@ -30,7 +32,6 @@ const Contact = React.lazy(() => import("./components/pages/Contact"));
 const TrackOrder = React.lazy(() => import("./components/pages/TrackOrder"));
 const Packages = React.lazy(() => import("./components/pages/Packages"));
 const Specialities = React.lazy(() => import("./components/pages/Specialities"));
-
 
 const ScrollToTop = withRouter(({ children, location: { pathname } }) => {
   useLayoutEffect(() => {
@@ -47,15 +48,6 @@ function App() {
         <ScrollToTop>
           <Preloader />
           <Route exact path="/" component={Home} />
-          <Route path="/home-v2" component={Hometwo} />
-          <Route path="/home-v3" component={Homethree} />
-          <Route path="/home-v4" component={Homefour} />
-          <Route path="/blog-grid" exact component={Bloggrid} />
-          <Route path="/blog/tag/:tagId" exact component={props => (<Bloggrid {...props} key={window.location.pathname} />)} />
-          <Route path="/blog-list" component={Bloglist} />
-          <Route path="/blog-masonry" component={Blogmasonry} />
-          <Route path="/blog-full-width" component={Blogfull} />
-          <Route path="/blog-single/:id" exact component={props => (<Blogsingle {...props} key={window.location.pathname} />)} />
           <Route path="/about" component={About} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
@@ -63,9 +55,7 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/legal" component={Legal} />
           <Route path="/error" component={Error} />
-          <Route path="/menu-v1" component={Menuone} />
           <Route path="/menu" component={Menuone} />
-          <Route path="/menu-v2" component={Menutwo} />
           <Route path="/menu-item-v1/:id" exact component={props => (<Menuitemone {...props} key={window.location.pathname} />)} />
           <Route path="/ordering/:id" exact component={props => (<Menuitemone {...props} key={window.location.pathname} />)} />
           <Route path="/menu-item-v2/:id" exact component={props => (<Menuitemtwo {...props} key={window.location.pathname} />)} />

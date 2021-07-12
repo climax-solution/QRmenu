@@ -7,6 +7,8 @@ import products from "../../../data/product.json";
 import productcategory from "../../../data/productcategory.json";
 import { Rating } from "../../../helper/helper";
 import Masonry from 'react-masonry-component';
+import { connect } from 'react-redux';
+import { getSpecialities } from '../../../store/actions/content.actions';
 
 class Content extends Component {
     constructor(props) {
@@ -14,9 +16,21 @@ class Content extends Component {
         this.state = {
             modalshow: false,
             lastActiveBox: -1,
-            filteredProducts: products,
+            filteredProducts: [],
             activeItem: -1
         };
+    }
+
+    componentDidMount() {
+        this.props.getSpecialities();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.specialities !== this.props.specialities) {
+            this.setState({
+                filteredProducts: this.props.specialities
+            })
+        }
     }
     render() {
         return (
@@ -24,24 +38,25 @@ class Content extends Component {
                 {/* Menu Wrapper Start */}
                 <div className="section section-padding">
                     <div className="container">
-                    {/* <form style={{overflow:'hidden'}}>
-                        <div className="row">
-                            <div className="form-group col-lg-6 offset-lg-3">
-                                <input type="text" placeholder="Phone Number" className="form-control" name="phone-number" />
+                    { this.state.filteredProducts.map((item, i) => (
+                        <div key={i} className="col-lg-4 col-md-6 masonry-item sides">
+                            <div className="product">
+                                <Link className="product-thumb" to={"/ordering/" + item.id}>
+                                    <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.special_name} />
+                                </Link>
+                                <div className="product-body">
+                                    <div className="product-desc">
+                                        <h4> <Link to={"/ordering/" + item.id}>{item.special_name}</Link></h4>
+                                        <p>{item.short_about}</p>
+                                    </div>
+                                    <div className="product-controls">
+                                        <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
+                                        <Link to={"/ordering/" + item.id} className="order-item btn-custom btn-sm shadow-none">Add Cart <i className="fas fa-shopping-cart" /> </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="form-group col-lg-6 offset-lg-3">
-                                <input type="text" placeholder="Order ID" className="form-control" name="order-id" />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="form-group col-lg-6 offset-lg-3">
-                            <button type="button" className="btn-custom primary" name="button" style={{float:'right'}}>Check</button>
-                            </div>
-                        </div>
-                        
-                    </form> */}
+                    )) }
                     </div>
                 </div>
                 {/* Menu Wrapper End */}
@@ -49,5 +64,12 @@ class Content extends Component {
         );
     }
 }
+const mapStateToProps = state => ({
+    specialities: state.content.specialities
+})
 
-export default Content;
+const mapStateToDispatch = dispatch => ({
+    getSpecialities: () => dispatch(getSpecialities()),
+})
+
+export default connect(mapStateToProps, mapStateToDispatch)(Content);

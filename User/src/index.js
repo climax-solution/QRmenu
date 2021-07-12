@@ -4,6 +4,8 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import ScrollToTop from "./scrollToTop";
+import store from './store';
+import { Provider } from "react-redux";
 
 // Css
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -18,10 +20,12 @@ import './assets/css/style.css';
 import './index.css';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <ScrollToTop />
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <ScrollToTop />
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('slices')
 );
 
