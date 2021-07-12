@@ -22,6 +22,9 @@ class CreateOrdersTable extends Migration
             $table->string('order_type')->nullable();
             $table->string('overview')->nullable();
             $table->string('vendor')->nullable();
+            $table->string('guest_number')->nullable();
+            $table->string('table_reservation')->nullable();
+            $table->string('reservation_date')->nullable();
             $table->enum('status',['-1','0','1','2','3'])->default('1');
             $table->timestamps();
         });

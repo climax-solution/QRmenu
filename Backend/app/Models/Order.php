@@ -16,6 +16,9 @@ class Order extends Model
         'order_type',
         'overview',
         'status',
+        'guest_number',
+        'table_reservation',
+        'reservation_date',
         'vendor',
     ];
 }

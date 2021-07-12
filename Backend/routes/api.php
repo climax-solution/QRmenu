@@ -22,6 +22,7 @@ use App\Http\Controllers\VendorChunkOne;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
 
+
 // Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::post('signup', [AuthController::class, 'postSignup']);
@@ -84,3 +85,13 @@ Route::post('removespecial', [MenuController::class,'removespecial']);
 
 Route::post('orderlist', [MenuController::class,'orderlist']);
 Route::post('updateorder', [MenuController::class,'updateorder']);
+
+
+
+/*------ For Front User ------*/
+use App\Http\Controllers\FrontUser\HomeController;
+Route::post('user/getspeciallist', [HomeController::class, 'getspeciallist']);
+Route::post('user/getitemlist', [HomeController::class, 'getitemlist']);
+Route::post('user/getcategorylist', [HomeController::class, 'getcategorylist']);
+Route::post('user/getspecialities', [HomeController::class, 'getspecialities']);
+Route::post('user/placereservation', [HomeController::class, 'placereservation']);

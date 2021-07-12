@@ -32,6 +32,7 @@ class User extends Authenticatable
         'instagram',
         'short_about',
         'more_about',
+        'sub_domain',
     ];
 
     /**
