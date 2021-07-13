@@ -19,7 +19,7 @@ export default class OfflinePayment extends Component {
         data: []
     }
     componentWillMount() {
-        axios.get('http://localhost:8000/api/offlinepayment').then(res=>{
+        axios.get(REACT_APP_BACKEND_API + 'offlinepayment').then(res=>{
             let { data } = this.state;
             res.data.map((row,index)=>{
                 let item = [index + 1];

@@ -81,7 +81,7 @@ export default class Specialites extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/speciallist',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'speciallist',{},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data);
         })
@@ -132,7 +132,7 @@ export default class Specialites extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/removespecial',{id: tmp[arg].id},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'removespecial',{id: tmp[arg].id},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data.data);
             if (data.success) {

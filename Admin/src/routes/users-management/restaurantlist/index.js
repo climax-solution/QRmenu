@@ -20,7 +20,7 @@
         source:[]
     }
     componentDidMount() {
-        Axios.get('http://localhost:8000/api/restaurantlist').then(res=>{
+        Axios.get(REACT_APP_BACKEND_API + 'restaurantlist').then(res=>{
             const { data } = res;
             let { source } = this.state;
             data.map((item, index)=>{

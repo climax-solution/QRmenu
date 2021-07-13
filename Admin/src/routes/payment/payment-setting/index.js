@@ -40,7 +40,7 @@ import Axios from 'axios';
 	}
 
     componentWillMount() {
-        Axios.get('http://localhost:8000/api/paymentsettings').then(res => {
+        Axios.get(REACT_APP_BACKEND_API + 'paymentsettings').then(res => {
             const { data } = res;
             const { paypal, stripe, razor, bambora } = this.state;
             let paypals =[], stripes =[] ,razors =[], bamboras = [];
@@ -110,7 +110,7 @@ import Axios from 'axios';
                 break;
         }
         console.log(sendData);
-        Axios.post('http://localhost:8000/api/modifycreate_payment',sendData).then(res => {
+        Axios.post(REACT_APP_BACKEND_API + 'modifycreate_payment',sendData).then(res => {
             
         })
     }

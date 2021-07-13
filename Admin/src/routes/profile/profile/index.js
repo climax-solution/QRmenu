@@ -47,7 +47,7 @@ export default class Profile extends Component {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }
-        Axios.post('http://localhost:8000/api/profileinfo',{},headers).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'profileinfo',{},headers).then(res=>{
             const { data } = res;
             let { list } = this.state;
            for (let key in list) {
@@ -69,7 +69,7 @@ export default class Profile extends Component {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }
-        Axios.post('http://localhost:8000/api/updateprofile',sendData,headers).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'updateprofile',sendData,headers).then(res=>{
         })
     }
     render() {

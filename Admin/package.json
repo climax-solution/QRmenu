@@ -54,6 +54,7 @@
       "chart.js": "2.7.3",
       "classnames": "2.2.6",
       "clsx": "^1.1.1",
+      "dotenv": "^10.0.0",
       "downshift": "^3.2.7",
       "draft-js": "0.10.5",
       "firebase": "^5.8.6",

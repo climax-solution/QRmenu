@@ -90,7 +90,7 @@ import validator from 'validator';
          NotificationManager.error('Password is invalid!');
       } else {
          delete state.confirmpass;
-         Axios.post('http://localhost:8000/api/signup',state).then((res)=>{
+         Axios.post(REACT_APP_BACKEND_API + 'signup',state).then((res)=>{
             NotificationManager.success('Successfully Signed Up!');
          }).catch((error) => {
             NotificationManager.error('Faliure!');

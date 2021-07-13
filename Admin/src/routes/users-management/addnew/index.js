@@ -36,7 +36,7 @@ import validator from 'validator';
        packages:[],
     }
      componentDidMount() {
-        Axios.get('http://localhost:8000/api/pkglist').then(res=>{
+        Axios.get(REACT_APP_BACKEND_API + 'pkglist').then(res=>{
             const result = res.data.data;
             let { packages } = this.state;
             result.map((item) => {
@@ -65,7 +65,7 @@ import validator from 'validator';
             NotificationManager.error('Input is invalid!');
          }
          else {
-            Axios.post('http://localhost:8000/api/adduser',send).then(res=>{
+            Axios.post(REACT_APP_BACKEND_API + 'adduser',send).then(res=>{
                 if (res.status) {
                    NotificationManager.success('Successfully added!');
                 }

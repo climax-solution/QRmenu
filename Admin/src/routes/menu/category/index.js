@@ -60,7 +60,7 @@ export default class Category extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/categorylist',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'categorylist',{},{headers: headers}).then(res=>{
             const { data } = res;
             let { categorylist, dialog, tmp } = this.state;
             data.map((item, index)=>{
@@ -138,7 +138,7 @@ export default class Category extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/removecategory',{id: tmp[arg].id},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'removecategory',{id: tmp[arg].id},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data.data);
             if (data.success) {

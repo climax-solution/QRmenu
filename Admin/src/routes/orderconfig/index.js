@@ -56,7 +56,7 @@ import Axios from 'axios';
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/configsettings',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'configsettings',{},{headers: headers}).then(res=>{
             const { first_config, config, paypal, bambora, stripe } = this.state;
             const { data } = res;
             for (let key in first_config) {
@@ -113,7 +113,7 @@ import Axios from 'axios';
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
          }
-        Axios.post('http://localhost:8000/api/modifyorderconfig',sendData, {headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'modifyorderconfig',sendData, {headers: headers}).then(res=>{
 
         })
     }

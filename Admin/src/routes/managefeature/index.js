@@ -23,7 +23,7 @@ export default class ManageFeature extends Component {
         feature_list: []
     }
     componentWillMount() {
-        Axios.get('http://localhost:8000/api/featurelist').then(res=>{
+        Axios.get(REACT_APP_BACKEND_API + 'featurelist').then(res=>{
             const { data } = res;
             let { feature_list } = this.state;
             data.map(row=>{
@@ -52,7 +52,7 @@ export default class ManageFeature extends Component {
     }
     updateFeature() {
         let { feature_list } = this.state;
-        Axios.post('http://localhost:8000/api/updatefeature', feature_list).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'updatefeature', feature_list).then(res=>{
             if (res.data.success) {
                 NotificationManager.success('Successfully updated!');
             }

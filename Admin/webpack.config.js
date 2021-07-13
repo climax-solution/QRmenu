@@ -21,7 +21,17 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const dotenv = require('dotenv').config({path: '.env'});
+const webpack = require('webpack');
+// call dotenv and it will return an Object with a parsed key 
+const env = dotenv.parsed;
 
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+    console.log('Key=>', next);
+    prev[`${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
 // the path(s) that should be cleaned
 let pathsToClean = [
     'dist',
@@ -174,7 +184,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "static/css/[name].[hash:8].css"
-        })
-        // new BundleAnalyzerPlugin()
+        }),
+        new webpack.DefinePlugin(envKeys)
     ]
 };

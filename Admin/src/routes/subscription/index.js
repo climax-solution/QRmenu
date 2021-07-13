@@ -22,7 +22,7 @@ class Subscription extends Component {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
          }
-        Axios.get('http://localhost:8000/api/pkglist',{},{headers: headers}).then(res=>{
+        Axios.get(REACT_APP_BACKEND_API + 'pkglist',{},{headers: headers}).then(res=>{
             this.setState({
                 packages: res.data.data
             })

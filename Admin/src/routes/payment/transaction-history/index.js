@@ -18,7 +18,7 @@ export default class TransactionHistory extends Component {
         data: []
     }
     componentWillMount() {
-        axios.get('http://localhost:8000/api/transactionhistory').then(res=>{
+        axios.get(REACT_APP_BACKEND_API + 'transactionhistory').then(res=>{
             const { data } = this.state;
             res.data.map((row, index)=>{
                 let item = [index + 1];

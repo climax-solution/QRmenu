@@ -24,7 +24,7 @@ export default class LiveOrder extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/orderlist',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'orderlist',{},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data);
         })
@@ -37,7 +37,7 @@ export default class LiveOrder extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/updateorder', {id: tmp[index].id, status: status},{headers:headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'updateorder', {id: tmp[index].id, status: status},{headers:headers}).then(res=>{
             const { data } = res;
             if ( data.status ) {
                 this.resetStates(data.data);

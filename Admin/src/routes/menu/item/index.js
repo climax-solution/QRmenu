@@ -57,7 +57,7 @@ export default class Item extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/categorylist',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'categorylist',{},{headers: headers}).then(res=>{
             const { category_list } = this.state;
             const { data } = res;
             data.map(item=>{
@@ -68,7 +68,7 @@ export default class Item extends Component {
                 category_list: category_list
             })
         })
-        Axios.post('http://localhost:8000/api/itemlist',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'itemlist',{},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data);
         })
@@ -155,7 +155,7 @@ export default class Item extends Component {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/removeitem',{id: tmp[arg].id},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'removeitem',{id: tmp[arg].id},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data.data);
             if (data.success) {

@@ -46,7 +46,7 @@ export default class Avaibledays extends Component {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }
-        Axios.post('http://localhost:8000/api/gettimelist',{},headers).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'gettimelist',{},headers).then(res=>{
             const { data } = res;
             const { timelist } = this.state;
             if ( data ) {
@@ -77,7 +77,7 @@ export default class Avaibledays extends Component {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }
-        Axios.post('http://localhost:8000/api/updatetimelist',timelist,headers).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'updatetimelist',timelist,headers).then(res=>{
             if (res.data.success) {
                 NotificationManager.success('Success!');
             }
@@ -95,7 +95,7 @@ export default class Avaibledays extends Component {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }
-        Axios.post('http://localhost:8000/api/updatetimelist',{type_name: type_name},headers).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'updatetimelist',{type_name: type_name},headers).then(res=>{
             if (res.data.success) {
                 NotificationManager.success('Success!');
             }
@@ -105,9 +105,10 @@ export default class Avaibledays extends Component {
         })
 	};
      render() {
-         const { timelist,type_name } = this.state;
-
-         return (
+        const { timelist,type_name } = this.state;
+        console.log(process.env.REACT_APP_BACKEND_API);
+       
+        return (
              <div className="blank-wrapper">
                  <Helmet>
                      <title>Avaible Days</title>

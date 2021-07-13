@@ -44,7 +44,7 @@ class UsersPackage extends Component {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
          }
-        Axios.get('http://localhost:8000/api/pkglist',{},{headers: headers}).then(res=>{
+        Axios.get(REACT_APP_BACKEND_API + 'pkglist',{},{headers: headers}).then(res=>{
             this.setState({
                 packages: res.data.data
             })
@@ -66,7 +66,7 @@ class UsersPackage extends Component {
     };
     
     editPackage = (id) => {
-        Axios.post('http://localhost:8000/api/pkgitem',{id: id}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'pkgitem',{id: id}).then(res=>{
             const { data } = res;
             const { dialog } = this.state;
             for (let key in data) {
@@ -94,7 +94,7 @@ class UsersPackage extends Component {
         const { dialog, isUpdate, activeId } = this.state;
         let affix = isUpdate ? 'editpkg' : 'addpkg';
         if ( isUpdate ) dialog['id'] = activeId;
-        Axios.post('http://localhost:8000/api/'+affix, dialog).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + ''+affix, dialog).then(res=>{
             const { data } = res;
             if (!data.status) {
                 NotificationManager.error('Package info is incorrectly!');

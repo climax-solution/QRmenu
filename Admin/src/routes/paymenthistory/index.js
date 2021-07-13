@@ -21,7 +21,7 @@ import Axios from 'axios';
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
-        Axios.post('http://localhost:8000/api/vendorpaymenthistory',{},{headers: headers}).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'vendorpaymenthistory',{},{headers: headers}).then(res=>{
             const result = res.data;
             let { data } = this.state;
             result.map((row, index)=>{

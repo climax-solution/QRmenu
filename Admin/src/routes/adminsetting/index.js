@@ -35,7 +35,7 @@ import Axios from 'axios';
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:8000/api/settingstatus').then(res => {
+        Axios.get(REACT_APP_BACKEND_API + 'settingstatus').then(res => {
             let { site_setting, recaptcha, setGe } = this.state;
             let { data } = res;
             console.log(res);
@@ -84,7 +84,7 @@ import Axios from 'axios';
             default:
                 break;
         }
-        Axios.post('http://localhost:8000/api/modifycreate', sendData).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'modifycreate', sendData).then(res=>{
             NotificationManager.success('Successfully Changed!');
         })
     }

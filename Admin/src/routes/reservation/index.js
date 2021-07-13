@@ -26,7 +26,7 @@ export default class BackUpDB extends Component {
             }
         };
         const sort = { sort: 'today' };
-        Axios.post('http://localhost:8000/api/reservation_list',sort, headers).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'reservation_list',sort, headers).then(res=>{
             const { data } = res;
             let { list } = this.state;
             data.map((item, index)=>{
@@ -52,7 +52,7 @@ export default class BackUpDB extends Component {
             status: state == 'allow' ? '1' : '-1'
         }
         console.log(data);
-        Axios.post('http://localhost:8000/api/updateitem',data).then(res=>{
+        Axios.post(REACT_APP_BACKEND_API + 'updateitem',data).then(res=>{
             if (res.data.success) {
                 NotificationManager.success('Success!');
             }
