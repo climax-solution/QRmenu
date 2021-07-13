@@ -24,7 +24,7 @@ export const getCategories = () => dispatch => {
 }
 
 export const getSpecialities = () => dispatch => {
-    axios.post(process.env.REACT_APP_BACKEND_API+'user/getspecialities',datas).then(res=>{
+    axios.post(process.env.REACT_APP_BACKEND_API+'user/getspeciallist',datas).then(res=>{
         dispatch({
             type: GET_SPECIALITIES,
             payload: res.data

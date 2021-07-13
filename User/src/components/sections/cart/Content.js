@@ -1,28 +1,133 @@
 import React, { Component, } from 'react';
 import { Link } from 'react-router-dom';
-import cartitem from '../../../data/cartlist.json';
-
+import { connect } from 'react-redux';
+import axios from 'axios';
+import validator from 'validator';
+import { NotificationManager, NotificationContainer } from 'react-notifications';
 const tax = 9.99;
 
 class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            priceTotal: cartitem.reduce((totalPrice, item) => totalPrice + item.price * item.qty, 0),
-            cartitem: cartitem
+            priceTotal: this.props.cart_list[window.location.host].reduce((totalPrice, item) => totalPrice + Number(item.price) * item.qty, 0),
+            cartitem: this.props.cart_list[window.location.host],
+            ordertypelist: [],
+            typename: ['Kontantbetaling ved levering','Bestilling','Henting','Betal med kontanter','Spis i Restaurant'],
+            formData: {
+                name: '',
+                email: '',
+                phone: '',
+                order_type: '',
+            },
+            address:'',
+            google_map: '',
+            guest_number: '',
+            date_time: '',
+            time: '',
+            activeTable:'',
+            table_guest: '',
+            activeOrderType: -1,
+            activePerson:'',
+            
         };
+    }
+
+    componentDidMount() {
+        const sendData = {
+            subdomain: window.location.host
+        }
+        axios.post(process.env.REACT_APP_BACKEND_API + 'user/getordertypelist',sendData).then(res=>{
+            const { data } = res;
+            this.setState({
+                ordertypelist: [data.content_betal, data.bestilling, data.henting, data.betal, data.spis]
+            })
+        })
     }
     IncrementItem = (item) => {
         item.qty = item.qty + 1;
-        this.setState({ cartitem: this.state.cartitem, priceTotal: cartitem.reduce((totalPrice, item) => totalPrice + item.price * item.qty, 0) });
+        this.setState({ cartitem: this.state.cartitem, priceTotal: this.state.cartitem.reduce((totalPrice, item) => totalPrice + Number(item.price) * item.qty, 0) });
     };
     DecreaseItem = (item) => {
         item.qty = item.qty - 1;
-        this.setState({ cartitem: this.state.cartitem, priceTotal: cartitem.reduce((totalPrice, item) => totalPrice + item.price * item.qty, 0) });
-    }; 
+        this.setState({ cartitem: this.state.cartitem, priceTotal: this.state.cartitem.reduce((totalPrice, item) => totalPrice + Number(item.price) * item.qty, 0) });
+    };
+    personList() {
+        let list = [];
+        for (let i = 0; i < 9; i ++) {
+            list.push(<option value={i+1}>{i+1}</option>);
+        }
+        return list;
+    }
+    placeOrder() {
+        const { formData } = this.state;
+        let flag = 0;
+        for(let key in formData) {
+            if (formData[key] == '' || key == 'email' && !validator.isEmail(formData[key])) flag = 1;
+        console.log('First=>',key, formData[key], flag);
+
+        }
+
+        switch(formData.order_type) {
+            case 1:
+                if (this.state.activePerson == '' || !validator.isDate(this.state.date_time))
+                    flag = 1;
+                break;
+            case 2:
+                // if (!validator.isDate(this.state.time))
+                    // flag = 1;
+                break;
+            case 3:
+                break;
+            case 4: 
+                if (this.state.activeTable == '' || this.state.activePerson == '') 
+                    flag = 1;
+                break;
+            default:
+                if (this.state.address == '' || this.state.google_map == '')
+                    flag = 1;
+                break;
+        }
+        console.log('Second=>',flag);
+
+        if (flag) {
+            NotificationManager.warning('Input is invalid');
+            return;
+        }
+        else {
+            switch(formData.order_type) {
+                case 1:
+                    formData['guest_number'] = this.state.activePerson;
+                    formData['date_time'] = this.state.date_time;
+                    break;
+                case 2:
+                    formData['time'] = this.state.time;
+                    break;
+                case 3:
+                    break;
+                case 4: 
+                    formData['table'] = this.state.activeTable;
+                    formData['table_guest'] = this.state.activePerson;
+                    break;
+                default:
+                    formData['address'] = this.state.address;
+                    formData['google_map'] = this.state.google_map;
+                    break;
+            }
+        }
+        formData['subdomain'] = window.location.host;
+        formData['carts'] = JSON.stringify(this.props.cart_list[window.location.host]);
+        console.log(formData);
+        axios.post(process.env.REACT_APP_BACKEND_API + 'user/placeorder',formData).then(res=>{
+
+        })
+    }
     render() {
+        const { cartitem, ordertypelist, typename, formData } = this.state;
+        console.log('OrderType', ordertypelist);
         return (
             <section className="section">
+                <NotificationContainer/>
                 <div className="container">
                     {/* Cart Table Start */}
                     <table className="ct-responsive-table">
@@ -46,16 +151,16 @@ class Content extends Component {
                                     </td>
                                     <td data-title="Product">
                                         <div className="cart-product-wrapper">
-                                            <img src={process.env.PUBLIC_URL + "/" + item.img} alt={item.name} />
+                                            <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.name} />
                                             <div className="cart-product-body">
                                                 <h6> <Link to="/menu-item-v1/1">{item.name}</Link> </h6>
-                                                {item.flavours.map((item, i) => (
+                                                {/* {item.flavours.map((item, i) => (
                                                     <p key={i}>{item}</p>
-                                                ))}
+                                                ))} */}
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-title="Price"> <strong>{new Intl.NumberFormat().format((item.price).toFixed(2))}$</strong> </td>
+                                    <td data-title="Price"> <strong>{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</strong> </td>
                                     <td className="quantity" data-title="Quantity">
                                         <div className="qty">
                                             <span className="qty-subtract" onClick={() => this.DecreaseItem(item)}><i className="fa fa-minus" /></span>
@@ -63,7 +168,7 @@ class Content extends Component {
                                             <span className="qty-add" onClick={() => this.IncrementItem(item)}><i className="fa fa-plus" /></span>
                                         </div>
                                     </td>
-                                    <td data-title="Total"> <strong>{new Intl.NumberFormat().format((item.price * item.qty).toFixed(2))}$</strong> </td>
+                                    <td data-title="Total"> <strong>{new Intl.NumberFormat().format((Number(item.price) * item.qty).toFixed(2))}$</strong> </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -71,17 +176,146 @@ class Content extends Component {
                     {/* Cart Table End */}
                     {/* Coupon Code Start */}
                     <div className="row">
-                        <div className="col-lg-5">
+                        <div className="col-lg-6">
                             <div className="form-group mb-0">
+                                <div className="input-group mb-2">
+                                    <input type="text" className="form-control" placeholder="Full Name" aria-label="Full Name" value={formData.name} onChange={(e) => this.setState({
+                                        formData: {...formData, name: e.target.value}
+                                    })}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="form-group mb-2">
                                 <div className="input-group mb-0">
-                                    <input type="text" className="form-control" placeholder="Enter Coupon Code" aria-label="Coupon Code" />
-                                    <div className="input-group-append">
-                                        <button className="btn-custom shadow-none" type="button">Apply</button>
+                                    <input type="email" className="form-control" placeholder="Enter Email" aria-label="Email"  value={formData.email} onChange={(e) => this.setState({
+                                        formData: {...formData, email: e.target.value}
+                                    })}/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <input type="text" className="form-control" placeholder="Enter Phone" aria-label="Phone"  value={formData.phone} onChange={(e) => this.setState({
+                                        formData: {...formData, phone: e.target.value}
+                                    })} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <select className="form-control" value={formData.order_type} onChange={(e)=> this.setState({
+                                        formData:{...formData, order_type: e.target.value}
+                                    })}>
+                                        <option value="">Select order type</option>
+                                        {
+                                            ordertypelist.map((item, index )=>{
+                                                return item && <option value={index} key={index}>{typename[index]}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    { formData.order_type == 0 &&<div className="row">
+                        <div className="col-lg-12">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <textarea className="form-control" placeholder="Address" rows="5"  value={this.state.address} onChange={(e) => this.setState({
+                                        address: e.target.value
+                                    })}></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-12">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <input className="form-control" placeholder="Google Map Link"   value={this.state.google_map} onChange={(e) => this.setState({
+                                        google_map: e.target.value
+                                    })}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+                    {
+                        formData.order_type == 1 && <div className="row">
+                        <div className="col-lg-6">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <select className="form-control" value={this.state.activePerson} onChange={(e)=> this.setState({
+                                            activePerson: e.target.value
+                                        })}>
+                                            <option value="">Select person</option>
+                                            {
+                                                this.personList()
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-6">
+                                <div className="form-group mb-2">
+                                    <div className="input-group mb-0">
+                                        <input type="datetime-local" className="form-control"   value={this.state.date_time} onChange={(e) => this.setState({
+                                        date_time: e.target.value
+                                    })}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    }
+                    {
+                        formData.order_type == 2 && <div className="row">
+                            <div className="col-lg-6">
+                                <div className="form-group mb-2">
+                                    <div className="input-group mb-0">
+                                        <input type="time" className="form-control" value={this.state.time} onChange={(e) => this.setState({
+                                        time: e.target.value
+                                    })}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    {
+                        formData.order_type == 4 && <div className="row">
+                        <div className="col-lg-6">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <select className="form-control" value={this.state.activePerson} onChange={(e) => this.setState({
+                                        activePerson: e.target.value
+                                    })}>
+                                        <option value="">Select person</option>
+                                        {
+                                            this.personList()
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="form-group mb-2">
+                                <div className="input-group mb-0">
+                                    <select className="form-control" value={this.state.activePerson} onChange={(e) => this.setState({
+                                        activePerson: e.target.value
+                                    })}>
+                                        <option value="">Select person</option>
+                                        {
+                                            this.personList()
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    }
                     {/* Coupon Code End */}
                     {/* Cart form Start */}
                     <div className="row ct-cart-form">
@@ -93,17 +327,9 @@ class Content extends Component {
                                         <th>Subtotal</th>
                                         <td>{new Intl.NumberFormat().format((this.state.priceTotal).toFixed(2))}$</td>
                                     </tr>
-                                    <tr>
-                                        <th>Tax</th>
-                                        <td> {tax}$ <span className="small">(11%)</span> </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Total</th>
-                                        <td> <b>{new Intl.NumberFormat().format((this.state.priceTotal + tax).toFixed(2))}$</b> </td>
-                                    </tr>
                                 </tbody>
                             </table>
-                            <button type="submit" className="btn-custom primary btn-block">Proceeed to Checkout</button>
+                            <button type="button" className="btn-custom primary btn-block" onClick={()=>this.placeOrder()}>Order</button>
                         </div>
                     </div>
                     {/* Cart form End */}
@@ -113,4 +339,10 @@ class Content extends Component {
     }
 }
 
-export default Content;
+const mapStateToProps = state => ({
+    cart_list: JSON.parse(state.content.cart_list)
+})
+const mapStateToDispatch = dispatch => ({
+    // removeCart: (key) => dispatch(removeCart(key))
+})
+export default connect(mapStateToProps,null)(Content);

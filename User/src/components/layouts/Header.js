@@ -6,10 +6,19 @@ import Search from '../layouts/Search';
 import Mobilemenu from '../layouts/Mobilemenu';
 import Menu from './Menu';
 import classNames from 'classnames';
-import cartitem from '../../data/cartlist.json';
+import { connect } from 'react-redux';
+
 
 class Header extends HeaderComponent {
     render() {
+        let cart_list = this.props.cart_list;
+        cart_list = JSON.parse(cart_list);
+        let cart_count = 0;
+        if (cart_list && cart_list[window.location.host]) {
+            cart_list[window.location.host].map(item => {
+                cart_count += Number(item.qty);
+            })
+        }
         return (
             <Fragment>
                 {/* Cart Sidebar Start */}
@@ -51,23 +60,22 @@ class Header extends HeaderComponent {
                             </Link>
                             {/* Menu */}
                             <Menu />
-                            <div className="header-controls">
+                            {
+                                cart_count > 0 && <div className="header-controls">
                                 <ul className="header-controls-inner">
                                     <li className="cart-dropdown-wrapper cart-trigger" onClick={this.cartToggle}>
-                                        <span className="cart-item-count">{cartitem.length}</span>
+                                        <span className="cart-item-count">{cart_count}</span>
                                         <i className="flaticon-shopping-bag" />
                                     </li>
-                                    <li className="search-dropdown-wrapper search-trigger" onClick={this.searchToggle}>
-                                        <i className="flaticon-search" />
-                                    </li>
-                                </ul>
+                                </ul></div>
+                            }
                                 {/* Toggler */}
                                 <div className="aside-toggler aside-trigger" onClick={this.toggleNav}>
                                     <span />
                                     <span />
                                     <span />
                                 </div>
-                            </div>
+                            
                         </nav>
                     </div>
                 </header>
@@ -77,4 +85,7 @@ class Header extends HeaderComponent {
     }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+    cart_list: state.content.cart_list
+})
+export default connect(mapStateToProps, null)(Header);

@@ -12,6 +12,10 @@ class Banner extends Component {
             nav1: null,
             nav2: null,
             special_list: [],
+            banneStyle: {
+                width: '500px',
+                height: '500px'
+            }
         };
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
@@ -37,8 +41,7 @@ class Banner extends Component {
         }
     }
     render() {
-        const { special_list } = this.state;
-        console.log(this.props)
+        const { special_list, banneStyle } = this.state;
         const settings = {
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -52,7 +55,7 @@ class Banner extends Component {
             }]
         }
         const settingsthumb = {
-            slidesToShow: 3,
+            slidesToShow: special_list.length < 4 ? special_list.length : 4,
             slidesToScroll: 1,
             arrows: false,
             dots: false,
@@ -87,12 +90,12 @@ class Banner extends Component {
                                             <h1 className="title text-center">{item.special_name}</h1>
                                             <p className="subtitle">{item.short_about}</p>
                                             <div className="banner-controls">
-                                                <Link to="/menu-v1" className="btn-custom primary">Order <i className="flaticon-shopping-bag" /> </Link>
+                                                <Link to="/specialities" className="btn-custom primary">Go to Page <i className="fa fa-shopping-cart" /> </Link>
                                                 <h4>${new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}</h4>
                                             </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6">
-                                            <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.title} />
+                                            <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.title} style={{banneStyle}}/>
                                         </div>
                                     </div>
                                 </div>

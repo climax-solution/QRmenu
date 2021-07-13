@@ -3,7 +3,6 @@ import MetaTags from "react-meta-tags";
 import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import Content from '../sections/home/Content';
-
 const pagelocation = 'Homepage';
 
 class Home extends Component {
@@ -13,7 +12,7 @@ class Home extends Component {
     static getDerivedStateFromProps() {
     }
     render() {
-        console.log('Render => ');
+        console.log(process.env);
         return (
             <Fragment>
                 <MetaTags>

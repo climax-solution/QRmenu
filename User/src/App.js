@@ -20,6 +20,7 @@ const About = React.lazy(() => import("./components/pages/About"));
 const Login = React.lazy(() => import("./components/pages/Login"));
 const Register = React.lazy(() => import("./components/pages/Register"));
 const Reservation = React.lazy(() => import("./components/pages/Reservation"));
+const Checkout = React.lazy(() => import("./components/pages/Checkout"));
 const Cart = React.lazy(() => import("./components/pages/Cart"));
 const Legal = React.lazy(() => import("./components/pages/Legal"));
 const Error = React.lazy(() => import("./components/pages/Error"));
@@ -64,6 +65,7 @@ function App() {
           <Route path="/track-order" component={TrackOrder} />
           <Route path="/package" component={Packages} />
           <Route path="/specialities" component={Specialities} />
+          <Route path="/checkout" component={Cart} />
         </ScrollToTop>
       </Suspense>
     </Router>

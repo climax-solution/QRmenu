@@ -9,7 +9,7 @@ import { Rating } from "../../../helper/helper";
 import Masonry from 'react-masonry-component';
 import { connect } from 'react-redux';
 import { getSpecialities } from '../../../store/actions/content.actions';
-
+import { addCart } from '../../../store/actions/cart.actions';
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -33,30 +33,39 @@ class Content extends Component {
         }
     }
     render() {
+        const imagesLoadedOptions = {
+            itemSelector: '.masonry-item',
+            percentPosition: true,
+            resize: true,
+            fitWidth: true
+        };
         return (
             <Fragment>
                 {/* Menu Wrapper Start */}
                 <div className="section section-padding">
                     <div className="container">
+                    <Masonry className="menu-container row menu-v2" imagesLoadedOptions={imagesLoadedOptions}>
+
                     { this.state.filteredProducts.map((item, i) => (
                         <div key={i} className="col-lg-4 col-md-6 masonry-item sides">
                             <div className="product">
-                                <Link className="product-thumb" to={"/ordering/" + item.id}>
+                                <Link className="product-thumb" to="#" onClick={()=>this.props.addCart(item)}>
                                     <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.special_name} />
                                 </Link>
                                 <div className="product-body">
                                     <div className="product-desc">
-                                        <h4> <Link to={"/ordering/" + item.id}>{item.special_name}</Link></h4>
+                                        <h4> <Link to="#" onClick={()=>this.props.addCart(item)}>{item.special_name}</Link></h4>
                                         <p>{item.short_about}</p>
                                     </div>
                                     <div className="product-controls">
                                         <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
-                                        <Link to={"/ordering/" + item.id} className="order-item btn-custom btn-sm shadow-none">Add Cart <i className="fas fa-shopping-cart" /> </Link>
+                                        <Link to="#" onClick={()=>this.props.addCart(item)} className="order-item btn-custom btn-sm shadow-none">Add Cart <i className="fas fa-shopping-cart" /> </Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )) }
+                    </Masonry>
                     </div>
                 </div>
                 {/* Menu Wrapper End */}
@@ -70,6 +79,7 @@ const mapStateToProps = state => ({
 
 const mapStateToDispatch = dispatch => ({
     getSpecialities: () => dispatch(getSpecialities()),
+    addCart: (item) => dispatch(addCart(item)),
 })
 
 export default connect(mapStateToProps, mapStateToDispatch)(Content);

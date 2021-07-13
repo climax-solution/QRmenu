@@ -7,11 +7,11 @@ import Quickview from '../../layouts/Quickview';
 import productcategory from "../../../data/productcategory.json";
 import { Rating } from "../../../helper/helper";
 import Masonry from 'react-masonry-component';
-// import Axios from 'axios';
 import { connect, useDispatch } from 'react-redux';
 import { getCategories, getItems } from '../../../store/actions/content.actions';
+import { addCart } from '../../../store/actions/cart.actions';
 import { GET_ITEMS } from '../../../store/actions/types';
-
+import axios from 'axios';
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -21,12 +21,12 @@ class Content extends Component {
             filteredProducts: this.props.items,
             allItems: this.props.items,
             categoryList: [],
+            ordertypelist: [],
             activeItem: -1
         };
         this.modalShow = this.modalShow.bind(this);
         this.modalClose = this.modalClose.bind(this);
     }
-    
     // Modal
     modalShow(index) {
         this.setState({ modalshow: true, lastActiveBox: index });
@@ -37,6 +37,16 @@ class Content extends Component {
     componentDidMount() {    
         this.props.getItems();
         this.props.getCategories();
+        const sendData = {
+            subdomain: window.location.host
+        }
+        axios.post(process.env.REACT_APP_BACKEND_URL + 'users/getordertypelist',sendData).then(res=>{
+            let { ordertypelist } = this.state;
+            const { data } = res;
+            this.setState({
+                ordertypelist: data
+            })
+        })
     }
     componentDidUpdate(prevProps) {
         if (prevProps.items !== this.props.items) {
@@ -106,18 +116,18 @@ class Content extends Component {
                     <div className="favorite">
                         <i className="far fa-heart" />
                     </div>
-                    <Link className="product-thumb" to={"/ordering/" + item.id}>
+                    <Link className="product-thumb" to="#">
                         <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.name} />
                     </Link>
                     <div className="product-body">
                         <div className="product-desc">
-                            <h4> <Link to={"/ordering/" + item.id}>{item.title}</Link></h4>
+                            <h4> <Link to="#">{item.title}</Link></h4>
                             <p>{item.shortdesc}</p>
                             {/* <Link to="#" className="btn-custom light btn-sm shadow-none" onClick={(e) => this.modalShow(item.id)}> Preview <i className="fas fa-eye" /> </Link> */}
                         </div>
                         <div className="product-controls">
                             <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
-                            <Link to={"/ordering/" + item.id} className="order-item btn-custom btn-sm shadow-none">Order <i className="fas fa-shopping-cart" /> </Link>
+                            <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item)}>Add cart <i className="fas fa-shopping-cart" /> </Link>
                         </div>
                     </div>
                 </div>
@@ -177,7 +187,8 @@ const mapStateToProps = state => ({
 
 const mapStateToDispatch = dispatch => ({
     getItems: () => dispatch(getItems()),
-    getCategories: () => dispatch(getCategories())
+    addCart: (item) => dispatch(addCart(item)),
+    getCategories: () => dispatch(getCategories()),
 })
 
 export default connect(mapStateToProps, mapStateToDispatch)(Content);

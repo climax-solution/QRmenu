@@ -5,6 +5,9 @@ import { Modal } from 'react-bootstrap';
 import Quickview from '../../layouts/Quickview';
 import products from "../../../data/product.json";
 import Axios from 'axios';
+import { connect } from 'react-redux';
+import { addCart } from '../../../store/actions/cart.actions';
+
 class Products extends Component {
     constructor(props) {
         super(props);
@@ -49,7 +52,7 @@ class Products extends Component {
     render() {
         const { item_list } = this.state;
         const settings = {
-            slidesToShow: 3,
+            slidesToShow: item_list.length > 3 ? 3: item_list.length,
             slidesToScroll: 1,
             arrows: false,
             dots: false,
@@ -83,16 +86,16 @@ class Products extends Component {
                                 </Link>
                                 <div className="product-body">
                                     <div className="product-desc">
-                                        <h4> <Link to={"/order/" + item.id}>{item.title}</Link> </h4>
+                                        <h4> <Link to="#">{item.title}</Link> </h4>
                                         <p>{item.shortdesc}</p>
-                                        <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</p>
+                                        <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
                                         <div className="favorite">
                                             <i className="far fa-heart" />
                                         </div>
                                     </div>
                                     <div className="product-controls">
-                                        <Link to={"/order/" + item.id} className="order-item btn-custom btn-sm shadow-none">Order <i className="fas fa-shopping-cart" /> </Link>
-                                        <Link to="#" className="btn-custom secondary btn-sm shadow-none"  onClick={(e) => this.modalShow(item.id)}> Customize <i className="fas fa-plus" /> </Link>
+                                        <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item)}>Add cart <i className="fas fa-shopping-cart" /> </Link>
+                                        {/* <Link to="#" className="btn-custom secondary btn-sm shadow-none"  onClick={(e) => this.modalShow(item.id)}> Customize <i className="fas fa-plus" /> </Link> */}
                                     </div>
                                 </div>
                             </div>
@@ -113,4 +116,10 @@ class Products extends Component {
     }
 }
 
-export default Products;
+const mapStateToProps = state => ({
+    cart_list: state.content.cart_list
+})
+const mapStateToDispatch = dispatch => ({
+    addCart: (item) => dispatch(addCart(item))
+})
+export default connect(mapStateToProps, mapStateToDispatch)(Products);

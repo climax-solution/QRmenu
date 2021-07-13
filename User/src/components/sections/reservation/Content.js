@@ -19,7 +19,7 @@ class Content extends Component {
     placeReservation() {
         const state = this.state;
         const data = {
-            name: state.name,
+            order_name: state.name,
             email: state.email,
             phone: state.phone,
             guest_number: state.guest_number,

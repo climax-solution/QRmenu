@@ -2370,7 +2370,11 @@ table img{
 }
 
 .banner-nav-item-inner img{
+  min-width: 150px;
   max-width: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  border-radius: 50%;
   margin-right: 20px;
   -webkit-transition: .3s;
   -o-transition: .3s;
@@ -4824,6 +4828,8 @@ td.quantity{
   .banner.banner-1 .banner-inner .row img{
     max-width: 350px;
     margin: 0 auto 30px;
+    height: 350px;
+    max-height: 350px;
   }
   .banner.banner-1 .banner-inner h1, .banner.banner-1 .banner-inner p{
     max-width: 100%;
@@ -5280,4 +5286,13 @@ td.quantity{
     width: 200px;
   }
 
+}
+
+
+/*Custom*/
+.banner.banner-1 .banner-inner .row img {
+  width: 100%;
+  margin: 0 auto 30px;
+  height: 500px;
+  max-height: 500px;
 }
