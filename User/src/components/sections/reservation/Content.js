@@ -5,7 +5,12 @@ import { Accordion, NavLink } from 'react-bootstrap';
 import axios from 'axios';
 import { NotificationManager, NotificationContainer } from 'react-notifications';
 import validator from 'validator';
+import { connect } from 'react-redux';
+import { getTimeList } from '../../../store/actions/timelist.actions';
+import moment from 'moment';
+
 const priceTotal = cartitem.reduce((totalPrice, item) => totalPrice + item.price * item.qty, 0);
+
 class Content extends Component {
     state = {
         name: '',
@@ -100,14 +105,91 @@ class Content extends Component {
                             </div>
                             <div className="col-xs-5">
                                 <h2>Time List</h2>
-                                <ul className="text-black">
-                                    <li><a href="javascript:void(0)">Sunday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i> 10:00 AM ~ 08:00 PM</a></li>
-                                    <li><a href="javascript:void(0)">Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i> 09:00 AM ~ 06:00 PM</a></li>
-                                    <li><a href="javascript:void(0)">Tuesday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i> 09:00 AM ~ 08:00 PM</a></li>
-                                    <li><a href="javascript:void(0)">Wednesday &nbsp;<i className="fa fa-clock"></i> 11:00 AM ~ 05:00 PM</a></li>
-                                    <li><a href="javascript:void(0)">Thursday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i> 08:00 AM ~ 08:00 PM</a></li>
-                                    <li><a href="javascript:void(0)">Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i> 10:00 AM ~ 07:00 PM</a></li>
-                                    <li><a href="javascript:void(0)">Saturday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i> 06:00 AM ~ 05:00 PM</a></li>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0)">Sunday
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.sun_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.sun_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">Monday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.mon_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.mon_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">Tuesday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.tue_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.tue_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">Wednesday&nbsp;&nbsp;
+                                            <i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.wed_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.wed_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.thu_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.thu_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.fri_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.fri_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)">Saturday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <i className="fa fa-clock"></i>&nbsp;&nbsp;
+                                            {
+                                                moment(new Date(this.props.time_list.sat_mor)).format('LT')
+                                            }
+                                            ~
+                                            {
+                                                moment(new Date(this.props.time_list.sat_aft)).format('LT')
+                                            }
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -119,4 +201,10 @@ class Content extends Component {
     }
 }
 
-export default Content;
+const maptoStateProps = state => ({
+    time_list: state.content.time_list
+})
+const maptoStateDispatch = dispatch => ({
+    getTimeList: () => dispatch(getTimeList())
+})
+export default connect(maptoStateProps, maptoStateDispatch)(Content);

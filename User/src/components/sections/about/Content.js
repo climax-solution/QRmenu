@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import Aboutus from "../home/Aboutus";
-import Infographics from "../home-v3/Infographics";
-import Newsletter from "../home-v2/Newsletter";
 import Teammembers from './Teammembers';
 
 class Content extends Component {
@@ -9,8 +7,6 @@ class Content extends Component {
         return (
             <Fragment>
                 <Aboutus />
-                <Infographics/>
-                <Newsletter/>
             </Fragment>
         );
     }

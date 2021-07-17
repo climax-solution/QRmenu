@@ -54,3 +54,9 @@ export const removeCart = (key) => (dispatch, getState) => {
         payload: JSON.stringify(cart_list)
     })
 }
+
+export const emptyCart = () => dispatch => {
+    dispatch({
+        type: EMPTY_CART,
+    })
+}

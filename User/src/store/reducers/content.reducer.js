@@ -1,10 +1,11 @@
-import { ADD_CART, EMPTY_CART, GET_CATEGORIES, GET_ITEMS, GET_SPECIALITIES, REMOVE_CART } from "../actions/types";
+import { ADD_CART, EMPTY_CART, GET_CATEGORIES, GET_ITEMS, GET_SPECIALITIES, GET_TIMELIST, REMOVE_CART } from "../actions/types";
 
 const initialState = {
     categories: [],
     items: [],
     specialities: [],
-    cart_list: window.localStorage.getItem(window.location.host)
+    cart_list: window.localStorage.getItem(window.location.host),
+    time_list: [],
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -39,10 +40,15 @@ export default (state = initialState, action) => {
                 cart_list: action.payload
             };
         case EMPTY_CART:
-            window.localStorage.clear();
+            window.localStorage.removeItem(window.location.host);
             return {
                 ...state,
                 cart_list: null
+            }
+        case GET_TIMELIST:
+            return {
+                ...state,
+                time_list: action.payload
             }
         default:
             return state;
