@@ -15,7 +15,7 @@ class HorizontalMenu extends Component {
             <div className="horizontal-menu">
                 <ul className="list-unstyled nav">
                     <li className="nav-item">
-                        <a href="javascript:void(0);" className="nav-link">
+                        <a href="#;" className="nav-link">
                             <i className="zmdi zmdi-view-dashboard"></i>
                             <span className="menu-title"><IntlMessages id="sidebar.general" /></span>
                         </a>

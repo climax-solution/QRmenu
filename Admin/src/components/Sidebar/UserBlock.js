@@ -69,7 +69,7 @@ class UserBlock extends Component {
 		 Axios.get(REACT_APP_BACKEND_API + 'logout', {}, {headers: headers}).then(res=>{
 			console.log(res);
 			localStorage.clear();
-			this.props.history.push('/');
+			window.location.href = '/';
 
 		 });
 	}
@@ -105,19 +105,6 @@ class UserBlock extends Component {
 						</DropdownToggle>
 						<DropdownMenu>
 							<ul className="list-unstyled mb-0">
-								<li className="p-15 border-bottom user-profile-top bg-primary rounded-top">
-									<p className="text-white mb-0 fs-14">Rajeevan J.</p>
-									<span className="text-white fs-14">info@example.com</span>
-								</li>
-								<li>
-									<Link to={{
-										pathname: '/admin/adminsetting',
-										state: { activeTab: 0 }
-									}}>
-										<i className="zmdi zmdi-account text-primary mr-3"></i>
-										<IntlMessages id="widgets.profile" />
-									</Link>
-								</li>
 								<li className="border-top">
 									<a onClick={() => this.onLogout()}>
 										<i className="zmdi zmdi-power text-danger mr-3"></i>

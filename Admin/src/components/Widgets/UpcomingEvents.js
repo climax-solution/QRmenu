@@ -22,7 +22,7 @@ class UpcomingEvents extends Component {
                         <p className="mb-0 fs-12">28th April, Mumbai</p>
                      </div>
                      <div>
-                        <Link to="javascript:void(0);" >email</Link>
+                        <Link to="#;" >email</Link>
                      </div>
                   </ListItem>
                   <ListItem className="border-bottom px-0 d-flex justify-content-between align-content-start">
@@ -31,7 +31,7 @@ class UpcomingEvents extends Component {
                         <p className="mb-0 fs-12">22th May, Delhi</p>
                      </div>
                      <div>
-                        <Link to="javascript:void(0);" >phone</Link>
+                        <Link to="#;" >phone</Link>
                      </div>
                   </ListItem>
                   <ListItem className="border-bottom px-0 d-flex justify-content-between align-content-start">
@@ -40,7 +40,7 @@ class UpcomingEvents extends Component {
                         <p className="mb-0 fs-12">29th May, Delhi</p>
                      </div>
                      <div>
-                        <Link to="javascript:void(0);" >skype</Link>
+                        <Link to="#;" >skype</Link>
                      </div>
                   </ListItem>
                   <ListItem className="border-bottom px-0 d-flex justify-content-between align-content-start">
@@ -49,7 +49,7 @@ class UpcomingEvents extends Component {
                         <p className="mb-0 fs-12">30th May, Delhi</p>
                      </div>
                      <div>
-                        <Link to="javascript:void(0);" >email</Link>
+                        <Link to="#;" >email</Link>
                      </div>
                   </ListItem>
                </List>

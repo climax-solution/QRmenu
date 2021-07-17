@@ -18,7 +18,7 @@ export default class LiveOrder extends Component {
         tmp: [],
         order_list: []
     }
-    static getDerivedStateFromProps() {
+    componentDidMount() {
         const headers = {
             'Accept':'application/json',
             'Content-type': 'application/json',
@@ -64,6 +64,7 @@ export default class LiveOrder extends Component {
     }
      render() {
         const { order_list } = this.state;
+        console.log(order_list);
         const columns = [
             {
                 name: "Sl"

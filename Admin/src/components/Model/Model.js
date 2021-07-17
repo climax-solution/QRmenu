@@ -42,14 +42,14 @@ class RctModel extends Component {
 					<ModalFooter>
 						<div>
 							<Button
-								variant="raised"
+								variant="contained"
 								color="primary"
 								className="text-white bg-primary"
 							>
 								Update
 							</Button>
 							<Button
-								variant="raised"
+								variant="contained"
 								className="btn-danger text-white bg-danger"
 							>
 								Cancel

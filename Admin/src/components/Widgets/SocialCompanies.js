@@ -57,7 +57,7 @@ class SocialCompanines extends Component {
                            </td>
                            <td>
                               <span className="d-block">{data.title}</span>
-                              <a href="javascript:void(0);" className="text-blue">{data.url}</a>
+                              <a href="#;" className="text-blue">{data.url}</a>
                            </td>
                            <td>{data.likes}</td>
                            <td>{data.comments}</td>

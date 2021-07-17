@@ -98,8 +98,8 @@ class EmployPayroll extends Component {
                                         }
                                     </td>
                                     <td className="table-action">
-                                        {employee.status === 0 && <a href="javascript:void(0)" onClick={() => this.onCheckBoxClick(employee)}><i className="ti-check"></i></a>}
-                                        <a href="javascript:void(0)" onClick={() => this.deleteEmployePayroll(employee)}><i className="ti-close"></i></a>
+                                        {employee.status === 0 && <a href="#" onClick={() => this.onCheckBoxClick(employee)}><i className="ti-check"></i></a>}
+                                        <a href="#" onClick={() => this.deleteEmployePayroll(employee)}><i className="ti-close"></i></a>
                                     </td>
                                 </tr>
                             ))}

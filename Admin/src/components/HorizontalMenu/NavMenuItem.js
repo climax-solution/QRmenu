@@ -29,7 +29,7 @@ class NavMenuItem extends Component {
          <li className="nav-item">
             {menu.child_routes !== null ?
                <Fragment>
-                  <a href="javascript:void(0);" className="nav-link">
+                  <a href="#;" className="nav-link">
                      <i className={menu.menu_icon}></i>
                      <IntlMessages id={menu.menu_title} />
                      {menu.new_item && menu.new_item === true ?
@@ -56,7 +56,7 @@ class NavMenuItem extends Component {
                         }
                         return (
                            <li className='nav-item' key={subKey}>
-                              <a href="javascript:void(0);" className="nav-link">
+                              <a href="#;" className="nav-link">
                                  <IntlMessages id={subMenu.menu_title} />
                               </a>
                               <ul className="list-unstyled sub-menu-sub-child">

@@ -120,7 +120,7 @@
 				<ul className="navbar-right list-inline mb-0">
 				   <li className="list-inline-item summary-icon">
 					  <Tooltip title="Summary" placement="bottom">
-						 <a href="javascript:void(0)" className="header-icon tour-step-3" onClick={() => this.openDashboardOverlay()}>
+						 <a href="#" className="header-icon tour-step-3" onClick={() => this.openDashboardOverlay()}>
 							<i className="zmdi zmdi-info-outline"></i>
 						 </a>
 					  </Tooltip>

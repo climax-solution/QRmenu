@@ -117,15 +117,6 @@ export default class Avaibledays extends Component {
                  <PageTitleBar title={<IntlMessages id="sidebar.avaible" />} match={this.props.match} />
                 <div className="row">
                     <div className="col-sm-12 col-md-12 col-lg-7">
-                    <TextField
-                        id="time"
-                        label="Next appointment"
-                        type="time"
-                        defaultValue="10:30"
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                    />
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-sm-12 col-md-12 d-sm-full"

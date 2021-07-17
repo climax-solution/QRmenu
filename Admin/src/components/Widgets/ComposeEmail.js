@@ -78,10 +78,10 @@ class ComposeEmailWidget extends Component {
 				</Form>
 				<ReactQuill modules={modules} formats={formats} placeholder="Enter Your Message.." />
 				<RctCardFooter>
-					<a href="javascript:void(0)" onClick={() => this.onClickSend()} className="btn btn-success btn-sm mr-10">
+					<a href="#" onClick={() => this.onClickSend()} className="btn btn-success btn-sm mr-10">
 						<IntlMessages id="widgets.send" />
 					</a>
-					<a href="javascript:void(0)" onClick={() => this.onClickSaveToDraft()} className="btn btn-secondary btn-sm mr-10">
+					<a href="#" onClick={() => this.onClickSaveToDraft()} className="btn btn-secondary btn-sm mr-10">
 						<IntlMessages id="widgets.saveAsDrafts" />
 					</a>
 				</RctCardFooter>

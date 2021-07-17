@@ -27,7 +27,7 @@ class DashboardOverlay extends Component {
                     <div className="dash-user-info">
                         <h2 className="fw-bold mb-0"><IntlMessages id="components.summary" /></h2>
                     </div>
-                    <a href="javascript:void(0)" onClick={onClose} className="closed">
+                    <a href="#" onClick={onClose} className="closed">
                         <i className="ti-close"></i>
                     </a>
                 </div>

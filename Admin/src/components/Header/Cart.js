@@ -88,7 +88,7 @@ class Carts extends Component {
 													<div className="text-center">
 														<span className="text-muted fs-12 d-block mb-10">$ {cart.price} X {cart.productQuantity}</span>
 														<a
-															href="javascript:void(0);"
+															href="#;"
 															className="hover-close"
 															onClick={() => deleteItemFromCart(cart)}>
 															<i className="ti-close"></i>
@@ -101,7 +101,7 @@ class Carts extends Component {
 									<div className="dropdown-foot d-flex justify-content-between align-items-center p-2 bg-white rounded-bottom">
 										<div>
 											<Button
-												variant="raised"
+												variant="contained"
 												component={Link}
 												to={`/${getAppLayout(location)}/ecommerce/cart`}
 												color="primary"
@@ -110,7 +110,7 @@ class Carts extends Component {
 												<IntlMessages id="components.viewCart" />
 											</Button>
 											<Button
-												variant="raised"
+												variant="contained"
 												component={Link}
 												to={`/${getAppLayout(location)}/ecommerce/checkout`}
 												color="secondary"

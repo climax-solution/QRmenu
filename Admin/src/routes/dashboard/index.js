@@ -37,24 +37,7 @@
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={match} />
                 <div className="row">
-                    <div className="col-sm-6 col-md-4 w-xs-half-block">
-                        <VisitorAreaChartWidget
-                            data={visitorsData}
-                        />
-                    </div>
-                    <div className="col-sm-12 col-md-4 w-xs-half-block">
-                        <OrdersAreaChartWidget
-                            data={ordersData}
-                        />
-                    </div>
-                    <div className="col-sm-6 col-md-4 w-xs-full">
-                        <SalesAreaChartWidget
-                            data={salesData}
-                        />
-                    </div>
-				</div>
-                <div className="row">
-                    <RctCollapsibleCard
+                    {/* <RctCollapsibleCard
                         customClasses="trafic-bar-chart"
                         colClasses="col-sm-12 col-md-12 col-lg-5 d-sm-full"
                         heading={<IntlMessages id="widgets.overallTrafficStatus" />}
@@ -66,8 +49,8 @@
                         <OverallTrafficStatusWidget
                             chartData={trafficStatus}
                         />
-                    </RctCollapsibleCard>
-                    <div className="col-sm-12 col-md-12 col-lg-7 d-sm-full">
+                    </RctCollapsibleCard> */}
+                    <div className="col-sm-12 col-md-12 col-lg-12 d-sm-full">
                         <div className="row">
                             <RctCollapsibleCard
                                 colClasses="col-sm-12 col-md-12 col-lg-12 w-xs-full"

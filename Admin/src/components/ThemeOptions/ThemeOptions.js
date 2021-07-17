@@ -172,7 +172,7 @@ class ThemeOptions extends Component {
                                         <IntlMessages id="themeOptions.themeColor" />
                                     </li>
                                     <li className="adjustments-line mb-10">
-                                        <a href="javascript:void(0)">
+                                        <a href="#">
                                             <div>
                                                 {themes.map((theme, key) => (
                                                     <Tooltip title={theme.name} placement="top" key={key}>
@@ -222,7 +222,7 @@ class ThemeOptions extends Component {
                                     {enableSidebarBackgroundImage &&
                                         <li className="background-img">
                                             {sidebarBackgroundImages.map((sidebarImage, key) => (
-                                                <a className={classnames('img-holder', { 'active': selectedSidebarImage === sidebarImage })} href="javascript:void(0)" key={key} onClick={() => this.setSidebarBgImage(sidebarImage)}>
+                                                <a className={classnames('img-holder', { 'active': selectedSidebarImage === sidebarImage })} href="#" key={key} onClick={() => this.setSidebarBgImage(sidebarImage)}>
                                                     <img src={sidebarImage} alt="sidebar" className="img-fluid" width="" height="" />
                                                 </a>
                                             ))}

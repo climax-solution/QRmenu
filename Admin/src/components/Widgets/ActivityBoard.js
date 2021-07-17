@@ -103,7 +103,7 @@ export default class ActivityBoard extends Component {
                               <li key={key} className="list-inline-item overlay-wrap overflow-hidden rounded">
                                  <img src={data.imageUrl} className="size-120 rounded img-fluid" alt="img" />
                                  <div className="overlay-content">
-                                    <a href="javascript:void(0)" className="d-flex align-items-center justify-content-center h-100 font-2x text-white">
+                                    <a href="#" className="d-flex align-items-center justify-content-center h-100 font-2x text-white">
                                        <i className="zmdi zmdi-download"></i>
                                     </a>
                                  </div>

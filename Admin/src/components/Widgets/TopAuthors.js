@@ -90,10 +90,10 @@ export default class TopAuthors extends Component {
                            </li>
                         </ul>
                         <ul className="d-flex social-info list-unstyled">
-                           <li><a className="facebook" href="javascript:void(0)"><i className="zmdi zmdi-facebook-box"></i></a></li>
-                           <li><a className="twitter" href="javascript:void(0)"><i className="zmdi zmdi-twitter-box"></i></a></li>
-                           <li><a className="linkedin" href="javascript:void(0)"><i className="zmdi zmdi-linkedin-box"></i></a></li>
-                           <li><a className="instagram" href="javascript:void(0)"><i className="zmdi zmdi-instagram"></i></a></li>
+                           <li><a className="facebook" href="#"><i className="zmdi zmdi-facebook-box"></i></a></li>
+                           <li><a className="twitter" href="#"><i className="zmdi zmdi-twitter-box"></i></a></li>
+                           <li><a className="linkedin" href="#"><i className="zmdi zmdi-linkedin-box"></i></a></li>
+                           <li><a className="instagram" href="#"><i className="zmdi zmdi-instagram"></i></a></li>
                         </ul>
                      </div>
                      <ul className="d-flex list-unstyled footer-content text-center w-100 border-top mb-0">

@@ -23,8 +23,8 @@ const SupportPage = ({ isOpen, onCloseSupportPage, onSubmit }) => (
             </FormGroup>
         </ModalBody>
         <ModalFooter>
-            <Button variant="raised" color="primary" className="text-white bg-primary" onClick={onSubmit}>Submit</Button>{' '}
-            <Button variant="raised" className="btn-danger text-white" onClick={onCloseSupportPage}>Cancel</Button>
+            <Button variant="contained" color="primary" className="text-white bg-primary" onClick={onSubmit}>Submit</Button>{' '}
+            <Button variant="contained" className="btn-danger text-white" onClick={onCloseSupportPage}>Cancel</Button>
         </ModalFooter>
     </Modal>
 );

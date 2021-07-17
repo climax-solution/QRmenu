@@ -48,7 +48,7 @@ class AgencyMenu extends Component {
          <div className="horizontal-menu agency-menu justify-content-between align-items-center">
             <ul className="list-unstyled nav">
                <li className="nav-item">
-                  <a href="javascript:void(0);" className="nav-link">
+                  <a href="#;" className="nav-link">
                      <i className="zmdi zmdi-view-dashboard"></i>
                      <span className="menu-title"><IntlMessages id="sidebar.general" /></span>
                      <span className="arrow-icon"></span>

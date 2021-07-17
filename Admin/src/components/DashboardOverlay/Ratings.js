@@ -82,7 +82,7 @@ class RatingsStats extends Component {
                     </div>
                 </RctCardContent>
                 <RctCardFooter>
-                    <Button component={Link} to="/admin/pages/report" variant="raised" color="primary" className="bg-primary">
+                    <Button component={Link} to="/admin/pages/report" variant="contained" color="primary" className="bg-primary">
                         View All
                     </Button>
                 </RctCardFooter>

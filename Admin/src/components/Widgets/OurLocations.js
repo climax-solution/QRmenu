@@ -90,7 +90,7 @@ const ShowLocation = ({ data }) => (
             <span className="w-25">Address</span>
             <div className="w-75">
                <address className="mb-0">{data.address}</address>
-               <a href="javascript:void(0)" className="text-danger d-block">Get Direction</a>
+               <a href="#" className="text-danger d-block">Get Direction</a>
             </div>
          </ListItem>
       }

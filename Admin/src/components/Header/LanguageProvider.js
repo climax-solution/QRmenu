@@ -70,7 +70,7 @@ class LanguageProvider extends Component {
 								<ul className="list-unstyled mb-0 dropdown-list">
 									{languages.map((language, key) => (
 										<li key={key} onClick={() => this.onChangeLanguage(language)}>
-											<a href="javascript:void(0)">
+											<a href="#">
 													<img
 														src={require(`Assets/flag-icons/${language.icon}.png`)} className="mr-10"
 														width="25"
