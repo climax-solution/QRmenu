@@ -12,7 +12,10 @@
         "laravel/framework": "^8.40",
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
-        "stancl/tenancy": "^3.4"
+        "razorpay/razorpay": "^2.7",
+        "srmklive/paypal": "~1.6",
+        "stancl/tenancy": "^3.4",
+        "stripe/stripe-php": "^7.89"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

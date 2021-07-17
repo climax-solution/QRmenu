@@ -16,9 +16,14 @@ class Order extends Model
         'order_type',
         'overview',
         'status',
+        'paid_status',
+        'carts',
+        'google_map',
+        'date_time',
         'guest_number',
-        'table_reservation',
-        'reservation_date',
+        'table',
+        'table_guest',
+        'time',
         'vendor',
     ];
 }

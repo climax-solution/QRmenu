@@ -43,8 +43,8 @@ class ProfileController extends Controller
             try {
                 $data = $request->all();
                 $check = AvaibleDay::where('user',$user->email)->get();
+                $data['user'] = $user->email;
                 if (!count($check)) {
-                    $data['user'] = $user->email;
                     AvaibleDay::create($data);
                 }
                 else {

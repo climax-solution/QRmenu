@@ -90,8 +90,20 @@ Route::post('updateorder', [MenuController::class,'updateorder']);
 
 /*------ For Front User ------*/
 use App\Http\Controllers\FrontUser\HomeController;
+
 Route::post('user/getspeciallist', [HomeController::class, 'getspeciallist']);
 Route::post('user/getitemlist', [HomeController::class, 'getitemlist']);
 Route::post('user/getcategorylist', [HomeController::class, 'getcategorylist']);
 Route::post('user/getspecialities', [HomeController::class, 'getspecialities']);
 Route::post('user/placereservation', [HomeController::class, 'placereservation']);
+Route::post('user/getordertypelist', [HomeController::class, 'getordertypelist']);
+Route::post('user/placeorder', [HomeController::class, 'placeorder']);
+Route::post('user/createorder', [HomeController::class, 'createorder']);
+Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
+
+//Payment Integration
+use App\Http\Controllers\Payment\PayPalController;
+
+Route::get('payment', [PayPalController::class,'payment'])->name('payment');
+
+Route::post('user/stripeMethod', [HomeController::class,'stripeMethod']);

@@ -17,6 +17,9 @@ class Reservation extends Model
         'overview',
         'status',
         'vendor',
+        'guest_number',
+        'table_reservation',
+        'reservation_date',
         'created_at'
     ];
     const UPDATED_AT = null;

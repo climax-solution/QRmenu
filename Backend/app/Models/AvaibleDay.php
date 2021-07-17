@@ -23,5 +23,6 @@ class AvaibleDay extends Model
         'fri_aft',
         'sat_mor',
         'sat_aft',
+        'user'
     ];
 }

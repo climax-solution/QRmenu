@@ -17,12 +17,16 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->string('order_id')->nullable();
             $table->string('order_name')->nullable();
+            $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('order_type')->nullable();
             $table->string('comments')->nullable();
             $table->string('overview')->nullable();
             $table->string('status')->nullable();
             $table->string('vendor')->nullable();
+            $table->string('guest_number')->nullable();
+            $table->string('table_reservation')->nullable();
+            $table->string('reservation_date')->nullable();
             $table->date('created_at');
         });
     }
