@@ -26,7 +26,7 @@ import Axios from 'axios';
             let { data } = this.state;
             result.map((row, index)=>{
                 let item = [index + 1];
-                const key = [ 'order_number', 'txnid', 'amount', 'status', 'payment','createdat'];
+                const key = ['amount', 'status', 'payment','createdat'];
                 key.map(it => {
                     item.push(row[it]);
                 })
@@ -38,15 +38,10 @@ import Axios from 'axios';
         })
      }
      render() {
+        const paymenttype = ['PayPal', 'Stripe', 'Razor' , 'Bambora','Offline'];
         const columns = [
             {
                 name: "Sl"
-            },
-            {
-                name: 'Order Number'
-            },
-            {
-                name: "Txn Id"
             },
             {
                 name: "Amount"
@@ -56,19 +51,18 @@ import Axios from 'axios';
             },
             {
                 name: "Payment By",
-                // options:{
-                //     customBodyRender: (value, tableMeta, updateValue) => (
-                //         (value == 'Pending'
-                //         ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                //         : value)
-                //     )
-                // }
+                options:{
+                    customBodyRender: (value, tableMeta, updateValue) => (
+                       <span className="badge badge-warning">{paymenttype[value]}</span>
+                    )
+                }
             },
             {
                 name: "Payment Date"
             }
         ];
         const { data } = this.state;
+
          return (
              <div className="blank-wrapper">
                  <Helmet>

@@ -128,5 +128,15 @@
                 </div>
             </div>
         </div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+        <script>
+            let dd = {!! $cu !!};
+            dd.handler = function (response){
+                console.log(response);
+            };
+            var rzp = new Razorpay(dd);
+            rzp.open();
+        </script>
     </body>
 </html>

@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransactionHistory extends Model
 {
+    protected $fillable = [
+        'username',
+        'package',
+        'price',
+        'status',
+        'txnid',
+        'payment',
+        'payment_date'
+    ];
     use HasFactory;
 }

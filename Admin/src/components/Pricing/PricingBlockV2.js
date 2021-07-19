@@ -22,7 +22,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 ];
 const green = {fontWeight: 'bold', color: 'green'};
 const red = {fontWeight: 'bold', color: 'red'};
- const PricingBlockV2 = ({ planType, type, price, users, features, color, ability,id,status }) => (
+ const PricingBlockV2 = ({ planType, type, price, users, features, color, ability,id,status, activePkg }) => (
     <RctCollapsibleCard customClasses="text-center" colClasses="col-md-4" id={id}>
        <div className="pricing-icon mb-40">
           <img src={require('Assets/img/pricing-icon.png')} alt="pricing icon" className="img-fluid" width="" height="" />
@@ -40,7 +40,7 @@ const red = {fontWeight: 'bold', color: 'red'};
              <li key={key} className="text-left"><i className={`${!ability[key] ? 'ti-close' : 'ti-check'}`} style={ability[key] ? green : red}></i> {feature}</li>
           ))}
        </ul>
-         <Button color={color} className='btn-block btn-lg'>
+         <Button color={color} className='btn-block btn-lg' onClick={activePkg}>
             {
                status ? <IntlMessages id="widgets.runpackage" disabled/>
                : <IntlMessages id="widgets.selectpackage" />

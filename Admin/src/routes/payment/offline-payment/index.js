@@ -18,7 +18,7 @@ export default class OfflinePayment extends Component {
     state = {
         data: []
     }
-    componentWillMount() {
+    componentDidMount() {
         axios.get(REACT_APP_BACKEND_API + 'offlinepayment').then(res=>{
             let { data } = this.state;
             res.data.map((row,index)=>{
@@ -91,7 +91,7 @@ export default class OfflinePayment extends Component {
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.offlinepayment" />} match={this.props.match} />
                 <Fragment>
-                    <Scrollbars className="rct-scroll" autoHeight  autoHeightMin={500} autoHeightMax={700} autoWidth autoWidthMin={100} autoWidthMax={500} autoHide >
+                    <Scrollbars className="rct-scroll" autoHeight  autoHeightMin={500} autoHeightMax={700} autoHide >
                         <RctCollapsibleCard heading="Offline Payment" fullBlock>
                             <MUIDataTable
                                 title={"Offline Payment"}

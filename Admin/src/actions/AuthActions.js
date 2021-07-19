@@ -134,3 +134,13 @@ export const signinUserWithTwitter = (history) => (dispatch) => {
       NotificationManager.error(error.message);
    });
 }
+
+export const updatePackage = () => dispatch => {
+   const str = localStorage.getItem('extime');
+   const data = JSON.parse(str);
+   dispatch({
+      type: LOGIN_USER_SUCCESS,
+      permission: data['p'],
+      package: data['g']
+   })
+}

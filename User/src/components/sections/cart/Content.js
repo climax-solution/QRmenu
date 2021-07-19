@@ -48,7 +48,7 @@ class Content extends Component {
 
     componentDidMount() {
         const Location = window.location;
-        const params = (new URLSearchParams(window.location.search));
+        const params = (new URLSearchParams(Location.search));
         if (params.get('status') == 'success' && localStorage.getItem('tmp_order')) {
             const sendOrder = JSON.parse(localStorage.getItem('tmp_order'));
             sendOrder['token'] = params.get('token');
@@ -62,7 +62,7 @@ class Content extends Component {
             })
         }
         const sendData = {
-            subdomain: window.location.host
+            subdomain: Location.host
         }
         axios.post(process.env.REACT_APP_BACKEND_API + 'user/getordertypelist',sendData).then(res=>{
             const { data } = res;

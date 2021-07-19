@@ -15,6 +15,7 @@ import api from 'Api';
 
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
+import Axios from 'axios';
 
 class Notifications extends Component {
 
@@ -23,6 +24,9 @@ class Notifications extends Component {
   }
 
   componentDidMount() {
+	  Axios.post(REACT_APP_BACKEND_API + 'getnotificationdata').then(res=>{
+		  
+	  })
     this.getNotifications();
   }
 

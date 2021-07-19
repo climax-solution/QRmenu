@@ -206,7 +206,7 @@ import Axios from 'axios';
                                 </FormGroup>
                             </FormControl>
                         </RctCollapsibleCard>
-                        <RctCollapsibleCard
+                        {/* <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-md-12 d-sm-full"
                             heading={<IntlMessages id="Paypal Payment Gateway" />}
@@ -324,7 +324,7 @@ import Axios from 'axios';
                                     </Button>
                                 </FormGroup>
                             </FormControl>
-                        </RctCollapsibleCard>
+                        </RctCollapsibleCard> */}
                     </div>
                     <div className="col-lg-6 col-sm-12 col-md-12">
                         <RctCollapsibleCard
@@ -404,7 +404,7 @@ import Axios from 'axios';
                                 </FormGroup>
                             </FormControl>
                         </RctCollapsibleCard>
-                        <RctCollapsibleCard
+                        {/* <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-md-12 d-sm-full"
                             heading={<IntlMessages id="Stripe Payment Gateway" />}
@@ -459,7 +459,7 @@ import Axios from 'axios';
                                     </Button>
                                 </FormGroup>
                             </FormControl>
-                        </RctCollapsibleCard>
+                        </RctCollapsibleCard> */}
                     </div>
                 </div>
              </div>

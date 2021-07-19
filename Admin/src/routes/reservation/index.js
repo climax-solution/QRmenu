@@ -31,7 +31,7 @@ export default class BackUpDB extends Component {
             let { list } = this.state;
             data.map((item, index)=>{
                 let row = [index + 1];
-                const key = ['order_id','order_name','phone','order_type','overview','comments','status'];
+                const key = ['id','order_name','phone','order_type','status'];
                 key.map(it=>{
                     row.push(item[it]);
                 })
@@ -84,12 +84,6 @@ export default class BackUpDB extends Component {
                 //         : value)
                 //     )
                 // }
-            },
-            {
-                name: "Overview"
-            },
-            {
-                name: "Comments"
             },
             {
                 name: "Status",

@@ -32,6 +32,7 @@
  
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
+import { auth } from 'firebase';
  
  class Header extends Component {
  
@@ -81,7 +82,8 @@
 		  $('.dashboard-overlay').addClass('d-none');
 		  $('body').css('overflow', '');
 	   });
-	   const { horizontalMenu, agencyMenu, location,match } = this.props;
+	   const { horizontalMenu, agencyMenu, location,match, permission } = this.props;
+	   console.log(this.props)
 	   return (
 		  <AppBar position="static" className="rct-header">
 			 <Toolbar className="d-flex justify-content-between w-100 pl-0">
@@ -126,7 +128,7 @@
 					  </Tooltip>
 				   </li>
 				   <LanguageProvider />
-				   <Notifications match={match}/>
+				   {permission == 'vendor' && <Notifications match={match}/>}
 				   <li className="list-inline-item">
 					  <Tooltip title="Full Screen" placement="bottom">
 						 <IconButton aria-label="settings" onClick={() => this.toggleScreenFull()}>
@@ -152,9 +154,10 @@
  }
  
  // map state to props
- const mapStateToProps = ({ settings }) => {
-	return settings;
- };
+ const mapStateToProps = ({ authUser, settings }) => {
+	 return {...authUser, ...settings};
+	
+ }
  
  export default withRouter(connect(mapStateToProps, {
 	collapsedSidebarAction

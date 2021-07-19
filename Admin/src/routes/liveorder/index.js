@@ -51,7 +51,7 @@ export default class LiveOrder extends Component {
         data.map((item, index)=>{
             tmp.push(item);
             let row = [index + 1];
-            const key = ['order_number','name','phone','address','order_type','overview','status','status'];
+            const key = ['id','name','phone','address','order_type','status','status'];
             key.map(it => {
                 row.push(item[it]);
             })
@@ -64,7 +64,8 @@ export default class LiveOrder extends Component {
     }
      render() {
         const { order_list } = this.state;
-        console.log(order_list);
+        const ordertype = ['Kontantbetaling ved levering', 'Bestilling', 'Henting'];
+        // const ordertype = ['PayPal', 'Stripe', 'Razor' , 'Bambora'];
         const columns = [
             {
                 name: "Sl"
@@ -83,16 +84,11 @@ export default class LiveOrder extends Component {
             },
             {
                 name: "OrderType",
-                // options:{
-                //     customBodyRender: (value, tableMeta, updateValue) => (
-                //         (value == 'Pending'
-                //         ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                //         : value)
-                //     )
-                // }
-            },
-            {
-                name: "Overview"
+                options:{
+                    customBodyRender: (value, tableMeta, updateValue) => (
+                        (<span className="badge badge-info">{ordertype[value]}</span>)
+                    )
+                }
             },
             {
                 name: "Status",

@@ -21,6 +21,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VendorChunkOne;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubscriptPayController;
 
 
 // Authentication
@@ -61,6 +62,9 @@ Route::get('featurelist', [VendorChunkOne::class, 'featurelist']);
 Route::post('updatefeature', [VendorChunkOne::class, 'updatefeature']);
 Route::post('reservation_list', [VendorChunkOne::class, 'reservation_list']);
 Route::post('updateitem', [VendorChunkOne::class, 'updateitem']);
+Route::post('getkds', [VendorChunkOne::class, 'getkds']);
+Route::post('getnotificationdata', [VendorChunkOne::class, 'getnotificationdata']);
+
 Route::post('profileinfo', [ProfileController::class, 'getlistprofile']);
 Route::post('updateprofile', [ProfileController::class, 'updateprofile']);
 Route::post('gettimelist', [ProfileController::class, 'gettimelist']);
@@ -87,7 +91,6 @@ Route::post('orderlist', [MenuController::class,'orderlist']);
 Route::post('updateorder', [MenuController::class,'updateorder']);
 
 
-
 /*------ For Front User ------*/
 use App\Http\Controllers\FrontUser\HomeController;
 
@@ -102,8 +105,11 @@ Route::post('user/createorder', [HomeController::class, 'createorder']);
 Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
 
 //Payment Integration
-use App\Http\Controllers\Payment\PayPalController;
 
-Route::get('payment', [PayPalController::class,'payment'])->name('payment');
-
-Route::post('user/stripeMethod', [HomeController::class,'stripeMethod']);
+Route::post('paypalMethod', [SubscriptPayController::class,'paypalMethod']);
+Route::post('paypalTrans', [SubscriptPayController::class,'paypalTrans']);
+Route::post('stripeMethod', [SubscriptPayController::class,'stripeMethod']);
+Route::post('razorMethod', [SubscriptPayController::class,'razorMethod']);
+Route::post('razorResult', [SubscriptPayController::class,'razorResult']);
+Route::post('bamboraMethod', [SubscriptPayController::class,'bamboraMethod']);
+Route::post('offlineMethod', [SubscriptPayController::class,'offlineMethod']);

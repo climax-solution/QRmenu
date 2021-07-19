@@ -34,6 +34,7 @@ export default class TransactionHistory extends Component {
         })
     }
     render() {
+        const paymenttype = ['PayPal', 'Stripe', 'Razor' , 'Bambora','Offline'];
         const columns = [
             {
                 name: "Sl"
@@ -51,7 +52,8 @@ export default class TransactionHistory extends Component {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <Badge color="primary" badgeContent={value} className="badge-pill"></Badge>
+                        <span className="badge badge-primary">{value}</span>
+
                     )
                 }
             },
@@ -62,7 +64,7 @@ export default class TransactionHistory extends Component {
                 name: "PaymentBy",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <Badge color="secondary" badgeContent={value}></Badge>
+                        <span className="badge badge-primary">{paymenttype[value]}</span>
                     )
                 }
             },
@@ -75,16 +77,6 @@ export default class TransactionHistory extends Component {
         //     filterType: 'dropdown',
         //     responsive: 'stacked'
         // };
-        const StatusBadge = ({status}) => (
-            <Fragment>
-                {status == "completed" && (
-                    <p> Completed </p>
-                )}
-                {status != "Pending"&& (
-                    <span style={{color:'red'}}> Pending </span>
-                )}
-            </Fragment>
-        );
         return (
             <div className="blank-wrapper">
                 <Helmet>

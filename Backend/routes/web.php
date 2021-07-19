@@ -14,5 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = [
+        "key"               => 123,
+        "amount"            => 3212321321,
+        "name"              => 'adsfadfadfadf',
+        "description"       => 'afadfadfadfadf',
+        "prefill"           => [
+            "name"              => 'adfadfadfadf',
+            "email"             => 'adfadfadadfadf',
+            "contact"           => 'adfadsfdsfadsfadsfadsf',
+        ],
+        "notes"             => [
+            "address"           => '122132121221ddddddd',
+            "merchant_order_id" => 'dafds1234safa',
+        ],
+        "order_id"          => '123123213123',
+    ];
+    $cu = json_encode($data);
+    return view('welcome', compact('cu'));
 });

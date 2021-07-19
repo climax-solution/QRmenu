@@ -238,7 +238,7 @@ class HomeController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function razorMethod(Request $request)
     {
         $input = $request->all();
 

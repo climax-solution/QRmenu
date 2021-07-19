@@ -26,10 +26,11 @@ class PaymentController extends Controller
     }
 
     public function offlinepayment(Request $request) {
-        return response()->json(OfflinePayment::all());
+        return response()->json(TransactionHistory::where('payment','4')->get());
     }
 
     public function transactionhistory(Request $request) {
         return response()->json(TransactionHistory::all());
     }
+
 }

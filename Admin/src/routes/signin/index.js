@@ -39,7 +39,14 @@ class SignIn extends Component {
          }
 
          Axios.post(REACT_APP_BACKEND_API + 'login',data).then( res => {
+            const now = new Date();
+            const time = {
+               t: now.getTime(),
+               g: res.data.data.package,
+               p: res.data.data.permission
+            }
             window.localStorage.setItem('token', res.data.data.access_token);
+            window.localStorage.setItem('extime',JSON.stringify(time));
             NotificationManager.success("You logined successfully!");
             this.props.logined(res.data.data.permission);
             this.props.history.push(`/${res.data.data.permission}`);
