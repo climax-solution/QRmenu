@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PaymentSetting;
 use App\Models\OfflinePayment;
 use App\Models\TransactionHistory;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
