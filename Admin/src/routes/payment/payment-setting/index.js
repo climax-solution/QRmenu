@@ -11,6 +11,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,FormLabel} 
 // rct collapsible card
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import ToggleSwitch from "./switch";
+import {NotificationManager, NotificationContainer} from 'react-notifications';
 import Axios from 'axios';
 
  export default class PaymentSetting extends Component {
@@ -29,12 +30,13 @@ import Axios from 'axios';
         },
         razor: {
             razor_payment: false,
-            razor_key: ''
+            razor_key: '',
+            razor_secret: ''
         },
         bambora: {
             bambora_gateway: false,
             bambora_access_key: '',
-            bambora_merchant_key: '',
+            bambora_merchant: '',
             bambora_secret_key: ''
         }
 	}
@@ -109,22 +111,35 @@ import Axios from 'axios';
                 sendData = bambora;
                 break;
         }
-        console.log(sendData);
+        
+        let flag = 0;
+
+        for (const key in sendData) {
+            if ( !sendData[key]  && typeof sendData[key] != 'boolean') flag = 1;
+        }
+
+        if (flag) {
+            NotificationManager.warning('Input is invalid');
+            return;
+        }
         Axios.post(REACT_APP_BACKEND_API + 'modifycreate_payment',sendData).then(res => {
-            
+            const { data } = res;
+            if (data.success) {
+                NotificationManager.success('Successfully!');
+            }
+            else {
+                NotificationManager.error('Failure');
+            }
         })
     }
 
     onNewsletterChange = () => {
-        alert(12312312);
         this.setState({
             open: true
         })
       };
      render() {
          const { paypal, stripe, razor, bambora } = this.state;
-        console.log('STate = >', paypal.paypal_payment);
-
          return (
              <div className="blank-wrapper">
                  <Helmet>
@@ -269,7 +284,7 @@ import Axios from 'axios';
                                             dataNo="&#xe6ae; Off"
                                         />
                                     </div>
-                                    <div className="col-md-12 mt-50">
+                                    <div className="col-md-6 col-sm-12 mt-50">
                                         <TextField
                                             margin="dense"
                                             id="razorpaykey"
@@ -278,6 +293,17 @@ import Axios from 'axios';
                                             fullWidth
                                             value={razor.razor_key}
                                             onChange={(e)=>this.setState({ razor: {...razor,razor_key: e.target.value }})}
+                                        />
+                                    </div>
+                                    <div className="col-md-6 col-sm-12 mt-50">
+                                        <TextField
+                                            margin="dense"
+                                            id="razorpaysecret"
+                                            label="Razorpay Secret"
+                                            type="text"
+                                            fullWidth
+                                            value={razor.razor_secret}
+                                            onChange={(e)=>this.setState({ razor: {...razor,razor_secret: e.target.value }})}
                                         />
                                     </div>
                                 </div>
@@ -330,9 +356,9 @@ import Axios from 'axios';
                                             label="Bambora Merchant Number"
                                             type="text"
                                             fullWidth
-                                            value={bambora.bambora_merchant_key}
+                                            value={bambora.bambora_merchant}
                                             onChange={(e)=>this.setState({
-                                                bambora: { ...bambora, bambora_merchant_key: e.target.value }
+                                                bambora: { ...bambora, bambora_merchant: e.target.value }
                                             })}
                                         />
                                     </div>
@@ -354,6 +380,7 @@ import Axios from 'axios';
                             </FormGroup>
                         </FormControl>
                     </RctCollapsibleCard>
+                    <NotificationContainer/>
                 </div>
              </div>
          );

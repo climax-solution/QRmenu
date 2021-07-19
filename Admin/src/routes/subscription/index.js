@@ -31,7 +31,7 @@ class Subscription extends Component {
         },
         paymentsetting: [],
         livePrice: -1,
-        selectedPkg: -1,
+        selectedPkg: '',
      }
      componentDidMount() {
         const Location = window.location;
@@ -332,7 +332,7 @@ class Subscription extends Component {
                                 description="Secure file sharing and collaboration. Ideal for small teams."
                                 price={item.price}
                                 users={1}
-                                activePkg = {()=>{ item.id != activedpkg ? this.paymentMethod(item.price, item.id) : NotificationManager.info('You have already chosen this package!')}}
+                                activePkg = {()=>{ item.id != activedpkg ? this.paymentMethod(item.price, item.package_name) : NotificationManager.info('You have already chosen this package!')}}
                                 features={[
                                     'Velkommen side',
                                     `Meny (${item.order_limit < 0 ? 'Unlimited' : item.order_limit} items)`,

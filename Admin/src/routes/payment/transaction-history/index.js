@@ -12,6 +12,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
 import { Badge,Media } from '@material-ui/core';
+import moment from 'moment';
 import axios from 'axios';
 export default class TransactionHistory extends Component {
     state = {
@@ -22,9 +23,10 @@ export default class TransactionHistory extends Component {
             const { data } = this.state;
             res.data.map((row, index)=>{
                 let item = [index + 1];
-                const key = ['username','package','price','status','txnid','payment','payment_date'];
+                const key = ['username','package','price','status','txnid','payment','created_at'];
                 key.map(it=>{
-                    item.push(row[it]);
+                    if (it == 'created_at') item.push(moment(row[it]).format('Y-MM-DD'));
+                    else item.push(row[it]);
                 })
                 data.push(item);
             })
@@ -52,8 +54,10 @@ export default class TransactionHistory extends Component {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <span className="badge badge-primary">{value}</span>
-
+                        (
+                        value == 1 ? <span className="badge badge-success">success</span>
+                        :  <span className="badge badge-info">pending</span>
+                        )
                     )
                 }
             },
@@ -64,7 +68,13 @@ export default class TransactionHistory extends Component {
                 name: "PaymentBy",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <span className="badge badge-primary">{paymenttype[value]}</span>
+                        (
+                            value == 0 ? <span className="badge badge-success">{paymenttype[value]}</span>
+                            : value == 1 ? <span className="badge badge-info">{paymenttype[value]}</span>
+                            : value == 2 ? <span className="badge badge-primary">{paymenttype[value]}</span>
+                            : value == 3 ? <span className="badge badge-warning">{paymenttype[value]}</span>
+                            : <span className="badge badge-danger">{paymenttype[value]}</span>
+                        )
                     )
                 }
             },
