@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('short_about')->nullable();
             $table->string('more_about')->nullable();
             $table->string('package')->nullable();
+            $table->boolean('package_status')->default(1);
+            $table->boolean('status')->default(0);
             $table->string('subdomain')->nullable();
             $table->timestamps();
         });

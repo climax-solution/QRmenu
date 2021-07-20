@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-   
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Models\User;
@@ -10,7 +10,7 @@ use Validator;
 use Illuminate\Support\Facades\Password;
 use Exception;
 use App\Http\Resources\Auth as AuthResource;
-   
+
 class AuthController extends BaseController
 {
     /**
@@ -28,9 +28,9 @@ class AuthController extends BaseController
                 'website' => 'required',
                 'username' => 'required|unique:users'
             ]);
-       
+
             if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());       
+                return $this->sendError('Validation Error.', $validator->errors());
             }
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
@@ -39,10 +39,10 @@ class AuthController extends BaseController
         } catch (Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
-        
+
         return $this->sendResponse($success, 'User signup successfully.');
     }
-   
+
     /**
      * Login api
      *
@@ -50,7 +50,7 @@ class AuthController extends BaseController
      */
     public function postLogin(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status'=>1])){
             $user = Auth::user();
 
             // if ($user->email_verified_at === null)
@@ -59,10 +59,10 @@ class AuthController extends BaseController
             $user->tokenResult = $user->createToken($user->email);
 
             return $this->sendResponse(new AuthResource($user), 'User login successfully.');
-        } 
-        else{ 
+        }
+        else{
             return $this->sendError('Invalid Credentials.', ['email' => __('auth.failed')]);
-        } 
+        }
     }
 
     /**
@@ -76,15 +76,15 @@ class AuthController extends BaseController
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
         ]);
-   
+
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $status = Password::sendResetLink(
             $request->only('email')
         );
-        
+
         return $status === Password::RESET_LINK_SENT
             ? $this->sendResponse([], __($status))
             : $this->sendError('Email sending error.', ['email' => __($status)]);
@@ -92,7 +92,7 @@ class AuthController extends BaseController
 
     /**
      * Fetch auth data
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
@@ -105,7 +105,7 @@ class AuthController extends BaseController
 
     /**
      * Logout
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\Response
      */

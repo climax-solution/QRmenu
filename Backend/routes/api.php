@@ -52,6 +52,7 @@ Route::post('modifycreate_payment', [PaymentController::class, 'postModifyPaymen
 Route::get('paymentsettings', [PaymentController::class, 'getPaymentSettings']);
 Route::get('offlinepayment', [PaymentController::class, 'offlinepayment']);
 Route::get('transactionhistory', [PaymentController::class, 'transactionhistory']);
+Route::post('approvetransaction', [PaymentController::class, 'approvetransaction']);
 
 
 /********** Vendor ***********/

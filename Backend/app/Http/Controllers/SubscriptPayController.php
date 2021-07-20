@@ -397,6 +397,7 @@ class SubscriptPayController extends Controller
         }
         $input['username'] = $user->email;
         TransactionHistory::create($input);
+        User::where('email',$data['username'])->update(['package'=>$data['package'], 'package_status'=>0]);
         return response()->json(['status'=>true]);
     }
 }

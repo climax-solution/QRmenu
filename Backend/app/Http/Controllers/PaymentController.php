@@ -7,6 +7,7 @@ use App\Models\PaymentSetting;
 use App\Models\OfflinePayment;
 use App\Models\TransactionHistory;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class PaymentController extends Controller
 {
@@ -34,4 +35,9 @@ class PaymentController extends Controller
         return response()->json(TransactionHistory::all());
     }
 
+    public function approvetransaction(Request $request) {
+        TransactionHistory::where(['id'=>$request->id, 'username'=>$request->email])->update(['status'=>1]);
+        User::where(['email'=>$request->email, 'package'=> $request->package])->update(['package_status'=>1]);
+        return response()->json(['status'=>true]);
+    }
 }

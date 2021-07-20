@@ -120,7 +120,7 @@ class HomeController extends Controller
             }
         }
         catch (Exception $error) {
-            return response()->json([]);
+            return response()->json($error);
         }
     }
 
@@ -144,23 +144,7 @@ class HomeController extends Controller
         $response = $provider->getExpressCheckoutDetails($request->token);
 
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
-            $validate = $this->validation_check($request);
-            if (!$validate) return false;
-            try {
-                $data = $request->input();
-                $email = vendor_email($data['subdomain']);
-                if ($email) {
-                    unset($data['subdomain']);
-                    unset($data['domain_url']);
-                    $data['vendor'] = $email;
-                    Order::create($data);
-                    return response()->json(['status'=>true]);
-                }
-                return response()->json(['status'=>false]);
-            }
-            catch (Exception $error) {
-                return response()->json(['status'=>false]);
-            }
+
         }
         else {
             return response()->json(['status'=>false]);
@@ -171,28 +155,23 @@ class HomeController extends Controller
     public function placeorder(Request $request)
     {
 
-        $input = $request->input();
-        $data = [];
-        $data['items'] = [
-            [
-                'name' => 'Order foods',
-                'price' => $input['total'],
-                'desc'  => 'Payment Price of Food',
-                'qty' => 1
-            ]
-        ];
-
-        $data['invoice_id'] = 1;
-        $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
-
-        $data['return_url'] = $input['domain_url'] . '?status=success';
-        $data['cancel_url'] = $input['domain_url'] . '?status=failure';
-        $data['total'] = $input['total'];
-
-        $provider = new ExpressCheckout;
-        $response = $provider->setExpressCheckout($data, true);
-
-        return response()->json(['url'=>$response['paypal_link']]);
+        $validate = $this->validation_check($request);
+        if (!$validate) return false;
+        try {
+            $data = $request->input();
+            $email = vendor_email($data['subdomain']);
+            if ($email) {
+                unset($data['subdomain']);
+                unset($data['domain_url']);
+                $data['vendor'] = $email;
+                Order::create($data);
+                return response()->json(['status'=>true]);
+            }
+            return response()->json(['status'=>false]);
+        }
+        catch (Exception $error) {
+            return response()->json(['status'=>false]);
+        }
     }
 
     /*--------Stripe-----------*/

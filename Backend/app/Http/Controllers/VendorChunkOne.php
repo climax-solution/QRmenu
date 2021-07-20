@@ -38,7 +38,7 @@ class VendorChunkOne extends Controller
 
     public function vendorpaymenthistory(Request $request) {
         $user = auth('api')->user();
-        $result = TransactionHistory::where('user',$user->email)->get();
+        $result = TransactionHistory::where('username',$user->email)->get();
         return response()->json($result);
     }
 
