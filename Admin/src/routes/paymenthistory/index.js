@@ -1,16 +1,18 @@
 /**
  * Blank Page
  */
- import React, { Component } from 'react';
- import { Helmet } from "react-helmet";
- // page title bar
- import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
+import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
+// page title bar
+import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
- 
- // intl messages
- import IntlMessages from 'Util/IntlMessages';
- import MUIDataTable from "mui-datatables";
+
+// intl messages
+import IntlMessages from 'Util/IntlMessages';
+import MUIDataTable from "mui-datatables";
 import Axios from 'axios';
+import moment from 'moment';
+
  export default class BackUpDB extends Component {
     state = {
         data:[]
@@ -26,9 +28,10 @@ import Axios from 'axios';
             let { data } = this.state;
             result.map((row, index)=>{
                 let item = [index + 1];
-                const key = ['amount', 'status', 'payment','createdat'];
+                const key = ['price', 'status', 'payment','created_at'];
                 key.map(it => {
-                    item.push(row[it]);
+                    if (it == 'created_at') item.push(moment(row[it]).format('Y-MM-DD'));
+                    else item.push(row[it]);
                 })
                 data.push( item );
             })
@@ -47,7 +50,13 @@ import Axios from 'axios';
                 name: "Amount"
             },
             {
-                name: "Payment Status"
+                name: "Payment Status",
+                options:{
+                    customBodyRender: (value, tableMeta, updateValue) => (
+                       value != 1 ? <span className="badge badge-success">success<i className=" zmdi zmdi-check ml-5"></i></span>
+                       : <span className="badge badge-info">pending<i className=" zmdi zmdi-spinner ml-5"></i></span>
+                    )
+                }
             },
             {
                 name: "Payment By",

@@ -11,29 +11,63 @@ import IntlMessages from 'Util/IntlMessages';
 import { Scrollbars } from 'react-custom-scrollbars';
 import {Badge,Button} from '@material-ui/core';
 import MUIDataTable from "mui-datatables";
-
+import moment from 'moment';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import axios from 'axios';
+import swal from 'sweetalert';
+
 export default class OfflinePayment extends Component {
     state = {
-        data: []
+        data: [],
+        tmp: []
     }
     componentDidMount() {
         axios.get(REACT_APP_BACKEND_API + 'offlinepayment').then(res=>{
             let { data } = this.state;
             res.data.map((row,index)=>{
                 let item = [index + 1];
-                const key = ['username','email','package','price','txnid','request_date','status'];
+                const key = ['username','email','package','price','created_at','status','status'];
                 key.map(it=>{
-                    item.push(row[it]);
+                    if (it == 'created_at') item.push(moment(row[it]).format('Y-MM-DD'));
+                    else item.push(row[it]);
                 })
                 data.push(item);
             })
             this.setState({
-                data: data
+                data: data,
+                tmp: res.data
             });
         })
     }
+
+    approve(index) {
+        swal({
+            title: "Are you sure?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                const { tmp } = this.state;
+                const sendData = {
+                    email: tmp[index]['username'],
+                    id: tmp[index]['id']
+                }
+                axios.post(REACT_APP_BACKEND_API + 'approvetransaction', sendData).then(res=>{
+                    const { status } = res.data;
+                    if (status) {
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });   
+                    }
+                })
+            } else {
+                swal("Your imaginary file is safe!");
+            }
+        });
+    }
+
     render() {
         console.log(this.state.data);
         const columns = [
@@ -54,16 +88,14 @@ export default class OfflinePayment extends Component {
                 
             },
             {
-                name: "TxnId"
-            },
-            {
                 name: "Request Date"
             },
             {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <Badge color="secondary" badgeContent={value} className="badge-pill"></Badge>
+                        (value == 0 ? <span className="badge badge-info">pending</span>
+                        :  <span className="badge badge-success">success</span>)
                     )
                 }
             },
@@ -71,7 +103,7 @@ export default class OfflinePayment extends Component {
                 name: "Action",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" disabled={value == 1 ? true : false} onClick={()=>this.approve(tableMeta.rowIndex)}>
                             Approve<i className="ti-arrow-circle-right"></i>
                         </Button>
                     )

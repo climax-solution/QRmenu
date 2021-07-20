@@ -14,6 +14,8 @@
  // intl messages
  import IntlMessages from 'Util/IntlMessages';
  import Axios from 'axios';
+import moment from 'moment';
+
  export default class RestaurantList extends Component {
 
     state = {
@@ -28,7 +30,7 @@
                 row.push(index + 1);
                 row.push(item.email);
                 row.push(item.packages);
-                row.push(item.created_at);
+                row.push(moment(item.created_at).format('Y-MM-DD'));
                 source.push(row);
             })
             this.setState({
