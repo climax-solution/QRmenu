@@ -52,7 +52,7 @@ class Headerfour extends HeaderComponent {
                                     </ul>
                                 </div>
                                 <ul className="top-header-nav header-cta">
-                                    <li> <Link to="/menu-v1">Order Online</Link> </li>
+                                    <li> <Link to="/menu">Order Online</Link> </li>
                                 </ul>
                             </div>
                         </div>

@@ -59,7 +59,7 @@ class Content extends Component {
                                     </div>
                                     <div className="product-controls">
                                         <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
-                                        <Link to="#" onClick={()=>this.props.addCart(item)} className="order-item btn-custom btn-sm shadow-none">Add Cart <i className="fas fa-shopping-cart" /> </Link>
+                                        <Link to="#" onClick={()=>this.props.addCart(item, 'special')} className="order-item btn-custom btn-sm shadow-none">Add Cart <i className="fas fa-shopping-cart" /> </Link>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
 
 const mapStateToDispatch = dispatch => ({
     getSpecialities: () => dispatch(getSpecialities()),
-    addCart: (item) => dispatch(addCart(item)),
+    addCart: (item, type) => dispatch(addCart(item, type)),
 })
 
 export default connect(mapStateToProps, mapStateToDispatch)(Content);

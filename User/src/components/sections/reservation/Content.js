@@ -41,8 +41,7 @@ class Content extends Component {
         }
 
         if (flag || !validator.isEmail(data['email'])) {
-            console.log(data, flag);
-            NotificationManager.error('Input is invalid!');
+            NotificationManager.warning('Input is invalid!');
             return;
         }
         axios.post(process.env.REACT_APP_BACKEND_API + 'user/placereservation',data).then(res=>{
@@ -51,6 +50,7 @@ class Content extends Component {
                 NotificationManager.success('Success');
             }
             else {
+                NotificationManager.error('Failture');
             }
         })
     }
@@ -58,7 +58,7 @@ class Content extends Component {
         return (
             <section className="section">
                 <div className="container">
-                    <form method="post" action="javascript:myFunction();">
+                    <form method="post" action="#">
                         <div className="row">
                             <div className="col-xl-7">
                                 {/* Buyer Info */}
@@ -82,7 +82,7 @@ class Content extends Component {
                                     </div>
                                     <div className="form-group col-xl-6">
                                         <label>Number of Guest <span className="text-danger">*</span></label>
-                                        <input type="number" name="number-guest" className="form-control" value={this.state.guest_number} onChange={(e)=>this.setState({guest_number: e.target.value})} required />
+                                        <input type="number" name="number-guest" min="0" className="form-control" value={this.state.guest_number} onChange={(e)=>this.setState({guest_number: e.target.value})} required />
                                     </div>
                                     <div className="form-group col-xl-6">
                                         <label>Table Reservation</label>
@@ -103,7 +103,7 @@ class Content extends Component {
                                 </div>
                                 {/* /Buyer Info */}
                             </div>
-                            <div className="col-xs-5">
+                            <div className="col-xs-5 ml-auto mr-auto">
                                 <h2>Time List</h2>
                                 <ul>
                                     <li>

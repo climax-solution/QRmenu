@@ -13,15 +13,15 @@ class Cartlist extends Component {
         return (
             <Fragment>
                 <div className="cart-sidebar-body">
-                    <Scrollbar className="cart-sidebar-scroll" style={{ height: "100vh" }} children={'&'}>
+                    <Scrollbar className="cart-sidebar-scroll" style={{ height: "100vh" }} children={()=>{return false}}>
                         {cart_list && cart_list[window.location.host] && cart_list[window.location.host].map((item, i) => (
                             <div key={i} className="cart-sidebar-item">
                                 <div className="media">
-                                    <Link>
+                                    <Link to='#'>
                                         <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.name} />
                                     </Link>
                                     <div className="media-body">
-                                        <h5> <Link title={item.name}>{item.name}</Link> </h5>
+                                        <h5> <Link title={item.name} to='#'>{item.name}</Link> </h5>
                                         <span>{item.qty}x {new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</span>
                                     </div>
                                 </div>

@@ -94,8 +94,7 @@ class Products extends Component {
                                         </div>
                                     </div>
                                     <div className="product-controls">
-                                        <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item)}>Add cart <i className="fas fa-shopping-cart" /> </Link>
-                                        {/* <Link to="#" className="btn-custom secondary btn-sm shadow-none"  onClick={(e) => this.modalShow(item.id)}> Customize <i className="fas fa-plus" /> </Link> */}
+                                        <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item,'item')}>Add cart <i className="fas fa-shopping-cart" /> </Link>
                                     </div>
                                 </div>
                             </div>
@@ -120,6 +119,6 @@ const mapStateToProps = state => ({
     cart_list: state.content.cart_list
 })
 const mapStateToDispatch = dispatch => ({
-    addCart: (item) => dispatch(addCart(item))
+    addCart: (item,type) => dispatch(addCart(item, type))
 })
 export default connect(mapStateToProps, mapStateToDispatch)(Products);

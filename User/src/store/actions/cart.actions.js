@@ -1,6 +1,6 @@
 import { ADD_CART, EMPTY_CART, REMOVE_CART } from "./types";
 
-export const addCart = (product) => (dispatch, getState) =>{
+export const addCart = (product, type) => (dispatch, getState) =>{
     let { cart_list } = getState().content;
     let list = JSON.parse(cart_list);
     if ( list == null ) {
@@ -12,7 +12,8 @@ export const addCart = (product) => (dispatch, getState) =>{
                 price:product.price,
                 qty: 1,
                 img_url: product.img_url,
-                name: product.title
+                name: product.title,
+                type: type
             }
         ]
     }
@@ -34,7 +35,8 @@ export const addCart = (product) => (dispatch, getState) =>{
                 price: product.price,
                 qty: 1,
                 img_url: product.img_url,
-                name: product.title
+                name: product.title,
+                type: type
             })
         }
         
@@ -48,7 +50,6 @@ export const addCart = (product) => (dispatch, getState) =>{
 export const removeCart = (key) => (dispatch, getState) => {
     let cart_list = JSON.parse(getState().content.cart_list);
     cart_list[window.location.host].splice(key, 1);
-    console.log('CART_LIST=>',cart_list[window.location.host], key);
     dispatch({
         type: REMOVE_CART,
         payload: JSON.stringify(cart_list)

@@ -48,7 +48,7 @@ class Headertwo extends HeaderComponent {
                         <Link className="navbar-brand" to="/"> <img src={process.env.PUBLIC_URL + "/assets/img/logo.png"} alt="logo" /> </Link>
                         {/* Menu */}
                         <Menu />
-                        <Link to="/menu-v1" className="header-cta">Order Online</Link>
+                        <Link to="/menu" className="header-cta">Order Online</Link>
                         <div className="header-controls">
                             <ul className="header-controls-inner">
                                 <li className="cart-dropdown-wrapper cart-trigger" onClick={this.cartToggle}>

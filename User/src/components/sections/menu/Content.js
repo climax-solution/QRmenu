@@ -102,7 +102,6 @@ class Content extends Component {
             resize: true,
             fitWidth: true
         };
-        console.log('LOG',this.props, this.state.filteredProducts)
         const renderAll = this.state.filteredProducts.map((item, i) => (
             <div key={i} className="col-lg-4 col-md-6 masonry-item sides">
                 <div className="product">
@@ -120,7 +119,7 @@ class Content extends Component {
                         </div>
                         <div className="product-controls">
                             <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
-                            <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item)}>Add cart <i className="fas fa-shopping-cart" /> </Link>
+                            <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item,'item')}>Add cart <i className="fas fa-shopping-cart" /> </Link>
                         </div>
                     </div>
                 </div>
@@ -180,7 +179,7 @@ const mapStateToProps = state => ({
 
 const mapStateToDispatch = dispatch => ({
     getItems: () => dispatch(getItems()),
-    addCart: (item) => dispatch(addCart(item)),
+    addCart: (item, type) => dispatch(addCart(item, type)),
     getCategories: () => dispatch(getCategories()),
 })
 

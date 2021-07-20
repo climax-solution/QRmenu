@@ -13,7 +13,7 @@ class Cta extends Component {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                         </p>
                     </div>
-                    <Link to="/menu-v1" className="btn-custom shadow-none">Order Online</Link>
+                    <Link to="/menu" className="btn-custom shadow-none">Order Online</Link>
                 </div>
             </div>
         );
