@@ -102,6 +102,7 @@ class HomeController extends Controller
                 unset($data['subdomain']);
                 $data['vendor'] = $email;
                 Reservation::create($data);
+                return response()->json(['status'=>true]);
             }
         }
         catch (Exception $error) {
