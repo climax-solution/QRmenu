@@ -1,3 +1,7 @@
 body {
     background-color: #000;
 }
+
+.ct-menu-category-item:hover .menu-category-thumb, .ct-menu-category-item.active .menu-category-thumb {
+    background-color: #fff;
+}

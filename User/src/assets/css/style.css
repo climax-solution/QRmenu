@@ -5287,12 +5287,3 @@ td.quantity{
   }
 
 }
-
-
-/*Custom*/
-.banner.banner-1 .banner-inner .row img {
-  width: 100%;
-  margin: 0 auto 30px;
-  height: 500px;
-  max-height: 500px;
-}

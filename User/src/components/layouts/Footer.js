@@ -23,15 +23,15 @@ class Footer extends Component {
                             <div className="col-xl-4 col-lg-4 col-md-4 col-sm-12 footer-widget">
                                 <img src={process.env.PUBLIC_URL + "/" + this.props.footer.logo} alt="logo" style={{width: '200px'}}/>
                                 <ul>
-                                    <li><a href="javascript:void(0)">Test Restaurant AS</a></li>
-                                    <li><a href="javascript:void(0)"><i className="fa fa-envelope text-white"></i>post@testinfo.no</a></li>
+                                    <li><a href="#">Test Restaurant AS</a></li>
+                                    <li><a href="#"><i className="fa fa-envelope text-white"></i>post@testinfo.no</a></li>
                                 </ul>
                             </div>
                             <div className="col-xl-4 col-lg-4 col-md-4 col-sm-12 footer-widget">
                                 <h5 className="widget-title">Avaible Days</h5>
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)">Sunday
+                                        <a href="#">Sunday
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.sun_mor)).format('LT')
@@ -43,7 +43,7 @@ class Footer extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Monday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Monday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.mon_mor)).format('LT')
@@ -55,7 +55,7 @@ class Footer extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Tuesday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Tuesday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.tue_mor)).format('LT')
@@ -67,7 +67,7 @@ class Footer extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Wednesday&nbsp;&nbsp;
+                                        <a href="#">Wednesday&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.wed_mor)).format('LT')
@@ -79,7 +79,7 @@ class Footer extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.thu_mor)).format('LT')
@@ -91,7 +91,7 @@ class Footer extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.fri_mor)).format('LT')
@@ -103,7 +103,7 @@ class Footer extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Saturday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Saturday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.sat_mor)).format('LT')

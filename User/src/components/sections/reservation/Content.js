@@ -107,7 +107,7 @@ class Content extends Component {
                                 <h2>Time List</h2>
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)">Sunday
+                                        <a href="#">Sunday
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.sun_mor)).format('LT')
@@ -119,7 +119,7 @@ class Content extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Monday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Monday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.mon_mor)).format('LT')
@@ -131,7 +131,7 @@ class Content extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Tuesday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Tuesday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.tue_mor)).format('LT')
@@ -143,7 +143,7 @@ class Content extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Wednesday&nbsp;&nbsp;
+                                        <a href="#">Wednesday&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.wed_mor)).format('LT')
@@ -155,7 +155,7 @@ class Content extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.thu_mor)).format('LT')
@@ -167,7 +167,7 @@ class Content extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.fri_mor)).format('LT')
@@ -179,7 +179,7 @@ class Content extends Component {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">Saturday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="#">Saturday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <i className="fa fa-clock"></i>&nbsp;&nbsp;
                                             {
                                                 moment(new Date(this.props.time_list.sat_mor)).format('LT')

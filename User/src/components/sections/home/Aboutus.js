@@ -17,14 +17,11 @@ class Aboutus extends Component {
                                 <h2 className="title">Serving Pizzas By The Slice Since 1987</h2>
                                 <p className="subtitle">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </p>
+                                </p>
                                 <p className="subtitle">
                                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-          </p>
-                                <div className="signature">
-                                    <img src={process.env.PUBLIC_URL + "/assets/img/signature.png"} alt="img" />
-                                </div>
-                                <Link to="/menu-v1" className="btn-custom">Check our Menu</Link>
+                                </p>
+                                <Link to="/menu" className="btn-custom">Check our Menu</Link>
                             </div>
                         </div>
                     </div>

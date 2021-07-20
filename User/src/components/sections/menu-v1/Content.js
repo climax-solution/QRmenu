@@ -40,13 +40,6 @@ class Content extends Component {
         const sendData = {
             subdomain: window.location.host
         }
-        axios.post(process.env.REACT_APP_BACKEND_URL + 'users/getordertypelist',sendData).then(res=>{
-            let { ordertypelist } = this.state;
-            const { data } = res;
-            this.setState({
-                ordertypelist: data
-            })
-        })
     }
     componentDidUpdate(prevProps) {
         if (prevProps.items !== this.props.items) {
@@ -72,7 +65,7 @@ class Content extends Component {
     render() {
         const { categories: categoryList } = this.props;
         const settings = {
-            slidesToShow: categoryList.length,
+            slidesToShow: categoryList.length + 1,
             slidesToScroll: 3,
             arrows: false,
             dots: false,
@@ -140,7 +133,7 @@ class Content extends Component {
                     <div className="container">
                         <Slider className="menu-category-slider" {...settings}>
                             <Link to="#" data-filter="*" className={this.state.activeItem === -1 ? 'ct-menu-category-item active' : 'ct-menu-category-item'} onClick={this.handleClick.bind(this, -1)}>
-                                <div className="menu-category-thumb">
+                                <div className="menu-category-thumb" style={{background: '#fff'}}>
                                     <img src={process.env.PUBLIC_URL + "/assets/img/categories/6.jpg"} alt="All" />
                                 </div>
                                 <div className="menu-category-desc">
@@ -149,7 +142,7 @@ class Content extends Component {
                             </Link>
                             {categoryList.map((item, i) => (
                                 <Link key={item.id} to="#" className={this.state.activeItem === parseInt(item.id) ? 'ct-menu-category-item active' : 'ct-menu-category-item'} onClick={this.handleClick.bind(this, item.id)}>
-                                    <div className="menu-category-thumb">
+                                    <div className="menu-category-thumb" style={{background: '#fff'}}>
                                         <img src={process.env.PUBLIC_URL + "/assets/img/categories/6.jpg"} alt={item.category_name} />
                                     </div>
                                     <div className="menu-category-desc">

@@ -10,19 +10,18 @@ const priceTotal = cartitem.reduce((totalPrice, item) => totalPrice + Number(ite
 class Cartlist extends Component {    
     render() {
         const { cart_list } = this.props;
-        console.log(cart_list);
         return (
             <Fragment>
                 <div className="cart-sidebar-body">
-                    <Scrollbar className="cart-sidebar-scroll" style={{ height: "100vh" }}>
+                    <Scrollbar className="cart-sidebar-scroll" style={{ height: "100vh" }} children={'&'}>
                         {cart_list && cart_list[window.location.host] && cart_list[window.location.host].map((item, i) => (
                             <div key={i} className="cart-sidebar-item">
                                 <div className="media">
-                                    <Link to="/menu-item-v1/1">
+                                    <Link>
                                         <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.name} />
                                     </Link>
                                     <div className="media-body">
-                                        <h5> <Link to="/menu-item-v1/1" title={item.name}>{item.name}</Link> </h5>
+                                        <h5> <Link title={item.name}>{item.name}</Link> </h5>
                                         <span>{item.qty}x {new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</span>
                                     </div>
                                 </div>

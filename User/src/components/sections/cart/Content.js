@@ -47,22 +47,8 @@ class Content extends Component {
     }
 
     componentDidMount() {
-        const Location = window.location;
-        const params = (new URLSearchParams(Location.search));
-        if (params.get('status') == 'success' && localStorage.getItem('tmp_order')) {
-            const sendOrder = JSON.parse(localStorage.getItem('tmp_order'));
-            sendOrder['token'] = params.get('token');
-            sendOrder['PayerID'] = params.get('PayerID');
-            axios.post(process.env.REACT_APP_BACKEND_API + 'user/createorder', sendOrder).then(res=>{
-                if (res.data.status) {
-                    localStorage.removeItem('tmp_order');
-                    localStorage.removeItem(sendOrder['subdomain']);
-                    this.props.history.push(Location.pathname);
-                }
-            })
-        }
         const sendData = {
-            subdomain: Location.host
+            subdomain: window.location.host
         }
         axios.post(process.env.REACT_APP_BACKEND_API + 'user/getordertypelist',sendData).then(res=>{
             const { data } = res;
@@ -70,11 +56,6 @@ class Content extends Component {
                 ordertypelist: [data.content_betal, data.bestilling, data.henting, data.betal, data.spis]
             })
         })
-        // const script = document.createElement("script");
-        // script.src = "https://js.stripe.com/v2/";
-        // script.async = true;
-
-        // document.body.appendChild(script);
     }
 
     componentDidUpdate(preprops) {
@@ -101,7 +82,7 @@ class Content extends Component {
     personList() {
         let list = [];
         for (let i = 0; i < 9; i ++) {
-            list.push(<option value={i+1}>{i+1}</option>);
+            list.push(<option value={i+1} key={i}>{i+1}</option>);
         }
         return list;
     }
@@ -164,91 +145,14 @@ class Content extends Component {
         formData['domain_url'] = window.location.origin + window.location.pathname; 
         formData['carts'] = JSON.stringify(this.props.cart_list[window.location.host]);
         formData['total'] = this.state.priceTotal;
-        // axios.post(process.env.REACT_APP_BACKEND_API + 'user/placeorder',formData).then(res=>{
-        //     const { url } = res.data;
-        //     const tmp_order = JSON.stringify(formData);
-        //     localStorage.setItem('tmp_order',tmp_order);
-        //     window.location.assign(url);
-        // })
-        swal("Please Select Payment", {
-            buttons: {
-              paypal: {
-                text: "PayPal",
-                value: 'paypal'
-              },
-              stripe: {
-                text: "Stripe",
-                value: "stripe",
-              },
-              razor: {
-                text: 'Razor',
-                value: "razor",
-              },
-              bambora: {
-                text: 'Bambora',
-                value: "bambora"
-              }
-            },
-          })
-          .then((value) => {
-            switch (value) {
-                case "paypal":
-                    axios.post(process.env.REACT_APP_BACKEND_API + 'user/placeorder',formData).then(res=>{
-                        const { url } = res.data;
-                        const tmp_order = JSON.stringify(formData);
-                        localStorage.setItem('tmp_order',tmp_order);
-                        window.location.assign(url);
-                    })
-                    break;
-              case "stripe":
-                this.modalToggle()
-                break;
-            
-              case "razor":
-                    swal("Gotcha!", "Pikachu was caught!", "success");
-                    break;
-              case "bambora":
-                    swal("Gotcha!", "Pikachu was caught!", "success");
-                    break;
-              default:
-                swal("Got away safely!");
+        axios.post(process.env.REACT_APP_BACKEND_API + 'user/placeorder',formData).then(res=>{
+           const { status } = res.data;
+           if (status) {
+               NotificationManager.success('Successfully Ordered!');
+               this.props.emptyCart();
             }
-          });
-    }
-
-    modalToggle() {
-        this.setState({
-            modalshow: !this.state.modalshow
-        })
-    }
-
-    payByStripe = async (e) => {
-        const { stripeInput, formData } = this.state;
-        let flag = 0;
-        for (const key in stripeInput ) {
-            if (stripeInput[key] == '') flag = 1;
-            console.log(key, '=>', stripeInput[key]);
-        }
-        if (flag) {
-            NotificationManager.warning('Input is invalid!');
-            return;
-        }
-        let sendData = {...formData, ...stripeInput };
-        axios.post(process.env.REACT_APP_BACKEND_API + 'user/stripeMethod',sendData).then(res=>{
-            const { data } = res;
-            if (data.status) {
-                NotificationManager.success('Successfully Ordered!');
-                this.props.emptyCart();
-            }
-            else {
-                NotificationManager.error('Action Failure!');
-            }
-        })
-    }
-
-    cartFormat() {
-        localStorage.removeItem(window.location.host);
-        localStorage.removeItem('tmp_order');
+           else NotificationManager.error('Failure!');
+        }) 
     }
     render() {
         const {

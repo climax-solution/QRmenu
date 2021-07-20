@@ -81,7 +81,7 @@ class Products extends Component {
                         {/* Product Start */}
                         {item_list.map((item, i) => (
                             <div key={i} className="product">
-                                <Link className="product-thumb" to={"/order/" + item.id}>
+                                <Link className="product-thumb">
                                     <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.title} />
                                 </Link>
                                 <div className="product-body">
