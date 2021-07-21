@@ -31,6 +31,7 @@ import {
 import Axios from 'axios';
 import {Table, TableHead, TableBody, TableRow, TableCell} from '@material-ui/core';
 import { NotificationManager } from 'react-notifications';
+
 export default class Category extends Component {
     constructor(props) {
         super(props)
@@ -196,12 +197,10 @@ export default class Category extends Component {
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
-                            <Button variant="contained" className="btn-primary text-white" onClick={()=>this.itemEdit(tableMeta.rowIndex)}>
-                            &nbsp;<i className="ti-pencil-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Edit
-                            </Button>
-                            <Button variant="contained" className="btn-danger text-white mt-5" onClick={()=>this.itemRemove(tableMeta.rowIndex)}>
-                                <i className="ti-trash"></i>&nbsp;&nbsp;Delete
-                            </Button>
+                            <Button variant="contained" className="btn-primary text-white btn-icon" onClick={()=>this.itemEdit(tableMeta.rowIndex)}><i className="zmdi zmdi-edit"></i></Button>
+                            <Button variant="contained" className="btn-danger text-white ml-5 btn-icon" onClick={()=>this.itemRemove(tableMeta.rowIndex)}>
+                                <i className="zmdi zmdi-delete"></i></Button>
+                                
                         </div>
                         
                     )

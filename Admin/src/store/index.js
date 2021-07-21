@@ -22,10 +22,14 @@ export function configureStore(initialState) {
             localStorage.removeItem('extime');
             localStorage.removeItem('token');
             store.dispatch({type: 'LOGIN_USER_FAILURE'});
+            axios.post(REACT_APP_BACKEND_API + str['p'] == 'admin' ? 'admindashboard' : 'vendordashboard').then(res=>{
+                
+            })
         }
         else {
             store.dispatch({type: 'LOGIN_USER_SUCCESS',permission: data['p'], activedpkg: data['g'] });
         }
+
     }
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers

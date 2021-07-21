@@ -27,12 +27,17 @@
  } from './data';
 
  export default class Dashboard extends Component {
+     state = {
+        permission_status: window.location.pathname.indexOf('admin') ? 'admin': 'vendor'
+     }
      render() {
+     console.log('permission_status',this.state.permission_status);
+
          const { match } = this.props;
          return (
              <div className="dashboard-wrapper">
                 <Helmet>
-                    <title>Package</title>
+                    <title>Dashboard</title>
                     <meta name="description" content="Reactify Blank Page" />
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={match} />

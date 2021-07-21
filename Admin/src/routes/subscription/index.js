@@ -75,13 +75,11 @@ class Subscription extends Component {
         
         else if (params.get('type') == 'bambora') {
             if (params.get('status') == 'success' && localStorage.getItem('tmp_subs')) {
-                NotificationManager.success('Transfered Successfully!');
                 const src = JSON.parse(localStorage.getItem('tmp_subs'));
                 const sendOrder = {
                     package: src.pkg,
                     price: src.price,
                     txnid: params.get('txnid'),
-                    subdomain: window.location.host,
                 }
                 const headers = {
                     headers: {
@@ -177,7 +175,7 @@ class Subscription extends Component {
                     this.paypalMethod(sendData);
                     break;
                 case "stripe":
-                this.modalToggle()
+                    this.modalToggle()
                 break;
 
                 case "razor":
@@ -185,7 +183,6 @@ class Subscription extends Component {
                     break;
                 case "bambora":
                     this.bamboraMethod();
-                    // swal("Gotcha!", "Pikachu was caught!", "success");
                     break;
                 case "offline":
                     this.offlineMethod();
@@ -278,11 +275,16 @@ class Subscription extends Component {
     bamboraMethod() {
         const bamboraData = {
             price: this.state.livePrice,
-            domain_url: window.location.hostname + window.location.pathname
+            domain_url: window.location.origin + window.location.pathname
         };
 
         axios.post(REACT_APP_BACKEND_API + 'bamboraMethod', bamboraData).then(res=>{
             const { data } = res;
+            const tmp_subs = JSON.stringify({
+                price: this.state.livePrice,
+                pkg: this.state.selectedPkg
+            });
+            localStorage.setItem('tmp_subs',tmp_subs);
             new Bambora.RedirectCheckout(data.token);
         })
     }
@@ -332,7 +334,7 @@ class Subscription extends Component {
                                 description="Secure file sharing and collaboration. Ideal for small teams."
                                 price={item.price}
                                 users={1}
-                                activePkg = {()=>{ item.id != activedpkg ? this.paymentMethod(item.price, item.package_name) : NotificationManager.info('You have already chosen this package!')}}
+                                activePkg = {()=>{ item.id != activedpkg ? this.paymentMethod(item.price, item.id) : NotificationManager.info('You have already chosen this package!')}}
                                 features={[
                                     'Velkommen side',
                                     `Meny (${item.order_limit < 0 ? 'Unlimited' : item.order_limit} items)`,
