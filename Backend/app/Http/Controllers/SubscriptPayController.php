@@ -369,8 +369,6 @@ class SubscriptPayController extends Controller
     }
 
     public function bamboraTrans(Request $request) {
-        $validate = $this->validation_check($request);
-        if (!$validate) return false;
         try {
             $data = $request->input();
             $user = auth('api')->user();

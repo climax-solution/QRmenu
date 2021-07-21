@@ -32,6 +32,11 @@ Route::get('user', [AuthController::class, 'getUser']);
 Route::get('logout', [AuthController::class, 'getLogout']);
 Route::post('check-token', [AuthController::class, 'postCheckToken']);
 
+
+//Dashboard Management
+Route::post('admindashboard', [DashboardController::class, 'admin']);
+Route::post('vendordashboard', [DashboardController::class, 'vendor']);
+
 //Package Management
 Route::get('pkglist', [PkgController::class, 'getPkgList']);
 Route::post('addpkg', [PkgController::class, 'postAddPkg']);
@@ -42,7 +47,7 @@ Route::delete('deletepkg/{id}', [PkgController::class, 'postDeleteItem']);
 //Manage Restaurant
 Route::get('restaurantlist', [RestaurantController::class, 'getRestList']);
 Route::post('adduser',[RestaurantController::class, 'postAddUser']);
-
+Route::post('updateuser', [RestaurantController::class, 'updateuser']);
 //Site Setting
 Route::get('settingstatus', [SettingController::class, 'getStatus']);
 Route::post('modifycreate', [SettingController::class, 'postModifyCreate']);
@@ -109,6 +114,7 @@ Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
 
 Route::post('paypalMethod', [SubscriptPayController::class,'paypalMethod']);
 Route::post('paypalTrans', [SubscriptPayController::class,'paypalTrans']);
+Route::post('bamboraTrans', [SubscriptPayController::class,'bamboraTrans']);
 Route::post('stripeMethod', [SubscriptPayController::class,'stripeMethod']);
 Route::post('razorMethod', [SubscriptPayController::class,'razorMethod']);
 Route::post('razorResult', [SubscriptPayController::class,'razorResult']);
