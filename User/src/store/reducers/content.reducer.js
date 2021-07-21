@@ -33,7 +33,6 @@ export default (state = initialState, action) => {
                 cart_list: action.payload
             };
         case REMOVE_CART:
-            console.log('ACTION_PAYLOAD',action.payload);
             window.localStorage.setItem(window.location.host, action.payload);
             return {
                 ...state,

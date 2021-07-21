@@ -14,7 +14,6 @@ const tax = 9.99;
 class Content extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         if (props.cart_list == null ) props.history.push('/');
         this.state = {
             priceTotal: this.props.cart_list[window.location.host].reduce((totalPrice, item) => totalPrice + Number(item.price) * item.qty, 0),

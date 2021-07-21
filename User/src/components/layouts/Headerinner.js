@@ -58,14 +58,16 @@ class Headerinner extends HeaderComponent {
                             <Link className="navbar-brand" to="/"> <img src={process.env.PUBLIC_URL + "/assets/img/logo.png"} alt="logo" /> </Link>
                             {/* Menu */}
                             <Menu />
-                            {
-                                cart_count > 0 && <div className="header-controls">
-                                <ul className="header-controls-inner">
+                            
+                               <div className="header-controls">
+                                {
+                                cart_count > 0 && <ul className="header-controls-inner">
                                     <li className="cart-dropdown-wrapper cart-trigger" onClick={this.cartToggle}>
                                         <span className="cart-item-count">{cart_count}</span>
                                         <i className="flaticon-shopping-bag" />
                                     </li>
                                 </ul>
+                                }
                                 {/* Toggler */}
                                 <div className="aside-toggler aside-trigger" onClick={this.toggleNav}>
                                     <span />
@@ -73,7 +75,7 @@ class Headerinner extends HeaderComponent {
                                     <span />
                                 </div>
                             </div>
-                            }
+                            
                         </nav>
                     </div>
                 </header>
