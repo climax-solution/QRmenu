@@ -12,7 +12,7 @@ class Specialities extends Component {
         return (
             <Fragment>
                 <MetaTags>
-                    <title>Slices - React Template | {pagelocation}</title>
+                    <title>{pagelocation}</title>
                     <meta
                         name="description"
                         content="#"
