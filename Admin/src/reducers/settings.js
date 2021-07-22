@@ -83,8 +83,8 @@ const INIT_STATE = {
 			icon: 'en',
 		},
 		{
-			languageId: 'norway',
-			locale: 'nw',
+			languageId: 'english',
+			locale: 'fr',
 			name: 'Norway',
 			icon: 'nw',
 		},

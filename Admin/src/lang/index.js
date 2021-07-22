@@ -32,7 +32,7 @@ const AppLocale = {
 };
 
 addLocaleData(AppLocale.en.data);
-// addLocaleData(AppLocale.fr.data);
+addLocaleData(AppLocale.fr.data);
 // addLocaleData(AppLocale.zh.data);
 // addLocaleData(AppLocale.ar.data);
 // addLocaleData(AppLocale.he.data);
