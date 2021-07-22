@@ -88,7 +88,7 @@ export default class Specialites extends Component {
     }
     modifyCreate() {
         const { dialog, activeIndex,tmp } = this.state;
-        console.log(activeIndex);
+        //console.log(activeIndex);
         let sendData = new FormData();
         for (let key in dialog) {
             sendData.append(key, dialog[key]);
@@ -113,7 +113,7 @@ export default class Specialites extends Component {
     }
     itemEdit(arg) {
         const { tmp, dialog } = this.state;
-        console.log(tmp, dialog);
+        //console.log(tmp, dialog);
         for (let key in dialog ) {
             dialog[key] = tmp[arg][key];
         }
@@ -125,7 +125,7 @@ export default class Specialites extends Component {
         })
     }
     itemRemove(arg) {
-        console.log(this.state);
+        //console.log(this.state);
         const { tmp } = this.state;
         const headers = {
             'Accept':'application/json',

@@ -10,7 +10,7 @@
  class SignLayout extends Component {
      render() {
         const { match, location } = this.props;
-        console.log(match);
+        //console.log(match);
         if (location.pathname === '/signin') {
             return <Redirect to='/signin/signin'/>;
         }

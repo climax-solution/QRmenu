@@ -35,7 +35,7 @@ import SignLayout from './SignLayout';
 class App extends Component {
    render() {
       const { location, match, user,permission } = this.props;
-      console.log(user);
+      //console.log(user);
       if (location.pathname === '/' || !user && location.pathname.indexOf('sign') < 0 ) {
          return <Redirect to='/signin/signin' />;
       }
@@ -46,7 +46,7 @@ class App extends Component {
          return <Redirect to={'/admin/dashboard'} />;
       }
       else if (location.pathname === '/vendor' ) {
-         console.log('VENDOR')
+         //console.log('VENDOR')
 
          return <Redirect to={'/vendor/dashboard'} />;
       }

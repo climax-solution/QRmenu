@@ -120,7 +120,7 @@ export default class Item extends Component {
 
     itemEdit(arg) {
         const { tmp, dialog } = this.state;
-        console.log(tmp, dialog);
+        //console.log(tmp, dialog);
         for (let key in dialog ) {
             dialog[key] = tmp[arg][key];
         }
@@ -148,7 +148,7 @@ export default class Item extends Component {
         })
     }
     itemRemove(arg) {
-        console.log(this.state);
+        //console.log(this.state);
         const { tmp } = this.state;
         const headers = {
             'Accept':'application/json',

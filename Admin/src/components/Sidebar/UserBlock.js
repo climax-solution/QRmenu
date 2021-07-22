@@ -67,7 +67,7 @@ class UserBlock extends Component {
 			'Authorization': `Bearer ${localStorage.getItem('token')}`
 		 }
 		 Axios.get(REACT_APP_BACKEND_API + 'logout', {}, {headers: headers}).then(res=>{
-			console.log(res);
+			//console.log(res);
 			localStorage.clear();
 			window.location.href = '/';
 

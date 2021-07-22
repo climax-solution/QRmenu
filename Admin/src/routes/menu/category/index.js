@@ -73,7 +73,7 @@ export default class Category extends Component {
                 }
                 categorylist.push(row);
             })
-            console.log('Catergory=>',categorylist);
+            //console.log('Catergory=>',categorylist);
             this.setState({
                 categorylist: categorylist,
                 tmp: tmp
@@ -121,7 +121,7 @@ export default class Category extends Component {
 
     itemEdit(arg) {
         const { tmp, dialog } = this.state;
-        console.log(tmp, dialog);
+        //console.log(tmp, dialog);
         for (let key in dialog ) {
             dialog[key] = tmp[arg][key];
         }

@@ -155,7 +155,7 @@
  
 	 render() {
 		 const { locale, languages } = this.props;
-		 console.log(this.props);
+		 //console.log(this.props);
 		 return (
 			 <Dropdown nav className="list-inline-item language-dropdown tour-step-5" isOpen={this.state.langDropdownOpen} toggle={this.toggle}>
 					 <DropdownToggle caret nav className="header-icon language-icon">

@@ -61,7 +61,7 @@ import validator from 'validator';
              if (send[key] === '') flag = 1;
          }
          if (flag || !validator.isEmail(send['email']) ) {
-             console.log(flag,validator.isEmail(send['email']))
+             //console.log(flag,validator.isEmail(send['email']))
             NotificationManager.error('Input is invalid!');
          }
          else {

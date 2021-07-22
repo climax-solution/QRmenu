@@ -58,7 +58,7 @@ export default class Avaibledays extends Component {
                     type_name: data['type_name']
                 })
             }
-            console.log(timelist);
+            //console.log(timelist);
             
         })
     }
@@ -106,7 +106,7 @@ export default class Avaibledays extends Component {
 	};
      render() {
         const { timelist,type_name } = this.state;
-        console.log(process.env.REACT_APP_BACKEND_API);
+        //console.log(process.env.REACT_APP_BACKEND_API);
        
         return (
              <div className="blank-wrapper">

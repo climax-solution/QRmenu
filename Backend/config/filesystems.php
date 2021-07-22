@@ -56,7 +56,11 @@ return [
             'driver' => 'local',
             'root' => public_path('images'),
             'url' => env('APP_URL').'/public',
-            
+        ],
+        'download' => [
+            'driver' => 'local',
+            'root' => public_path('/'),
+            'url' => env('APP_URL').'/public',
         ]
     ],
 

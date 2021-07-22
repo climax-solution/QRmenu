@@ -108,7 +108,6 @@ Route::post('user/getspecialities', [HomeController::class, 'getspecialities']);
 Route::post('user/placereservation', [HomeController::class, 'placereservation']);
 Route::post('user/getordertypelist', [HomeController::class, 'getordertypelist']);
 Route::post('user/placeorder', [HomeController::class, 'placeorder']);
-Route::post('user/createorder', [HomeController::class, 'createorder']);
 Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
 Route::post('user/getuseremail', [HomeController::class, 'getuseremail']);
 
@@ -122,3 +121,6 @@ Route::post('razorMethod', [SubscriptPayController::class,'razorMethod']);
 Route::post('razorResult', [SubscriptPayController::class,'razorResult']);
 Route::post('bamboraMethod', [SubscriptPayController::class,'bamboraMethod']);
 Route::post('offlineMethod', [SubscriptPayController::class,'offlineMethod']);
+
+//Backup
+Route::post('backupdb', [VendorChunkOne::class,'backupDB']);

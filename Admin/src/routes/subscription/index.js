@@ -213,7 +213,7 @@ class Subscription extends Component {
         let flag = 0;
         for (const key in stripeInput ) {
             if (stripeInput[key] == '') flag = 1;
-            console.log(key, '=>', stripeInput[key]);
+            //console.log(key, '=>', stripeInput[key]);
         }
         if (flag) {
             NotificationManager.warning('Input is invalid!');
@@ -315,7 +315,7 @@ class Subscription extends Component {
     render() {
         const { packages, modalshow,stripeInput  } = this.state;
         const { user, activedpkg } = this.props;
-        console.log(user);
+        //console.log(user);
         return (
             <div className="blank-wrapper">
                 <Helmet>

@@ -23,7 +23,7 @@ export function configureStore(initialState) {
             localStorage.removeItem('extime');
             localStorage.removeItem('token');
             store.dispatch({type: 'LOGIN_USER_FAILURE'});
-            console.log('STR',str);
+            //console.log('STR',str);
         }
         else {
             if ( data['p'] == 'admin' ) {

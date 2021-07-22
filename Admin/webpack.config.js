@@ -28,7 +28,7 @@ const env = dotenv.parsed;
 
 // reduce it to a nice object, the same as before
 const envKeys = Object.keys(env).reduce((prev, next) => {
-    console.log('Key=>', next);
+    //console.log('Key=>', next);
     prev[`${next}`] = JSON.stringify(env[next]);
     return prev;
 }, {});

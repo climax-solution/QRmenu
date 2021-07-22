@@ -69,7 +69,7 @@ export default class OfflinePayment extends Component {
     }
 
     render() {
-        console.log(this.state.data);
+        //console.log(this.state.data);
         const columns = [
             {
                 name: "Sl"

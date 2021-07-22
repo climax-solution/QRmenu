@@ -55,19 +55,19 @@ import Axios from 'axios';
             }
             for (let key in paypal) {
                 paypals[key] = data[key];
-                console.log(key, typeof data[key]);
+                //console.log(key, typeof data[key]);
             }
             for (let key in stripe) {
                 stripes[key] = data[key];
-                console.log(key, typeof data[key]);
+                //console.log(key, typeof data[key]);
 
             }
             for (let key in razor) {
-                console.log(key, typeof data[key]);
+                //console.log(key, typeof data[key]);
                 razors[key] = data[key];
             }
             for (let key in bambora) {
-                console.log(key, typeof data[key]);
+                //console.log(key, typeof data[key]);
                 bamboras[key] = data[key];
             }
             this.setState({
@@ -76,7 +76,7 @@ import Axios from 'axios';
                 razor:razors,
                 bambora: bamboras
             })
-            console.log(paypal,stripe,razor,bambora);
+            //console.log(paypal,stripe,razor,bambora);
         })
     }
     

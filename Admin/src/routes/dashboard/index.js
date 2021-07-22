@@ -38,7 +38,7 @@ class Dashboard extends Component {
      render() {
 
          const { match, dashboard } = this.props;
-         console.log('STATE=>',this.state.permission_status);
+         //console.log('STATE=>',this.state.permission_status);
          return (
              <div className="dashboard-wrapper">
                 <Helmet>

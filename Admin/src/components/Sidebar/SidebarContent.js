@@ -13,6 +13,9 @@ import NavMenuItem from './NavMenuItem';
 
 // redux actions
 import { onToggleMenu } from 'Actions';
+import Axios from 'axios';
+import fileDownload from 'js-file-download';
+import { NotificationManager } from 'react-notifications';
 
 class SidebarContent extends Component {
 
@@ -24,6 +27,12 @@ class SidebarContent extends Component {
         this.props.onToggleMenu(data);
     }
 
+    backupDB() {
+        Axios.post(REACT_APP_BACKEND_API + 'backupdb').then(res=>{
+            fileDownload(res.data, 'backup.sql');
+            NotificationManager.success('Backup Database successfully!');
+        })
+    }
     render() {
         const { sidebarMenus } = this.props.sidebar;
         const { match } = this.props;
@@ -98,6 +107,7 @@ class SidebarContent extends Component {
                             </List>
                             <List
                                 className="rct-mainMenu p-0 m-0 list-unstyled"
+                                onClick={()=>this.backupDB()}
                             >
                                 {sidebarMenus.category6.map((menu, key) => (
                                     <NavMenuItem 
@@ -214,7 +224,7 @@ class SidebarContent extends Component {
                                     />
                                 ))}
                             </List>
-                            <List
+                            {/* <List
                                 className="rct-mainMenu p-0 m-0 list-unstyled"
                             >
                                 {sidebarMenus.category13.map((menu, key) => (
@@ -223,7 +233,7 @@ class SidebarContent extends Component {
                                         key={key}
                                     />
                                 ))}
-                            </List>
+                            </List> */}
                         </div>
                     }
                 </nav>

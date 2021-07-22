@@ -66,7 +66,7 @@ export default {
       {
          "menu_title": "sidebar.backupdb",
          "menu_icon": "zmdi zmdi-download",
-         "path": "/admin/backupdb",
+         "path": "#",
          "child_routes": null
       }
    ],

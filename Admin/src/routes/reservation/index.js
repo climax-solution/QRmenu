@@ -45,13 +45,13 @@ export default class BackUpDB extends Component {
 
     updateItem = (arg, state) => {
         const { list } = this.state;
-        console.log(list);
+        //console.log(list);
         const data = {
             order_id: list[arg][1],
             // vendor: list[arg].vendor,
             status: state == 'allow' ? '1' : '-1'
         }
-        console.log(data);
+        //console.log(data);
         Axios.post(REACT_APP_BACKEND_API + 'updateitem',data).then(res=>{
             if (res.data.success) {
                 NotificationManager.success('Success!');

@@ -30,7 +30,7 @@ export default class ManageFeature extends Component {
                 row.status = row.status ? true : false; 
                 feature_list.push(row);
             })
-            console.log(feature_list);
+            //console.log(feature_list);
             this.setState({
                 feature_list: feature_list
             })

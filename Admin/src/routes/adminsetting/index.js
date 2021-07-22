@@ -19,17 +19,17 @@ import Axios from 'axios';
     state = {
         selectedValue: 'english',
         site_setting:{
-            currency:'',
-            timezone: '',
-            site_name: '',
-            copyright: '',
-            description:'',
-            google_analytics: '',
+            currency: '',
+            timezone:  '',
+            site_name:  '',
+            copyright:  '',
+            description: '',
+            google_analytics:  '',
         },
         recaptcha:{
             recaptcha: false,
-            site_key: '',
-            secret_key: '',
+            site_key:  '',
+            secret_key:  '',
         },
         setGe:[false,false,false,false,false,false]
     }
@@ -38,12 +38,12 @@ import Axios from 'axios';
         Axios.get(REACT_APP_BACKEND_API + 'settingstatus').then(res => {
             let { site_setting, recaptcha, setGe } = this.state;
             let { data } = res;
-            console.log(res);
+            //console.log(res);
             for (let key in site_setting ) {
-                site_setting[key] = data[key];
+                site_setting[key] = !data[key] ? '' : data[key];
             }
             for (let key in recaptcha ) {
-                recaptcha[key] = data[key];
+                recaptcha[key] = !data[key] ? '' : data[key];
             }
             recaptcha['recaptcha'] = recaptcha['recaptcha'] == "0" ? false : true;
             setGe = data.normal_setting ? data.normal_setting : setGe;
@@ -112,14 +112,14 @@ import Axios from 'axios';
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
                                         <InputLabel htmlFor="currency" className="ml-10">Currency</InputLabel>
                                         <Select value={site_setting.currency} onChange={(e)=>this.setState({site_setting:{...site_setting, currency: e.target.value}})} inputProps={{ name: 'currency', id: 'currency', }}fullWidth>
-                                            <MenuItem value={''}>Select Amount</MenuItem>
-                                            <MenuItem value={-1}>Unlimit</MenuItem>
-                                            <MenuItem value={10}>10</MenuItem>
-                                            <MenuItem value={15}>15</MenuItem>
-                                            <MenuItem value={20}>20</MenuItem>
-                                            <MenuItem value={30}>30</MenuItem>
-                                            <MenuItem value={40}>40</MenuItem>
-                                            <MenuItem value={50}>50</MenuItem>
+                                            <MenuItem value={''} key="0">Select Amount</MenuItem>
+                                            <MenuItem value={-1} key="1">Unlimit</MenuItem>
+                                            <MenuItem value={10} key="2">10</MenuItem>
+                                            <MenuItem value={15} key="3">15</MenuItem>
+                                            <MenuItem value={20} key="4">20</MenuItem>
+                                            <MenuItem value={30} key="5">30</MenuItem>
+                                            <MenuItem value={40} key="6">40</MenuItem>
+                                            <MenuItem value={50} key="7">50</MenuItem>
                                         </Select>
                                     </FormGroup>
                                 </FormControl>
@@ -130,8 +130,8 @@ import Axios from 'axios';
                                     <InputLabel htmlFor="currency" className="ml-10">Time Zone</InputLabel>
                                         <Select value={site_setting.timezone} onChange={(e)=>this.setState({site_setting:{...site_setting, timezone: e.target.value}})} inputProps={{ name: 'timezone', id: 'timezone', }}fullWidth>
                                             {
-                                                timezone.map((item)=>{
-                                                    return <MenuItem value={item}>{item}</MenuItem>
+                                                timezone.map((item,i)=>{
+                                                    return <MenuItem value={item} key={i}>{item}</MenuItem>
                                                 })
                                             }
                                         </Select>

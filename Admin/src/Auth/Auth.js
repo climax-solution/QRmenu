@@ -32,7 +32,7 @@ export default class Auth {
         store.dispatch({ type: 'LOGIN_USER_SUCCESS', payload: authResult })
         window.location.replace('/')
       } else if (err) {
-        console.log(err);
+        //console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });

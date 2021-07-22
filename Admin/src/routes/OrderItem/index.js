@@ -35,7 +35,7 @@ export default class OrderItem extends Component {
     }
     render() {
         const { item_list } = this.state;
-        console.log(item_list);
+        //console.log(item_list);
         const columns = [
             {
                 name: "Sl"

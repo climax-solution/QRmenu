@@ -124,7 +124,7 @@ class UsersPackage extends Component {
         })
     }
      render() {
-        console.log(this.state);
+        //console.log(this.state);
         const { dialog, items, packages } = this.state;
         const CheckItems = this.CheckItem;
          return (
