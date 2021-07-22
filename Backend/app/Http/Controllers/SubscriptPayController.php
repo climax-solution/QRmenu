@@ -50,50 +50,6 @@ class SubscriptPayController extends Controller
         return true;
     }
 
-    public function bamboraPayment() {
-        $merchant_id = ''; //INSERT MERCHANT ID (must be a 9 digit string)
-        // $api_key = ''; //INSERT API ACCESS PASSCODE
-        // $api_version = 'v1'; //default
-        // $platform = 'api'; //default
-
-        // //Create Beanstream Gateway
-        // $beanstream = new \Beanstream\Gateway($merchant_id, $api_key, $platform, $api_version);
-
-        // //Example Card Payment Data
-        // $payment_data = array(
-        //         'order_number' => 'a1b2c3',
-        //         'amount' => 1.00,
-        //         'payment_method' => 'card',
-        //         'card' => array(
-        //             'name' => 'Mr. Card Testerson',
-        //             'number' => '4030000010001234',
-        //             'expiry_month' => '07',
-        //             'expiry_year' => '22',
-        //             'cvd' => '123'
-        //         )
-        // );
-        // $complete = TRUE; //set to FALSE for PA
-
-        // //Try to submit a Card Payment
-        // try {
-
-        //     $result = $beanstream->payments()->makeCardPayment($payment_data, $complete);
-
-        //     /*
-        //     * Handle successful transaction, payment method returns
-        //     * transaction details as result, so $result contains that data
-        //     * in the form of associative array.
-        //     */
-        // } catch (\Beanstream\Exception $e) {
-        //     /*
-        //     * Handle transaction error, $e->code can be checked for a
-        //     * specific error, e.g. 211 corresponds to transaction being
-        //     * DECLINED, 314 - to missing or invalid payment information
-        //     * etc.
-        //     */
-        // }
-    }
-
     public function paypalMethod(Request $request){
         $setting = PaymentSetting::first();
         if (!$setting) {
@@ -116,13 +72,13 @@ class SubscriptPayController extends Controller
 
         //The item name and amount can be brought in dynamically by querying the $input['item_number'] variable.
         $querystring .= "item_name=".urlencode($item_name)."&";
-        $querystring .= "amount=".urlencode(123)."&";
+        $querystring .= "amount=".urlencode($item_amount)."&";
         $querystring .= "item_number=".urlencode($item_number)."&";
 
         $querystring .= "cmd=".urlencode(stripslashes('_xclick'))."&";
         $querystring .= "bn=".urlencode(stripslashes('PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest'))."&";
         $querystring .= "lc=".urlencode(stripslashes('RU'))."&";
-        $querystring .= "currency_code=".urlencode(stripslashes('RUB'))."&";
+        $querystring .= "currency_code=".urlencode(stripslashes('NOK'))."&";
 
         // Append paypal return addresses
         $querystring .= "return=".urlencode(stripslashes($return_url))."&";
@@ -226,7 +182,7 @@ class SubscriptPayController extends Controller
         {
             $url = "https://api.fixer.io/latest?symbols=$this->displayCurrency&base=INR";
             $exchange = json_decode(file_get_contents($url), true);
-            $displayAmount = $exchange['rates']['RUB'] * $amount / 100;
+            $displayAmount = $exchange['rates']['NOK'] * $amount / 100;
         }
 
         $data = [

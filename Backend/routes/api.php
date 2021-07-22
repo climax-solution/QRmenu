@@ -22,7 +22,7 @@ use App\Http\Controllers\VendorChunkOne;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubscriptPayController;
-
+use App\Http\Controllers\DashboardController;
 
 // Authentication
 Route::post('login', [AuthController::class, 'postLogin']);
@@ -70,6 +70,7 @@ Route::post('reservation_list', [VendorChunkOne::class, 'reservation_list']);
 Route::post('updateitem', [VendorChunkOne::class, 'updateitem']);
 Route::post('getkds', [VendorChunkOne::class, 'getkds']);
 Route::post('getnotificationdata', [VendorChunkOne::class, 'getnotificationdata']);
+Route::post('getorderitem', [VendorChunkOne::class, 'getorderitem']);
 
 Route::post('profileinfo', [ProfileController::class, 'getlistprofile']);
 Route::post('updateprofile', [ProfileController::class, 'updateprofile']);
@@ -109,6 +110,7 @@ Route::post('user/getordertypelist', [HomeController::class, 'getordertypelist']
 Route::post('user/placeorder', [HomeController::class, 'placeorder']);
 Route::post('user/createorder', [HomeController::class, 'createorder']);
 Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
+Route::post('user/getuseremail', [HomeController::class, 'getuseremail']);
 
 //Payment Integration
 

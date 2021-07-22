@@ -15,14 +15,13 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id')->nullable();
             $table->string('order_name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('order_type')->nullable();
             $table->string('comments')->nullable();
             $table->string('overview')->nullable();
-            $table->string('status')->nullable();
+            $table->boolean('status')->default(0);
             $table->string('vendor')->nullable();
             $table->string('guest_number')->nullable();
             $table->string('table_reservation')->nullable();

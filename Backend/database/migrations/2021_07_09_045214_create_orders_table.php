@@ -15,7 +15,6 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_number')->nullable();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
@@ -31,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->text('carts')->nullable();
             $table->enum('status',['-1','0','1','2','3'])->default('1');
             $table->enum('paid_status',['0','1'])->default('0');
+            $table->boolean('view_status')->default('0');
             $table->timestamps();
         });
     }

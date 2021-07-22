@@ -9,6 +9,8 @@ use App\Models\Feature;
 use App\Models\Reservation;
 use App\Models\Order;
 use App\Models\TransactionHistory;
+use App\Models\VendorItem;
+use App\Models\VendorSpecial;
 use Exception;
 class VendorChunkOne extends Controller
 {
@@ -88,6 +90,28 @@ class VendorChunkOne extends Controller
     }
 
     public function getnotificationdata(Request $request) {
+        $user = auth('api')->user();
+        $date = date('Y-m-d');
+        $order = Order::where(['vendor'=>$user->email,'view_status'=>'0', 'status'=>'0'])->where('created_at','like',$date.'%')->count();
+        $reservation = Reservation::where(['vendor'=>$user->email,'status'=>'0'])->where('created_at','like',$date.'%')->count();
+        return response()->json(['order'=>$order, 'reservation'=>$reservation]);
+    }
 
+    public function getorderitem(Request $request) {
+        $input = $request->input();
+        Order::where($input)->update(['view_status'=>'1']);
+        $src = Order::where($input)->first();
+        $data = json_decode($src->carts);
+        foreach ($data as $item) {
+            if ( $item->type == 'item' ) {
+                $ITEMS = VendorItem::where('id',$item->id)->first();
+                $item->item_name = $ITEMS->title;
+            }
+            else {
+                $ITEMS = VendorSpecial::where('id',$item->id)->first();
+                $item->item_name = $ITEMS->special_name;
+            }
+        }
+        return response()->json($data);
     }
 }
