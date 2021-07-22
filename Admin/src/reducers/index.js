@@ -3,10 +3,7 @@
  */
 import { combineReducers } from 'redux';
 import settings from './settings';
-import chatAppReducer from './ChatAppReducer';
-import emailAppReducer from './EmailAppReducer';
 import sidebarReducer from './SidebarReducer';
-import todoAppReducer from './TodoAppReducer';
 import authUserReducer from './AuthUserReducer';
 import feedbacksReducer from './FeedbacksReducer';
 import pkgmanagement from './PkgManagement';
