@@ -15,6 +15,8 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\fileExists;
+
 class VendorChunkOne extends Controller
 {
     public function modifyorderconfig(Request $request) {
@@ -166,11 +168,10 @@ class VendorChunkOne extends Controller
         }
     }
     $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+    if (fileExists($file_name)) unlink($file_name);
     $file_handle = fopen($file_name, 'w+');
     fwrite($file_handle, $output);
     fclose($file_handle);
     return response()->download(public_path($file_name));
-    // readfile($file_name);
-    // unlink($file_name);
     }
 }
