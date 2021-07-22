@@ -24,7 +24,6 @@
  // components
  import Notifications from './Notifications';
  import ChatSidebar from './ChatSidebar';
- import DashboardOverlay from '../DashboardOverlay/DashboardOverlay';
  import LanguageProvider from './LanguageProvider';
  import SearchForm from './SearchForm';
  import MobileSearchForm from './MobileSearchForm';
@@ -144,9 +143,6 @@ import { auth } from 'firebase';
 				   <ChatSidebar />
 				</Drawer>
 			 </Toolbar>
-			 <DashboardOverlay
-				onClose={() => this.closeDashboardOverlay()}
-			 />
 		  </AppBar>
 	   );
 	}
