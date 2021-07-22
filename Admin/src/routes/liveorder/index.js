@@ -13,6 +13,7 @@ import MUIDataTable from "mui-datatables";
 import { Badge } from '@material-ui/core';
 import Axios from  'axios';
 import NotificationManager from 'react-notifications/lib/NotificationManager';
+import { Link } from 'react-router-dom';
 export default class LiveOrder extends Component {
     state = {
         tmp: [],
@@ -94,7 +95,11 @@ export default class LiveOrder extends Component {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
-                        <span className="badge badge-info">{value == '-1' ? 'Blocked' : value == '0' ? 'Pending': value == '1' ? 'Allowed' : 'Completed'}</span>
+                        <span
+                            className={`badge ${value == '0' ? 'badge-primary' : 'badge-info'}`}
+                        >
+                            {value == '-1' ? 'Blocked' : value == '0' ? 'Pending': value == '1' ? 'Allowed' : 'Completed'}
+                        </span>
                     )
                 }
             },
@@ -103,8 +108,38 @@ export default class LiveOrder extends Component {
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
-                            <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" onClick={() => this.updateItem(tableMeta.rowIndex, value < '1' ? '1' : '2' )}> <i className="zmdi zmdi-check"></i>{value == '1' ? 'Complete' : 'Allow'}</MatButton>
-                            <MatButton variant="contained" color="danger" className="mr-10 mb-10 text-white btn-danger btn-icon"  onClick={() => this.updateItem(tableMeta.rowIndex, '-1')}> <i className="zmdi zmdi-block"></i>Block</MatButton>
+                            <MatButton
+                                variant="contained"
+                                className="btn-success mr-10 mb-10 text-white btn-icon"
+                                component={Link}
+                                to={"orderitem/"+tableMeta.rowData[1]}
+                            >
+                                <i
+                                    className="zmdi zmdi-eye"
+                                ></i>View
+                            </MatButton>
+                            <MatButton
+                                variant="contained"
+                                color="primary"
+                                className="mr-10 mb-10 text-white btn-icon"
+                                onClick={() => this.updateItem(tableMeta.rowIndex, value < '1' ? '1' : '2' )}
+                                disabled={value == '2' ? true : false}
+                            >
+                                <i
+                                    className="zmdi zmdi-check"
+                                ></i>
+                                {value == '1' ? 'Complete' : 'Allow'}
+                            </MatButton>
+                            {
+                                value < '2' &&
+                                <MatButton
+                                    variant="contained"
+                                    color="danger"
+                                    className="mr-10 mb-10 text-white btn-danger btn-icon"  onClick={() => this.updateItem(tableMeta.rowIndex, '-1')}
+                                >
+                                    <i className="zmdi zmdi-block"></i>Block
+                                </MatButton>
+                            }
                         </div>
                     )
                 }

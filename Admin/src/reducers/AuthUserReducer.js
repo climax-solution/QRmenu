@@ -8,7 +8,8 @@ import {
     LOGOUT_USER,
     SIGNUP_USER,
     SIGNUP_USER_SUCCESS,
-    SIGNUP_USER_FAILURE
+    SIGNUP_USER_FAILURE,
+    ACTIVE_DASHBOARD_DATA 
 } from 'Actions/types';
 
 /**
@@ -17,7 +18,8 @@ import {
 const INIT_STATE = {
     user: false,
     loading: false,
-    permission: ''
+    permission: '',
+    dashboarddata: []
 };
 
 export default (state = INIT_STATE, action) => {
@@ -43,7 +45,8 @@ export default (state = INIT_STATE, action) => {
 
         case SIGNUP_USER_FAILURE:
             return { ...state, loading: false };
-
+        case ACTIVE_DASHBOARD_DATA:
+            return { ...state, dashboarddata: action.payload}
         default: return { ...state };
     }
 }

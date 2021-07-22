@@ -97,7 +97,7 @@ class Subscription extends Component {
                         data['g'] = sub['pkg'];
                         localStorage.setItem('extime',JSON.stringify(data));
                         localStorage.removeItem('tmp_subs');
-                        this.props.history.push(Location.pathname);
+                        window.location.assign(Location.pathname);
                     }
                 })
                 

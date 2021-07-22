@@ -17,7 +17,7 @@ const ChatSidebar = () => (
    <div className="chat-sidebar rct-customizer">
       <AppBar position="static" color="primary">
          <Toolbar>
-            <Typography variant="title" color="inherit">
+            <Typography color="inherit">
                Chat
             </Typography>
          </Toolbar>

@@ -11,11 +11,7 @@
  import {Checkbox,FormControlLabel} from '@material-ui/core';
  import LinearProgress from '@material-ui/core/LinearProgress';
  import QueueAnim from 'rc-queue-anim';
- import { Fab } from '@material-ui/core';
 import { NotificationManager } from 'react-notifications';
- 
- // components
- import { SessionSlider } from 'Components/Widgets';
  
  // app config
  import AppConfig from 'Constants/AppConfig';

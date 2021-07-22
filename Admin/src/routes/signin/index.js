@@ -49,7 +49,7 @@ class SignIn extends Component {
             window.localStorage.setItem('extime',JSON.stringify(time));
             NotificationManager.success("You logined successfully!");
             this.props.logined(res.data.data.permission);
-            this.props.history.push(`/${res.data.data.permission}`);
+            window.location.assign(`/${res.data.data.permission}`);
          }).catch(res=>{
             if (res) NotificationManager.error('Your info is invalid!');
          })

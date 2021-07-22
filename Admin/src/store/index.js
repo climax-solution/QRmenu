@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import Thunk from 'redux-thunk';
 import reducers from '../reducers';
-import Axios from 'axios';
+import axios from 'axios';
 import { StepIcon } from '@material-ui/core';
+import { ACTIVE_DASHBOARD_DATA } from '../actions/types';
 
 export function configureStore(initialState) {
 
@@ -18,15 +19,36 @@ export function configureStore(initialState) {
         const old = data['t'];
         const time = new Date();
         const now = time.getTime();
-        if ( now - old > 72000000) {
+        if ( now - old > 36000000) {
             localStorage.removeItem('extime');
             localStorage.removeItem('token');
             store.dispatch({type: 'LOGIN_USER_FAILURE'});
-            axios.post(REACT_APP_BACKEND_API + str['p'] == 'admin' ? 'admindashboard' : 'vendordashboard').then(res=>{
-                
-            })
+            console.log('STR',str);
         }
         else {
+            if ( data['p'] == 'admin' ) {
+                axios.post(REACT_APP_BACKEND_API + 'admindashboard').then(res=>{
+                    store.dispatch({
+                        type: ACTIVE_DASHBOARD_DATA,
+                        payload: res.data
+                    })
+                })
+            }
+            else {
+                const headers = {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+                axios.post(REACT_APP_BACKEND_API + 'vendordashboard', {}, headers).then(res=>{
+                    store.dispatch({
+                        type: ACTIVE_DASHBOARD_DATA,
+                        payload: res.data
+                    })
+                })
+            }
             store.dispatch({type: 'LOGIN_USER_SUCCESS',permission: data['p'], activedpkg: data['g'] });
         }
 

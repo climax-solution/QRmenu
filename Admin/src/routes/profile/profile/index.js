@@ -205,7 +205,7 @@ export default class Profile extends Component {
                                     />
                                 </div>
                                 <div className="col-md-6 mt-20">
-                                    <InputLabel>Instagarm</InputLabel>
+                                    <InputLabel>Instagram</InputLabel>
                                     <Input
                                         id="instagram"
                                         type="text"

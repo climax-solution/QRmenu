@@ -82,8 +82,7 @@ import { auth } from 'firebase';
 		  $('.dashboard-overlay').addClass('d-none');
 		  $('body').css('overflow', '');
 	   });
-	   const { horizontalMenu, agencyMenu, location,match, permission } = this.props;
-	   console.log(this.props)
+	   const { horizontalMenu, agencyMenu, location, match, permission } = this.props;
 	   return (
 		  <AppBar position="static" className="rct-header">
 			 <Toolbar className="d-flex justify-content-between w-100 pl-0">
@@ -120,13 +119,13 @@ import { auth } from 'firebase';
 				   }
 				</div>
 				<ul className="navbar-right list-inline mb-0">
-				   <li className="list-inline-item summary-icon">
+				   {/* <li className="list-inline-item summary-icon">
 					  <Tooltip title="Summary" placement="bottom">
 						 <a href="#" className="header-icon tour-step-3" onClick={() => this.openDashboardOverlay()}>
 							<i className="zmdi zmdi-info-outline"></i>
 						 </a>
 					  </Tooltip>
-				   </li>
+				   </li> */}
 				   <LanguageProvider />
 				   {permission == 'vendor' && <Notifications match={match}/>}
 				   <li className="list-inline-item">

@@ -76,16 +76,6 @@ export default class BackUpDB extends Component {
                 name: "Phone"
             },
             {
-                name: "OrderType",
-                // options:{
-                //     customBodyRender: (value, tableMeta, updateValue) => (
-                //         (value == 'Pending'
-                //         ?<Badge color="primary" badgeContent={"Pending"} className="badge-pill"></Badge>
-                //         : value)
-                //     )
-                // }
-            },
-            {
                 name: "Status",
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (

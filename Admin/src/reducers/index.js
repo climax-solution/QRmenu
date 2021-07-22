@@ -13,10 +13,10 @@ import pkgmanagement from './PkgManagement';
 
 const reducers = combineReducers({
   settings,
-  chatAppReducer,
-  emailApp: emailAppReducer,
+  // chatAppReducer,
+  // emailApp: emailAppReducer,
   sidebar: sidebarReducer,
-  todoApp: todoAppReducer,
+  // todoApp: todoAppReducer,
   authUser: authUserReducer,
   feedback: feedbacksReducer,
   pkgmange: pkgmanagement,
