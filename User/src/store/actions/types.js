@@ -1,4 +1,5 @@
 export const AUTH = 'AUTH';
+export const SET_EMAIL = "SET_EMAIL";
 
 export const GET_ITEMS = "GET_ITEMS";
 export const GET_CATEGORIES = "GET_CATEGORIES";

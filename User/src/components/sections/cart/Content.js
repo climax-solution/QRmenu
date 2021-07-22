@@ -17,7 +17,7 @@ class Content extends Component {
         if (props.cart_list == null ) props.history.push('/');
         this.state = {
             priceTotal: this.props.cart_list[window.location.host].reduce((totalPrice, item) => totalPrice + Number(item.price) * item.qty, 0),
-            cartitem: this.props.cart_list[window.location.host],
+            cartitem: this.props.cart_list ? this.props.cart_list[window.location.host] : [],
             ordertypelist: [],
             typename: ['Kontantbetaling ved levering','Bestilling','Henting'],
             formData: {

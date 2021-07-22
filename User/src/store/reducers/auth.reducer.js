@@ -11,6 +11,9 @@ export default (state = initialState, action) => {
                 ...state
             }
         default:
-            return state;
+            return {
+                ...state
+            };
+            break;
     }
 }
