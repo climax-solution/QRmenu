@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import cartitem from '../../../data/cartlist.json';
-import { Accordion, NavLink } from 'react-bootstrap';
 
 const priceTotal = cartitem.reduce((totalPrice, item) => totalPrice + item.price * item.qty, 0);
 

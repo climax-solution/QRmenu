@@ -6,7 +6,7 @@ import validator from 'validator';
 import { NotificationManager, NotificationContainer } from 'react-notifications';
 import { Input, FormGroup, Label } from 'reactstrap';
 import { Modal, Button } from 'react-bootstrap';
-import swal from 'sweetalert';
+
 import { emptyCart, removeCart } from '../../../store/actions/cart.actions';
 // import Stripe from 'stripe';
 const tax = 9.99;

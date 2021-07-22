@@ -6,7 +6,6 @@ import Search from '../layouts/Search';
 import Mobilemenu from '../layouts/Mobilemenu';
 import Menu from './Menu';
 import classNames from 'classnames';
-import cartitem from '../../data/cartlist.json';
 import { connect } from 'react-redux';
 
 class Headerinner extends HeaderComponent {

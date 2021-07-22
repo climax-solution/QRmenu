@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import { home as bannerpost } from '../../../data/banner.json'
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { getCategories, getItems, getSpecialities } from '../../../store/actions/content.actions';
 
 class Banner extends Component {
