@@ -13,6 +13,7 @@ import AppConfig from 'Constants/AppConfig';
 import Axios from 'axios';
 import validator from 'validator';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 class SignIn extends Component {
    state = {
@@ -60,6 +61,11 @@ class SignIn extends Component {
    }
    render() {
       return (
+         <div>
+            <Helmet>
+               <title>Sign in </title>
+               <meta name="description" content="Reactify Blank Page" />
+            </Helmet>
          <QueueAnim type="bottom" duration={2000}>
             <div className="rct-session-wrapper" key="1" style={{overflow:'hidden'}}>
                <AppBar position="static" className="session-header">
@@ -106,6 +112,7 @@ class SignIn extends Component {
                </div>
             </div>
          </QueueAnim>
+         </div>
       );
    }
 }
