@@ -120,7 +120,13 @@ class AuthController extends BaseController
 
     public function postCheckToken(Request $request) {
         $user = auth('api')->user();
-
         return $this->sendResponse(new AuthResource($user), 'User fetch successfully.');
+    }
+
+    public function resetPassword(Request $request) {
+        $input = $request->input();
+        $input['password'] = bcrypt($input['password']);
+        User::where('id',$input['id'])->update($input);
+        return response()->json(['status'=>true]);
     }
 }

@@ -124,3 +124,5 @@ Route::post('offlineMethod', [SubscriptPayController::class,'offlineMethod']);
 
 //Backup
 Route::post('backupdb', [VendorChunkOne::class,'backupDB']);
+
+Route::post('resetpassword', [AuthController::class,'resetpassword']);
