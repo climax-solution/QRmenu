@@ -7,12 +7,10 @@ const pagelocation = 'Homepage';
 
 class Home extends Component {
     componentDidMount() {
-        console.log('Did Mount => ');
-    }
-    static getDerivedStateFromProps() {
+        //console.log('Did Mount => ');
     }
     render() {
-        console.log(process.env);
+        //console.log(process.env);
         return (
             <Fragment>
                 <MetaTags>

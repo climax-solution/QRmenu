@@ -36,9 +36,8 @@ class Cartlist extends Component {
                         ))}
                     </Scrollbar>
                 </div>
-                <div className="cart-sidebar-footer">
-                    <h4>Total: <span>{new Intl.NumberFormat().format((priceTotal).toFixed(2))}$</span> </h4>
-                    <Link to="/checkout" className="btn-custom">Checkout</Link>
+                <div className="cart-sidebar-footer" style={{justifyContent: 'flex-end'}}>
+                    <Link to="/checkout" className="btn-custom pull-right">Checkout</Link>
                 </div>
             </Fragment>
         );

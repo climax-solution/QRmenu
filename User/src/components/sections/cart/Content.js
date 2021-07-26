@@ -58,7 +58,7 @@ class Content extends Component {
     }
 
     componentDidUpdate(preprops) {
-        const nowProps = this.props.cart_list[window.location.host];
+        const nowProps = !this.props.cart_list ? [] : this.props.cart_list[window.location.host];
         if (preprops.cart_list != this.props.cart_list) {
             this.setState({
                 cartitem: nowProps
@@ -148,6 +148,7 @@ class Content extends Component {
            const { status } = res.data;
            if (status) {
                NotificationManager.success('Successfully Ordered!');
+               setTimeout(3000);
                this.props.emptyCart();
             }
            else NotificationManager.error('Failure!');
@@ -368,101 +369,6 @@ class Content extends Component {
                     </div>
                     {/* Cart form End */}
                 </div>
-                <Modal
-                    show={modalshow}
-                    onHide={this.modalToggle}
-                    backdrop="static"
-                    keyboard={false}
-                    size="lg"
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Stripe Payment</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="row">
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <FormGroup>
-                                    <Label for="cardnumber">Card Number</Label>
-                                    <Input
-                                        type="text"
-                                        name="cardnumber"
-                                        placeholder="Card Number"
-                                        value={stripeInput.card_number}
-                                        onChange={
-                                            (e)=>this.setState({
-                                                stripeInput: {
-                                                    ...stripeInput,
-                                                    card_number: e.target.value
-                                                }
-                                            })
-                                        }
-                                    />
-                                </FormGroup>
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <FormGroup>
-                                    <Label for="cvc">CVC</Label>
-                                    <Input
-                                        type="text"
-                                        name="cvc"
-                                        placeholder="ex.311"
-                                        value={stripeInput.cvc}
-                                        onChange={
-                                            (e)=>this.setState({
-                                                stripeInput:{
-                                                    ...stripeInput,
-                                                    cvc: e.target.value
-                                                }
-                                            })
-                                        }
-                                    />
-                                </FormGroup>
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <FormGroup>
-                                    <Label for="expire_mm">Expiration Month</Label>
-                                    <Input
-                                        type="text"
-                                        name="expire_mm"
-                                        placeholder="MM"
-                                        value={stripeInput.expire_mm}
-                                        onChange={
-                                            (e)=>this.setState({
-                                                stripeInput:{
-                                                    ...stripeInput,
-                                                    expire_mm: e.target.value
-                                                }
-                                            })
-                                        }
-                                    />
-                                </FormGroup>
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <FormGroup>
-                                    <Label for="expire_yy">Expiration Year</Label>
-                                    <Input
-                                        type="text"
-                                        name="expire_yy"
-                                        placeholder="YYYY"
-                                        value={stripeInput.expire_yy}
-                                        onChange={
-                                            (e)=>this.setState({
-                                                stripeInput:{
-                                                    ...stripeInput,
-                                                    expire_yy: e.target.value
-                                                }
-                                            })
-                                        }
-                                    />
-                                </FormGroup>
-                            </div>
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={()=>this.modalToggle()} variant="secondary">Cancel</Button>
-                        <Button variant="primary" onClick={()=>this.payByStripe()}>Submit</Button>
-                    </Modal.Footer>
-                </Modal>
             </section>
         );
     }

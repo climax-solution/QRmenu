@@ -51,7 +51,7 @@ class Header extends HeaderComponent {
                 </aside>
                 <div className="aside-overlay aside-trigger" onClick={this.toggleNav} />
                 {/* Header Start */}
-                <header className="main-header header-1 header-absolute">
+                <header className="main-header header-1">
                     <div className="container">
                         <nav className="navbar">
                             {/* Logo */}

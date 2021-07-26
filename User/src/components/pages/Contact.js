@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import MetaTags from "react-meta-tags";
-import Header from '../layouts/Headerthree';
+import Header from '../layouts/Header';
 import Footer from '../layouts/Footer';
 import Content from '../sections/contact/Content';
 
@@ -17,7 +17,7 @@ class Contact extends Component {
                         content="#"
                     />
                 </MetaTags> 
-                <Header/>
+                <Header style={{position: 'relative'}}/>
                 <Content/>
                 <Footer footer={{ style:"ct-footer footer-dark", logo:"assets/img/qrcode.png" }} />
             </Fragment>
