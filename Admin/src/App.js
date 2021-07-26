@@ -19,7 +19,7 @@ import App from './container/App';
 import { configureStore } from './store';
 
 const MainApp = () => (
-	<Provider store={configureStore()} loading={null}>
+	<Provider store={configureStore()}>
 		<MuiPickersUtilsProvider utils={MomentUtils}>
 			<Router>
 				<Switch>
