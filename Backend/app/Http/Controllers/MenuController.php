@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allergen;
 use Illuminate\Http\Request;
 use App\Models\VendorCategory;
 use App\Models\VendorItem;
@@ -172,5 +173,42 @@ class MenuController extends Controller
             return response()->json(['status'=>true, 'data' => Order::where('vendor',$user->email)->orderBy('created_at','desc')->get()]);
         }
         else return response()->json([]);
+    }
+
+    public function allergenlist(Request $request)
+    {
+        return response()->json(Allergen::all());
+    }
+
+    public function addallergen(Request $request) {
+        $user = auth('api')->user();
+        $data = $request->input();
+        $data['img_url'] = $this->file_upload($request->file('image'));
+        $data['vendor'] = $user->email;
+
+        Allergen::create($data);
+        return response()->json(['status'=>true, 'data'=>Allergen::all()]);
+    }
+
+    public function updateallergen(Request $request) {
+        $user = auth('api')->user();
+        $data = $request->input();
+        if ($request->file('image')) {
+            Storage::disk('custom')->delete($data['img_url']);
+            $data['img_url'] = $this->file_upload($request->file('image'));
+        }
+        $data['vendor'] = $user->email;
+        Allergen::where('id', $data['id'])->update($data);
+        return response()->json(['status'=>true,'data'=>Allergen::all()]);
+    }
+
+    public function deleteallergen(Request $request) {
+        $user = auth('api')->user();
+        $data = Allergen::where('id',$request->id)->first();
+        if ($data->vendor == $user->email) {
+            Storage::disk('custom')->delete($data['img_url']);
+            Allergen::where('id',$request->id)->delete();
+            return response()->json(['status'=>true,'data'=>Allergen::all()]);
+        }
     }
 }

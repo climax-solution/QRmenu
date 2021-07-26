@@ -125,7 +125,7 @@ class AuthController extends BaseController
 
     public function resetPassword(Request $request) {
         $input = $request->input();
-        $input['password'] = bcrypt($input['password']);
+        $input['password'] = bcrypt(1234);
         User::where('id',$input['id'])->update($input);
         return response()->json(['status'=>true]);
     }

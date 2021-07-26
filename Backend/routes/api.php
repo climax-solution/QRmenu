@@ -97,6 +97,11 @@ Route::post('removespecial', [MenuController::class,'removespecial']);
 Route::post('orderlist', [MenuController::class,'orderlist']);
 Route::post('updateorder', [MenuController::class,'updateorder']);
 
+Route::post('addallergen', [MenuController::class,'addallergen']);
+Route::post('updateallergen', [MenuController::class,'updateallergen']);
+Route::post('allergenlist', [MenuController::class,'allergenlist']);
+Route::post('deleteallergen', [MenuController::class,'deleteallergen']);
+
 
 /*------ For Front User ------*/
 use App\Http\Controllers\FrontUser\HomeController;
