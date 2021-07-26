@@ -23,10 +23,6 @@ import { FormControl, Input } from '@material-ui/core';
     state = {
         source:[],
         tmp: [],
-        open: false,
-        password: '',
-        confpassword: '',
-        activeIndex: -1
     }
     componentDidMount() {
         Axios.get(REACT_APP_BACKEND_API + 'restaurantlist').then(res=>{
@@ -73,44 +69,17 @@ import { FormControl, Input } from '@material-ui/core';
         })
     }
 
-    modalOpen(index) {
-        this.setState({
-            open: true,
-            activeIndex: this.state.tmp[index].id
-        })
-    }
-    modalClose() {
-        this.setState({
-            open: false,
-            activeIndex: -1
-        })
-        this.formatPassword();
-    }
-    formatPassword() {
-        this.setState({
-            password: '',
-            confpassword: ''
-        })
-    }
-    resetPassword() {
-        const { password, confpassword, activeIndex } = this.state;
-        if (password != confpassword) {
-            NotificationManager.warning('Confirm Password!');
-            return;
-        }
+    resetPassword(index) {
         const senddata = {
-            password: this.state.password,
-            id: activeIndex
+            id: this.state.tmp[index].id
         }
         
         Axios.post(REACT_APP_BACKEND_API + 'resetpassword', senddata).then(res=>{
             const { data } = res;
-            if (data.status) NotificationManager.success('Success');
-            this.modalClose();
+            if (data.status) NotificationManager.success('Password is 1234');
         })
         .catch(err=>{
             NotificationManager.success('Failure');
-            this.modalClose();
         })
     }
      render() {
@@ -132,7 +101,7 @@ import { FormControl, Input } from '@material-ui/core';
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
-                            <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.modalOpen(tableMeta.rowIndex)}><i className="zmdi zmdi-lock-outline"></i></MatButton>
+                            <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.resetPassword(tableMeta.rowIndex)}><i className="zmdi zmdi-lock-outline"></i></MatButton>
                             {value == 0 ? <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.updatestatus(tableMeta.rowIndex, 1)}><i className="zmdi zmdi-flash"></i></MatButton>
                             : <MatButton variant="contained" className="mr-10 mb-10 text-white btn-danger btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.updatestatus(tableMeta.rowIndex, 0)}> <i className="zmdi zmdi-flash-off"></i></MatButton>}
                         </div>
@@ -161,44 +130,6 @@ import { FormControl, Input } from '@material-ui/core';
 						options={options}
 					/>
 				</RctCollapsibleCard>
-                <Dialog
-                    open={open}
-                    aria-labelledby="scroll-dialog-title"
-                    aria-describedby="scroll-dialog-description"
-                >
-                    <DialogTitle id="scroll-dialog-title">Reset Password</DialogTitle>
-                    <DialogContent>
-                    <DialogContentText
-                        id="scroll-dialog-description"
-                        tabIndex={-1}
-                    >
-                        <FormControl>
-                            <TextField
-                                placeholder="New Password"
-                                value={password}
-                                onChange={(e)=>this.setState({password: e.target.value})} type="password"
-                                key="0"
-                            />
-                            <TextField
-                                placeholder="Confirm Password"
-                                className="mt-30"
-                                value={confpassword}
-                                onChange={(e)=>this.setState({confpassword: e.target.value})}
-                                type="password"
-                                key="1"
-                            />
-                        </FormControl>
-                    </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                    <MatButton onClick={()=>this.modalClose()} color="primary">
-                        Cancel
-                    </MatButton>
-                    <MatButton onClick={()=>this.resetPassword()} color="primary">
-                        Submit
-                    </MatButton>
-                    </DialogActions>
-                </Dialog>
              </div>
          );
      }

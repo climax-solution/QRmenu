@@ -77,11 +77,11 @@ export default [
       component: OrderItem,
       divide: ['/vendor']
    },
-   {
-      path: 'reservationitem/:id',
-      component: OrderItem,
-      divide: ['/vendor']
-   },
+   // {
+   //    path: 'reservationitem/:id',
+   //    component: OrderItem,
+   //    divide: ['/vendor']
+   // },
    {
       path: 'reservation',
       component: Reservation,

@@ -104,10 +104,10 @@ export default {
             //    "path": "/vendor/menu/qrbuilder",
             //    "menu_title": "sidebar.qrbuilder"
             // },
-            // {
-            //    "path": "/vendor/menu/allergens",
-            //    "menu_title": "sidebar.allergens"
-            // }
+            {
+               "path": "/vendor/menu/allergens",
+               "menu_title": "sidebar.allergens"
+            }
          ]
       }
    ],
