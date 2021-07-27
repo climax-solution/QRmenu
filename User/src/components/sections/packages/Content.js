@@ -7,6 +7,7 @@ import products from "../../../data/product.json";
 import productcategory from "../../../data/productcategory.json";
 import { Rating } from "../../../helper/helper";
 import Masonry from 'react-masonry-component';
+import axios from 'axios';
 
 class Content extends Component {
     constructor(props) {
@@ -15,8 +16,17 @@ class Content extends Component {
             modalshow: false,
             lastActiveBox: -1,
             filteredProducts: products,
-            activeItem: -1
+            activeItem: -1,
+            package_list: []
         };
+    }
+    componentDidMount() {
+        axios.post(process.env.REACT_APP_BACKEND_API + 'user/getpackagelist',{}).then(res=>{
+            const { data } = res;
+            this.setState({
+                package_list: data
+            })
+        })
     }
     render() {
         return (
@@ -24,6 +34,7 @@ class Content extends Component {
                 {/* Menu Wrapper Start */}
                 <div className="section section-padding">
                     <div className="container">
+
                     {/* <form style={{overflow:'hidden'}}>
                         <div className="row">
                             <div className="form-group col-lg-6 offset-lg-3">

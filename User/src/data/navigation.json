@@ -10,6 +10,11 @@
         "link":"/menu"
     },
     {
+        "id":5,
+        "linkText":"Package",
+        "link":"/package"
+    },
+    {
         "id": 34,
         "link": "/specialities",
         "linkText": "Specialities"
