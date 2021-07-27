@@ -85,8 +85,13 @@ Route::post('removecategory', [MenuController::class, 'removecategory']);
 
 Route::post('createitem', [MenuController::class, 'createitem']);
 Route::post('itemlist', [MenuController::class, 'itemlist']);
-Route::post('updateitem', [MenuController::class, 'updateitem']);
+Route::post('updateproduct', [MenuController::class, 'updateproduct']);
 Route::post('removeitem', [MenuController::class, 'removeitem']);
+
+Route::post('createdrink', [MenuController::class, 'createdrink']);
+Route::post('drinklist', [MenuController::class, 'drinklist']);
+Route::post('updatedrink', [MenuController::class, 'updatedrink']);
+Route::post('removedrink', [MenuController::class, 'removedrink']);
 
 Route::post('speciallist', [MenuController::class,'speciallist']);
 Route::post('createspecial', [MenuController::class,'createspecial']);
@@ -115,6 +120,7 @@ Route::post('user/getordertypelist', [HomeController::class, 'getordertypelist']
 Route::post('user/placeorder', [HomeController::class, 'placeorder']);
 Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
 Route::post('user/getuseremail', [HomeController::class, 'getuseremail']);
+Route::post('user/getpackagelist', [HomeController::class, 'getpackagelist']);
 
 //Payment Integration
 
