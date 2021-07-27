@@ -8,6 +8,7 @@ use App\Models\VendorCategory;
 use App\Models\VendorItem;
 use App\Models\VendorSpecial;
 use App\Models\Order;
+use App\Models\VendorPackage;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -76,7 +77,7 @@ class MenuController extends Controller
         }
     }
 
-    public function updateitem(Request $request) {
+    public function updateproduct(Request $request) {
         $user = auth('api')->user();
         if ($user) {
             $data = $request->input();
@@ -84,6 +85,7 @@ class MenuController extends Controller
                 Storage::disk('custom')->delete($data['img_url']);
                 $data['img_url'] = $this->file_upload($request->file('image'));
             }
+            unset($data['image']);
             $data['vendor'] = $user->email;
             VendorItem::where(['vendor'=>$user->email, 'id'=>$data['id']])->update($data);
             return response()->json(['status'=>true,'data'=>VendorItem::where('vendor',$user->email)->get()]);
@@ -209,6 +211,52 @@ class MenuController extends Controller
             Storage::disk('custom')->delete($data['img_url']);
             Allergen::where('id',$request->id)->delete();
             return response()->json(['status'=>true,'data'=>Allergen::all()]);
+        }
+    }
+
+    public function drinklist(Request $request) {
+        $user = auth('api')->user();
+        return response()->json(VendorPackage::where('vendor',$user->email)->get());
+    }
+
+    public function createdrink(Request $request) {
+        $user = auth('api')->user();
+        if ($user) {
+            try{
+                $data = $request->input();
+                $data['vendor'] = $user->email;
+                $data['img_url'] = $this->file_upload($request->file('image'));
+                VendorPackage::create($data);
+                return response()->json(['status'=>true,'data'=>VendorPackage::where('vendor',$user->email)->get()]);
+            }
+            catch(Exception $error) {
+                return response()->json(['status'=>false]);
+            }
+        }
+    }
+
+    public function updatedrink(Request $request) {
+        $user = auth('api')->user();
+        if ($user) {
+            $data = $request->input();
+            if ($request->file('image')) {
+                Storage::disk('custom')->delete($data['img_url']);
+                $data['img_url'] = $this->file_upload($request->file('image'));
+            }
+            $data['vendor'] = $user->email;
+            VendorPackage::where(['vendor'=>$user->email, 'id'=>$data['id']])->update($data);
+            return response()->json(['status'=>true,'data'=>VendorPackage::where('vendor',$user->email)->get()]);
+        }
+    }
+
+    public function removedrink(Request $request) {
+        $user = auth('api')->user();
+        if ($user) {
+            $data = $request->input();
+            $check = VendorPackage::where($data)->first();
+            Storage::disk('custom')->delete($check['img_url']);
+            $check = VendorPackage::where($data)->delete();
+            return response()->json(['status'=>true,'data'=>VendorPackage::where('vendor',$user->email)->get()]);
         }
     }
 }

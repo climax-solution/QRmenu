@@ -12,12 +12,9 @@ use App\Models\OrderConfiguration;
 use App\Models\Reservation;
 use App\Models\AvaibleDay;
 use App\Models\User;
+use App\Models\VendorPackage;
 use Validator;
 use Exception;
-use Srmklive\PayPal\Services\ExpressCheckout;
-use Stripe;
-use Razorpay\Api\Api;
-use Session;
 
 class HomeController extends Controller
 {
@@ -169,5 +166,10 @@ class HomeController extends Controller
         $res = User::where($input)->first();
         return response()->json(['email'=>$res->email]);
     }
-}
 
+    public function getpackagelist(Request $request) {
+        $input = $request->input();
+        $res = VendorPackage::where('vendor',$input['email'])->get();
+        return response()->json($res);
+    }
+}

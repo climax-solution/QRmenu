@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class VendorPackage extends Model
 {
+    protected $fillable = [
+        'id',
+        'package_name',
+        'img_url',
+        'price',
+        'vendor',
+        'details'
+    ];
+
     use HasFactory;
 }

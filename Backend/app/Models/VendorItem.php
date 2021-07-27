@@ -13,6 +13,7 @@ class VendorItem extends Model
         'vendor',
         'title',
         'img_url',
+        'allergen',
         'short_des',
         'more_des',
         'status',

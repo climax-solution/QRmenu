@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVendorItemsTable extends Migration
+class CreateVendorPackagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateVendorItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendor_items', function (Blueprint $table) {
+        Schema::create('vendor_packages', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('category')->nullable();
-            $table->string('price')->nullable();
-            $table->string('short_des')->nullable();
-            $table->string('more_des')->nullable();
+            $table->string('package_name')->nullable();
             $table->string('img_url')->nullable();
-            $table->boolean('status')->default(0);
-            $table->string('allergen')->nullable();
+            $table->string('price')->nullable();
             $table->string('vendor')->nullable();
+            $table->string('details')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ class CreateVendorItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendor_items');
+        Schema::dropIfExists('vendor_packages');
     }
 }
