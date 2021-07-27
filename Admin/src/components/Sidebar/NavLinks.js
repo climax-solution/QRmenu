@@ -92,10 +92,10 @@ export default {
                "path": "/vendor/menu/item",
                "menu_title": "sidebar.item"
             },
-            // {
-            //    "path": "/vendor/menu/package",
-            //    "menu_title": "sidebar.package"
-            // },
+            {
+               "path": "/vendor/menu/package",
+               "menu_title": "sidebar.package"
+            },
             {
                "path": "/vendor/menu/specialities",
                "menu_title": "sidebar.specialities"

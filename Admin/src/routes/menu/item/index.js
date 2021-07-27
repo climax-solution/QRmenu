@@ -39,19 +39,21 @@ export default class Item extends Component {
         category_list: [],
         activeCategory: '',
         item_list: [],
+        allergen_list: [],
         tmp: [],
         dialog: {
             category: '',
             title: '',
             short_des: '',
-            status: true,
+            status: 1,
             more_des: '',
             price: '',
+            allergen: '',
             image:''
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const headers = {
             'Accept':'application/json',
             'Content-type': 'application/json',
@@ -66,6 +68,17 @@ export default class Item extends Component {
             })
             this.setState({
                 category_list: category_list
+            })
+        })
+        Axios.post(REACT_APP_BACKEND_API + 'allergenlist').then(res=>{
+            const { allergen_list } = this.state;
+            const { data } = res;
+            data.map(item=>{
+                let row = { id: item.id, name: item.name};
+                allergen_list.push(row);
+            })
+            this.setState({
+                allergen_list: allergen_list
             })
         })
         Axios.post(REACT_APP_BACKEND_API + 'itemlist',{},{headers: headers}).then(res=>{
@@ -92,9 +105,9 @@ export default class Item extends Component {
         }
         for (let key in dialog ) {
             sendData.append(key, dialog[key]);
-            if (!dialog[key]) flag = 1;
+            if (activeIndex != -1 && key == 'image') continue;
+            if (!dialog[key] && key != 'allergen' ) flag = 1;
         }
-        sendData['status'] = dialog['status'];
         if (activeIndex != -1) {
             sendData.append('id', tmp[activeIndex].id);
             sendData.append('img_url', tmp[activeIndex].img_url);
@@ -103,7 +116,8 @@ export default class Item extends Component {
             NotificationManager.warning('Input is invalid. Please check!');
             return;
         }
-        Axios.post(`http://localhost:8000/api/${activeIndex == -1 ? 'createitem' : 'updateitem'}`,sendData,{headers: headers}).then(res=>{
+        
+        Axios.post(`${REACT_APP_BACKEND_API}${activeIndex == -1 ? 'createitem' : 'updateproduct'}`,sendData,{headers: headers}).then(res=>{
             if (res.data.status) {
                 NotificationManager.success('Sucess!');
                 this.resetStates(res.data.data);
@@ -158,14 +172,14 @@ export default class Item extends Component {
         Axios.post(REACT_APP_BACKEND_API + 'removeitem',{id: tmp[arg].id},{headers: headers}).then(res=>{
             const { data } = res;
             this.resetStates(data.data);
-            if (data.success) {
+            if (data.status) {
                 NotificationManager.success('Successfully Removed!');
             }
         })
     }
 
      render() {
-        const { category_list, dialog, item_list, activeCategory,activeIndex } = this.state;
+        const { category_list, dialog, item_list, activeCategory,activeIndex, allergen_list } = this.state;
 
         const columns = [
             {
@@ -186,7 +200,12 @@ export default class Item extends Component {
                 name: "Price"
             },
             {
-                name: "Status"
+                name: "Status",
+                options:{
+                    customBodyRender: (value,tableMeta) => (
+                        <span className="badge badge-success">Live</span>
+                    )
+                }
             },
             {
                 name: "Action",
@@ -233,7 +252,7 @@ export default class Item extends Component {
                  <Button className="btn btn-info text-white" variant="contained" onClick={this.handleClickOpen}>
                     <i className="ti-plus"></i> Add New
                 </Button>
-                <div style={{width: '250px'}} className="pull-right mb-0 mt-0 select-category">
+                {/* <div style={{width: '250px'}} className="pull-right mb-0 mt-0 select-category">
                     <span>Category: </span>
                     <FormControl style={{width: '50%'}}>
                         <Select
@@ -245,13 +264,13 @@ export default class Item extends Component {
                             {
                                 category_list.map(item=>{
                                     return (
-                                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                                        <MenuItem value={item.id} >{item.name}</MenuItem>
                                     )
                                 })
                             }
                         </Select>
                     </FormControl>
-                </div>
+                </div> */}
                 
                  <RctCollapsibleCard
                     heading="Items"
@@ -270,22 +289,45 @@ export default class Item extends Component {
                     <DialogContent>
                         <div className="row">                        
                             <div className="col-md-12">
-                                <FormControl margin="dense" fullWidth>
-                                    <InputLabel htmlFor="packagetype">Category</InputLabel>
-                                    <Select id="packagetype" value={dialog.category} onChange={(e)=>this.setState({
-                                            dialog: { ...dialog, category: e.target.value}
-                                        })
-                                    }>
-                                        <MenuItem value="">Select</MenuItem>
-                                        {
-                                            category_list.map(item=>{
-                                                return (
-                                                    <MenuItem value={item.id}>{item.name}</MenuItem>
-                                                )
-                                            })
-                                        }
-                                    </Select>
-                                </FormControl>
+                                <div className="row">
+                                    <div className="col-md-6 col-sm-12">
+                                        <FormControl margin="dense" fullWidth>
+                                            <InputLabel htmlFor="packagetype">Category</InputLabel>
+                                            <Select id="packagetype" value={dialog.category} onChange={(e)=>this.setState({
+                                                    dialog: { ...dialog, category: e.target.value}
+                                                })
+                                            }>
+                                                <MenuItem value="" key="0">Select</MenuItem>
+                                                {
+                                                    category_list.map((item, index)=>{
+                                                        return (
+                                                            <MenuItem value={item.id} key={index + 1}>{item.name}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                    <div className="col-md-6 col-sm-12">
+                                        <FormControl margin="dense" fullWidth>
+                                            <InputLabel htmlFor="packagetype">Allergen</InputLabel>
+                                            <Select id="packagetype" value={dialog.allergen} onChange={(e)=>this.setState({
+                                                    dialog: { ...dialog, allergen: e.target.value}
+                                                })
+                                            }>
+                                                <MenuItem value="" key="0">Select</MenuItem>
+                                                {
+                                                    allergen_list.map((item, index)=>{
+                                                        return (
+                                                            <MenuItem value={item.id} key={index + 1}>{item.name}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </div>
+                                
                                 <TextField margin="dense" id="title" label="Title" type="text" fullWidth value={dialog.title} onChange={(e)=>this.setState({ dialog:{...dialog, title: e.target.value}})}/>
                                 <TextField margin="dense" id="price" label="Price" type="text" fullWidth value={dialog.price} onChange={(e)=>this.setState({ dialog:{...dialog, price: e.target.value}})}/>
                                 <FormControl style={{display: 'block',padding:'10px 0px'}} className="mt-20" fullWidth>
