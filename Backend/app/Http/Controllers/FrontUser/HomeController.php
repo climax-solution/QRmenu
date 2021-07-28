@@ -16,8 +16,16 @@ use App\Models\VendorPackage;
 use Validator;
 use Exception;
 
+
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\LabelAlignment;
+
+
 class HomeController extends Controller
 {
+
+
     public function getspeciallist(Request $request) {
         $validate = $this->validation_check($request);
         if ($validate) {
@@ -147,13 +155,32 @@ class HomeController extends Controller
         try {
             $data = $request->input();
             $email = vendor_email($data['subdomain']);
+            $subdomain = $data['subdomain'];
             if ($email) {
                 unset($data['subdomain']);
                 unset($data['domain_url']);
                 $data['vendor'] = $email;
                 Order::create($data);
-                return response()->json(['status'=>true]);
+                $res = Order::where($data)->first();
+                $url = 'http://'. $subdomain .'/track-order?phone='.$res->phone.'&id='.$res->id;
+                $qrCode = new QrCode($url);
+                $qrCode->setSize(300);
+                $qrCode->setMargin(10);
+                $qrCode->setEncoding('UTF-8');
+                $qrCode->setWriterByName('png');
+                $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
+                $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
+                $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
+                $qrCode->setLogoSize(150, 200);
+                $qrCode->setValidateResult(false);
+                $qrCode->setRoundBlockSize(true);
+                $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
+                header('Content-Type: '.$qrCode->getContentType());
+                $file_name= '\/qrcode/'.time().'png';
+                $qrCode->writeFile(public_path($file_name));
+                return response()->json(['status'=>true, 'order_id'=>$res->id,'qrcode'=>$file_name]);
             }
+
             return response()->json(['status'=>false]);
         }
         catch (Exception $error) {
@@ -168,8 +195,27 @@ class HomeController extends Controller
     }
 
     public function getpackagelist(Request $request) {
-        $input = $request->input();
-        $res = VendorPackage::where('vendor',$input['email'])->get();
+        $data = $request->input();
+        $email = vendor_email($data['subdomain']);
+        $res = VendorPackage::where('vendor',$email)->get();
         return response()->json($res);
+    }
+
+    public function createQrCode(Request $request) {
+
+        $qrCode = new QrCode('');
+		$qrCode->setSize(300);
+		$qrCode->setMargin(10);
+		$qrCode->setEncoding('UTF-8');
+		$qrCode->setWriterByName('png');
+		$qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
+		$qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
+		$qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
+		$qrCode->setLogoSize(150, 200);
+		$qrCode->setValidateResult(false);
+		$qrCode->setRoundBlockSize(true);
+		$qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
+		header('Content-Type: '.$qrCode->getContentType());
+		$qrCode->writeFile(public_path('/qrcode.png'));
     }
 }

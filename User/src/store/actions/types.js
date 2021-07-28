@@ -10,4 +10,4 @@ export const REMOVE_CART = "REMOVE_CART";
 export const EMPTY_CART = "EMPTY_CART";
 
 export const GET_TIMELIST = "GET_TIMELIST";
-export const GET_PACKAGELIST = "GET_PACKAGELIST";
+export const SET_PACKAGELIST = "GET_PACKAGELIST";

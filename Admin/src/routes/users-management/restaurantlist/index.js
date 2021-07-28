@@ -83,9 +83,22 @@ import { FormControl, Input } from '@material-ui/core';
         })
     }
      render() {
+        const { tmp } = this.state;
         const columns = [
             {
-                name: "Name",                
+                name: "Name",
+                options: {
+                    customBodyRender: (value, meta) => {
+                        <a
+                            href={
+                                tmp[meta.rowIndex].subdomain
+                                ? 'https://'+tmp[meta.rowIndex].subdomain
+                                : '#'
+                        }>
+                            {value}
+                        </a>
+                    }
+                }
             },
             {
                 name: "Email Address",                

@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "beanstream/beanstream": "dev-master",
         "cartalyst/stripe-laravel": "^13.1",
+        "endroid/qr-code": "~3.9",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -16,6 +17,7 @@
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "razorpay/razorpay": "^2.7",
+        "simplesoftwareio/simple-qrcode": "~4",
         "srmklive/paypal": "~1.6",
         "stancl/tenancy": "^3.4",
         "stripe/stripe-php": "^7.89"
