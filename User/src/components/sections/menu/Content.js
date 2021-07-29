@@ -12,6 +12,8 @@ import { getCategories, getItems } from '../../../store/actions/content.actions'
 import { addCart } from '../../../store/actions/cart.actions';
 import { GET_ITEMS } from '../../../store/actions/types';
 import axios from 'axios';
+import ReactHtmlParser from 'html-react-parser';
+
 class Content extends Component {
     constructor(props) {
         super(props);

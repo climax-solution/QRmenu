@@ -10,7 +10,8 @@ import Masonry from 'react-masonry-component';
 import axios from 'axios';
 import { getPackageList } from '../../../store/actions/package.action';
 import { connect } from 'react-redux';
-
+import { addCart } from '../../../store/actions/cart.actions';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'html-react-parser';
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -52,20 +53,17 @@ class Content extends Component {
                             package_list.map((item, i)=>{
                                 return <div key={i} className="col-lg-4 col-md-6 masonry-item sides">
                                     <div className="product">
-                                        <div className="favorite">
-                                            <i className="far fa-heart" />
-                                        </div>
                                         <Link className="product-thumb" to="#">
                                             <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.name} />
                                         </Link>
                                         <div className="product-body">
                                             <div className="product-desc">
                                                 <h4> <Link to="#">{item.package_name}</Link></h4>
-                                                <p>{item.details}</p>
+                                                {ReactHtmlParser(item.details)}
                                             </div>
                                             <div className="product-controls">
                                                 <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
-                                                <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item,'item')}>Add cart <i className="fas fa-shopping-cart" /> </Link>
+                                                <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item,'package')}>Add cart <i className="fas fa-shopping-cart" /> </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -103,6 +101,8 @@ const mapToStateProps = ({ drink }) => ({
 })
 
 const mapStateToDispatch = dispatch =>({
-    getPackageList: () => dispatch(getPackageList())
+    getPackageList: () => dispatch(getPackageList()),
+    addCart: (item, type) => dispatch(addCart(item, type)),
+
 })
 export default connect(mapToStateProps, mapStateToDispatch)(Content);

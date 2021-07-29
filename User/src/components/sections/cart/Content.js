@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,withRouter } from 'react-router-dom';
+import { Link,Route,withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import validator from 'validator';
@@ -7,10 +7,29 @@ import { NotificationManager, NotificationContainer } from 'react-notifications'
 import { Input, FormGroup, Label } from 'reactstrap';
 import { Modal, Button } from 'react-bootstrap';
 
-import { emptyCart, removeCart } from '../../../store/actions/cart.actions';
+import { addCart, emptyCart, removeCart } from '../../../store/actions/cart.actions';
+import swal from '@sweetalert/with-react';
 // import Stripe from 'stripe';
 const tax = 9.99;
 
+const Sample = () => {
+    return (
+        <div>
+        <div className="text-center">
+            <img src="http://localhost:8000/qrcode/1627548859.png" alt="234" className="w-50"/>
+        </div>
+        <div className="text-center">
+            {/* <a className="badge badge-success" href={process.env.REACT_APP_BACKEND_HOST+ qrcode} download>Download</a> */}
+            <button className="badge badge-success download-btn" onClick={alert()}>
+                Download
+            </button>
+            <a href="http://localhost:8000/qrcode/1627548859.png" download="test.png" target="__blank">Download1</a>
+        </div>
+        <div className="text-center">
+        </div>
+    </div>
+    )
+}
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -86,34 +105,69 @@ class Content extends Component {
         return list;
     }
 
+    runAlert = () =>{
+        alert('dddd')
+    }
+
+
     placeOrder() {
+        swal({
+            buttons: {
+                cancel: "Close",
+                download: "Download",
+            },
+            content: (
+                <div>
+                    {/* <div className="text-center">
+                        <img src={process.env.REACT_APP_BACKEND_HOST+ qrcode} alt="234" className="w-50"/>
+                    </div>
+                    <div className="text-center">
+                        <p>Your Order Id: {order_id}</p>
+                    </div> */}
+                </div>
+            )
+        }).then((value) => {
+            switch (value) {
+           
+              case "cancel":
+                break;
+
+              default:
+                this.download();
+            }
+        });
         const { formData } = this.state;
         let flag = 0;
         for(let key in formData) {
             if (formData[key] == '' || key == 'email' && !validator.isEmail(formData[key])) flag = 1;
         }
-
+        console.log(flag);
         switch(formData.order_type) {
-            case 1:
-                if (this.state.activePerson == '' || !validator.isDate(this.state.date_time))
+            case '1':
+                if ( !this.state.activePerson || !this.state.date_time) {
                     flag = 1;
+                }
                 break;
-            case 2:
+            case '2':
                 // if (!validator.isDate(this.state.time))
                     // flag = 1;
+
                 break;
-            case 3:
+            case '3':
                 break;
-            case 4: 
-                if (this.state.activeTable == '' || this.state.activePerson == '') 
+            case '4': 
+                if (this.state.activeTable == '' || this.state.activePerson == '') {
+
                     flag = 1;
+                }
                 break;
             default:
-                if (this.state.address == '' || this.state.google_map == '')
+                if (this.state.address == '' || this.state.google_map == '') {
+
                     flag = 1;
+                }
                 break;
         }
-
 
         if (flag) {
             NotificationManager.warning('Input is invalid');
@@ -145,23 +199,68 @@ class Content extends Component {
         formData['carts'] = JSON.stringify(this.props.cart_list[window.location.host]);
         formData['total'] = this.state.priceTotal;
         axios.post(process.env.REACT_APP_BACKEND_API + 'user/placeorder',formData).then(res=>{
-           const { status } = res.data;
+           const { status, order_id, qrcode } = res.data;
            if (status) {
                NotificationManager.success('Successfully Ordered!');
-               setTimeout(3000);
-               this.props.emptyCart();
+                swal({
+                    buttons: {
+                        cancel: "Close",
+                        download: "Download",
+                    },
+                    content: (
+                        <div>
+                            <div className="text-center">
+                                <img src={process.env.REACT_APP_BACKEND_HOST+ qrcode} alt="234" className="w-50"/>
+                            </div>
+                            <div className="text-center">
+                                <p>Your Order Id: {order_id}</p>
+                            </div>
+                        </div>
+                    )
+                }).then((value) => {
+                    switch (value) {
+                   
+                      case "cancel":
+                        break;
+
+                      default:
+                        this.download(process.env.REACT_APP_BACKEND_HOST+ qrcode);
+                        setTimeout(3000);
+                        this.props.emptyCart();
+                    }
+                });
             }
            else NotificationManager.error('Failure!');
         }) 
     }
+    
+    download = (links) => {
+        axios.get(links,{
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
+          .then(response => {
+            response.arrayBuffer().then(function(buffer) {
+              const url = window.URL.createObjectURL(new Blob([buffer]));
+              const link = document.createElement("a");
+              link.href = url;
+              link.setAttribute("download", "image.png"); //or any other extension
+              document.body.appendChild(link);
+              link.click();
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    };
     render() {
+        
         const {
             cartitem,
             ordertypelist,
             typename,
-            formData, 
-            modalshow,
-            stripeInput
+            formData,
         } = this.state;
         return (
             <section className="section">

@@ -5,6 +5,7 @@
   "main": "lib/index",
   "types": "lib/index",
   "dependencies": {
+    "@sweetalert/with-react": "^0.1.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
@@ -12,6 +13,7 @@
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
     "history": "^5.0.0",
+    "html-react-parser": "^1.2.7",
     "jquery": "^3.5.1",
     "leaflet": "^1.7.1",
     "leaflet.markercluster": "^1.4.1",
@@ -36,6 +38,7 @@
     "react-scroll": "^1.8.1",
     "react-scroll-to-top": "^1.0.5",
     "react-slick": "^0.27.14",
+    "react-url-image-downloader": "0.0.1",
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
