@@ -10,6 +10,7 @@ use App\Models\Reservation;
 use App\Models\Order;
 use App\Models\TransactionHistory;
 use App\Models\VendorItem;
+use App\Models\VendorPackage;
 use App\Models\VendorSpecial;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -112,12 +113,16 @@ class VendorChunkOne extends Controller
                 $ITEMS = VendorItem::where('id',$item->id)->first();
                 $item->item_name = $ITEMS->title;
             }
-            else {
+            else if ($item->type == 'special'){
                 $ITEMS = VendorSpecial::where('id',$item->id)->first();
                 $item->item_name = $ITEMS->special_name;
             }
+            else {
+                $ITEMS = VendorPackage::where('id',$item->id)->first();
+                $item->item_name = $ITEMS->package_name;
+            }
         }
-        return response()->json($data);
+        return response()->json(['data' => $data, 'src' => $src]);
     }
 
     public function backupDB(){

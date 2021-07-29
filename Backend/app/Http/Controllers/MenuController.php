@@ -172,7 +172,7 @@ class MenuController extends Controller
         if ($user) {
             $data = $request->input();
             Order::where(['vendor'=>$user->email,'id'=>$data['id']])->update($data);
-            return response()->json(['status'=>true, 'data' => Order::where('vendor',$user->email)->orderBy('created_at','desc')->get()]);
+            return response()->json(['status'=>true, 'data' => Order::where('vendor',$user->email)->orderBy('created_at','desc')->get(),'src'=>Order::where(['vendor'=>$user->email,'id'=>$data['id']])->first()]);
         }
         else return response()->json([]);
     }

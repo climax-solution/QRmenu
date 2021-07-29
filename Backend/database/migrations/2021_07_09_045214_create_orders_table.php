@@ -30,7 +30,7 @@ class CreateOrdersTable extends Migration
             $table->string('table_guest')->nullable();
             $table->string('total')->nullable();
             $table->text('carts')->nullable();
-            $table->enum('status',['-1','0','1','2','3'])->default('1');
+            $table->enum('status',['-1','0','1','2','3'])->default('0');
             $table->enum('paid_status',['0','1'])->default('0');
             $table->boolean('view_status')->default('0');
             $table->timestamps();
