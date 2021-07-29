@@ -203,6 +203,24 @@ class HomeController extends Controller
     public function gettrackorder(Request $request) {
         $input = $request->input();
         $res = Order::where('id',$input['id'])->where('phone',$input['phone'])->first();
-        return response()->json($res);
+        if ($res) {
+            $carts = json_decode($res->carts);
+            $list = [];
+            foreach ( $carts as $cart) {
+                if ($cart->type == 'item') {
+                    $item = VendorItem::selectRaw('title as name')->where('id',$cart->id)->first();
+                }
+                else if ($cart['type'] == 'special') {
+                    $item = VendorSpecial::selectRaw('special_name as name')->where('id',$cart->id)->first();
+                }
+                else if ($cart['type'] == 'package') {
+                    $item = VendorPackage::selectRaw('package_name as name')->where('id',$cart->id)->first();
+                }
+                $cart->name = $item->name;
+                $cart->status = $res->status;
+            }
+            return response()->json($carts);
+        }
+        else return response()->json([]);
     }
 }
