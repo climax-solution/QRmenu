@@ -121,7 +121,7 @@ Route::post('user/placeorder', [HomeController::class, 'placeorder']);
 Route::post('user/gettimelist', [HomeController::class, 'gettimelist']);
 Route::post('user/getuseremail', [HomeController::class, 'getuseremail']);
 Route::post('user/getpackagelist', [HomeController::class, 'getpackagelist']);
-Route::post('user/createqrcode', [HomeController::class, 'createQrCode']);
+Route::post('user/gettrackorder', [HomeController::class, 'gettrackorder']);
 
 //Payment Integration
 

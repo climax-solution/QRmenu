@@ -160,8 +160,7 @@ class HomeController extends Controller
                 unset($data['subdomain']);
                 unset($data['domain_url']);
                 $data['vendor'] = $email;
-                Order::create($data);
-                $res = Order::where($data)->first();
+                $res = Order::create($data);
                 $url = 'http://'. $subdomain .'/track-order?phone='.$res->phone.'&id='.$res->id;
                 $qrCode = new QrCode($url);
                 $qrCode->setSize(300);
@@ -176,15 +175,15 @@ class HomeController extends Controller
                 $qrCode->setRoundBlockSize(true);
                 $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
                 header('Content-Type: '.$qrCode->getContentType());
-                $file_name= '\/qrcode/'.time().'png';
-                $qrCode->writeFile(public_path($file_name));
+                $file_name= 'qrcode/'.time().'.png';
+                $qrCode->writeFile(public_path('/'.$file_name));
                 return response()->json(['status'=>true, 'order_id'=>$res->id,'qrcode'=>$file_name]);
             }
 
             return response()->json(['status'=>false]);
         }
         catch (Exception $error) {
-            return response()->json(['status'=>false]);
+            return response()->json(['status'=>$error]);
         }
     }
 
@@ -201,21 +200,9 @@ class HomeController extends Controller
         return response()->json($res);
     }
 
-    public function createQrCode(Request $request) {
-
-        $qrCode = new QrCode('');
-		$qrCode->setSize(300);
-		$qrCode->setMargin(10);
-		$qrCode->setEncoding('UTF-8');
-		$qrCode->setWriterByName('png');
-		$qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
-		$qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
-		$qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
-		$qrCode->setLogoSize(150, 200);
-		$qrCode->setValidateResult(false);
-		$qrCode->setRoundBlockSize(true);
-		$qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
-		header('Content-Type: '.$qrCode->getContentType());
-		$qrCode->writeFile(public_path('/qrcode.png'));
+    public function gettrackorder(Request $request) {
+        $input = $request->input();
+        $res = Order::where('id',$input['id'])->where('phone',$input['phone'])->first();
+        return response()->json($res);
     }
 }
