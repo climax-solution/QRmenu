@@ -21,15 +21,15 @@ class Footer extends Component {
                 {/* Middle Footer */}
                 <div className="footer-middle">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-xl-4 col-lg-4 col-md-4 col-sm-12 footer-widget">
+                        <div className="row" style={{justifyContent: 'center'}}>
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 footer-widget">
                                 <img src={process.env.PUBLIC_URL + "/" + this.props.footer.logo} alt="logo" style={{width: '200px'}}/>
                                 <ul>
                                     {/* <li><a href="#">Test Restaurant AS</a></li> */}
                                     <li><a href="#"><i className="fa fa-envelope text-white"></i>{this.props.email}</a></li>
                                 </ul>
                             </div>
-                            <div className="col-xl-4 col-lg-4 col-md-4 col-sm-12 footer-widget">
+                            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 footer-widget">
                                 <h5 className="widget-title">Avaible Days</h5>
                                 <ul>
                                     <li>
@@ -118,13 +118,13 @@ class Footer extends Component {
                                     </li>
                                 </ul>
                             </div>
-                            <div className="col-xl-4 col-lg-4 col-md-4 col-sm-12 footer-widget">
+                            <div className="col-xl-4 col-lg-4 col-md-3 col-sm-12 footer-widget">
                                 <h5 className="widget-title">Quick Links</h5>
                                 <ul>
                                     <li> <Link to="/">Home</Link> </li>
                                     <li> <Link to="/reservation">Reservation</Link> </li>
                                     <li> <Link to="/about">About us</Link> </li>
-                                    {/* <li> <Link to="/track-order">Track Order</Link> </li> */}
+                                    <li> <Link to="/track-order">Track Order</Link> </li>
                                     <li> <Link to="/contact">Contact us</Link> </li>
                                     <li> <a href="http://localhost:4000">Login</a> </li>
                                 </ul>
@@ -133,13 +133,13 @@ class Footer extends Component {
                     </div>
                 </div>
                 {/* Footer Bottom */}
-                <div className="footer-bottom">
+                {/* <div className="footer-bottom">
                     <div className="container">
                         <div className="footer-copyright text-center" style={{justifyContent:'center'}}>
-                            <p>&copy; 2021 Test Restaurant AS </p>
+                            <p>&copy; 2021  </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </footer>
         );
     }

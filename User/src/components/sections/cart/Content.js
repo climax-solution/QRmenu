@@ -203,6 +203,7 @@ class Content extends Component {
            if (status) {
                NotificationManager.success('Successfully Ordered!');
                 swal({
+                    text: 'Ordered successfully! You can check your orderlist by phone and order id',
                     buttons: {
                         cancel: "Close",
                         download: "Download",
@@ -225,9 +226,9 @@ class Content extends Component {
 
                       default:
                         this.download(process.env.REACT_APP_BACKEND_HOST+ qrcode);
-                        setTimeout(3000);
-                        this.props.emptyCart();
+                        
                     }
+                    this.props.emptyCart();
                 });
             }
            else NotificationManager.error('Failure!');
@@ -346,7 +347,7 @@ class Content extends Component {
                                     <select className="form-control" value={formData.order_type} onChange={(e)=> this.setState({
                                         formData:{...formData, order_type: e.target.value}
                                     })}>
-                                        <option value="">Select order type</option>
+                                        <option value="-1">Select order type</option>
                                         {
                                             ordertypelist.map((item, index )=>{
                                                 return item && typename[index] && <option value={index} key={index}>{typename[index]}</option>
