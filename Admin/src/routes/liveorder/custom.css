@@ -1,0 +1,7 @@
+.mail-sidebar-wrap, .todo-sidebar-wrap, .chat-sidebar {
+    overflow: auto !important;
+}
+
+.rct-customizer {
+    width: 17rem !important;
+}

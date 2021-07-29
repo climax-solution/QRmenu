@@ -118,13 +118,6 @@ import { auth } from 'firebase';
 				   }
 				</div>
 				<ul className="navbar-right list-inline mb-0">
-				   {/* <li className="list-inline-item summary-icon">
-					  <Tooltip title="Summary" placement="bottom">
-						 <a href="#" className="header-icon tour-step-3" onClick={() => this.openDashboardOverlay()}>
-							<i className="zmdi zmdi-info-outline"></i>
-						 </a>
-					  </Tooltip>
-				   </li> */}
 				   <LanguageProvider />
 				   {permission == 'vendor' && <Notifications match={match}/>}
 				   <li className="list-inline-item">

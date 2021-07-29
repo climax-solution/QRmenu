@@ -10,14 +10,18 @@
 import IntlMessages from 'Util/IntlMessages';
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import MUIDataTable from "mui-datatables";
-import { Badge } from '@material-ui/core';
+import { Drawer } from '@material-ui/core';
 import Axios from  'axios';
 import NotificationManager from 'react-notifications/lib/NotificationManager';
 import { Link } from 'react-router-dom';
+import OrderItem from './OrderItem';
+
 export default class LiveOrder extends Component {
     state = {
         tmp: [],
-        order_list: []
+        order_list: [],
+    	customizer: false,
+        activeID: -1
     }
     componentDidMount() {
         const headers = {
@@ -61,6 +65,13 @@ export default class LiveOrder extends Component {
         this.setState({
             order_list: order_list,
             tmp: tmp
+        })
+    }
+    quickView(index) {
+        const { tmp } = this.state;
+        this.setState({
+            activeID: tmp[index].id,
+            customizer: true
         })
     }
      render() {
@@ -111,30 +122,30 @@ export default class LiveOrder extends Component {
                             <MatButton
                                 variant="contained"
                                 className="btn-success mr-10 mb-10 text-white btn-icon"
-                                component={Link}
-                                to={"orderitem/"+tableMeta.rowData[1]}
+                                // component={Link}
+                                // to={"orderitem/"+tableMeta.rowData[1]}
+                                onClick={()=>this.quickView(tableMeta.rowIndex)}
                             >
-                                <i
-                                    className="zmdi zmdi-eye"
-                                ></i>View
-                            </MatButton>
-                            <MatButton
-                                variant="contained"
-                                color="primary"
-                                className="mr-10 mb-10 text-white btn-icon"
-                                onClick={() => this.updateItem(tableMeta.rowIndex, value < '1' ? '1' : '2' )}
-                                disabled={value == '2' ? true : false}
-                            >
-                                <i
-                                    className="zmdi zmdi-check"
-                                ></i>
-                                {value == '1' ? 'Complete' : 'Allow'}
+                                <i className="zmdi zmdi-eye"></i>
+                                View
                             </MatButton>
                             {
-                                value < '2' &&
+                                value > '-1' && <MatButton
+                                    variant="contained"
+                                    className="mr-10 mb-10 text-white btn-icon btn-primary"
+                                    onClick={() => this.updateItem(tableMeta.rowIndex, value < '1' ? '1' : '2' )}
+                                    disabled={value == '2' ? true : false}
+                                >
+                                    <i
+                                        className="zmdi zmdi-check"
+                                    ></i>
+                                    {value == '1' ? 'Complete' : value == '0'  ? 'Allow' : 'Completed'}
+                                </MatButton>
+                            }
+                            {
+                                value == '0' &&
                                 <MatButton
                                     variant="contained"
-                                    color="danger"
                                     className="mr-10 mb-10 text-white btn-danger btn-icon"  onClick={() => this.updateItem(tableMeta.rowIndex, '-1')}
                                 >
                                     <i className="zmdi zmdi-block"></i>Block
@@ -163,6 +174,13 @@ export default class LiveOrder extends Component {
                         columns={columns}
                         // options={options}
                     />
+                    <Drawer
+                        anchor={'right'}
+                        open={this.state.customizer}
+                        onClose={() => this.setState({ customizer: false })}
+                        >
+                        <OrderItem id={this.state.activeID} resetState={(data)=>this.resetStates(data)}/>
+                    </Drawer>
                  </RctCollapsibleCard>
              </div>
          );
