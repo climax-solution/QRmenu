@@ -110,7 +110,13 @@ import { data } from 'jquery';
             }
             this.setState({
                 open: false,
-                activeIndex: -1
+                activeIndex: -1,
+                dialog: {
+                    image: [],
+                    package_name: '',
+                    price: '',
+                    details: '',
+                }
             })
         })
     }

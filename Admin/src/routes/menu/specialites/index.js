@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import { Helmet } from "react-helmet";
 // page title bar
 import PageTitleBar from 'Components/PageTitleBar/PageTitleBar';
-import { Scrollbars } from 'react-custom-scrollbars';
 
 import MUIDataTable from "mui-datatables";
 import ReactQuill from 'react-quill';
@@ -13,17 +12,8 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 import IntlMessages from 'Util/IntlMessages';
 import {
     TextField,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    InputLabel,
-    Select,
-    MenuItem,
     FormControl,
     Button,
-    Badge,
     InputAdornment,
     FormLabel,
     FormGroup,
@@ -109,6 +99,15 @@ export default class Specialites extends Component {
                 NotificationManager.success('Success!');
             }
             else NotificationManager.error('Failure!');
+        })
+        this.setState({
+            dialog: {
+                special_name: '',
+                price: '',
+                short_about: '',
+                more_about: '',
+                image:''
+            }
         })
     }
     itemEdit(arg) {

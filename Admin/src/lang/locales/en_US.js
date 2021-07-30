@@ -806,4 +806,5 @@ module.exports = {
    "widgets.runpackage": "Runing Package",
    "widgets.selectpackage": "Select Package",
    "widgets.reversation": "Reversation",
+   "widgets.earningchart" : "Earning Chart"
 }

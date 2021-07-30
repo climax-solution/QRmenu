@@ -15,15 +15,20 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 import 'react-vertical-timeline-component/style.min.css';
 import { FaRegBell } from 'react-icons/fa';
 import './custom.css';
+import moment from 'moment';
+import { Alert } from 'reactstrap';
+import { List } from '@material-ui/core';
+import { ListItem } from '@material-ui/core';
 
 export default class OrderItem extends Component {
     state = {
-        item_list: []
+        item_list: [],
+        order_info: []
     }
     componentDidMount() {
         const { id } = this.props.match.params;
         Axios.post( REACT_APP_BACKEND_API + 'getorderitem',{ id: id}).then(res=>{
-            const { data } = res.data;
+            const { data, src } = res.data;
             let item_list = [];
             data.map((item, index)=>{
                 let row = [index + 1];
@@ -34,12 +39,13 @@ export default class OrderItem extends Component {
                 item_list.push(row);
             })
             this.setState({
-                item_list: item_list
+                item_list: item_list,
+                order_info: src
             })
         })
     }
     render() {
-        const { item_list } = this.state;
+        const { item_list, order_info } = this.state;
         //console.log(item_list);
         const columns = [
             {
@@ -70,6 +76,14 @@ export default class OrderItem extends Component {
                     <meta name="description" content="Reactify Blank Page" />
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.orderitem" />} match={this.props.match} />
+                <Alert color="info">
+                    <h1 className="alert-heading">Order ID: {order_info.id} </h1>
+                    <List>
+                        <ListItem>Name: {order_info.name}</ListItem>
+                        <ListItem>Phone: {order_info.phone}</ListItem>
+                        <ListItem>Email: {order_info.email}</ListItem>
+                    </List>
+                </Alert>
                 <div className="row">
                 <RctCollapsibleCard
                     heading="Served"
@@ -99,17 +113,51 @@ export default class OrderItem extends Component {
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '2px solid rgb(33, 150, 243)', color: '#000' }}
                             contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                            date="2011 - present"
+                            date={moment(order_info.created_at).format('YYYY-MM-DD HH:mm')}
                             iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                             icon={<FaRegBell />}
                         >
-                            <h3 className="vertical-timeline-element-title">Creative Director</h3>
-                            <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-                            <p>
-                                Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-                            </p>
+                            <h2 className="vertical-timeline-element-title">Just Cretaed</h2>
                         </VerticalTimelineElement>
-                        
+                        {
+                            order_info.status > '1' && 
+                            <VerticalTimelineElement
+                                className="vertical-timeline-element--work"
+                                contentStyle={{ borderTop: '2px solid rgb(33, 150, 243)', color: '#000' }}
+                                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                date={moment(order_info.updated_at).format('YYYY-MM-DD HH:mm')}
+                                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                icon={<FaRegBell />}
+                            >
+                                <h2 className="vertical-timeline-element-title">Accepted</h2>
+                            </VerticalTimelineElement>
+                        }
+                        {
+                            order_info.status > '1' && 
+                            <VerticalTimelineElement
+                                className="vertical-timeline-element--work"
+                                contentStyle={{ borderTop: '2px solid rgb(33, 150, 243)', color: '#000' }}
+                                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                date={moment(order_info.updated_at).format('YYYY-MM-DD HH:mm')}
+                                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                icon={<FaRegBell />}
+                            >
+                                <h2 className="vertical-timeline-element-title">Completed</h2>
+                            </VerticalTimelineElement>
+                        }
+                        {
+                            order_info.status == '-1' && 
+                            <VerticalTimelineElement
+                                className="vertical-timeline-element--work"
+                                contentStyle={{ borderTop: '2px solid rgb(243, 33, 33)', color: '#000' }}
+                                contentArrowStyle={{ borderRight: '7px solid  rgb(243, 33, 33)' }}
+                                date={moment(order_info.updated_at).format('YYYY-MM-DD HH:mm')}
+                                iconStyle={{ background: 'rgb(243, 33, 33)', color: '#fff' }}
+                                icon={<FaRegBell />}
+                            >
+                                <h2 className="vertical-timeline-element-title">Canceled</h2>
+                            </VerticalTimelineElement>
+                        }
                     </VerticalTimeline>
                 </RctCollapsibleCard>
                 </div>

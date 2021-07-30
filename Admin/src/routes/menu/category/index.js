@@ -115,7 +115,20 @@ export default class Category extends Component {
             else {
                 NotificationManager.error('failure');
             }
-            this.setState({ open: false, activeIndex: -1 });
+            const dialog = {
+                category_name: '',
+                type: '',
+                order: '',
+                status: true,
+                details: ''
+            };
+            this.setState({
+                open: false,
+                activeIndex: -1,
+                dialog: dialog,
+                pictures: []
+            });
+
         })
     };
 

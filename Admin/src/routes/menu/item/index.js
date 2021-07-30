@@ -127,7 +127,17 @@ export default class Item extends Component {
             }
             this.setState({
                 open: false,
-                activeIndex: -1
+                activeIndex: -1,
+                dialog: {
+                    category: '',
+                    title: '',
+                    short_des: '',
+                    status: 1,
+                    more_des: '',
+                    price: '',
+                    allergen: '',
+                    image:''
+                }
             })
         })
     }
