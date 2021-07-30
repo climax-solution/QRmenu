@@ -112,13 +112,16 @@ class VendorChunkOne extends Controller
             if ( $item->type == 'item' ) {
                 $ITEMS = VendorItem::where('id',$item->id)->first();
                 $item->item_name = $ITEMS->title;
+                $item->img_url = $ITEMS->img_url;
             }
             else if ($item->type == 'special'){
                 $ITEMS = VendorSpecial::where('id',$item->id)->first();
+                $item->img_url = $ITEMS->img_url;
                 $item->item_name = $ITEMS->special_name;
             }
             else {
                 $ITEMS = VendorPackage::where('id',$item->id)->first();
+                $item->img_url = $ITEMS->img_url;
                 $item->item_name = $ITEMS->package_name;
             }
         }
