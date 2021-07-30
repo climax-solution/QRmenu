@@ -25,6 +25,7 @@ class Order extends Model
         'table',
         'table_guest',
         'time',
+        'total',
         'vendor',
     ];
 }

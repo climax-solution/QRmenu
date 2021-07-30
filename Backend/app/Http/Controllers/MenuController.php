@@ -8,7 +8,9 @@ use App\Models\VendorCategory;
 use App\Models\VendorItem;
 use App\Models\VendorSpecial;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\VendorPackage;
+use Faker\Core\Number;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -172,6 +174,19 @@ class MenuController extends Controller
         if ($user) {
             $data = $request->input();
             Order::where(['vendor'=>$user->email,'id'=>$data['id']])->update($data);
+            if ($data['status'] == '2') {
+                $row = Order::where(['vendor'=>$user->email,'id'=>$data['id']])->first();
+                $price = $row->total;
+                $index = date('m');
+                $row = User::where('email',$user->email)->first();
+                $earning = explode(',',$row->earning);
+                $earning[$index - 1] = intval($earning[$index - 1]) + intval($price);
+                $earn_str = $earning[0];
+                for ($i = 1; $i < count($earning); $i ++) {
+                    $earn_str .= ','.$earning[$i];
+                }
+                User::where('email',$user->email)->update(['earning' => $earn_str ]);
+            }
             return response()->json(['status'=>true, 'data' => Order::where('vendor',$user->email)->orderBy('created_at','desc')->get(),'src'=>Order::where(['vendor'=>$user->email,'id'=>$data['id']])->first()]);
         }
         else return response()->json([]);

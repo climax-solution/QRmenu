@@ -36,7 +36,8 @@ class DashboardController extends Controller
             'menu' => $menu,
             'special' => $special,
             'activepkg' => $activepkg['package_name'],
-            'join_date' => $join_date
+            'join_date' => $join_date,
+            'earning' => $USER->earning
         ];
         return response()->json($res);
     }

@@ -24,6 +24,7 @@ class Auth extends JsonResource
             'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
             'permission' => $this->permission,
             'package' => $this->package,
+            'earning' => $this->earning,
             $this->mergeWhen($this->tokenResult, function () {
                 return [
                     'access_token' => $this->tokenResult->accessToken,
