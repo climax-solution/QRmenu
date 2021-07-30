@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('short_about')->nullable();
             $table->string('more_about')->nullable();
             $table->string('package')->nullable();
+            $table->text('earning')->default('0,0,0,0,0,0,0,0,0,0,0,0');
             $table->boolean('package_status')->default(1);
             $table->enum('status',[-1,0,1])->default(0);
             $table->string('subdomain')->nullable();
