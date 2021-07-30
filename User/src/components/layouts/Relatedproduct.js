@@ -38,7 +38,7 @@ class Relatedproduct extends Component {
                                         <div className="product-desc">
                                             <h4> <Link to={"/menu-item-v1/" + item.id}>{item.name}</Link> </h4>
                                             <p>{item.shortdesc}</p>
-                                            <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</p>
+                                            <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}Kr</p>
                                             <div className="favorite">
                                                 <i className="far fa-heart" />
                                             </div>

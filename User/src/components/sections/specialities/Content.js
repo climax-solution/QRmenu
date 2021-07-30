@@ -52,7 +52,7 @@ class Content extends Component {
                                         <p>{item.short_about}</p>
                                     </div>
                                     <div className="product-controls">
-                                        <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
+                                        <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</p>
                                         <Link to="#" onClick={()=>this.props.addCart(item, 'special')} className="order-item btn-custom btn-sm shadow-none">Add Cart <i className="fas fa-shopping-cart" /> </Link>
                                     </div>
                                 </div>

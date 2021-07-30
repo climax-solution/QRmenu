@@ -80,7 +80,7 @@ class Content extends Component {
                                                     </div>
                                                 </td>
                                                 <td data-title="Quantity">x{item.qty}</td>
-                                                <td data-title="Total"> <strong>{new Intl.NumberFormat().format((item.price * item.qty).toFixed(2))}$</strong> </td>
+                                                <td data-title="Total"> <strong>{new Intl.NumberFormat().format((item.price * item.qty).toFixed(2))}Kr</strong> </td>
                                             </tr>
                                         ))}
                                         <tr className="total">
@@ -88,7 +88,7 @@ class Content extends Component {
                                                 <h6 className="mb-0">Grand Total</h6>
                                             </td>
                                             <td />
-                                            <td> <strong>{new Intl.NumberFormat().format((priceTotal).toFixed(2))}$</strong> </td>
+                                            <td> <strong>{new Intl.NumberFormat().format((priceTotal).toFixed(2))}Kr</strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>

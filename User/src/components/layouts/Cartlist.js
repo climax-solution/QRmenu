@@ -22,7 +22,7 @@ class Cartlist extends Component {
                                     </Link>
                                     <div className="media-body">
                                         <h5> <Link title={item.name} to='#'>{item.name}</Link> </h5>
-                                        <span>{item.qty}x {new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</span>
+                                        <span>{item.qty}x {new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</span>
                                     </div>
                                 </div>
                                 <div className="cart-sidebar-price">

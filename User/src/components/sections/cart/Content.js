@@ -295,7 +295,7 @@ class Content extends Component {
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-title="Price"> <strong>{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</strong> </td>
+                                    <td data-title="Price"> <strong>{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</strong> </td>
                                     <td className="quantity" data-title="Quantity">
                                         <div className="qty">
                                             <span className="qty-subtract" onClick={() => this.DecreaseItem(item)}><i className="fa fa-minus" /></span>
@@ -303,7 +303,7 @@ class Content extends Component {
                                             <span className="qty-add" onClick={() => this.IncrementItem(item)}><i className="fa fa-plus" /></span>
                                         </div>
                                     </td>
-                                    <td data-title="Total"> <strong>{new Intl.NumberFormat().format((Number(item.price) * item.qty).toFixed(2))}$</strong> </td>
+                                    <td data-title="Total"> <strong>{new Intl.NumberFormat().format((Number(item.price) * item.qty).toFixed(2))}Kr</strong> </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -460,7 +460,7 @@ class Content extends Component {
                                 <tbody>
                                     <tr>
                                         <th>Subtotal</th>
-                                        <td>{new Intl.NumberFormat().format((this.state.priceTotal).toFixed(2))}$</td>
+                                        <td>{new Intl.NumberFormat().format((this.state.priceTotal).toFixed(2))}Kr</td>
                                     </tr>
                                 </tbody>
                             </table>

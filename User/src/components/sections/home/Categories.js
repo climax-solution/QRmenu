@@ -25,7 +25,7 @@ class Categories extends Component {
                                             <div className="ct-mini-menu-top">
                                                 <h5>{item.title}</h5>
                                                 <div className="ct-mini-menu-dots" />
-                                                <span className="custom-primary">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</span>
+                                                <span className="custom-primary">{new Intl.NumberFormat().format((item.price).toFixed(2))}Kr</span>
                                             </div>
                                             <div className="ct-mini-menu-bottom">
                                                 <p>{item.shortdesc}</p>
@@ -58,7 +58,7 @@ class Categories extends Component {
                                             <div className="ct-mini-menu-top">
                                                 <h5>{item.title}</h5>
                                                 <div className="ct-mini-menu-dots" />
-                                                <span className="custom-primary">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</span>
+                                                <span className="custom-primary">{new Intl.NumberFormat().format((item.price).toFixed(2))}Kr</span>
                                             </div>
                                             <div className="ct-mini-menu-bottom">
                                                 <p>{item.shortdesc}</p>

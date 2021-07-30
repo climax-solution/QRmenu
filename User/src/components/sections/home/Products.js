@@ -87,7 +87,7 @@ class Products extends Component {
                                     <div className="product-desc">
                                         <h4> <Link to="#">{item.title}</Link> </h4>
                                         <p>{item.shortdesc}</p>
-                                        <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
+                                        <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</p>
                                         <div className="favorite">
                                             <i className="far fa-heart" />
                                         </div>

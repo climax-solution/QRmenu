@@ -114,7 +114,7 @@ class Banner extends Component {
                                         <img src={process.env.REACT_APP_BACKEND_HOST + "images/" + item.img_url} alt={item.special_name} />
                                         <div className="banner-nav-item-body">
                                             <h5>{item.category}</h5>
-                                            <span>{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</span>
+                                            <span>{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</span>
                                         </div>
                                     </div>
                                 </div>

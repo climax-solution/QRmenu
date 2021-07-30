@@ -120,7 +120,7 @@ class Content extends Component {
                             {/* <Link to="#" className="btn-custom light btn-sm shadow-none" onClick={(e) => this.modalShow(item.id)}> Preview <i className="fas fa-eye" /> </Link> */}
                         </div>
                         <div className="product-controls">
-                            <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}$</p>
+                            <p className="product-price">{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</p>
                             <Link to='#' className="order-item btn-custom btn-sm shadow-none" onClick={() => this.props.addCart(item,'item')}>Add cart <i className="fas fa-shopping-cart" /> </Link>
                         </div>
                     </div>

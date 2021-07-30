@@ -50,7 +50,7 @@ class Relatedproduct extends Component {
                                             <button type="button" className="btn-custom light btn-sm shadow-none" onClick={(e) => this.modalShow(item.id)}> Customize <i className="fas fa-plus" /> </button>
                                         </div>
                                         <div className="product-controls">
-                                            <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}$</p>
+                                            <p className="product-price">{new Intl.NumberFormat().format((item.price).toFixed(2))}Kr</p>
                                             <Link to={"/menu-item-v1/" + item.id} className="order-item btn-custom btn-sm shadow-none">Order <i className="fas fa-shopping-cart" /> </Link>
                                         </div>
                                     </div>
