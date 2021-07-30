@@ -122,8 +122,6 @@ export default class LiveOrder extends Component {
                             <MatButton
                                 variant="contained"
                                 className="btn-success mr-10 mb-10 text-white btn-icon"
-                                // component={Link}
-                                // to={"orderitem/"+tableMeta.rowData[1]}
                                 onClick={()=>this.quickView(tableMeta.rowIndex)}
                             >
                                 <i className="zmdi zmdi-eye"></i>
@@ -175,7 +173,7 @@ export default class LiveOrder extends Component {
                         // options={options}
                     />
                     <Drawer
-                        anchor={'right'}
+                        anchor={'left'}
                         open={this.state.customizer}
                         onClose={() => this.setState({ customizer: false })}
                         >
