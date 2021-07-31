@@ -14,6 +14,8 @@ import {
    SIGNUP_USER_SUCCESS,
    SIGNUP_USER_FAILURE
 } from 'Actions/types';
+import axios from 'axios';
+import { ACTIVE_DASHBOARD_DATA } from './types';
 
 /**
  * Redux Action To Sigin User With Firebase
@@ -143,4 +145,33 @@ export const updatePackage = () => dispatch => {
       permission: data['p'],
       package: data['g']
    })
+}
+
+export const getDashboardData = () => dispatch => {
+   const str = localStorage.getItem('extime');
+   const data = JSON.parse(str);
+   if ( data['p'] == 'admin' ) {
+      axios.post(REACT_APP_BACKEND_API + 'admindashboard').then(res=>{
+          dispatch({
+              type: ACTIVE_DASHBOARD_DATA,
+              payload: res.data
+          })
+      })
+  }
+  else {
+      const headers = {
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+      }
+      axios.post(REACT_APP_BACKEND_API + 'vendordashboard', {}, headers).then(res=>{
+          dispatch({
+              type: ACTIVE_DASHBOARD_DATA,
+              payload: res.data
+          })
+      })
+  }
+  dispatch({type: 'LOGIN_USER_SUCCESS',permission: data['p'], activedpkg: data['g'] });
 }

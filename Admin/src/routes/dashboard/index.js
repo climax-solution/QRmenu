@@ -14,6 +14,7 @@ import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Line } from "react-chartjs-2";
+import { getDashboardData } from '../../actions/AuthActions';
 
 const textEffect = {
     textShadow:'0 1px 0 hsl(174,5%,80%),0 2px 0 hsl(174,5%,75%),0 3px 0 hsl(174,5%,70%), 0 4px 0 hsl(174,5%,66%),0 5px 0 hsl(174,5%,64%),0 6px 0 hsl(174,5%,62%),0 7px 0 hsl(174,5%,61%), 0 8px 0 hsl(174,5%,60%), 0 0 5px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.2), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.2),  0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.3)',
@@ -30,6 +31,10 @@ class Dashboard extends Component {
         permission_status: window.location.pathname.indexOf('admin') > 0 ? 'admin': 'vendor',
         dashboard: {},
         chartDataList: ''
+     }
+
+     componentDidMount() {
+         this.props.getDashboardData();
      }
 
      componentDidUpdate(preprops) {
@@ -178,4 +183,7 @@ class Dashboard extends Component {
  const mapStateToProps = ({ authUser }) =>({
      dashboard: authUser.dashboarddata
  })
- export default connect(mapStateToProps)(Dashboard);
+ const maptoStateDispatch = dispatch => ({
+     getDashboardData: () => dispatch(getDashboardData())
+ })
+ export default connect(mapStateToProps, maptoStateDispatch)(Dashboard);
