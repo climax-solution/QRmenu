@@ -54,7 +54,7 @@ class Banner extends Component {
             }]
         }
         const settingsthumb = {
-            slidesToShow: special_list.length < 4 ? special_list.length : 4,
+            slidesToShow: special_list.length < 4 && special_list.length > 1 ? special_list.length : 4,
             slidesToScroll: 1,
             arrows: false,
             dots: false,
