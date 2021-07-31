@@ -48,7 +48,7 @@ import validator from 'validator';
          })
      }
 
-     AddNewUser () {
+     addNewUser () {
         const {data} = this.state;
         const send = {
             username: data.username,
@@ -105,7 +105,7 @@ import validator from 'validator';
                                         {
                                             packages.map((key,index) => {
                                                 return (
-                                                    <option value={packages[index].id}>{packages[index].name}</option>
+                                                    <option value={packages[index].id} key={index}>{packages[index].name}</option>
                                                 )
                                             })
                                         }
@@ -115,7 +115,7 @@ import validator from 'validator';
                                     <Label for="password">Password</Label>
                                     <Input type="password" name="password" id="password" placeholder="Password" value={data.password} onChange={(e)=>this.setState({data:{...data,password: e.target.value}})}/>
                                 </FormGroup>
-                                <Button color="primary" onClick={()=>this.AddNewUser()} block>Submit</Button>
+                                <Button color="primary" onClick={()=>this.addNewUser()} block>Submit</Button>
                             </Form>
                         </RctCollapsibleCard>
                     </div>

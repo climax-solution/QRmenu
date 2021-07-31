@@ -81,17 +81,7 @@ class Dashboard extends Component {
                     <meta name="description" content="Reactify Blank Page" />
                 </Helmet>
                 <PageTitleBar title={<IntlMessages id="sidebar.dashboard" />} match={match} />
-                <RctCollapsibleCard
-                    customClasses="trafic-bar-chart"
-                    colClasses="col-sm-12"
-                    heading={<IntlMessages id="widgets.earningchart" />}
-                    collapsible
-                    reloadable
-                    closeable
-                    fullBlock
-                >
-                    <Line ref="chart" data={chartData} options={Options} className="mb-10" />
-                </RctCollapsibleCard>
+                
                 {
                 this.state.permission_status == 'vendor' ?
                     <div className="row">
@@ -134,6 +124,17 @@ class Dashboard extends Component {
                                     <h3 style={{...textEffect, ...rem3}}>{moment(dashboard.join_date).format('Y-MM-DD')}</h3>
                                 </div>
                             </div>
+                        </RctCollapsibleCard>
+                        <RctCollapsibleCard
+                            customClasses="trafic-bar-chart"
+                            colClasses="col-sm-12"
+                            heading={<IntlMessages id="widgets.earningchart" />}
+                            collapsible
+                            reloadable
+                            closeable
+                            fullBlock
+                        >
+                            <Line ref="chart" data={chartData} options={Options} className="mb-10" />
                         </RctCollapsibleCard>
                     </div>
                     : <div className="row">

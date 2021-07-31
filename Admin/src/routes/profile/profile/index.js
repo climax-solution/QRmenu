@@ -267,7 +267,7 @@ export default class Profile extends Component {
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="d-sm-full"
-                            heading={<IntlMessages id="Profile QR Code" />}
+                            heading={<IntlMessages id="widgets.profile_qr_code" />}
                             collapsible
                             closeable
                             fullBlock

@@ -27,7 +27,7 @@ const red = {fontWeight: 'bold', color: 'red'};
        <div className="pricing-icon mb-40">
           <img src={require('Assets/img/pricing-icon.png')} alt="pricing icon" className="img-fluid" width="" height="" />
        </div>
-       <h2 className={`text-${color} pricing-title`}><IntlMessages id={type} /></h2>
+       <h2 className={`text-${color} pricing-title`}>{type}</h2>
        <div className="mb-25">
           {planType === 'free' ?
              <h2 className="amount-title"><IntlMessages id={price} /></h2>

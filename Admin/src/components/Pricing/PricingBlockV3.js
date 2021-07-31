@@ -42,10 +42,10 @@ const red = {fontWeight: 'bold', color: 'red'};
           ))}
        </ul>
        <Button className='btn-info' onClick={editPackage}>
-          <IntlMessages id="Edit" />
+          <IntlMessages id="button.edit" />
        </Button>
        <Button className='btn-danger ml-10' onClick={deletePackage}>
-          <IntlMessages id="Remove" />
+          <IntlMessages id="button.remove" />
        </Button>
     </RctCollapsibleCard>
  );

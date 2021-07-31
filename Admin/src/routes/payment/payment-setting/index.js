@@ -151,7 +151,7 @@ import Axios from 'axios';
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Paypal Payment Gateway" />}
+						heading={<IntlMessages id="widgets.paypal_payment_gateway" />}
 						collapsible
 						closeable
 						fullBlock
@@ -191,7 +191,7 @@ import Axios from 'axios';
                                     label="Paypal Email"
                                     type="email"
                                     fullWidth
-                                    value={paypal.paypal_email}
+                                    value={!paypal.paypal_email ? '' : paypal.paypal_email}
                                     onChange={(e)=>this.setState({
                                         paypal:{...paypal, paypal_email: e.target.value}
                                     })}
@@ -205,7 +205,7 @@ import Axios from 'axios';
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Stripe Payment Gateway" />}
+						heading={<IntlMessages id="widgets.stripe_payment_gateway" />}
 						collapsible
 						closeable
 						fullBlock
@@ -226,11 +226,11 @@ import Axios from 'axios';
                                     <div className="col-md-6 mt-10">
                                         <TextField
                                             margin="dense"
-                                            id="paypalemail"
+                                            id="stripe_public_key"
                                             label="Stripe Public Key"
                                             type="text"
                                             fullWidth
-                                            value={stripe.stripe_public_key}
+                                            value={!stripe.stripe_public_key ? '' : stripe.stripe_public_key}
                                             onChange={
                                                 (e)=>this.setState({
                                                     stripe: {...stripe, stripe_public_key: e.target.value}
@@ -241,10 +241,10 @@ import Axios from 'axios';
                                     <div className="col-md-6 mt-10">
                                         <TextField
                                             margin="dense"
-                                            id="paypalemail"
+                                            id="stripe_secret_key"
                                             label="Stripe Secret Key"
                                             type="text"
-                                            value={stripe.stripe_secret_key}
+                                            value={!stripe.stripe_secret_key ? '' : stripe.stripe_secret_key}
                                             onChange={
                                                 (e)=>this.setState({
                                                     stripe: {...stripe, stripe_secret_key: e.target.value}
@@ -264,7 +264,7 @@ import Axios from 'axios';
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Razorpay Payment Gateway" />}
+						heading={<IntlMessages id="widgets.razor_payment_gateway" />}
 						collapsible
 						closeable
 						fullBlock
@@ -291,7 +291,7 @@ import Axios from 'axios';
                                             label="Razorpay Key"
                                             type="text"
                                             fullWidth
-                                            value={razor.razor_key}
+                                            value={!razor.razor_key ? '' : razor.razor_key}
                                             onChange={(e)=>this.setState({ razor: {...razor,razor_key: e.target.value }})}
                                         />
                                     </div>
@@ -302,7 +302,7 @@ import Axios from 'axios';
                                             label="Razorpay Secret"
                                             type="text"
                                             fullWidth
-                                            value={razor.razor_secret}
+                                            value={!razor.razor_secret ? '' : razor.razor_secret}
                                             onChange={(e)=>this.setState({ razor: {...razor,razor_secret: e.target.value }})}
                                         />
                                     </div>
@@ -316,7 +316,7 @@ import Axios from 'axios';
                     <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="col-sm-12 col-md-12 col-lg-6 d-sm-full"
-						heading={<IntlMessages id="Bambora Payment Gateway" />}
+						heading={<IntlMessages id="widgets.bambora_payment_gateway" />}
 						collapsible
 						closeable
 						fullBlock
@@ -343,7 +343,7 @@ import Axios from 'axios';
                                             label="Bambora Access Key"
                                             type="text"
                                             fullWidth
-                                            value={bambora.bambora_access_key}
+                                            value={!bambora.bambora_access_key ? '' : bambora.bambora_access_key}
                                             onChange={(e)=>this.setState({
                                                 bambora: { ...bambora, bambora_access_key: e.target.value }
                                             })}
@@ -356,7 +356,7 @@ import Axios from 'axios';
                                             label="Bambora Merchant Number"
                                             type="text"
                                             fullWidth
-                                            value={bambora.bambora_merchant}
+                                            value={!bambora.bambora_merchant ? '' : bambora.bambora_merchant}
                                             onChange={(e)=>this.setState({
                                                 bambora: { ...bambora, bambora_merchant: e.target.value }
                                             })}
@@ -369,7 +369,7 @@ import Axios from 'axios';
                                     label="Bambora Secret Key"
                                     type="text"
                                     fullWidth
-                                    value={bambora.bambora_secret_key}
+                                    value={!bambora.bambora_secret_key ? '' : bambora.bambora_secret_key}
                                     onChange={(e)=>this.setState({
                                         bambora: { ...bambora, bambora_secret_key: e.target.value }
                                     })}

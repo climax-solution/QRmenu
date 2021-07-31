@@ -330,7 +330,7 @@ import Axios from 'axios';
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-md-12 d-sm-full"
-                            heading={<IntlMessages id="Configuration" />}
+                            heading={<IntlMessages id="widgets.configuration" />}
                             customStyle={{overflow: 'hidden', maxHeight: '400px'}}
                             collapsible
                             closeable

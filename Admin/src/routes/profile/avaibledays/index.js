@@ -51,7 +51,7 @@ export default class Avaibledays extends Component {
             const { timelist } = this.state;
             if ( data ) {
                 for (let key in timelist) {
-                    timelist[key] = data[key];
+                    timelist[key] = !data[key] ? moment() : data[key];
                 }
                 this.setState({
                     timelist: timelist,
@@ -120,7 +120,7 @@ export default class Avaibledays extends Component {
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-sm-12 col-md-12 d-sm-full"
-                            heading={<IntlMessages id="Reservation" />}
+                            heading={<IntlMessages id="widgets.reservation" />}
                             collapsible
                             closeable
                             fullBlock
@@ -430,14 +430,14 @@ export default class Avaibledays extends Component {
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="d-sm-full"
-                            heading={<IntlMessages id="Reservation Types" />}
+                            heading={<IntlMessages id="widgets.reservation_types" />}
                             customStyle={{overflow: 'hidden'}}
                             collapsible
                             closeable
                             fullBlock
                         >
                             <FormControl fullWidth style={{padding: '0 20px'}}>
-                                <TextField margin="dense" id="paypalemail" label="Type Name" type="text" value={type_name} onChange={(e)=>this.setState({
+                                <TextField margin="dense" id="paypalemail" label="Type Name" type="text" value={!type_name ? '' : type_name} onChange={(e)=>this.setState({
                                     type_name: e.target.value
                                 })} fullWidth />
                             </FormControl>
@@ -446,7 +446,7 @@ export default class Avaibledays extends Component {
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="d-sm-full"
-                            heading={<IntlMessages id="Reservation Type List" />}
+                            heading={<IntlMessages id="widgets.reservation_type_list" />}
                             collapsible
                             closeable
                             fullBlock

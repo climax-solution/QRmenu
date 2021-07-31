@@ -86,17 +86,18 @@ export default class ManageFeature extends Component {
                                         checked={item.status}
                                         colClasses="col-lg-6 col-md-12 col-sm-12"
                                         customStyle={{border: '1px solid rgb(0 0 0 / 10%)'}}
+                                        key={index}
                                     >
                                         <FormControl style={{padding: '0 20px'}} fullWidth>
                                             <FormLabel style={{fontSize:'1rem'}}>Heading</FormLabel>
                                             <FormGroup aria-label="position" row>
-                                                <TextField type="text" fullWidth value={item.heading} onChange={(e)=>this.inputValue(index,'heading',e.target.value)}/>
+                                                <TextField type="text" fullWidth value={!item.heading ? '' : item.heading} onChange={(e)=>this.inputValue(index,'heading',e.target.value)}/>
                                             </FormGroup>
                                         </FormControl>
                                         <FormControl className="mt-20" style={{padding: '0 20px'}} fullWidth>
                                             <FormLabel style={{fontSize:'1rem'}}>Sub Heading</FormLabel>
                                             <FormGroup aria-label="position" row>
-                                                <TextField type="text" value={item.sub_heading} fullWidth onChange={(e)=>this.inputValue(index,'sub_heading',e.target.value)}/>
+                                                <TextField type="text" value={!item.sub_heading ? '' : item.sub_heading} fullWidth onChange={(e)=>this.inputValue(index,'sub_heading',e.target.value)}/>
                                             </FormGroup>
                                         </FormControl>
                                     </RctCollapsibleCard>                                    

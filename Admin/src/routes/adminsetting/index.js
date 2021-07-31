@@ -103,7 +103,7 @@ import Axios from 'axios';
                         <RctCollapsibleCard
 						customClasses="trafic-bar-chart"
 						colClasses="d-sm-full"
-						heading={<IntlMessages id="Site Settings" />}
+						heading={<IntlMessages id="widgets.site_settings" />}
 						fullBlock
 					>
                         <div className="row">
@@ -207,7 +207,7 @@ import Axios from 'axios';
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="d-sm-full"
-                            heading={<IntlMessages id="Settings" />}
+                            heading={<IntlMessages id="widgets.settings" />}
                             collapsible
                             closeable
                             fullBlock
@@ -278,7 +278,7 @@ import Axios from 'axios';
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="d-sm-full"
-                            heading={<IntlMessages id="Recaptcha" />}
+                            heading={<IntlMessages id="widgets.recaptcha" />}
                             collapsible
                             closeable
                             fullBlock

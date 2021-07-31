@@ -120,7 +120,7 @@ class Subscription extends Component {
             })
         })
 
-        axios.post(REACT_APP_BACKEND_API + 'paymentsettings').then(res=>{
+        axios.get(REACT_APP_BACKEND_API + 'paymentsettings').then(res=>{
             const { data } = res;
             this.setState({
                 paymentsetting: data

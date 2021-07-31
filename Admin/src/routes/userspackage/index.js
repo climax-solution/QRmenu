@@ -150,7 +150,7 @@ class UsersPackage extends Component {
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
                         <Button color="success" className='btn-block btn-lg' onClick={()=>this.handleClickOpen(true)}>
-                            <IntlMessages id="Add New" />
+                            <IntlMessages id="button.addNew" />
                         </Button>
                     </div>
                     <div className="col-md-4"></div>
@@ -158,7 +158,7 @@ class UsersPackage extends Component {
                 <div className="price-list m-10">
                     <div className="row row-eq-height">
                         {
-                            packages.map(item=>{
+                            packages.map((item, index)=>{
                                 return <PricingBlockV3
                                     planType="premium"
                                     type="widgets.paymentmember"
@@ -182,6 +182,7 @@ class UsersPackage extends Component {
                                     id={item.id}
                                     deletePackage = {() => this.deletePackage(item.id) }
                                     ability={item.package_ability}
+                                    key={index}
                                 />
                             })
                         }
@@ -237,10 +238,10 @@ class UsersPackage extends Component {
                                 <FormControl component="fieldset" className="pull-right">
                                     <FormGroup>
                                         {
-                                            Object.keys(items).map(function(key,index) {
+                                            Object.keys(items).map((key,index) => {
                                                 return <FormControlLabel control={
-                                                    <Checkbox color="primary" onChange={CheckItems(index)} checked={dialog.package_ability[index]} name={key} />
-                                                } label={items[key]}
+                                                    <Checkbox color="primary" onChange={CheckItems(index)} checked={dialog.package_ability[index]} name={key}/>
+                                                } label={items[key]} key={index}
                                                 />
                                             })
                                         }
