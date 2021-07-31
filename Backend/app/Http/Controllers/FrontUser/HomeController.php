@@ -210,10 +210,10 @@ class HomeController extends Controller
                 if ($cart->type == 'item') {
                     $item = VendorItem::selectRaw('title as name')->where('id',$cart->id)->first();
                 }
-                else if ($cart['type'] == 'special') {
+                else if ($cart->type == 'special') {
                     $item = VendorSpecial::selectRaw('special_name as name')->where('id',$cart->id)->first();
                 }
-                else if ($cart['type'] == 'package') {
+                else if ($cart->type == 'package') {
                     $item = VendorPackage::selectRaw('package_name as name')->where('id',$cart->id)->first();
                 }
                 $cart->name = $item->name;
