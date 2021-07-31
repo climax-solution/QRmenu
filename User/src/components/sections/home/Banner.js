@@ -90,7 +90,7 @@ class Banner extends Component {
                                             <p className="subtitle">{item.short_about}</p>
                                             <div className="banner-controls">
                                                 <Link to="/specialities" className="btn-custom primary">Go to Page <i className="fa fa-shopping-cart" /> </Link>
-                                                <h4>${new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}</h4>
+                                                <h4>{new Intl.NumberFormat().format((Number(item.price)).toFixed(2))}Kr</h4>
                                             </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6">

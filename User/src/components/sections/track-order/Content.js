@@ -15,6 +15,22 @@ class Content extends Component {
         };
     }
 
+    componentDidMount() {
+        this.prepare();
+    }
+    async prepare() {
+        const queryParams = new URLSearchParams(window.location.search);
+        const id = queryParams.get('id');
+        const phone = queryParams.get('phone');
+        console.log('phone-<',phone,'id=>',id);
+        if ( phone && id ) {
+            await this.setState({
+                phone: phone,
+                id: id
+            })
+            await this.getTrackOrder();
+        }
+    }
     getTrackOrder() {
         const  { phone, id } = this.state;
         if ( !phone || !id ) {
