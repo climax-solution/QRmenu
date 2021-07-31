@@ -176,7 +176,7 @@ class VendorChunkOne extends Controller
             }
         }
         $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
-        if (fileExists($file_name)) unlink($file_name);
+        if (file_exists($file_name)) unlink($file_name);
         $file_handle = fopen($file_name, 'w+');
         fwrite($file_handle, $output);
         fclose($file_handle);
