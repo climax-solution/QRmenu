@@ -92,7 +92,7 @@ export default class Specialites extends Component {
             sendData.append('id',tmp[activeIndex].id);
             sendData.append('img_url',tmp[activeIndex].img_url);
         }
-        Axios.post(`http://localhost:8000/api/${activeIndex == -1 ? 'createspecial': 'updatespecial'}`,sendData, {headers: headers}).then(res=>{
+        Axios.post(`${REACT_APP_BACKEND_API}${activeIndex == -1 ? 'createspecial': 'updatespecial'}`,sendData, {headers: headers}).then(res=>{
             const { data } = res;
             if ( data.status ) {                
                 this.resetStates(data.data);
@@ -166,7 +166,7 @@ export default class Specialites extends Component {
                 name: "Images",
                 options: {
                     customBodyRender: (value, tableMeta) => (
-                        <img src={`http://localhost:8000/images/${value}`} style={{width: '50px',height: '50px'}} alt=""/>
+                        <img src={`${REACT_APP_BACKEND_HOST}images/${value}`} style={{width: '50px',height: '50px'}} alt=""/>
                     )
                 }
             },

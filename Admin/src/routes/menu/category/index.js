@@ -106,7 +106,7 @@ export default class Category extends Component {
         if (activeIndex != -1) {
             dialog['id'] = tmp[activeIndex].id;
         }
-        Axios.post(`http://localhost:8000/api/${activeIndex != -1 ? 'updatecategory': 'createcategory'}`,dialog,{headers: headers}).then(res=>{
+        Axios.post(`${REACT_APP_BACKEND_API}${activeIndex != -1 ? 'updatecategory': 'createcategory'}`,dialog,{headers: headers}).then(res=>{
             if (res.data.status) {
                 NotificationManager.success('Success!');
                 const { data } = res.data;

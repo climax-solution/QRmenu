@@ -109,7 +109,7 @@ class UsersPackage extends Component {
         })
     }
     deletePackage = (arg) => {
-        Axios.delete(`http://localhost:8000/api/deletepkg/${arg}`).then(res=>{
+        Axios.delete(`${REACT_APP_BACKEND_API}deletepkg/${arg}`).then(res=>{
             const { data } = res;
             if (!data.status) {
                 NotificationManager.error('Failure!');

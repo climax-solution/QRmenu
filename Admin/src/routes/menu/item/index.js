@@ -199,7 +199,7 @@ export default class Item extends Component {
                 name: 'Images',
                 options:{
                     customBodyRender: (value) => (
-                        <img src={`http://localhost:8000/images/${value}`} alt="" style={{width: '50px', height: '50px'}}/>
+                        <img src={`${REACT_APP_BACKEND_HOST}images/${value}`} alt="" style={{width: '50px', height: '50px'}}/>
                     )
                 }
             },

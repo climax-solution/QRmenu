@@ -6,12 +6,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Collapse from '@material-ui/core/Collapse';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import Chip from '@material-ui/core/Chip';
 
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
+import { connect } from 'react-redux';
 
 class NavMenuItem extends Component {
 
@@ -39,7 +40,7 @@ class NavMenuItem extends Component {
    }
 
    render() {
-      const { menu, onToggleMenu } = this.props;
+      const { menu, onToggleMenu, dashboarddata } = this.props;
       const { subMenuOpen } = this.state;
       if (menu.child_routes != null) {
          return (
@@ -128,7 +129,7 @@ class NavMenuItem extends Component {
                         ''
                      }
                   </span>
-               </NavLink>) : (<a href="http://localhost:3000" _target="blank">
+               </NavLink>) : (<a href={'http://' + dashboarddata.profile_url} _target="blank">
                <ListItemIcon className="menu-icon">
                   <i className={menu.menu_icon}></i>
                </ListItemIcon>
@@ -147,4 +148,8 @@ class NavMenuItem extends Component {
    }
 }
 
-export default NavMenuItem;
+const mapStateToProps = ({ authUser }) => {
+   const { dashboarddata } = authUser;
+   return { dashboarddata };
+};
+export default withRouter(connect(mapStateToProps)(NavMenuItem));

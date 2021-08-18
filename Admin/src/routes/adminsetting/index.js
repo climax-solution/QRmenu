@@ -19,7 +19,6 @@ import Axios from 'axios';
     state = {
         selectedValue: 'english',
         site_setting:{
-            currency: '',
             timezone:  '',
             site_name:  '',
             copyright:  '',
@@ -59,11 +58,6 @@ import Axios from 'axios';
             selectedValue: event.target.value
         })
     };
-    currencyChange = (event) => {
-        this.setState({
-            currency: event.target.value
-        })
-    }
     settingChang = (index) =>{
         let custom = this.state.setGe;
         custom[index] = custom[index] ? false : true;
@@ -107,24 +101,7 @@ import Axios from 'axios';
 						fullBlock
 					>
                         <div className="row">
-                            <div className="col-md-6 mt-5">
-                                <FormControl style={{display: 'block',padding:'10px 20px'}} fullWidth>
-                                    <FormGroup aria-label="position" style={{display: 'block'}} row>
-                                        <InputLabel htmlFor="currency" className="ml-10">Currency</InputLabel>
-                                        <Select value={site_setting.currency} onChange={(e)=>this.setState({site_setting:{...site_setting, currency: e.target.value}})} inputProps={{ name: 'currency', id: 'currency', }}fullWidth>
-                                            <MenuItem value={''} key="0">Select Amount</MenuItem>
-                                            <MenuItem value={-1} key="1">Unlimit</MenuItem>
-                                            <MenuItem value={10} key="2">10</MenuItem>
-                                            <MenuItem value={15} key="3">15</MenuItem>
-                                            <MenuItem value={20} key="4">20</MenuItem>
-                                            <MenuItem value={30} key="5">30</MenuItem>
-                                            <MenuItem value={40} key="6">40</MenuItem>
-                                            <MenuItem value={50} key="7">50</MenuItem>
-                                        </Select>
-                                    </FormGroup>
-                                </FormControl>
-                            </div>
-                            <div className="col-md-6">
+                            <div className="col-md-12">
                                 <FormControl style={{display: 'block',padding:'10px 20px'}} fullWidth>
                                     <FormGroup aria-label="position" style={{display: 'block'}} row>
                                     <InputLabel htmlFor="currency" className="ml-10">Time Zone</InputLabel>

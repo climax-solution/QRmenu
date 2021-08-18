@@ -11,7 +11,7 @@ import { FormGroup, FormControlLabel, FormControl, TextField, Button,FormLabel, 
 import RctCollapsibleCard from 'Components/RctCollapsibleCard/RctCollapsibleCard';
 import ToggleSwitch from "./switch";
 import Axios from 'axios';
-
+import { NotificationManager } from 'react-notifications';
  export default class OrderConfig extends Component {
     state = {
 		monthlyPlan: true,
@@ -71,11 +71,11 @@ import Axios from 'axios';
             }
             paypal['paypal_email'] = data['paypal_email'];
             for (let key in bambora) {
-                bambora[key] = data[key];
+                bambora[key] = !data[key] ? '' : data[key];
             }
             bambora['bambora_gateway'] = !data['bambora_gateway'] ? false : true;
             for (let key in stripe) {
-                stripe[key] = data[key];
+                stripe[key] = !data[key] ? '' : data[key];;
             }
             stripe['stripe_gateway'] = !data['stripe_gateway'] ? false : true;
             this.setState({
@@ -85,6 +85,7 @@ import Axios from 'axios';
                 bambora: bambora,
                 stripe: stripe
             })
+            console.log(this.state);
         })
     }
 
@@ -114,7 +115,8 @@ import Axios from 'axios';
             'Authorization': `Bearer ${localStorage.getItem('token')}`
          }
         Axios.post(REACT_APP_BACKEND_API + 'modifyorderconfig',sendData, {headers: headers}).then(res=>{
-
+            alert(1);
+            if (res.success) NotificationManager.success('afadf');
         })
     }
      render() {
@@ -139,7 +141,7 @@ import Axios from 'axios';
                             <FormControl style={{display: 'block',padding: '20px'}}>
                                 <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
                                     <div className="row">
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel>Kontantbetaling ved levering </FormLabel>
                                             <ToggleSwitch
                                                 id="contant-betaling"
@@ -151,7 +153,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel>Bestilling</FormLabel>
                                             <ToggleSwitch
                                                 id="bestilling"
@@ -163,7 +165,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel>Henting</FormLabel>
                                             <ToggleSwitch
                                                 id="henting"
@@ -175,19 +177,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
-                                            <FormLabel> Betal med kontanter </FormLabel>
-                                            <ToggleSwitch
-                                                id="betal-med"
-                                                checked={first_config.betal}
-                                                onChange={()=>this.setState({
-                                                    first_config: {...first_config, betal: !first_config.betal}
-                                                })}
-                                                dataYes="&#xe64c; On"
-                                                dataNo="&#xe6ae; Off"
-                                            />
-                                        </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel> Spis i Restaurant </FormLabel>
                                             <ToggleSwitch
                                                 id="spis"
@@ -200,16 +190,16 @@ import Axios from 'axios';
                                             />
                                         </div>
                                     </div>
-                                    <Button variant="contained" onClick={()=>this.modifyCreate(0)} color="primary" style={{float:'right'}} className="mt-10 mb-10">
+                                    <Button variant="contained" onClick={()=>this.modifyCreate(0)} color="primary" style={{float:'right'}} className="mt-20 mb-20">
                                         <i className="ti-save"></i>&nbsp;Save Change
                                     </Button>
                                 </FormGroup>
                             </FormControl>
                         </RctCollapsibleCard>
-                        {/* <RctCollapsibleCard
+                        <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-md-12 d-sm-full"
-                            heading={<IntlMessages id="Paypal Payment Gateway" />}
+                            heading={<IntlMessages id="widgets.paypal_payment_gateway" />}
                             collapsible
                             closeable
                             fullBlock
@@ -261,7 +251,7 @@ import Axios from 'axios';
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
                             colClasses="col-md-12 d-sm-full"
-                            heading={<IntlMessages id="Bambora Payment Gateway" />}
+                            heading={<IntlMessages id="widgets.bambora_payment_gateway" />}
                             collapsible
                             closeable
                             fullBlock
@@ -273,7 +263,7 @@ import Axios from 'axios';
                                             <FormLabel>Payment Gateway</FormLabel>
                                             <ToggleSwitch
                                                 id="bambora-payment"
-                                                checked={bambora.stripe_gateway}
+                                                checked={bambora.bambora_gateway}
                                                 onChange={(e)=>this.setState({
                                                     bambora: {...bambora, stripe_gateway: !bambora.stripe_gateway}
                                                 })}
@@ -281,7 +271,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-12">
                                             <TextField
                                                 margin="dense"
                                                 id="paypalemail"
@@ -294,7 +284,7 @@ import Axios from 'axios';
                                                 fullWidth
                                             />
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-12">
                                             <TextField
                                                 margin="dense"
                                                 id="paypalemail"
@@ -324,14 +314,15 @@ import Axios from 'axios';
                                     </Button>
                                 </FormGroup>
                             </FormControl>
-                        </RctCollapsibleCard> */}
+                        </RctCollapsibleCard>
+                    
                     </div>
                     <div className="col-lg-6 col-sm-12 col-md-12">
                         <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
-                            colClasses="col-md-12 d-sm-full"
+                            colClasses="col-md-12 d-sm-full d-inline-block"
                             heading={<IntlMessages id="widgets.configuration" />}
-                            customStyle={{overflow: 'hidden', maxHeight: '400px'}}
+                            customStyle={{overflow: 'hidden'}}
                             collapsible
                             closeable
                             fullBlock
@@ -339,7 +330,7 @@ import Axios from 'axios';
                             <FormControl style={{display: 'block',padding: '20px'}}>
                                 <FormGroup aria-label="position" style={{display: 'block',padding:'20px'}} row>
                                     <div className="row">
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel>Whatsapp Order </FormLabel>
                                             <ToggleSwitch
                                                 id="whatsapp-order"
@@ -351,7 +342,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel>Stock Status</FormLabel>
                                             <ToggleSwitch
                                                 id="stock-status"
@@ -363,7 +354,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel>Stock Counter</FormLabel>
                                             <ToggleSwitch
                                                 id="stock-counter"
@@ -375,7 +366,7 @@ import Axios from 'axios';
                                                 dataNo="&#xe6ae; Off"
                                             />
                                         </div>
-                                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-20">
+                                        <div className="col-sm-6 col-xs-12 mt-20">
                                             <FormLabel> KDS </FormLabel>
                                             <ToggleSwitch
                                                 id="KDS"
@@ -393,7 +384,7 @@ import Axios from 'axios';
                                         id="delivery-charge"
                                         label="Delivery charge"
                                         type="email"
-                                        checked={config.delivery_charge}
+                                        value={config.delivery_charge}
                                         onChange={(e)=>this.setState({
                                             config: {...config, delivery_charge: e.target.value}
                                         })}
@@ -404,11 +395,11 @@ import Axios from 'axios';
                                 </FormGroup>
                             </FormControl>
                         </RctCollapsibleCard>
-                        {/* <RctCollapsibleCard
+                        <RctCollapsibleCard
                             customClasses="trafic-bar-chart"
-                            colClasses="col-md-12 d-sm-full"
-                            heading={<IntlMessages id="Stripe Payment Gateway" />}
-                            customStyle={{overflow: 'hidden', maxHeight: '300px'}}
+                            colClasses="col-md-12 d-sm-full d-inline-block"
+                            heading={<IntlMessages id="widgets.stripe_payment_gateway" />}
+                            customStyle={{overflow: 'hidden'}}
                             collapsible
                             closeable
                             fullBlock
@@ -454,12 +445,12 @@ import Axios from 'axios';
                                             />
                                         </div>
                                     </div>
-                                    <Button variant="contained" onClick={()=>this.modifyCreate(4)} color="primary" style={{float:'right'}} className="mt-20">
+                                    <Button variant="contained" onClick={()=>this.modifyCreate(4)} color="primary" style={{float:'right'}} className="mt-20 mb-20">
                                         <i className="ti-save"></i>&nbsp;Save Change
                                     </Button>
                                 </FormGroup>
                             </FormControl>
-                        </RctCollapsibleCard> */}
+                        </RctCollapsibleCard>
                     </div>
                 </div>
              </div>

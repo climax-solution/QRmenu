@@ -42,7 +42,6 @@ class SidebarContent extends Component {
                 menu.path = '/vendor/' + item[2];
             })
         }
-        
         return (
             <div className="rct-sidebar-nav">
                 <nav className="navigation">
