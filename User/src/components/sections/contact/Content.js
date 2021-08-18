@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getTimeList } from '../../../store/actions/timelist.actions';
+import moment from 'moment';
+import { getUserInfo } from '../../../store/actions/content.actions';
 // import L from 'leaflet';
 // import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 
@@ -25,27 +29,108 @@ class Content extends Component {
                                         <div className="ct-info-box">
                                             <i className="flaticon-location" />
                                             <h5>Find Us</h5>
-                                            <span>445 Mount Eden Road, Mount Eden</span>
-                                            <span>21 Greens Road RD 2 Ruawai 0592</span>
-                                            <span> +123 456 789 </span>
-                                            <span> info@example.com </span>
+                                            <span>Email: {this.props.userinfo.email}</span>
+                                            <span>Whatsapp: +{this.props.userinfo.whatsapp} </span>
+                                            <span>Instagram: {this.props.userinfo.instagram} </span>
                                         </div>
                                     </div>
                                     <div className="col-xl-6">
                                         <div className="ct-info-box">
-                                            <i className="flaticon-online-booking" />
+                                            <i className="fa fa-clock" />
                                             <h5>Opening Hours</h5>
-                                            <span><span>Mon - Wed:</span> 8:00am - 8:00pm</span>
-                                            <span><span>Thu:</span> 8:00am - 5:00pm</span>
-                                            <span><span>Fri:</span> 8:00am - 8:00pm</span>
-                                            <span><span>Sat - Sun:</span> 8:00am - 2:00pm</span>
+                                            <ul className="text-black">
+                                                <li>
+                                                    <a href="#">Sunday
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        {
+                                                            moment(new Date(this.props.time_list.sun_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.sun_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Monday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        
+                                                        {
+                                                            moment(new Date(this.props.time_list.mon_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.mon_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Tuesday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        
+                                                        {
+                                                            moment(new Date(this.props.time_list.tue_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.tue_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Wednesday&nbsp;&nbsp;
+                                                        
+                                                        {
+                                                            moment(new Date(this.props.time_list.wed_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.wed_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        
+                                                        {
+                                                            moment(new Date(this.props.time_list.thu_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.thu_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        
+                                                        {
+                                                            moment(new Date(this.props.time_list.fri_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.fri_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Saturday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        
+                                                        {
+                                                            moment(new Date(this.props.time_list.sat_mor)).format('LT')
+                                                        }
+                                                        ~
+                                                        {
+                                                            moment(new Date(this.props.time_list.sat_aft)).format('LT')
+                                                        }
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="section pt-0">
+                    {/* <div className="section pt-0">
                         <div className="container">
                             <div className="section-title-wrap">
                                 <h2 className="title">Send us a Message </h2>
@@ -74,11 +159,18 @@ class Content extends Component {
                                 <button type="button" className="btn-custom primary" name="button">Send Message</button>
                             </form>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );
     }
 }
-
-export default Content;
+const maptoStateProps = state => ({
+    time_list: state.content.time_list,
+    userinfo: state.content.userinfo
+})
+const maptoStateDispatch = dispatch => ({
+    getTimeList: () => dispatch(getTimeList()),
+    getUserInfo: () => dispatch(getUserInfo())
+})
+export default connect(maptoStateProps, maptoStateDispatch)(Content);

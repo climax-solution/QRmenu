@@ -41,7 +41,7 @@ class Content extends Component {
         }
     }
     render() {
-        console.log('Props->',this.props);
+        //console.log('Props->',this.props);
 
         const { package_list } = this.state;
         return (

@@ -22,7 +22,7 @@ class Content extends Component {
         const queryParams = new URLSearchParams(window.location.search);
         const id = queryParams.get('id');
         const phone = queryParams.get('phone');
-        console.log('phone-<',phone,'id=>',id);
+        //console.log('phone-<',phone,'id=>',id);
         if ( phone && id ) {
             await this.setState({
                 phone: phone,
@@ -62,7 +62,7 @@ class Content extends Component {
                 <NotificationContainer/>
                 {/* Menu Wrapper Start */}
                 {
-                    !list.length  &&
+                    !list.length &&
                     <div className="section section-padding">
                         <div className="container">
                         <form style={{overflow:'hidden'}}>
@@ -87,14 +87,14 @@ class Content extends Component {
                     </div>
                 }
                 {
-                    list.length  &&
+                    list.length  ?
                     <table className="ct-responsive-table mt-5">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Image</th>
-                                <th>Price(NOK)</th>
+                                <th>Price(Kr)</th>
                                 <th>Qty</th>
                                 <th>Status</th>
                             </tr>
@@ -124,6 +124,7 @@ class Content extends Component {
                             ))}
                         </tbody>
                     </table>
+                    : <div></div>
                 }
                 {/* Menu Wrapper End */}
             </Fragment>

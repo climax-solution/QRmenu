@@ -26,7 +26,7 @@ class Cartlist extends Component {
                                     </div>
                                 </div>
                                 <div className="cart-sidebar-price">
-                                    {new Intl.NumberFormat().format((Number(item.price) * item.qty).toFixed(2))}$
+                                    {new Intl.NumberFormat().format((Number(item.price) * item.qty).toFixed(2))}Kr
                             </div>
                                 <div className="close-btn" onClick={()=> this.props.removeCart(i)}>
                                     <span />

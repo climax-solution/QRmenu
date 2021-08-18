@@ -16,14 +16,14 @@ const Sample = () => {
     return (
         <div>
         <div className="text-center">
-            <img src="http://localhost:8000/qrcode/1627548859.png" alt="234" className="w-50"/>
+            <img src={`${process.env.REACT_APP_BACKEND_HOST}/qrcode/1627548859.png`} alt="234" className="w-50"/>
         </div>
         <div className="text-center">
             {/* <a className="badge badge-success" href={process.env.REACT_APP_BACKEND_HOST+ qrcode} download>Download</a> */}
             <button className="badge badge-success download-btn" onClick={alert()}>
                 Download
             </button>
-            <a href="http://localhost:8000/qrcode/1627548859.png" download="test.png" target="__blank">Download1</a>
+            <a href={`${process.env.REACT_APP_BACKEND_HOST}/qrcode/1627548859.png`} download="test.png" target="__blank">Download1</a>
         </div>
         <div className="text-center">
         </div>
@@ -141,7 +141,7 @@ class Content extends Component {
         for(let key in formData) {
             if (formData[key] == '' || key == 'email' && !validator.isEmail(formData[key])) flag = 1;
         }
-        console.log(flag);
+        //console.log(flag);
         switch(formData.order_type) {
             case '1':
                 if ( !this.state.activePerson || !this.state.date_time) {
@@ -252,7 +252,7 @@ class Content extends Component {
             });
           })
           .catch(err => {
-            console.log(err);
+            //console.log(err);
           });
     };
     render() {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CATEGORIES, GET_ITEMS, GET_SPECIALITIES, SET_EMAIL } from "./types";
+import { GET_CATEGORIES, GET_ITEMS, GET_SPECIALITIES, SET_USERINFO } from "./types";
 
 const datas = {
     subdomain: window.location.host
@@ -32,11 +32,11 @@ export const getSpecialities = () => dispatch => {
     })
 }
 
-export const getEmail = () => dispatch => {
-    axios.post(process.env.REACT_APP_BACKEND_API+'user/getuseremail',datas).then(res=>{
+export const getUserInfo = () => dispatch => {
+    axios.post(process.env.REACT_APP_BACKEND_API+'user/getuserinfo',datas).then(res=>{
         dispatch({
-            type: SET_EMAIL,
-            payload: res.data.email
+            type: SET_USERINFO,
+            payload: res.data
         })
     })
 }

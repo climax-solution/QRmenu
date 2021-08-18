@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getTimeList } from '../../store/actions/timelist.actions';
 import moment from 'moment';
-import { getEmail } from '../../store/actions/content.actions';
+import { getUserInfo } from '../../store/actions/content.actions';
 class Footer extends Component {
     scrollToTop() {
         window.scrollTo({
@@ -13,9 +13,10 @@ class Footer extends Component {
     }
     componentDidMount() {
         this.props.getTimeList();
-        this.props.getEmail();
+        this.props.getUserInfo();
     }
     render() {
+        //console.log(this.props);
         return (
             <footer className={this.props.footer.style}>
                 {/* Middle Footer */}
@@ -26,7 +27,7 @@ class Footer extends Component {
                                 <img src={process.env.PUBLIC_URL + "/" + this.props.footer.logo} alt="logo" style={{width: '200px'}}/>
                                 <ul>
                                     {/* <li><a href="#">Test Restaurant AS</a></li> */}
-                                    <li><a href="#"><i className="fa fa-envelope text-white"></i>{this.props.email}</a></li>
+                                    <li><a href="#"><i className="fa fa-envelope text-white"></i>{this.props.userinfo.email}</a></li>
                                 </ul>
                             </div>
                             <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 footer-widget">
@@ -147,10 +148,10 @@ class Footer extends Component {
 
 const maptoStateProps = state => ({
     time_list: state.content.time_list,
-    email: state.content.email
+    userinfo: state.content.userinfo
 })
 const maptoStateDispatch = dispatch => ({
     getTimeList: () => dispatch(getTimeList()),
-    getEmail: () => dispatch(getEmail())
+    getUserInfo: () => dispatch(getUserInfo())
 })
 export default connect(maptoStateProps, maptoStateDispatch)(Footer);
