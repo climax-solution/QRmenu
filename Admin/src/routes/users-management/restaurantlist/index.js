@@ -114,6 +114,7 @@ import { FormControl, Input } from '@material-ui/core';
                 options:{
                     customBodyRender: (value, tableMeta, updateValue) => (
                         <div>
+                            <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon btn-info" style={{minWidth:'inherit'}} onClick={()=>this.resetPassword(tableMeta.rowIndex)}><i className="zmdi zmdi-edit"></i></MatButton>
                             <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.resetPassword(tableMeta.rowIndex)}><i className="zmdi zmdi-lock-outline"></i></MatButton>
                             {value == 0 ? <MatButton variant="contained" color="primary" className="mr-10 mb-10 text-white btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.updatestatus(tableMeta.rowIndex, 1)}><i className="zmdi zmdi-flash"></i></MatButton>
                             : <MatButton variant="contained" className="mr-10 mb-10 text-white btn-danger btn-icon" style={{minWidth:'inherit'}} onClick={()=>this.updatestatus(tableMeta.rowIndex, 0)}> <i className="zmdi zmdi-flash-off"></i></MatButton>}
