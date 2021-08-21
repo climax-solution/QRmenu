@@ -45,18 +45,16 @@ class Notifications extends Component {
 		})
 	}
 	getNotifications(data) {
-		let note_admin;
 		let note_vendor;
+		console.log(data);
 		note_vendor = [
 		{
-			userAvatar:'user-2',
-			userName:'New Orders Today',
+			text:'New Orders Today',
 			item_number: data['order'],
 			url: 'liveorder'
 		},
 		{
-			userAvatar:'user-6',
-			userName:'New Reservation Today',
+			text:'New Reservation Today',
 			item_number: data['reservation'],
 			url: 'reservation'
 		}
@@ -67,7 +65,7 @@ class Notifications extends Component {
   render() {
     const { notifications, all_item } = this.state;
     return (
-      all_item && <UncontrolledDropdown nav className="list-inline-item notification-dropdown">
+      all_item ? <UncontrolledDropdown nav className="list-inline-item notification-dropdown">
         <DropdownToggle nav className="p-0">
           <Tooltip title="Notifications" placement="bottom">
             <IconButton className="shake" aria-label="bell">
@@ -91,7 +89,7 @@ class Notifications extends Component {
 							<div className="media">
 								<div className="media-body pt-5">
 									<div className="d-flex justify-content-between">
-										<h5 className="mb-5 text-primary">{notification.userName}</h5>
+										<h5 className="mb-5 text-primary">{notification.text}</h5>
 										<span className="text-muted fs-12">{notification.item_number}</span>
 									</div>
 									<Button className="btn-xs mr-10" component={Link} to={`${notification.url}`}>
@@ -106,6 +104,7 @@ class Notifications extends Component {
 			</div>
         </DropdownMenu>
       </UncontrolledDropdown>
+	  : <span></span>
     );
   }
 }

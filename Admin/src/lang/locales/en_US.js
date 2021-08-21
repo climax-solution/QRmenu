@@ -92,6 +92,7 @@ module.exports = {
    "button.delete": "Delete",
    "button.yes": "Yes",
    "button.viewAll": "View All",
+   "button.gopage": "Go Page",
    "components.summary": "Summary",
    "hint.whatAreYouLookingFor": "What are You Looking For",
    "components.paid": "Paid",
