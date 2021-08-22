@@ -50,7 +50,7 @@ class AuthController extends BaseController
      */
     public function postLogin(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status'=>1])){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status'=> '1'])){
             $user = Auth::user();
 
             // if ($user->email_verified_at === null)

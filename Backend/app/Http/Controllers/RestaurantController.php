@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Validator;
 class RestaurantController extends Controller
 {
     public function getRestList(Request $request) {
-        return response()->json(User::where('permission','vendor')->get());
+        $res = DB::table('users')
+        ->join('packages', 'users.package', '=', 'packages.id')
+        ->select('users.*','packages.package_name')->get();
+        return response()->json($res);
     }
 
     public function postAddUser(Request $request) {

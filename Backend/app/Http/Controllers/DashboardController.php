@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $res = [
             'menu' => $menu,
             'special' => $special,
-            'activepkg' => $activepkg['package_name'],
+            'activepkg' => $activepkg->package_name,
             'join_date' => $join_date,
             'earning' => $USER->earning,
             'profile_url' => $USER->subdomain
