@@ -4,7 +4,7 @@ import Crm from 'Routes/crm';
 import UsersManagement from 'Routes/users-management';
 import UsersPackage from 'Routes/userspackage';
 import Payment from 'Routes/payment';
-import AdminSetting from 'Routes/adminsetting';
+import Setting from 'Routes/adminsetting';
 import BackUpDB from 'Routes/backupdb';
 import LiveOrder from 'Routes/liveorder';
 //vendor
@@ -57,8 +57,8 @@ export default [
       divide: ['/admin']
    },
    {
-      path: "adminsetting",
-      component: AdminSetting,
+      path: "settings",
+      component: Setting,
       divide: ['/admin']
    },
    {

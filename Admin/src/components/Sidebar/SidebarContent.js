@@ -101,6 +101,7 @@ class SidebarContent extends Component {
                                     <NavMenuItem 
                                         menu={menu}
                                         key={key}
+                                        onToggleMenu={() => this.toggleMenu(menu, "category5")}
                                     />
                                 ))}
                             </List>

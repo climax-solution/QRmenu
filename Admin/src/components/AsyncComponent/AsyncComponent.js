@@ -104,6 +104,15 @@ const AsyncAvaibleComponent = Loadable({
    loading: () => <RctPageLoader />
 })
 
+const AsyncSiteSettingComponent = Loadable({
+   loader: () => import("Routes/adminsetting/site_setting"),
+   loading: () => <RctPageLoader />
+})
+
+const AsyncEmainSettingComponent = Loadable({
+   loader: () => import("Routes/adminsetting/email_setting"),
+   loading: () => <RctPageLoader/>
+})
 export {
    AsyncDashboardComponent,
    AsyncComponentAddNewRestaurantComponent,
@@ -121,4 +130,6 @@ export {
    AsyncAllergensComponent,
    AsyncProfileComponent,
    AsyncAvaibleComponent,
+   AsyncSiteSettingComponent,
+   AsyncEmainSettingComponent
 };

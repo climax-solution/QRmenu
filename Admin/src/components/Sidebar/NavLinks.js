@@ -58,8 +58,16 @@ export default {
       {
          "menu_title": "sidebar.adminsetting",
          "menu_icon": "zmdi zmdi-settings",
-         "path": "/admin/adminsetting",
-         "child_routes": null
+         "child_routes": [
+            {
+               "path": "/admin/settings/site-setting",
+               "menu_title": "sidebar.site_setting"
+            },
+            {
+               "path": "/admin/settings/email-setting",
+               "menu_title": "sidebar.email_setting"
+            },
+         ]
       }
    ],
    category6: [

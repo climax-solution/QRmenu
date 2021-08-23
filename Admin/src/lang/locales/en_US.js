@@ -177,6 +177,8 @@ module.exports = {
    "sidebar.orderconfig": "Order Configuration",
    "sidebar.overviewprofile": "Overview Profile",
    "sidebar.orderitem": "Order Item",
+   "sidebar.site_setting": "Site settings",
+   "sidebar.email_setting": "Email settings",
    //custom widget
    "widgets.profile": "Profile",
    "widgets.logOut": "Log Out",
