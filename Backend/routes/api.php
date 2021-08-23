@@ -51,6 +51,8 @@ Route::post('updateuser', [RestaurantController::class, 'updateuser']);
 //Site Setting
 Route::get('settingstatus', [SettingController::class, 'getStatus']);
 Route::post('modifycreate', [SettingController::class, 'postModifyCreate']);
+Route::post('get_email_setting', [SettingController::class, 'postEmailSetting']);
+Route::post('modifyEmailCreate', [SettingController::class, 'postmodifyEmailCreate']);
 
 //Payment Setting
 Route::post('modifycreate_payment', [PaymentController::class, 'postModifyPayment']);
