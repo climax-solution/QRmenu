@@ -24,6 +24,10 @@ export default class LiveOrder extends Component {
         activeID: -1
     }
     componentDidMount() {
+        this.getOrderList(-1);
+    }
+
+    getOrderList(type) {
         const headers = {
             'Accept':'application/json',
             'Content-type': 'application/json',
