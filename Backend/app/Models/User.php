@@ -34,7 +34,8 @@ class User extends Authenticatable
         'more_about',
         'sub_domain',
         'status',
-        'package_status'
+        'package_status',
+        'permission'
     ];
 
     /**

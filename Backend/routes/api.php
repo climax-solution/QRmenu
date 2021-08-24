@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BroadCastingController;
 use App\Http\Controllers\PkgController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SettingController;
@@ -109,6 +110,7 @@ Route::post('updateallergen', [MenuController::class,'updateallergen']);
 Route::post('allergenlist', [MenuController::class,'allergenlist']);
 Route::post('deleteallergen', [MenuController::class,'deleteallergen']);
 
+Route::post('/broadcasting/auth',[App\Http\Controllers\BroadCastingController::class, 'index']);
 
 /*------ For Front User ------*/
 use App\Http\Controllers\FrontUser\HomeController;

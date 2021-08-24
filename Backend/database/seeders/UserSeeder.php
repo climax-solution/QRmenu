@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
         User::insert([
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
-            'status' => '1'
+            'status' => '1',
+            'permission' => 'admin'
         ]);
     }
 }

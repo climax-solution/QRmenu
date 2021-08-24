@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\User;
@@ -10,9 +11,11 @@ use Validator;
 class RestaurantController extends Controller
 {
     public function getRestList(Request $request) {
-        $res = DB::table('users')
-        ->join('packages', 'users.package', '=', 'packages.id')
-        ->select('users.*','packages.package_name')->get();
+        $res = User::where('permission', 'vendor')->get();
+        foreach($res as $item) {
+            $package = Package::where('id',$item->package)->select('package_name')->first();
+            $item->package_name = $package->package_name;
+        }
         return response()->json($res);
     }
 
