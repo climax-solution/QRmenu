@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LiveStatus;
 use App\Models\Package;
 use App\Models\User;
 use App\Models\VendorItem;
@@ -38,7 +39,8 @@ class DashboardController extends Controller
             'activepkg' => $activepkg->package_name,
             'join_date' => $join_date,
             'earning' => $USER->earning,
-            'profile_url' => $USER->subdomain
+            'profile_url' => $USER->subdomain,
+            'id' => $USER->id,
         ];
         return response()->json($res);
     }

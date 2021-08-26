@@ -114,6 +114,7 @@ Route::post('/broadcasting/auth',[App\Http\Controllers\BroadCastingController::c
 
 /*------ For Front User ------*/
 use App\Http\Controllers\FrontUser\HomeController;
+use Pusher\Pusher;
 
 Route::post('user/getspeciallist', [HomeController::class, 'getspeciallist']);
 Route::post('user/getitemlist', [HomeController::class, 'getitemlist']);
@@ -142,3 +143,16 @@ Route::post('offlineMethod', [SubscriptPayController::class,'offlineMethod']);
 Route::post('backupdb', [VendorChunkOne::class,'backupDB']);
 
 Route::post('resetpassword', [AuthController::class,'resetpassword']);
+$options = array(
+    'cluster' => 'mt1',
+    'encrypted' => false
+);
+$pusher = new Pusher(
+    env('PUSHER_APP_KEY'),
+    env('PUSHER_APP_SECRET'),
+    env('PUSHER_APP_ID'),
+    $options
+);
+
+$data['message'] = 'hello world';
+$pusher->trigger('test_channel', 'my_event', $data);

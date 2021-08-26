@@ -14,6 +14,6 @@ use App\Conversation;
 |
 */
 
-Broadcast::channel('messages.{id}', function ($user, $id) {
+Broadcast::channel('messages', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });

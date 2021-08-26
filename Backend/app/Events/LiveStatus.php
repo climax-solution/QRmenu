@@ -19,14 +19,14 @@ class LiveStatus implements ShouldBroadcast {
      * @return void
      */
 
-    public $username;
+    public $id;
 
-    public $message;
+    public $list;
 
-    public function __construct($username)
+    public function __construct($data)
     {
-        $this->username = $username;
-        $this->message  = "{$username} liked your status";
+        $this->id = $data->id;
+        $this->list  = $data->list;
     }
 
     /**
@@ -36,12 +36,7 @@ class LiveStatus implements ShouldBroadcast {
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('messages.'.$this->message);
-    }
-
-    public function broadcastWith()
-    {
-        return ["message" => $this->message];
+        return ['list'.$this->id];
     }
 
     public function broadcastAs()

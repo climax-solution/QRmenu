@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LiveStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Models\User;
@@ -10,6 +11,9 @@ use Validator;
 use Illuminate\Support\Facades\Password;
 use Exception;
 use App\Http\Resources\Auth as AuthResource;
+use App\Models\Order;
+use App\Models\Reservation;
+use Pusher\Pusher;
 
 class AuthController extends BaseController
 {
@@ -57,7 +61,31 @@ class AuthController extends BaseController
             //     return $this->sendError('Email no verificated.');
 
             $user->tokenResult = $user->createToken($user->email);
+            $options = array(
+                'cluster' => 'mt1',
+                'encrypted' => false
+            );
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                $options
+            );
 
+            if ($user->permission == 'vendor') {
+                $user = auth('api')->user();
+                $date = date('Y-m-d');
+                $order = Order::where(['vendor'=>$user->email,'view_status'=>'0', 'status'=>'0'])->where('created_at','like',$date.'%')->count();
+                $reservation = Reservation::where(['vendor'=>$user->email,'status'=>'0'])->where('created_at','like',$date.'%')->count();
+                $data = [
+                    'id' => $user->id,
+                    'list' => [
+                        'order' => $order,
+                        'reservation' => $reservation
+                    ]
+                ];
+                $pusher->trigger('messages', 'chat.'.$user->id, $data);
+            }
             return $this->sendResponse(new AuthResource($user), 'User login successfully.');
         }
         else{
