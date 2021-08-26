@@ -21,6 +21,7 @@ class SignIn extends Component {
       password: '',
       link:'/'
    }
+   
    changeEmail(e) {
       this.setState({
          email: e.target.value

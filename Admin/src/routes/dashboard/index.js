@@ -15,7 +15,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Line } from "react-chartjs-2";
 import { getDashboardData } from '../../actions/AuthActions';
-
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
 const textEffect = {
     textShadow:'0 1px 0 hsl(174,5%,80%),0 2px 0 hsl(174,5%,75%),0 3px 0 hsl(174,5%,70%), 0 4px 0 hsl(174,5%,66%),0 5px 0 hsl(174,5%,64%),0 6px 0 hsl(174,5%,62%),0 7px 0 hsl(174,5%,61%), 0 8px 0 hsl(174,5%,60%), 0 0 5px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.2), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.2),  0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.3)',
     color: 'white',
@@ -25,18 +26,13 @@ const textEffect = {
 const rem6 = { fontSize: '6rem'};
 const rem3 = { fontSize: '2rem' };
 
-
 class Dashboard extends Component {
      state = {
         permission_status: window.location.pathname.indexOf('admin') > 0 ? 'admin': 'vendor',
         dashboard: {},
         chartDataList: ''
      }
-
-     componentDidMount() {
-         this.props.getDashboardData();
-     }
-
+     
      componentDidUpdate(preprops) {
          if (preprops !== this.props) {
              this.setState({

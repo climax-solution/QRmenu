@@ -1,7 +1,7 @@
 /**
  * Notification Component
  */
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Link } from 'react-router-dom';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
@@ -16,14 +16,22 @@ import api from 'Api';
 // intl messages
 import IntlMessages from 'Util/IntlMessages';
 import Axios from 'axios';
+import dashboard from '../../routes/dashboard';
+import { connect } from 'react-redux';
+import Pusher from 'pusher-js';
 
 class Notifications extends Component {
 
-	state = {
-		notifications: [],
-		all_item: 0
+	constructor(props) {
+		super(props);
+		this.state = {
+			notifications: [],
+			all_item: 0,
+			dashboard: []
+		}
+		this.setAllItem = this.setAllItem.bind(this);
+		this.getNotifications = this.getNotifications.bind(this);
 	}
-
 	componentDidMount() {
 		const headers = {
 			headers: {
@@ -33,20 +41,40 @@ class Notifications extends Component {
 			}
 		}
 		Axios.post(REACT_APP_BACKEND_API + 'getnotificationdata',{},headers).then(res=>{
-			const { data } = res;
-			let { all_item } = this.state;
-			for (const key in data) {
-				all_item += data[key];
-			}
-			this.setState({
-				all_item: all_item
-			})
-			this.getNotifications(data);
 		})
+	}
+	componentDidUpdate(preprops) {
+		if (preprops != this.props) {
+			Pusher.logToConsole = true;
+			let pusher = new Pusher('a9d62f7653608deaa690', {
+				cluster: 'mt1',
+				forceTLS: true
+			});
+			const id = this.props.dashboard.id;
+			let channel = pusher.subscribe('messages');
+			const setAllItem = this.setAllItem;
+			const getNotify = this.getNotifications;
+			if (id > 1) {
+				channel.bind('chat.'+id, function(data) {
+					let all_item = 0;
+					for (const key in data.list) {
+						all_item += data.list[key];
+					}
+					setAllItem(all_item);
+					getNotify(data.list);
+				});
+			}
+		}
+	}
+	setAllItem(all_items) {
+		console.log(this);
+		let { all_item } = this.state;
+		this.setState({
+			all_item: all_items
+		});
 	}
 	getNotifications(data) {
 		let note_vendor;
-		console.log(data);
 		note_vendor = [
 		{
 			text:'New Orders Today',
@@ -108,5 +136,7 @@ class Notifications extends Component {
     );
   }
 }
-
-export default Notifications;
+const mapToState = ({ authUser }) => ({
+	dashboard: authUser.dashboarddata
+});
+export default connect(mapToState,null)(Notifications);

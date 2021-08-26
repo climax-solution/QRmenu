@@ -15,6 +15,7 @@ import Axios from  'axios';
 import NotificationManager from 'react-notifications/lib/NotificationManager';
 import { Link } from 'react-router-dom';
 import OrderItem from './OrderItem';
+import Pusher from 'pusher-js';
 
 export default class LiveOrder extends Component {
     state = {
