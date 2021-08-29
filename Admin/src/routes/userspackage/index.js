@@ -29,7 +29,7 @@ class UsersPackage extends Component {
             order_limit: '',
             price:'',
             item_limit: '',
-            package_ability:[false,false,false,false,false,false,false,false,false,false]
+            package_ability: [false,false,false,false,false,false,false,false,false,false]
         },
         items: {
             velkom: "Velkommen Side",meny: "Meny",pakker: "Pakker",spesial: "Spesialiteter", qrcode: "QR Code",whatsapp: 'Whatsapp Bestilling',onlinebest: 'Online Bestilling',reserve: 'Reservasion',contacter: 'Contacter', digitalbetal: 'Digtal Betaling'
@@ -71,7 +71,8 @@ class UsersPackage extends Component {
             const { dialog } = this.state;
             for (let key in data) {
                 if (key != 'id') {
-                    dialog[key] = data[key];
+                    if (key == 'package_ability') dialog[key] = data[key] ? data[key] : dialog[key];
+                    else dialog[key] = !data[key] ? '' : data[key];
                 }
             }
             this.setState({ dialog: dialog, open: true, isUpdate: true,activeId: data['id'] });
@@ -106,6 +107,14 @@ class UsersPackage extends Component {
                     packages: data.data
                 })
             }
+            let { dialog } = this.state;
+            for (const key in dialog) {
+                dialog[key] = '';
+                if (key == 'package_ability') dialog[key] = [false,false,false,false,false,false,false,false,false,false];
+            }
+            this.setState({
+                dialog: dialog
+            })
         })
     }
     deletePackage = (arg) => {
@@ -219,7 +228,7 @@ class UsersPackage extends Component {
                                         <MenuItem value="50">50</MenuItem>
                                     </Select>
                                 </FormControl>
-                                <TextField margin="dense" id="price" label="Price" type="text" fullWidth value={dialog.price} onChange={(e)=>this.setState({ dialog: {...dialog, price: e.target.value }})}/>
+                                <TextField margin="dense" id="price" label="Price" type="text" fullWidth value={!dialog.price ? '' : dialog.price} onChange={(e)=>this.setState({ dialog: {...dialog, price: e.target.value }})}/>
                                 <FormControl margin="dense"  fullWidth>
                                     <InputLabel htmlFor="itemLimit">Item Limit</InputLabel>
                                     <Select id="itemLimit" value={dialog.item_limit} onChange={(e)=> this.setState({ dialog: {...dialog, item_limit: e.target.value }})}>
@@ -240,7 +249,7 @@ class UsersPackage extends Component {
                                         {
                                             Object.keys(items).map((key,index) => {
                                                 return <FormControlLabel control={
-                                                    <Checkbox color="primary" onChange={CheckItems(index)} checked={dialog.package_ability[index]} name={key}/>
+                                                    <Checkbox color="primary" onChange={CheckItems(index)} checked={dialog.package_ability[index]} name={key} key={index}/>
                                                 } label={items[key]} key={index}
                                                 />
                                             })

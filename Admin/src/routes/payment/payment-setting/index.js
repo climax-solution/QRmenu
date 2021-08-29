@@ -20,7 +20,7 @@ import Axios from 'axios';
         open: false,
         paypal:{
             paypal_payment: false,
-            paypal_status: true,
+            paypal_status: false,
             paypal_email: ''
         },
         stripe:{
@@ -41,7 +41,7 @@ import Axios from 'axios';
         }
 	}
 
-    componentWillMount() {
+    componentDidMount() {
         Axios.get(REACT_APP_BACKEND_API + 'paymentsettings').then(res => {
             const { data } = res;
             const { paypal, stripe, razor, bambora } = this.state;
@@ -53,9 +53,10 @@ import Axios from 'axios';
                 }
 
             }
+            if (data) return;
             for (let key in paypal) {
                 paypals[key] = data[key];
-                //console.log(key, typeof data[key]);
+                console.log(key, typeof data[key]);
             }
             for (let key in stripe) {
                 stripes[key] = data[key];
@@ -113,7 +114,7 @@ import Axios from 'axios';
         }
         
         let flag = 0;
-
+        console.log(sendData);
         for (const key in sendData) {
             if ( !sendData[key]  && typeof sendData[key] != 'boolean') flag = 1;
         }

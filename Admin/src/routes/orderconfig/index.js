@@ -115,7 +115,6 @@ import { NotificationManager } from 'react-notifications';
             'Authorization': `Bearer ${localStorage.getItem('token')}`
          }
         Axios.post(REACT_APP_BACKEND_API + 'modifyorderconfig',sendData, {headers: headers}).then(res=>{
-            alert(1);
             if (res.success) NotificationManager.success('afadf');
         })
     }
