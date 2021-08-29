@@ -74,14 +74,14 @@ class Content extends Component {
                                     </div>
                                     <div className="form-group col-xl-6">
                                         <label>Email <span className="text-danger">*</span></label>
-                                        <input type="text" placeholder="Email" name="email" className="form-control" value={this.state.email} onChange={(e)=>this.setState({email: e.target.value})} required />
+                                        <input type="text" placeholder="Your Email" name="email" className="form-control" value={this.state.email} onChange={(e)=>this.setState({email: e.target.value})} required />
                                     </div>
                                     <div className="form-group col-xl-6">
-                                        <label>Phone <span className="text-danger">*</span></label>
+                                        <label>Phone Number<span className="text-danger">*</span></label>
                                         <input type="text" placeholder="Phone" name="phone" className="form-control" value={this.state.phone} onChange={(e)=>this.setState({phone: e.target.value})} required />
                                     </div>
                                     <div className="form-group col-xl-6">
-                                        <label>Number of Guest <span className="text-danger">*</span></label>
+                                        <label>Number of Guests <span className="text-danger">*</span></label>
                                         <input type="number" name="number-guest" min="0" className="form-control" value={this.state.guest_number} onChange={(e)=>this.setState({guest_number: e.target.value})} required />
                                     </div>
                                     <div className="form-group col-xl-6">
@@ -104,7 +104,7 @@ class Content extends Component {
                                 {/* /Buyer Info */}
                             </div>
                             <div className="col-xs-5 ml-auto mr-auto">
-                                <h2>Time List</h2>
+                                <h2>Our Restaurant Time List</h2>
                                 <ul>
                                     <li>
                                         <a href="#">Sunday

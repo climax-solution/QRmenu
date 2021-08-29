@@ -111,31 +111,6 @@ class Content extends Component {
 
 
     placeOrder() {
-        swal({
-            buttons: {
-                cancel: "Close",
-                download: "Download",
-            },
-            content: (
-                <div>
-                    {/* <div className="text-center">
-                        <img src={process.env.REACT_APP_BACKEND_HOST+ qrcode} alt="234" className="w-50"/>
-                    </div>
-                    <div className="text-center">
-                        <p>Your Order Id: {order_id}</p>
-                    </div> */}
-                </div>
-            )
-        }).then((value) => {
-            switch (value) {
-           
-              case "cancel":
-                break;
-
-              default:
-                this.download();
-            }
-        });
         const { formData } = this.state;
         let flag = 0;
         for(let key in formData) {

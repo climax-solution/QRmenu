@@ -49,6 +49,7 @@ class Content extends Component {
                 {/* Menu Wrapper Start */}
                 <div className="section section-padding">
                     <div className="container">
+                        <div className="row">
                         {
                             package_list.map((item, i)=>{
                                 return <div key={i} className="col-lg-4 col-md-6 masonry-item sides">
@@ -70,7 +71,7 @@ class Content extends Component {
                                 </div>
                             })
                         }
-                        
+                        </div>
                     {/* <form style={{overflow:'hidden'}}>
                         <div className="row">
                             <div className="form-group col-lg-6 offset-lg-3">
