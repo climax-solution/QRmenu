@@ -72,20 +72,20 @@ class AuthController extends BaseController
                 $options
             );
 
-            if ($user->permission == 'vendor') {
-                $user = auth('api')->user();
-                $date = date('Y-m-d');
-                $order = Order::where(['vendor'=>$user->email,'view_status'=>'0', 'status'=>'0'])->where('created_at','like',$date.'%')->count();
-                $reservation = Reservation::where(['vendor'=>$user->email,'status'=>'0'])->where('created_at','like',$date.'%')->count();
-                $data = [
-                    'id' => $user->id,
-                    'list' => [
-                        'order' => $order,
-                        'reservation' => $reservation
-                    ]
-                ];
-                $pusher->trigger('messages', 'chat.'.$user->id, $data);
-            }
+            // if ($user->permission == 'vendor') {
+            //     $user = auth('api')->user();
+            //     $date = date('Y-m-d');
+            //     $order = Order::where(['vendor'=>$user->email,'view_status'=>'0', 'status'=>'0'])->where('created_at','like',$date.'%')->count();
+            //     $reservation = Reservation::where(['vendor'=>$user->email,'status'=>'0'])->where('created_at','like',$date.'%')->count();
+            //     $data = [
+            //         'id' => $user->id,
+            //         'list' => [
+            //             'order' => $order,
+            //             'reservation' => $reservation
+            //         ]
+            //     ];
+            //     $pusher->trigger('messages', 'chat.'.$user->id, $data);
+            // }
             return $this->sendResponse(new AuthResource($user), 'User login successfully.');
         }
         else{

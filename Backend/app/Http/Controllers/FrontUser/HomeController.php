@@ -177,29 +177,17 @@ class HomeController extends Controller
                 header('Content-Type: '.$qrCode->getContentType());
                 $file_name= 'qrcode/'.time().'.png';
                 $qrCode->writeFile(public_path('/'.$file_name));
-
-                $user = auth('api')->user();
-                $date = date('Y-m-d');
-                $order = Order::where(['vendor'=>$user->email,'view_status'=>'0', 'status'=>'0'])->where('created_at','like',$date.'%')->count();
-                $reservation = Reservation::where(['vendor'=>$user->email,'status'=>'0'])->where('created_at','like',$date.'%')->count();
-                $send = [
-                    'id' => $user->id,
-                    'list' => [
-                        'order' => $order,
-                        'reservation' => $reservation
-                    ]
-                ];
-                $options = array(
-                    'cluster' => 'mt1',
-                    'encrypted' => false
-                );
-                $pusher = new Pusher(
-                    env('PUSHER_APP_KEY'),
-                    env('PUSHER_APP_SECRET'),
-                    env('PUSHER_APP_ID'),
-                    $options
-                );
-                $pusher->trigger('messages', 'chat.'.$user->id, $send);
+                // $options = array(
+                //     'cluster' => 'mt1',
+                //     'encrypted' => false
+                // );
+                // $pusher = new Pusher(
+                //     env('PUSHER_APP_KEY'),
+                //     env('PUSHER_APP_SECRET'),
+                //     env('PUSHER_APP_ID'),
+                //     $options
+                // );
+                // $pusher->trigger('messages', 'chat.'.$user->id, $send);
 
                 return response()->json(['status'=>true, 'order_id'=>$res->id,'qrcode'=>$file_name]);
             }
